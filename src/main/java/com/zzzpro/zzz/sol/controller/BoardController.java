@@ -46,4 +46,12 @@ public class BoardController {
 	public String boardUpdate(BoardDto bDto) {
 		return "boardUpdate";
 	}
+	
+	@GetMapping("/board/boardDelete")
+	public String boardDelete(BoardDto bDto, RedirectAttributes ra) {
+		if(bSer.boardDelete(bDto, ra)) {
+			return "boardList";
+		}
+		return "redirect:/board/boardDetail?b_num="+bDto.getB_num();
+	}
 }

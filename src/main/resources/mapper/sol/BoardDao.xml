@@ -31,4 +31,8 @@
 		select count(*) from member where m_nick=#{b_writerNick}
 	</select>
 	
+	<delete id="boardDelete">
+		delete from board where b_num=#{b_num}
+	</delete>
+	
 </mapper>

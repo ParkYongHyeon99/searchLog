@@ -27,43 +27,39 @@
 		
 		<h3>Board Write</h3>
 		
-		<div id=bWriteBox>
+		<form id="write_frm" method="get" onsubmit="return writeCheck()" action="/board/writeSub">
 		
-			<form id="write_frm" method="get" onsubmit="return writeCheck()" action="/board/writeSub">
-				
-				<th:block th:if="${session.member}!=null">
-					<p id="writerId" th:text=" ' 현재 로그인 ID: ' + ${session.member.m_id} + ' &ensp; '"></p>
-					
-					<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-						<div class="btn-group me-2" role="group" aria-label="First group">
-							<button type="button" class="btn btn-primary" id="nicknameBTN" onclick="anonymousChange()">공개</button>
-							<button type="button" class="btn btn-outline-primary" id="anonymousBTN" onclick="anonymousChange()">익명</button>
-						</div>
-						<div id="b_writerNick" style="display: none;">
-							<input type="text" id="b_writerNick" name="b_writerNick" class="input" placeholder="닉네임 입력" maxlength="20" autocapitalize="off">
-						</div>
+			<th:block th:if="${session.member}!=null">
+				<nav>
+					<p>현재 로그인 ID: </p><p id="writerId" th:text="${session.member.m_id}"></p>
+				</nav>
+				<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+					<div class="btn-group me-2" role="group" aria-label="First group">
+						<button type="button" class="btn btn-primary" id="nicknameBTN" onclick="anonymousChange()">공개</button>
+						<button type="button" class="btn btn-outline-primary" id="anonymousBTN" onclick="anonymousChange()">익명</button>
 					</div>
-					<input type="hidden" id="b_writer" name="b_writer" th:value="${session.member.m_nick}"> <br>
-				</th:block>
-				<th:block th:if="${session.member}==null">
-					<input type="hidden" name="b_writer" class="input" value="익명">
-					<input type="text" id="b_writerNick" name="b_writerNick" class="input" placeholder="닉네임 입력" maxlength="20" autocapitalize="off">
-					<input type="password" id="b_pw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20"> <br><br>
-				</th:block>
-				
-				<p id="unNickCheckTip"></p>
-				<input type="text" id="b_title" name="b_title" placeholder="제목은 최대 15글자까지 적을 수 있습니다." style="width: 90%; height: 40px;"> <br><br>
-				
-				<textarea id="summernote" name="b_contents"></textarea> <br>
-				
-				<div class="btnDiv">
-					<button type="button" onclick="location.href = document.referrer;">취소</button>
-					<button type="submit" class="crudBtn">올리기</button>
 				</div>
-				
-			</form>
+				<input type="hidden" id="b_writer" name="b_writer" th:value="${session.member.m_nick}">
+			</th:block>
+			<th:block th:if="${session.member}==null">
+				<input type="hidden" name="b_writer" class="input" value="익명">
+			</th:block>
 			
-		</div>
+			<div>
+				<input type="text" id="b_writerNick" name="b_writerNick" class="input" placeholder="닉네임 입력" maxlength="20" autocapitalize="off">
+				<input type="password" id="b_pw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20">
+			</div>
+			<p id="unNickCheckTip"></p>
+			
+			<input type="text" id="b_title" name="b_title" placeholder="제목은 최대 15글자까지 적을 수 있습니다." style="width: 90%; height: 40px;"> <br><br>
+			<textarea id="summernote" name="b_contents"></textarea> <br>
+			
+			<div class="btnDiv">
+				<button type="button" onclick="location.href = document.referrer;">취소</button>
+				<button type="submit" class="crudBtn">올리기</button>
+			</div>
+		
+		</form>
 		
 	</div>
 	
