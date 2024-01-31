@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Board Detail</title>
+<!-- jquery -->
+<script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- summernote -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<!-- 썸머노트 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+</head>
+<body>
+	
+	<div class="allBigBox">
+		
+		<h3>Board Detail</h3>
+		
+		<th:block th:if="${bDto}!=null">
+			
+			<p th:if="${bDto.unnamed == 1}"><b>익명 게시글</b></p>
+			<p th:text=" ' &ensp;글번호 ' + ${bDto.b_num} + ' &ensp; '"></p>
+			<p th:text=" ' &ensp;제목 ' + ${bDto.b_title} + ' &ensp; '"></p>
+			
+			<th:block th:if="${bDto.unnamed == 1}">
+				<p th:text=" ' &ensp;작성자 ' + ${bDto.b_writerNick} + ' &ensp; '"></p>
+			</th:block>
+			<th:block th:if="${bDto.unnamed == 0}">
+				<p th:text=" ' &ensp;작성자 ' + ${bDto.b_writer} + ' &ensp; '"></p>
+			</th:block>
+			
+			<p th:text=" ' &ensp;작성날짜 ' + ${bDto.b_date} + ' &ensp; '"></p>
+			<p th:text=" ' &ensp;조회수 ' + ${bDto.b_view} + ' &ensp; '"></p>
+			<p th:utext=" ' &ensp;내용 ' + ${bDto.b_contents} + ' &ensp; '"></p>
+			
+			<th:block th:if="${session.member}!=null">
+				<th:block th:if="${session.member.m_nick}==${bDto.b_writer}">
+					<button type="button" class="crudBtn" onclick="location.href='/board/boardUpdate?b_num=${bDto.b_num}'">수정</button>
+					<button type="button" class="crudBtn" onclick="alert('예정')"> <!-- onclick="location.href='/board/boardDelete?b_num=${bDto.b_num}'" -->삭제</button>
+				</th:block>
+			</th:block>
+			<th:block th:if="${session.member}==null and ${bDto.unnamed == 1}">
+				<input type="password" id="unBPw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20"> <br>
+				<button type="button" class="crudBtn" th:onclick="unUD(${bDto.b_num},u)">수정</button>
+				<button type="button" class="crudBtn" th:onclick="unUD(${bDto.b_num},d)">삭제</button>
+			</th:block>
+			
+		</th:block>
+		
+		
+		<button type="button" onclick="location.href='/'">메인화면</button>
+		<button type="button" onclick="location.href = document.referrer;">이전 페이지로 돌아가기</button>
+		
+	</div>
+	
+	<!-- 기본 js -->
+	<script type="text/javascript" src="/js/boardDetail.js"></script>
+</body>
+</html>
