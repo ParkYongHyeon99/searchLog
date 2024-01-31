@@ -1,0 +1,27 @@
+<!-- <?xml version="1.0" encoding="UTF-8"?> -->
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zzzpro.zzz.sol.dao.MemberDao">
+	
+	<select id="idCheck">
+		select count(*) from member where m_id=#{m_id}
+	</select>
+	
+	<select id="nickCheck">
+		select count(*) from member where m_nick=#{m_nick}
+	</select>
+	
+	<select id="emailCheck">
+		select count(*) from member where m_email=#{m_email}
+	</select>
+	
+	<insert id="join">
+		insert into member values(#{m_id},#{m_nick},#{m_pw},#{m_email},default,default,default)
+	</insert>
+	
+	<select id="login">
+		select * from member where m_id=#{m_id} and m_pw=#{m_pw}
+	</select>
+	
+	
+</mapper>
