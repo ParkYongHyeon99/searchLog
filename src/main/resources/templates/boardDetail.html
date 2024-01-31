@@ -40,14 +40,15 @@
 			<th:block th:if="${session.member}!=null">
 				<th:block th:if="${session.member.m_nick}==${bDto.b_writer}">
 					<button type="button" class="crudBtn" onclick="location.href='/board/boardUpdate?b_num=${bDto.b_num}'">수정</button>
-					<button type="button" class="crudBtn" onclick="alert('예정')"> <!-- onclick="location.href='/board/boardDelete?b_num=${bDto.b_num}'" -->삭제</button>
+					<button type="button" class="crudBtn" onclick="location.href='/board/boardDelete?b_num=${bDto.b_num}'">삭제</button>
 				</th:block>
 			</th:block>
 			<th:block th:if="${session.member}==null and ${bDto.unnamed == 1}">
 				<input type="password" id="unBPw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20"> <br>
-				<button type="button" class="crudBtn" th:onclick="unUD(${bDto.b_num},u)">수정</button>
-				<button type="button" class="crudBtn" th:onclick="unUD(${bDto.b_num},d)">삭제</button>
+				<button type="button" class="crudBtn" th:onclick="unUD([[${bDto.b_num}]],'U')">수정</button>
+				<button type="button" class="crudBtn" th:onclick="unUD([[${bDto.b_num}]],'D')">삭제</button>
 			</th:block>
+			
 			
 		</th:block>
 		

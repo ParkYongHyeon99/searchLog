@@ -20,5 +20,7 @@ public interface BoardDao {
 	public boolean unPwCheck(BoardDto bDto);
 
 	public boolean unNickCheck(BoardDto bDto);
+
+	public boolean boardDelete(BoardDto bDto);
 	
 }

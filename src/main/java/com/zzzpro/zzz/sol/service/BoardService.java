@@ -64,11 +64,19 @@ public class BoardService {
 	}
 
 	public String unNickCheck(BoardDto bDto) {
-		log.info(" ========== > service - unNickCheck: {}"+bDto.getB_writerNick()+" < ==========");
+		log.info(" ========== > service - unNickCheck: {}"+bDto+" < ==========");
 		if(!bDao.unNickCheck(bDto)) {
 			return "ok";
 		}
 		return "no";
+	}
+
+	public boolean boardDelete(BoardDto bDto, RedirectAttributes ra) {
+		log.info(" ========== > service - boardDelete: {}"+bDto.getB_num()+" < ==========");
+		if(bDao.boardDelete(bDto)) {
+			return true;
+		}
+		return false;
 	}
 	
 }
