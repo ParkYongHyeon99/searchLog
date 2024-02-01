@@ -22,5 +22,7 @@ public interface BoardDao {
 	public boolean unNickCheck(BoardDto bDto);
 
 	public boolean boardDelete(BoardDto bDto);
-	
+
+	public boolean updateSub(BoardDto bDto);
+
 }
