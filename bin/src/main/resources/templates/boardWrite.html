@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Board Write</title>
+<!-- jquery -->
+<script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<!-- summernote -->
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+
+<!-- 썸머노트 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+<!-- 버튼 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+
+
+</head>
+<body>
+	
+	<div class="allBigBox">
+		
+		<h3>Board Write</h3>
+		
+		<div id=bWriteBox>
+		
+			<form id="write_frm" method="get" onsubmit="return writeCheck()" action="/board/writeSub">
+				
+				<th:block th:if="${session.member}!=null">
+					<p id="writerId" th:text=" ' 현재 로그인 ID: ' + ${session.member.m_id} + ' &ensp; '"></p>
+					
+					<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+						<div class="btn-group me-2" role="group" aria-label="First group">
+							<button type="button" class="btn btn-primary" id="nicknameBTN" onclick="anonymousChange()">공개</button>
+							<button type="button" class="btn btn-outline-primary" id="anonymousBTN" onclick="anonymousChange()">익명</button>
+						</div>
+						<div id="b_writerNick" style="display: none;">
+							<input type="text" id="b_writerNick" name="b_writerNick" class="input" placeholder="닉네임 입력" maxlength="20" autocapitalize="off">
+						</div>
+					</div>
+					<input type="hidden" id="b_writer" name="b_writer" th:value="${session.member.m_nick}"> <br>
+				</th:block>
+				<th:block th:if="${session.member}==null">
+					<input type="hidden" name="b_writer" class="input" value="익명">
+					<input type="text" id="b_writerNick" name="b_writerNick" class="input" placeholder="닉네임 입력" maxlength="20" autocapitalize="off">
+					<input type="password" id="b_pw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20"> <br><br>
+				</th:block>
+				
+				<p id="unNickCheckTip"></p>
+				<input type="text" id="b_title" name="b_title" placeholder="제목은 최대 15글자까지 적을 수 있습니다." style="width: 90%; height: 40px;"> <br><br>
+				
+				<textarea id="summernote" name="b_contents"></textarea> <br>
+				
+				<div class="btnDiv">
+					<button type="button" onclick="location.href = document.referrer;">취소</button>
+					<button type="submit" class="crudBtn">올리기</button>
+				</div>
+				
+			</form>
+			
+		</div>
+		
+	</div>
+	
+	<!-- 기본 js -->
+	<script type="text/javascript" src="/js/boardWrite.js"></script>
+	<!-- 버튼 -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
