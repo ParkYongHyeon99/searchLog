@@ -74,9 +74,29 @@ public class BoardService {
 	public boolean boardDelete(BoardDto bDto, RedirectAttributes ra) {
 		log.info(" ========== > service - boardDelete: {}"+bDto.getB_num()+" < ==========");
 		if(bDao.boardDelete(bDto)) {
+			ra.addFlashAttribute("msg","게시글 삭제에 성공했습니다.");
+			return true;
+		}
+		ra.addFlashAttribute("msg","게시글 삭제에 실패했습니다.");
+		return false;
+	}
+
+	public boolean boardUpdate(BoardDto bDto, Model model) {
+		log.info(" ========== > service - boardDelete: {}"+bDto.getB_num()+" < ==========");
+		bDto = bDao.boardDetail(bDto.getB_num());
+		if(bDto.getB_writer()!=null) {
+			model.addAttribute("bDto", bDto);
 			return true;
 		}
 		return false;
+	}
+
+	public void updateSub(BoardDto bDto, RedirectAttributes ra) {
+		log.info(" ========== > service - boardDelete: {}"+bDto.getB_num()+" < ==========");
+		if(bDao.updateSub(bDto)) {
+			ra.addFlashAttribute("msg","게시글 수정에 성공했습니다.");
+		}
+		ra.addFlashAttribute("msg","게시글 수정에 실패했습니다.");
 	}
 	
 }
