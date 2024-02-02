@@ -20,9 +20,10 @@ class BoardDtoTest {
 		for(int i=0;i<200;i++) {
 			if(i%2!=0) {
 				bDto.setUnnamed(1);
+				bDto.setB_writerNick("더미testA");
 			}
-			bDto.setB_title("제목"+i);
-			bDto.setB_contents("내용"+i);
+			bDto.setB_title("제목 더미: "+i);
+			bDto.setB_contents("내용 더미: "+i);
 			bDto.setB_writer("aaa");
 			bDao.insertDummyData(bDto);
 		}

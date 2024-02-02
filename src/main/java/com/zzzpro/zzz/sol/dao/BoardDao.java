@@ -25,4 +25,6 @@ public interface BoardDao {
 
 	public boolean updateSub(BoardDto bDto);
 
+	public int getBCnt();
+
 }
