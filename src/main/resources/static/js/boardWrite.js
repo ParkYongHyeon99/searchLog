@@ -6,8 +6,8 @@
  	
  */
 
-let ano = false
-let anoPw = false
+let ano = false		// 익명 닉네임 사용 가능 여부
+let anoPw = false	// 익명 비밀번호 사용 가능 여부
 
 
 /* ====================== 회원일 시 익명 닉네임, 비밀번호 input 태그 가림 ====================== */

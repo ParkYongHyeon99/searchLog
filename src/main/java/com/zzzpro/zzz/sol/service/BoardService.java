@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zzzpro.zzz.sol.dao.BoardDao;
 import com.zzzpro.zzz.sol.dao.MemberDao;
 import com.zzzpro.zzz.sol.dto.BoardDto;
+import com.zzzpro.zzz.sol.dto.CommentDto;
 import com.zzzpro.zzz.sol.dto.Paging;
 
 import lombok.extern.slf4j.Slf4j;
@@ -57,6 +59,7 @@ public class BoardService {
 			bDto.setUnnamed(1);
 		}
 		if(bDao.writeSub(bDto)) {
+			bDao.bMGetPoint(bDto.getB_writer());
 			ra.addFlashAttribute("msg","게시글 작성에 성공했습니다.");
 			return true;
 		}
@@ -105,6 +108,17 @@ public class BoardService {
 			ra.addFlashAttribute("msg","게시글 수정에 성공했습니다.");
 		}
 		ra.addFlashAttribute("msg","게시글 수정에 실패했습니다.");
+	}
+
+	@Transactional(rollbackFor = {Exception.class})
+	public ArrayList<CommentDto> commentList(CommentDto cDto) {
+		log.info(" ========== > service - commentList: {}"+cDto.getB_num()+" < ==========");
+		ArrayList <CommentDto> cList = bDao.commentList(cDto.getB_num());
+		if(cList.size()!=0) {
+			bDao.cMGetPoint(cDto.getC_writer());
+			return cList;
+		}
+		return null;
 	}
 	
 }
