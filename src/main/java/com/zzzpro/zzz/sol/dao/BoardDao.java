@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.zzzpro.zzz.sol.dto.BoardDto;
+import com.zzzpro.zzz.sol.dto.CommentDto;
 
 @Mapper
 public interface BoardDao {
@@ -26,5 +27,11 @@ public interface BoardDao {
 	public boolean updateSub(BoardDto bDto);
 
 	public int getBCnt();
+
+	public ArrayList<CommentDto> commentList(int b_num);
+
+	public void bMGetPoint(String b_writer);
+
+	public void cMGetPoint(String c_writer);
 
 }
