@@ -42,8 +42,25 @@ public class BoardController {
 		return "redirect:/board/list?page=1";
 	}
 	
+	@GetMapping("/board/boardDelete")
+	public String boardDelete(BoardDto bDto, RedirectAttributes ra) {
+		if(bSer.boardDelete(bDto, ra)) {
+			return "redirect:/board/list?page=1";
+		}
+		return "redirect:/board/detail?b_num="+bDto.getB_num();
+	}
+	
 	@GetMapping("/board/boardUpdate")
-	public String boardUpdate(BoardDto bDto) {
-		return "boardUpdate";
+	public String boardUpdate(BoardDto bDto, Model model) {
+		if(bSer.boardUpdate(bDto, model)) {
+			return "boardUpdate";
+		}
+		return "redirect:/board/detail?b_num="+bDto.getB_num();
+	}
+	
+	@GetMapping("/board/updateSub")
+	public String updateSub(BoardDto bDto, RedirectAttributes ra) {
+		bSer.updateSub(bDto,ra);
+		return "redirect:/board/detail?b_num="+bDto.getB_num();
 	}
 }

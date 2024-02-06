@@ -20,9 +20,31 @@
 		
 		<h3>Board Update</h3>
 		
-		작업해야함ㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+		<div id="bDetailBox">
+
+			<form id="write_frm" method="get" onsubmit="return writeCheck()"
+				action="/board/updateSub">
+				<div id="bWrTitleDiv">
+					<input type="text" id="b_title" name="b_title" th:value="${bDto.b_title}"
+						placeholder="제목은 최대 15글자까지 적을 수 있습니다." style="width: 90%; height: 40px;">
+				</div>
+				<br>
+				<input type="hidden" id="b_num" name="b_num" th:value="${bDto.b_num}">
+				
+				<textarea id="summernote" name="b_contents" th:utext="${bDto.b_contents}"></textarea>
+				<br>
+
+				<div class="btnDiv">
+					<button type="button" onclick="location.href = document.referrer;">취소</button>
+					<button type="submit" class="crudBtn">올리기</button>
+				</div>
+			</form>
+
+		</div>
 		
 	</div>
 	
+	<!-- 기본 js -->
+	<script type="text/javascript" src="/js/boardUpdate.js"></script>
 </body>
 </html>

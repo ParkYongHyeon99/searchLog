@@ -9,26 +9,50 @@
 		insert into board(b_title,b_contents,b_writer,b_writerNick,unnamed) values(#{b_title},#{b_contents},#{b_writer},#{b_writerNick},#{unnamed})
 	</insert>
 	
-	<select id="boardList">
+	<select id="boardList">	<!-- 글 목록 -->
 		select b_num, b_title, b_writer, b_writerNick, b_date, b_view, unnamed from board order by b_num desc limit ${limit},10
 	</select>
 	
-	<select id="boardDetail">
+	<select id="boardDetail">	<!-- 글 읽기 -->
 		update board set b_view=b_view+1 where b_num=#{b_num};
 		select * from board where b_num=#{b_num};
 	</select>
 	
-	<insert id="writeSub">
+	<insert id="writeSub">	<!-- 글 작성 -->
 		insert into board(b_title,b_contents,b_writer,b_writerNick,b_pw,unnamed) 
-		values(#{b_title},#{b_contents},#{b_writer},#{b_writerNick},#{b_pw},#{unnamed});
+			values(#{b_title},#{b_contents},#{b_writer},#{b_writerNick},#{b_pw},#{unnamed});
 	</insert>
 	
-	<select id="unPwCheck">
+	<update id="bMGetPoint">
+		update member set m_point=m_point+10 where m_nick=#{b_writer}
+	</update>
+	
+	<select id="unPwCheck">	<!-- 익명 게시글/ 비번이 맞는지 체크 -->
 		select count(*) from board where b_num=#{b_num} and b_pw=#{b_pw}
 	</select>
 
-	<select id="unNickCheck">
+	<select id="unNickCheck">	<!-- 익명으로 쓸 닉네임이 회원 닉네임에 있는지 체크 -->
 		select count(*) from member where m_nick=#{b_writerNick}
 	</select>
+	
+	<delete id="boardDelete">	<!-- 글 삭제 -->
+		delete from board where b_num=#{b_num}
+	</delete>
+	
+	<update id="updateSub">	<!-- 글 수정 -->
+		update board set b_title=#{b_title}, b_contents=#{b_contents} where b_num=#{b_num}
+	</update>
+	
+	<select id="getBCnt">	<!-- 전체 글 수 -->
+		select count(*) from board
+	</select>
+	
+	<select id="commentList">	<!-- 댓글 목록 -->
+		select * from comment;
+	</select>
+	
+	<update id="cMGetPoint">
+		update member set m_point=m_point+5 where m_nick=#{b_writer}
+	</update>
 	
 </mapper>

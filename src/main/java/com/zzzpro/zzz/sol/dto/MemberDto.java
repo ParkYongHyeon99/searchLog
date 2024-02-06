@@ -20,5 +20,6 @@ public class MemberDto {
 	private String m_role;	// 역할 ( member / admin )
 	private String m_date;	// 가입 날짜
 	private String m_point;	// 등급을 결정하는 포인트
+	private String grade;	// 등급
 	
 }
