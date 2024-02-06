@@ -32,12 +32,10 @@
 		
 		<br><hr><br>
 		
-		<p>할 것: 댓글</p>
-		
 		<button type="button" class="crudBtn" onclick="location.href='/board/boardWrite'" style="float: left;">글 작성</button>
 		<br><br>
 		
-		<table style="border: 1px solid black; text-align: center;">
+		<table style="border: 1px solid black; text-align: center; width: 90%;">
 			<tr>
 				<th>&ensp;글 번호&ensp;</th>
 				<th>&ensp;제목&ensp;</th>
@@ -64,6 +62,25 @@
 					<td th:text=" ' &ensp; ' + ${b.b_view} + ' &ensp; '"></td>
 				</tr>
 			</th:block>
+		</table>
+		
+		
+		<table class="pagingTable" style="text-align: center; width: 90%;">
+			<tr>
+				<th:block th:if="${paging.leftP != 1}">
+					<td><a th:href="|/board/list?page=1|"><<</a></td>
+					<td><a th:href="|/board/list?page=${paging.beforeP}|"><</a></td>
+				</th:block>
+				
+				<th:block th:each="i: ${#numbers.sequence(paging.leftP, paging.rightP)}">
+					<td th:if="${i <= paging.lastP}"><a th:href="|/board/list?page=${i}|" th:text="${i}"></a></td>
+				</th:block>
+				
+				<th:block th:if="${paging.rightP<paging.lastP}">
+					<td><a th:href="|/board/list?page=${paging.nextP}|">></a></td>
+					<td><a th:href="|/board/list?page=${paging.lastP}|">>></a></td>
+				</th:block>
+			</tr>
 		</table>
 		
 		<br>
