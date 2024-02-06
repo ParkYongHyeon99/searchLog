@@ -18,6 +18,7 @@ public class ChampDto {
 	private String win;
 	private String win_percentage;
 	private String pick_percentage;
+	private String skill_tree;
 	private String tier1;
 
 }

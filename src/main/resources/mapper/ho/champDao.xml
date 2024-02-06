@@ -2,6 +2,8 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zzzpro.zzz.ho.dao.ChampDao">
 	<select id="winrate">
+	
+	select * from zzz_datas;
 		SELECT round((COUNT(CASE WHEN win ='True' THEN 1 END)
 		/ COUNT(*) * 100),2)
 		AS win_percentage
