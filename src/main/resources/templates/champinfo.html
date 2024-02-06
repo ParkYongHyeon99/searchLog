@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+<th:block th:if="${champDto != null}">
+<!--	<div th:text="${champDto.tier1}티어"></div>-->
+<!--	<div th:text="|${champDto.teamPosition}에서 ${champDto.championName}|"></div>-->
+	<div th:text="|${champDto.tier1}티어 ${champDto.teamPosition}에서 ${champDto.championName} 픽률: ${champDto.pick_percentage}%, 승률: ${champDto.win_percentage}%|"></div>
+	
+</th:block>
+</body>
+</html>

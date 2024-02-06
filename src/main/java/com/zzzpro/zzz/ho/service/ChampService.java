@@ -15,10 +15,11 @@ public class ChampService {
 	ChampDao champdao;
 	
 	public String winrate(ChampDto champdto) {
-		
 		 String bbb =champdao.winrate(champdto);
-		 log.info("===champdto===={}",bbb);
 		 return bbb;
 	}
-
+	public String pickrate(ChampDto champdto) {
+		 String bbb =champdao.pickrate(champdto);
+		 return bbb;
+	}
 }
