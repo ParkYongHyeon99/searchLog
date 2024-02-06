@@ -7,6 +7,6 @@ import com.zzzpro.zzz.ho.dto.ChampDto;
 @Mapper
 public interface ChampDao {
 	String winrate(ChampDto champDto);
-	
+	String pickrate(ChampDto champDto);
 
 }
