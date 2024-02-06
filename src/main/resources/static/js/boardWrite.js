@@ -167,7 +167,7 @@ $('#summernote').summernote({
 			[ 'color', [ 'color' ] ],
 			[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
 			[ 'table', [ 'table' ] ],
-			[ 'insert', [ 'link', 'picture', 'video' ] ],
+			[ 'insert', [ 'link'] ],	// , 'picture', 'video' 
 			[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
 });
 /* ====================== 썸머노트 설정 끝 ====================== */

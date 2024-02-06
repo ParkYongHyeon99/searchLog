@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.zzzpro.zzz.sol.dto.BoardDto;
@@ -42,7 +43,7 @@ public class BoardController {
 		return "redirect:/board/list?page=1";
 	}
 	
-	@GetMapping("/board/boardDelete")
+	@PostMapping("/board/boardDelete")
 	public String boardDelete(BoardDto bDto, RedirectAttributes ra) {
 		if(bSer.boardDelete(bDto, ra)) {
 			return "redirect:/board/list?page=1";
@@ -50,7 +51,7 @@ public class BoardController {
 		return "redirect:/board/detail?b_num="+bDto.getB_num();
 	}
 	
-	@GetMapping("/board/boardUpdate")
+	@PostMapping("/board/boardUpdate")
 	public String boardUpdate(BoardDto bDto, Model model) {
 		if(bSer.boardUpdate(bDto, model)) {
 			return "boardUpdate";
