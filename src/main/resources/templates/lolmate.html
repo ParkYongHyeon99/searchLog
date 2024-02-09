@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>LOL mate</title>
+<link rel="stylesheet" href="/css/lolmate.css">
+</head>
+<body>
+	<!-- https://appsnuri.tistory.com/405 나중에 이거 적용할것 -->
+	<div class="allBigBox">
+		
+		<h3>LOL-mate</h3>
+		
+		<div>
+			내용 들어갈 예정
+		</div>
+		
+		<div>
+			<table class="lmListT">
+				<tr class="trF">
+					<th>&ensp;게임모드&ensp;</th>
+					<th>&ensp;티어&ensp;</th>
+					<th>&ensp;소환사 명&ensp;</th>
+					<th>&ensp;주 포지션&ensp;</th>
+					<th>&ensp;승률&ensp;</th>
+					<th>&ensp;찾는 포지션&ensp;</th>
+					<th>&ensp;메모&ensp;</th>
+				</tr>
+				
+				<th:block th:if="${lmList}==null">
+					<tr>
+						<td colspan="8" class="tdDiv">
+							<div class="lmListDiv">글이 존재하지 않습니다.</div>
+						</td>
+					</tr>
+					<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>
+					<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>
+					<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>
+				</th:block>
+				
+				<th:block th:if="${lmList}!=null" th:each="lm:${lmList}">
+					<tr>
+						<td th:text=" ' &ensp; ' + ${lm.~~~} + ' &ensp; '"></td>
+						<td><button onclick="">신청</button></td>
+					</tr>
+				</th:block>
+			</table>
+		</div>
+		
+	</div>
+	
+	<!-- 기본 js -->
+	<script type="text/javascript" src="/js/lolmate.js"></script>
+</body>
+</html>
