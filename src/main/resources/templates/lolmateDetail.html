@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>LOL mate detail</title>
+</head>
+<body>
+	<div class="allBigBox">
+		
+		<p th:text="${lm.user}"></p>
+		<p th:text="${lm.gameMode}"></p>
+		<button type="button" class="btn btn-primary" id="nicknameBTN">공개</button>
+		<button type="button" class="btn btn-outline-primary" id="anonymousBTN">익명</button>
+	</div>
+	
+	<!-- 기본 js -->
+	<script type="text/javascript" src="/js/lolmateDetail.js"></script>
+</body>
+</html>

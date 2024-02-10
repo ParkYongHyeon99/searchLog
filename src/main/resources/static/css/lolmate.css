@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+
+.lmListT{
+	border: 1px solid black;
+	text-align: center;
+	width: 90%;
+	border-collapse: separate;
+	border-spacing: 0 5px;
+}
+
+.trF>th{
+	padding: 1% 0 1% 0;
+}
+
+.lmListDiv{
+	margin: auto;
+	padding: 1% 0 1% 0;
+	border: 1px solid black;
+	text-align: center;
+	width: 99%;
+}
