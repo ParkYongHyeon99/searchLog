@@ -16,6 +16,11 @@
 		</div>
 		
 		<div>
+			<div class="serchMateDiv">
+				<label><input type="radio" name="lm_gameMate" value="0" checked="checked">듀오</label>
+				<label><input type="radio" name="lm_gameMate" value="1">멘토</label>
+			</div>
+			
 			<table class="lmListT">
 				<tr class="trF">
 					<th>&ensp;게임모드&ensp;</th>
@@ -25,6 +30,7 @@
 					<th>&ensp;승률&ensp;</th>
 					<th>&ensp;찾는 포지션&ensp;</th>
 					<th>&ensp;메모&ensp;</th>
+					<th>&ensp;신청 버튼(글씨없애고자리차지하게할것)&ensp;</th>
 				</tr>
 				
 				<th:block th:if="${lmList}==null">
@@ -40,8 +46,14 @@
 				
 				<th:block th:if="${lmList}!=null" th:each="lm:${lmList}">
 					<tr>
-						<td th:text=" ' &ensp; ' + ${lm.~~~} + ' &ensp; '"></td>
-						<td><button onclick="">신청</button></td>
+						<td th:text=" ' &ensp; ' + '게임모드' + ' &ensp; '"></td>
+						<td th:text=" ' &ensp; ' + '티어' + ' &ensp; '"></td>
+						<td th:text=" ' &ensp; ' + '소환사 명' + ' &ensp; '"></td>
+						<td th:text=" ' &ensp; ' + '주 포지션' + ' &ensp; '"></td>
+						<td th:text=" ' &ensp; ' + '승률' + ' &ensp; '"></td>
+						<td th:text=" ' &ensp; ' + '찾는 포지션' + ' &ensp; '"></td>
+						<td th:text=" ' &ensp; ' + '메모' + ' &ensp; '"></td>
+						<td><button onclick="alert('할 예정!')">신청</button></td>
 					</tr>
 				</th:block>
 			</table>
