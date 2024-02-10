@@ -1,11 +1,36 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zzzpro.zzz.ho.dao.ChampDao">
-<select id ="winrate">
-	SELECT round((COUNT(CASE WHEN win ='True' THEN 1 END) / COUNT(*) * 100),2) AS win_percentage
-	 FROM zzz_datas1
-	 WHERE championName = #{championName} and teamPosition = #{teamPosition}
-</select>
+	<select id="winrate">
+	
+	select * from zzz_datas;
+		SELECT round((COUNT(CASE WHEN win ='True' THEN 1 END)
+		/ COUNT(*) * 100),2)
+		AS win_percentage
+		FROM zzz_datas1
+		WHERE championName
+		= #{championName} and teamPosition = #{teamPosition} and tier1 =
+		#{tier1}
+	</select>
+	<select id="pickrate">
+		select round(((COUNT(CASE WHEN championName =
+		#{championName} THEN 1 END)/5 /
+		(COUNT(*)/10))* 100),2) AS
+		pick_percentage
+		FROM zzz_datas1 where teamPosition = #{teamPosition}
+	</select>
+	<select id="skilltree">
+		SELECT
+		skill_tree,
+		COUNT(*) AS Count,
+		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas1 WHERE championName = #{championName})*100, 2) as
+		pickRate
+		FROM zzz_datas1
+		WHERE championName = #{championName}
+		GROUP BY skill_tree
+		ORDER BY Count DESC
+		limit 3;
+	</select>
 
 
 </mapper>

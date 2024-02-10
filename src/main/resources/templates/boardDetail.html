@@ -45,11 +45,8 @@
 				</th:block>
 				<th:block th:if="${session.member}==null and ${bDto.unnamed == 1}" id="anoUDBTN">
 					<input type="password" id="unBPw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20"> <br>
-						<button type="button" class="crudBtn" th:onclick="unUD([[${bDto.b_num}]],'U')">수정</button>
-					<form th:onsubmit="return unUD([[${bDto.b_num}]],'D')" th:action="|/board/boardDelete?b_num=[[${bDto.b_num}]]|">
-						<input type="hidden" name="b_num" th:value="${bDto.b_num}">
-						<button type="submit" class="crudBtn">삭제</button>
-					</form>
+					<button type="button" class="crudBtn" th:onclick="unUD([[${bDto.b_num}]],'U')">수정</button>
+					<button type="button" class="crudBtn" th:onclick="unUD([[${bDto.b_num}]],'D')">삭제</button>
 				</th:block>
 			</th:block>
 		</div>

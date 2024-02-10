@@ -1,0 +1,11 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzzpro.zzz.ho.dao.HoMemberDao">
+	<select id="login">
+		select * from member where m_id=#{m_Id}
+	</select>
+	<insert id="join">
+		insert into member1 value (#{m_Id}, #{m_Pw} )
+	</insert>
+
+</mapper>
