@@ -24,7 +24,9 @@
 	</insert>
 	
 	<update id="bMGetPoint">
-		update member set m_point=m_point+10 where m_nick=#{b_writer}
+		update minfo
+		set m_point = m_point+(select boardPoint from grade where (select m_point from minfo where  m_nick=#{b_writer}) between lowpoint and highpoint)
+		where m_nick = #{b_writer};
 	</update>
 	
 	<select id="unPwCheck">	<!-- 익명 게시글/ 비번이 맞는지 체크 -->
@@ -50,9 +52,5 @@
 	<select id="commentList">	<!-- 댓글 목록 -->
 		select * from comment;
 	</select>
-	
-	<update id="cMGetPoint">
-		update member set m_point=m_point+5 where m_nick=#{b_writer}
-	</update>
 	
 </mapper>
