@@ -27,8 +27,8 @@ public class RestBoardController {
 		return bSer.unPwCheck(bDto);
 	}
 	
-	@GetMapping("/board/commentList")
-	public ArrayList<CommentDto> commentList(CommentDto cDto) {
-		return bSer.commentList(cDto);
-	}
+	/* 댓글 할 예정
+	 * @GetMapping("/board/commentList") public ArrayList<CommentDto>
+	 * commentList(CommentDto cDto) { return bSer.commentList(cDto); }
+	 */
 }
