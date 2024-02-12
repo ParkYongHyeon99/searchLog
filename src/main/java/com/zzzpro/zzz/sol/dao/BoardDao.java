@@ -32,6 +32,4 @@ public interface BoardDao {
 
 	public void bMGetPoint(String b_writer);
 
-	public void cMGetPoint(String c_writer);
-
 }
