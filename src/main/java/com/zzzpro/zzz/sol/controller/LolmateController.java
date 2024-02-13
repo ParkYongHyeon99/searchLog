@@ -11,8 +11,12 @@ public class LolmateController {
 		return "lolmate";
 	}
 	
-	@GetMapping("/lolmate/lolmateWrite")
+	@GetMapping("/lolmate/write")
 	public String lolmateWrite() {
+		return "lolmateWrite";
+	}
+	@GetMapping("/lolmate/detail")
+	public String lolmateDetail() {
 		return "lolmateWrite";
 	}
 	

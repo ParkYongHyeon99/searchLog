@@ -18,9 +18,18 @@ public class LolmateService {
 	private LolmateDao lmDao;
 
 	public ArrayList<LolmateDto> lmList(LolmateDto lmDto) {
-		log.info(" ========== > service - lmList: {}"+lmDto.getLm_gameMate()+" < ==========");
+		System.out.println(lmDto.getLm_gameMate()+","+lmDto.getLm_gameMode()+","+lmDto.getLm_tier()+","+lmDto.getLm_findPosition());
+		
 		lmDto.setLm_tier("%"+lmDto.getLm_tier()+"%");
-		lmDto.setLm_findPosition("%All%");
+		lmDto.setLm_findPosition("%"+lmDto.getLm_findPosition()+"%");
+		
+		if(lmDto.getLm_tier().equals("%All%") && lmDto.getLm_findPosition().equals("%All%")) {
+			return lmDao.lmAllList(lmDto);
+		}else if(lmDto.getLm_tier().equals("%All%")) {
+			return lmDao.lmAllTierList(lmDto);
+		}else if(lmDto.getLm_findPosition().equals("%All%")) {
+			return lmDao.lmAllPositionList(lmDto);
+		}
 		return lmDao.lmList(lmDto);
 	}
 	
