@@ -58,13 +58,13 @@ function lmAjax(){
 			for(var lm of lmList){
 				html += '<tr>';
 				html += '<td>'+lm.lm_gameMode+'</td>';		// 게임 모드
-				html += '<td>'+lm.lm_tier+'</td>';			// 티어
+				html += '<td>'+lm.lm_tier.substring(0,lm.lm_tier.indexOf(' '))+'</td>';			// 티어
 				html += '<td>'+lm.lm_summonerName+'</td>';	// 작성자 게임닉
 				html += '<td>'+lm.lm_myPosition+'</td>';	// 작성자 포지션
 				html += '<td>'+lm.winrate+'</td>';			// 작성자 승률
-				html += '<td>'+lm.lm_findPosition+'</td>';	// 찾는 포지션
+				html += '<td>'+lm.lm_findPosition.substring(0,lm.lm_tier.indexOf(' '))+'</td>';	// 찾는 포지션
 				html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
-				html += '<td><button onclick="alert(\'할 예정!\')">신청</button></td>';
+				html += '<td><button onclick="popup(\'app\')">신청</button></td>';
 				html += '</tr>';
 			}
 		}else{
@@ -79,8 +79,14 @@ function lmAjax(){
 	})
 }
 
-function popup(){
-    var url = "lolmateWrite";
+
+function popup(menu){
+	// https://w94dev.tistory.com/45
+	if(menu=="find"){
+	    var url = "write?tier=gold";
+	}else if(menu=="app"){
+	    var url = "detail";
+	}
     var name = "lolmate popup";
     var option = "width=500, height= 500, top=200, left=800, location=no, resizable=no"
     window.open(url, name, option);
