@@ -40,29 +40,58 @@
 					<option value="Grandmaster">그랜드마스터</option>
 					<option value="Challenger">챌린저</option>
 				</select>
-			</div> <br>
+				
+				<div class="sePoDiv">
+	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="All" checked="checked">
+	 					<div class="positionImg" id="pAll"></div>
+	 				</input></label>
+	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="top">
+	 					<div class="positionImg" id="Top"></div>
+	 				</input></label>
+	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="mid">
+	 					<div class="positionImg" id="Mid"></div>
+	 				</input></label>
+	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="sup">
+	 					<div class="positionImg" id="Support"></div>
+	 				</input></label>
+	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="jug">
+	 					<div class="positionImg" id="Jungle"></div>
+	 				</input></label>
+	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="adc">
+	 					<div class="positionImg" id="Bot"></div>
+	 				</input></label>
+				</div>
+			</div>
+			<button onclick="popup()">글쓰기</button>
+			<br>
 			
 			<table class="lmListT">
-				<tr class="trF">
-					<th>&ensp;게임모드&ensp;</th>
-					<th>&ensp;티어&ensp;</th>
-					<th>&ensp;소환사 명&ensp;</th>
-					<th>&ensp;주 포지션&ensp;</th>
-					<th>&ensp;승률&ensp;</th>
-					<th>&ensp;찾는 포지션&ensp;</th>
-					<th>&ensp;메모&ensp;</th>
-					<th>&ensp;신청 버튼(글씨없애고자리차지하게할것)&ensp;</th>
-				</tr>
-				
-				<th:block th:if="${lmList}==null">
+				<thead>
+					<tr class="trF">
+						<th>&ensp;게임모드&ensp;</th>
+						<th>&ensp;티어&ensp;</th>
+						<th>&ensp;소환사 명&ensp;</th>
+						<th>&ensp;주 포지션&ensp;</th>
+						<th>&ensp;승률&ensp;</th>
+						<th>&ensp;찾는 포지션&ensp;</th>
+						<th>&ensp;메모&ensp;</th>
+						<th>&ensp;신청&ensp;</th>
+					</tr>
+				</thead>
+				<tbody id="lmTbody">
 					<tr>
+						<td colspan="8">
+							<div class="lmListDiv">글이 존재하지 않습니다.</div>
+						</td>
+					</tr>
+				</tbody>
+				
+<!-- 				<th:block th:if="${lmList}==null">
+					<tr id="lmList">
 						<td colspan="8" class="tdDiv">
 							<div class="lmListDiv">글이 존재하지 않습니다.</div>
 						</td>
 					</tr>
-					<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>
-					<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>
-					<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>
 				</th:block>
 				
 				<th:block th:if="${lmList}!=null" th:each="lm:${lmList}">
@@ -76,7 +105,7 @@
 						<td th:text=" ' &ensp; ' + '메모' + ' &ensp; '"></td>
 						<td><button onclick="alert('할 예정!')">신청</button></td>
 					</tr>
-				</th:block>
+				</th:block> -->
 			</table>
 		</div>
 		

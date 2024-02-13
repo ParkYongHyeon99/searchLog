@@ -20,3 +20,21 @@
 	text-align: center;
 	width: 99%;
 }
+
+.positionImg{
+    /*content:url(back.jpg);*/
+    width:10%;
+    padding-bottom: 10%;
+    /*background-image: url("../img/position/Silver-Support.png");*/
+    background-size: cover;
+}
+#poAll{
+    background-image: url("../img/position/angle-square-up.png");
+}
+
+.poRadio{
+	opacity: 0;
+}
+.poRadio:checked + label{
+	filter: invert(100%) sepia(0%) saturate(707%) hue-rotate(206deg) brightness(86%) contrast(92%);
+}
