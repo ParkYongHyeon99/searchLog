@@ -59,7 +59,9 @@ public class BoardService {
 			bDto.setUnnamed(1);
 		}
 		if(bDao.writeSub(bDto)) {
-			bDao.bMGetPoint(bDto.getB_writer());
+			if(!(bDto.getB_writer().equals("익명"))) {
+				bDao.bMGetPoint(bDto.getB_writer());
+			}
 			ra.addFlashAttribute("msg","게시글 작성에 성공했습니다.");
 			return true;
 		}
@@ -110,15 +112,13 @@ public class BoardService {
 		ra.addFlashAttribute("msg","게시글 수정에 실패했습니다.");
 	}
 
-	@Transactional(rollbackFor = {Exception.class})
-	public ArrayList<CommentDto> commentList(CommentDto cDto) {
-		log.info(" ========== > service - commentList: {}"+cDto.getB_num()+" < ==========");
-		ArrayList <CommentDto> cList = bDao.commentList(cDto.getB_num());
-		if(cList.size()!=0) {
-			bDao.cMGetPoint(cDto.getC_writer());
-			return cList;
-		}
-		return null;
-	}
+	/*
+	 * @Transactional(rollbackFor = {Exception.class}) public ArrayList<CommentDto>
+	 * commentList(CommentDto cDto) {
+	 * log.info(" ========== > service - commentList: {}"+cDto.getB_num()
+	 * +" < =========="); ArrayList <CommentDto> cList =
+	 * bDao.commentList(cDto.getB_num()); if(cList.size()!=0) {
+	 * bDao.cMGetPoint(cDto.getC_writer()); return cList; } return null; }
+	 */
 	
 }
