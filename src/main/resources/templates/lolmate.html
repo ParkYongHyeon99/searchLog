@@ -42,27 +42,27 @@
 				</select>
 				
 				<div class="sePoDiv">
-	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="All" checked="checked">
-	 					<div class="positionImg" id="pAll"></div>
-	 				</input></label>
-	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="top">
-	 					<div class="positionImg" id="Top"></div>
-	 				</input></label>
-	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="mid">
-	 					<div class="positionImg" id="Mid"></div>
-	 				</input></label>
-	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="sup">
-	 					<div class="positionImg" id="Support"></div>
-	 				</input></label>
-	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="jug">
-	 					<div class="positionImg" id="Jungle"></div>
-	 				</input></label>
-	 				<label><input type="radio" class="poRadio" name="lm_findPosition" value="adc">
-	 					<div class="positionImg" id="Bot"></div>
-	 				</input></label>
+	 				<label class="positionImg" id="pAll">
+	 					<input type="radio" class="poRadio" name="lm_findPosition" value="All" id="rpAll" checked="checked"></input>
+	 				</label>
+	 				<label class="positionImg" id="Top">
+	 					<input type="radio" class="poRadio" name="lm_findPosition" value="top" id="rTop"></input>
+	 				</label>
+	 				<label class="positionImg" id="Mid">
+		 				<input type="radio" class="poRadio" name="lm_findPosition" value="mid" id="rMid"></input>
+	 				</label>
+	 				<label class="positionImg" id="Support">
+	 					<input type="radio" class="poRadio" name="lm_findPosition" value="sup" id="rSupport"></input>
+	 				</label>
+	 				<label class="positionImg" id="Jungle">
+	 					<input type="radio" class="poRadio" name="lm_findPosition" value="jug" id="rJungle"></input>
+	 				</label>
+	 				<label class="positionImg" id="Bot">
+	 					<input type="radio" class="poRadio" name="lm_findPosition" value="adc" id="rBot"></input>
+	 				</label>
 				</div>
 			</div>
-			<button onclick="popup()">글쓰기</button>
+			<button onclick="popup('find')">듀오/멘토 찾기</button>
 			<br>
 			
 			<table class="lmListT">
@@ -85,27 +85,6 @@
 						</td>
 					</tr>
 				</tbody>
-				
-<!-- 				<th:block th:if="${lmList}==null">
-					<tr id="lmList">
-						<td colspan="8" class="tdDiv">
-							<div class="lmListDiv">글이 존재하지 않습니다.</div>
-						</td>
-					</tr>
-				</th:block>
-				
-				<th:block th:if="${lmList}!=null" th:each="lm:${lmList}">
-					<tr>
-						<td th:text=" ' &ensp; ' + '게임모드' + ' &ensp; '"></td>
-						<td th:text=" ' &ensp; ' + '티어' + ' &ensp; '"></td>
-						<td th:text=" ' &ensp; ' + '소환사 명' + ' &ensp; '"></td>
-						<td th:text=" ' &ensp; ' + '주 포지션' + ' &ensp; '"></td>
-						<td th:text=" ' &ensp; ' + '승률' + ' &ensp; '"></td>
-						<td th:text=" ' &ensp; ' + '찾는 포지션' + ' &ensp; '"></td>
-						<td th:text=" ' &ensp; ' + '메모' + ' &ensp; '"></td>
-						<td><button onclick="alert('할 예정!')">신청</button></td>
-					</tr>
-				</th:block> -->
 			</table>
 		</div>
 		
