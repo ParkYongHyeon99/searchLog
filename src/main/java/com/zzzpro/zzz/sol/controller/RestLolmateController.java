@@ -16,7 +16,7 @@ public class RestLolmateController {
 	 
 	@GetMapping("/lolmate/lmList")
 	public ArrayList<LolmateDto> lmList(LolmateDto lmDto) {
-		System.out.println(lmDto.getLm_gameMate() + "," + lmDto.getLm_gameMode() + "," + lmDto.getLm_tier());
+		System.out.println(lmDto.getLm_gameMate()+","+lmDto.getLm_gameMode()+","+lmDto.getLm_tier()+","+lmDto.getLm_findPosition());
 		return lmSer.lmList(lmDto);
 	}
 

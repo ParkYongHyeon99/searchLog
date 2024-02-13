@@ -20,7 +20,7 @@ public class LolmateService {
 	public ArrayList<LolmateDto> lmList(LolmateDto lmDto) {
 		log.info(" ========== > service - lmList: {}"+lmDto.getLm_gameMate()+" < ==========");
 		lmDto.setLm_tier("%"+lmDto.getLm_tier()+"%");
-		lmDto.setLm_findPosition("%All%");
+		lmDto.setLm_findPosition("%"+lmDto.getLm_findPosition()+"%");
 		return lmDao.lmList(lmDto);
 	}
 	
