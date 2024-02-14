@@ -24,7 +24,7 @@ $(()=>{
 	
 	
 /* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
-	$('input[name=lm_gameMate],select[name=lm_gameMode],select[name=lm_tier],input[name=lm_findPosition]').on('change',function(){
+$('input[name=lm_gameMate],select[name=lm_gameMode],select[name=lm_tier],input[name=lm_findPosition]').on('change',function(){
 		let position = ["Top","Mid","Support","Jungle","Bot"];
 		for(p of position){
 			document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
@@ -58,13 +58,14 @@ function lmAjax(){
 			for(var lm of lmList){
 				html += '<tr>';
 				html += '<td>'+lm.lm_gameMode+'</td>';		// 게임 모드
-				html += '<td>'+lm.lm_tier.substring(0,lm.lm_tier.indexOf(' '))+'</td>';			// 티어
+				html += '<td>'+imgHtml(lm.lm_tier,'emblem')+'</td>';			// 티어
 				html += '<td>'+lm.lm_summonerName+'</td>';	// 작성자 게임닉
 				html += '<td>'+lm.lm_myPosition+'</td>';	// 작성자 포지션
 				html += '<td>'+lm.winrate+'</td>';			// 작성자 승률
-				html += '<td>'+lm.lm_findPosition.substring(0,lm.lm_tier.indexOf(' '))+'</td>';	// 찾는 포지션
+				html += '<td>'+imgHtml(lm.lm_findPosition,'position')+'</td>';	// 찾는 포지션
+				//html += '<td>'+lm.lm_findPosition.substring(0,lm.lm_findPosition.indexOf(' '))+'</td>';	// 찾는 포지션
 				html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
-				html += '<td><button onclick="popup(\'app\')">신청</button></td>';
+				html += '<td><button onclick="popup(\'app\''+lm.lm_num+')">신청</button></td>';
 				html += '</tr>';
 			}
 		}else{
@@ -80,12 +81,58 @@ function lmAjax(){
 }
 
 
-function popup(menu){
+/* ====================== 포지션 이미지 설정 ====================== */
+function imgHtml(tp,img){
+	var imgSrc = '<div style="background-image: url(\'../img/'+img+'/'
+	var close = '.png); background-repeat: no-repeat; background-position: center;'
+	var dia = '/Diamond'
+	var html = ''
+	if(img=='emblem'){
+		console.log("1")
+		html += imgSrc+'Rank='+tp+close;;
+	}else if(img=='position'){
+		if(tp.search("All")!=-1){
+		console.log("2")
+			html += imgSrc+dia+'Top'+close;
+			html += imgSrc+dia+'Jungle'+close;
+			html += imgSrc+dia+'Mid'+close;
+			html += imgSrc+dia+'Support'+close;
+			html += imgSrc+dia+'Bot'+close;
+		}else{
+			if(tp.search("top")!=-1){
+			console.log("3")
+				html += imgSrc+dia+'Top'+close;
+			}
+			if(tp.search("jug")!=-1){
+			console.log("4")
+				html += imgSrc+dia+'Jungle'+close;
+			}
+			if(tp.search("mid")!=-1){
+			console.log("5")
+				html += imgSrc+dia+'Mid'+close;
+			}
+			if(tp.search("sup")!=-1){
+			console.log("6")
+				html += imgSrc+dia+'Support'+close;
+			}
+			if(tp.search("adc")!=-1){
+			console.log("7")
+				html += imgSrc+dia+'Bot'+close;
+			}
+		}
+	}
+	return html;
+}
+
+
+
+/* ====================== 팝업창 띄우기 ====================== */
+function popup(menu,lm_num){
 	// https://w94dev.tistory.com/45
 	if(menu=="find"){
-	    var url = "write?tier=gold";
+	    var url = "write";
 	}else if(menu=="app"){
-	    var url = "detail";
+	    var url = "detail?num="+lm_num;
 	}
     var name = "lolmate popup";
     var option = "width=500, height= 500, top=200, left=800, location=no, resizable=no"
