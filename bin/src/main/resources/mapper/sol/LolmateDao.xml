@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.zzzpro.zzz.sol.dao.LolmateDao">
+	
+	<select id="lmAllList">
+		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo from lolmateList
+			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode};
+	</select>
+	<select id="lmList">
+		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo from lolmateList
+			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_tier like #{lm_tier} and lm_findPosition like #{lm_findPosition};
+	</select>
+	<select id="lmAllTierList">
+		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo from lolmateList
+			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_findPosition like #{lm_findPosition};
+	</select>
+	<select id="lmAllPositionList">
+		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo from lolmateList
+			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_tier like #{lm_tier};
+	</select>
+	
+</mapper>

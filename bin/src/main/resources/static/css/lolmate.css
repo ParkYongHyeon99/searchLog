@@ -20,3 +20,25 @@
 	text-align: center;
 	width: 99%;
 }
+
+.positionImg{
+	float: left;
+}
+
+.positionImg{
+    width:30px;
+    padding-bottom: 30px;
+    background-size: cover;
+}
+#poAll{
+    background-image: url("../img/position/angle-square-up.png");
+}
+label{
+	display: inline-block;
+}
+.poRadio{
+	opacity: 0;
+	position: absolute;
+	width: 0;
+	height: 0;
+}
