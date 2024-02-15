@@ -17,7 +17,7 @@ public class LolmateController {
 	}
 	@GetMapping("/lolmate/detail")
 	public String lolmateDetail() {
-		return "lolmateWrite";
+		return "lolmateDetail";
 	}
 	
 }
