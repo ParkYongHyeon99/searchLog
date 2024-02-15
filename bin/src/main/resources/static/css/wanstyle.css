@@ -1,0 +1,94 @@
+* {
+	margin: 1px;
+	text-align: center;
+	background-color: lightgreen;
+	border: 1px solid black;
+	padding: 0;
+}
+
+body {
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+
+img {
+	display: inline-block;
+	width: 50px;
+	/* float: left; */
+}
+
+a {
+	color: black;
+	/* 링크의 기본 색깔 */
+	text-decoration: none;
+	/* 밑줄 제거 */
+	transition: color 0.3s;
+	/* 색깔 변경에 애니메이션 효과를 줍니다. */
+	cursor: pointer;
+}
+
+/* 마우스를 가져다대면 색깔 변경 */
+a:hover {
+	color: yellow;
+	/* 링크의 색깔을 마우스를 가져다대면 빨간색으로 변경 */
+}
+
+.container {
+	display: flex;
+	width: 1800px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.head-container {
+	width: 1800px;
+	margin: 1px auto;
+	/* 중앙 정렬을 위한 마진 설정 */
+}
+
+.tab-container {
+	display: flex;
+	flex-direction: column;
+	/* 세로로 배치 */
+	width: 200px;
+	/* 전체 탭 메뉴의 너비 */
+}
+
+.tab {
+	padding: 50px;
+	cursor: pointer;
+	width: 100%;
+	/* 탭의 너비를 100%로 설정하여 부모의 너비에 맞춤 */
+	box-sizing: border-box;
+}
+
+.tab-content {
+	padding: 10px;
+	display: none;
+	width: 100%;
+	/* 탭 내용의 너비를 100%로 설정하여 부모의 너비에 맞춤 */
+	box-sizing: border-box;
+	/* padding과 border를 포함하여 크기 계산 */
+}
+
+/* 첫 번째 탭의 내용은 페이지 로드 시에 보이도록 설정 */
+#tab1-content {
+	display: block;
+}
+
+/* ==================================건들지 말것====================== */
+.tab-flex {
+	display: flex;
+	width: 100%;
+	/* padding: 100px; */
+}
+
+.divide {
+	width: 100%;
+	/* float: left; */
+}
+
+.double-divide {
+	width: 25%;
+}

@@ -16,28 +16,32 @@ $(()=>{
 		document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
 		document.getElementById(p).style.backgroundRepeat = "no-repeat";
 		document.getElementById(p).style.backgroundSize = "30px";
-	}
 	
 /* ====================== 리스트 가져오는 함수 실행 ====================== */
 	lmAjax();
 	setInterval(function(){lmAjax()},5000);		// <- 5초마다 리스트 갱신
 	
+}
+	
 	
 /* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
-	$('input[name=lm_gameMate],select[name=lm_gameMode],select[name=lm_tier],input[name=lm_findPosition]').on('change',function(){
+$('input[name=lm_gameMate],select[name=lm_gameMode],select[name=lm_tier],input[name=lm_findPosition]').on('change',function(){
 		let position = ["Top","Mid","Support","Jungle","Bot"];
 		for(p of position){
 			document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
 		}
 		let selectP = $('input[name=lm_findPosition]:checked')[0].id.substr(1);
-		console.log(selectP);
+		console.log('lm_findPosition: '+selectP);
 		if(selectP!="pAll"){
 			document.getElementById(selectP).style.backgroundImage = "url('../img/position/Diamond-"+selectP+".png')";
 		}
 		lmAjax();
+		document.getElementsByClassName(selectP)[0].style.backgroundImage = "url('../img/position/Diamond-"+selectP+".png')";
 		console.log("변경");
 	})
 })
+
+
 
 
 /* ====================== gameMate,gameMode,tier에 따른 리스트 가져오기 ====================== */
@@ -58,13 +62,13 @@ function lmAjax(){
 			for(var lm of lmList){
 				html += '<tr>';
 				html += '<td>'+lm.lm_gameMode+'</td>';		// 게임 모드
-				html += '<td>'+lm.lm_tier.substring(0,lm.lm_tier.indexOf(' '))+'</td>';			// 티어
+				html += '<td>'+divHtml(lm.lm_tier,'emblem')+'</td>';			// 티어
 				html += '<td>'+lm.lm_summonerName+'</td>';	// 작성자 게임닉
-				html += '<td>'+lm.lm_myPosition+'</td>';	// 작성자 포지션
+				html += '<td>'+divHtml(lm.lm_myPosition,'position')+'</td>';	// 작성자 포지션
 				html += '<td>'+lm.winrate+'</td>';			// 작성자 승률
-				html += '<td>'+lm.lm_findPosition.substring(0,lm.lm_tier.indexOf(' '))+'</td>';	// 찾는 포지션
+				html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>';	// 찾는 포지션
 				html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
-				html += '<td><button onclick="popup(\'app\')">신청</button></td>';
+				html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')" disabled>신청</button></td>';
 				html += '</tr>';
 			}
 		}else{
@@ -72,6 +76,14 @@ function lmAjax(){
 		}
 			$("#lmTbody").empty();
 			$("#lmTbody").append(html);
+			
+			let id = document.getElementById('b_writer').value
+			if(id != ""){
+				document.getElementById('dmPBtn').disabled = false;
+				for(let i=0; i<lmList.length; i++){
+					document.getElementsByClassName('appBtn')[i].disabled = false;
+				}
+			}
 		
 	}).fail((err,status)=>{
 		console.log("err:", err);
@@ -80,10 +92,56 @@ function lmAjax(){
 }
 
 
-function popup(menu){
+/* ====================== 포지션 div 설정 ====================== */
+function divHtml(tp,img){
+	var divT = '<div class="tooltip positionImgDiv2" style="display: inline-block;"><div class="tooltip '
+	var spanT = '"><span class="tooltiptext tooltip-bottom">'
+	var spanTE = '</span></div></div>'
+	var html = '<div class="positionImgDiv">'
+	if(img=='emblem'){
+		html += divT+tp+spanT+tp+spanTE;
+	}else if(img=='position'){
+		if(tp.search("All")!=-1){
+			html += divT+'Top'+spanT+'탑'+spanTE;
+			html += divT+'Jungle'+spanT+'정글'+spanTE;
+			html += divT+'Mid'+spanT+'미드'+spanTE;
+			html += divT+'Support'+spanT+'서폿'+spanTE;
+			html += divT+'Bot'+spanT+'봇(원딜)'+spanTE;
+		}else{
+			if(tp.search("top")!=-1){html += divT+'Top'+spanT+'탑'+spanTE;}
+			if(tp.search("jug")!=-1){html += divT+'Jungle'+spanT+'정글'+spanTE;}
+			if(tp.search("mid")!=-1){html += divT+'Mid'+spanT+'미드'+spanTE;}
+			if(tp.search("sup")!=-1){html += divT+'Support'+spanT+'서포터'+spanTE;}
+			if(tp.search("adc")!=-1){html += divT+'Bot'+spanT+'봇(원딜)'+spanTE;}
+		}
+	}
+	return html+"</div>";
+}
+/*html+divT+dClass+'Top'+spanT+'탑+spanTE+"</div>"
+
+	<div class="positionImgDiv">
+		<div class="tooltip positionImgDiv2">
+			<div class="tooltip Top"><span class="tooltiptext tooltip-bottom">탑</span></div>
+		</div>
+	</div>
+
+*/
+
+
+/* ====================== 모달 띄우기 ====================== */
+
+
+
+
+
+
+
+
+/* ====================== 팝업창 띄우기 ====================== */
+function popup(menu,lm_num){
 	// https://w94dev.tistory.com/45
 	if(menu=="find"){
-	    var url = "write?tier=gold";
+	    var url = "write";
 	}else if(menu=="app"){
 	    var url = "detail";
 	}

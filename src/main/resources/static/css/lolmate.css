@@ -30,9 +30,6 @@
     padding-bottom: 30px;
     background-size: cover;
 }
-#poAll{
-    background-image: url("../img/position/angle-square-up.png");
-}
 label{
 	display: inline-block;
 }
@@ -42,3 +39,71 @@ label{
 	width: 0;
 	height: 0;
 }
+
+
+/* ============컨테이너 설정=========== */
+.positionImgDiv{
+	justify-content:center;
+	flex-direction: row;
+	text-align: center;
+}
+.positionImgDiv2{
+	flex-direction: column;
+	margin-left: auto;
+	text-align: center;
+}
+/* 툴팁 기본 스타일 설정 시작 */
+.tooltip { position: relative;	display: block; }
+.tooltip .tooltiptext {
+	text-align: center;
+	visibility: hidden;
+	width: 120px;
+	background-color: black;
+	color: #fff;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+}
+.tooltip:hover .tooltiptext { visibility: visible; }
+/* 아래쪽 툴팁 시작 */
+.tooltip .tooltip-bottom {
+	width: 120px;
+	top: 150%;
+	left: 50%;
+	margin-left: -60px;
+}
+.tooltip .tooltip-bottom::after {
+	bottom: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-color: transparent transparent black transparent;
+}
+
+
+
+.Top,.Jungle,.Mid,.Support,.Bot{
+	width: 30px;
+	padding-bottom: 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size : cover;
+	display: inline-block;
+}
+.Top{
+	background-image: url('../img/position/Silver-Top.png');
+}
+.Jungle{
+	background-image: url('../img/position/Silver-Jungle.png');
+}
+.Mid{
+	background-image: url('../img/position/Silver-Mid.png');
+}
+.Support{
+	background-image: url('../img/position/Silver-Support.png');
+}
+.Bot{
+	background-image: url('../img/position/Silver-Bot.png');
+}
+
+

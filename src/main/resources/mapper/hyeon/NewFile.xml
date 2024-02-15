@@ -1,0 +1,108 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zzzpro.zzz.hyeon.RuneDao">
+	<select id="Rune_winrate">
+		SELECT
+		main_name,
+		main_perks1,
+		main_perks2,
+		main_perks3,
+		main_perks4,
+		sub_name,
+		sub_perks1,
+		sub_perks2,
+		stat_perks1,
+		stat_perks2,
+		stat_perks3,
+		COUNT(*) AS Count,
+		round(COUNT(*)/(SELECT COUNT(*) FROM
+		zzz_datas_rune WHERE championName_KR = #{championName_KR})*100, 2)
+		as
+		percentage,
+		round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) *
+		100),2) AS win_percentage
+		FROM zzz_datas_rune
+		WHERE championName_KR =
+		#{championName_KR} and teamPosition = #{teamPosition} and tier1 =
+		#{tier1}
+		GROUP BY main_name, sub_name
+		ORDER BY Count DESC
+		LIMIT 1;
+	</select>
+
+	<select id="item_winrate">
+		SELECT
+		item6, shoes, core1, core2, core3,
+		COUNT(*) AS
+		Count,
+		round(COUNT(*)/(SELECT COUNT(*) FROM
+		zzz_item1 WHERE
+		championName_KR = #{championName_KR} and teamPosition =
+		#{teamPosition} )*100, 2)
+		as
+		percentage,
+		round((COUNT(CASE WHEN win = 1
+		THEN 1 END) / COUNT(*) *
+		100),2) AS
+		win_percentage
+		FROM zzz_item1
+		WHERE
+		championName_KR =
+		#{championName_KR} and teamPosition = #{teamPosition}
+		and tier1 =
+		#{tier1} and core2 != 0 and core3 != 0
+		GROUP BY core1
+		ORDER BY Count DESC
+		LIMIT 1;
+	</select>
+
+	<select id="skill_tree_winrate">
+		SELECT
+		value1,
+		value2,
+		value3,
+		value4,
+		value5,
+		value6,
+		value7,
+		value8,
+		value9,
+		value10,
+		value11,
+		value12,
+		COUNT(*) AS Count,
+		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_personal2 WHERE championName = #{championName} and
+		teamPosition = #{teamPosition})*100, 2) as percentage
+		FROM (
+		SELECT JSON_EXTRACT(skill_tree, '$[0]') AS value1,
+		JSON_EXTRACT(skill_tree, '$[1]') AS value2,
+		JSON_EXTRACT(skill_tree, '$[2]') AS value3,
+		JSON_EXTRACT(skill_tree, '$[3]') AS value4,
+		JSON_EXTRACT(skill_tree, '$[4]') AS value5,
+		JSON_EXTRACT(skill_tree, '$[5]') AS value6,
+		JSON_EXTRACT(skill_tree, '$[6]') AS value7,
+		JSON_EXTRACT(skill_tree, '$[7]') AS value8,
+		JSON_EXTRACT(skill_tree, '$[8]') AS value9,
+		JSON_EXTRACT(skill_tree, '$[9]') AS value10,
+		JSON_EXTRACT(skill_tree, '$[10]') AS value11,
+		JSON_EXTRACT(skill_tree, '$[11]') AS value12
+		FROM zzz_datas_personal2
+		WHERE teamPosition = #{teamPosition} and championName_KR = #{championName_KR}
+		) AS subquery
+		GROUP BY value1,
+		value2,
+		value3,
+		value4,
+		value5,
+		value6,
+		value7,
+		value8,
+		value9,
+		value10,
+		value11,
+		value12
+		ORDER BY Count DESC
+		LIMIT 1;
+	</select>
+
+</mapper>

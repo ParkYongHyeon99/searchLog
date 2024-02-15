@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/wanstyle.css">
+<script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div class="head-container">
+        <header>나는 헤더</header>
+        <nav>나는 검색창</nav>
+        <header>
+            <label>티어</label>
+            <select>
+                <option value="diamond">diamond</option>
+                <option value="platinum">platinum</option>
+                <option value="gold">gold</option>
+                <option value="silver">silver</option>
+                <option value="bronze">bronze</option>
+            </select>
+            <span>
+                <a th:href="@{/counter}">카운터</a>
+                <a th:href="@{/rune}">룬</a>
+                <a th:href="@{/item}">아이템</a>
+                <a th:href="@{/skill}">스킬</a>
+            </span>
+        </header>
+    </div>
+    <div class="container">
+        <div>
+            <div>
+                <!-- <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${chName}.png|" alt="초상화"> -->
+                <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Garen.png">
+            </div>
+            <div>스킬 설명 및 영상</div>
+        </div>
+        <!-- 탭 메뉴 시작 -->
+        <div class="tab-container">
+            <div class="tab" onclick="showTab('tab1')">
+                <div>TOP</div>
+                <div>50.5%</div>
+            </div>
+            <div class="tab" onclick="showTab('tab2')">
+                <div>JUN</div>
+                <div>40.5%</div>
+            </div>
+            <div class="tab" onclick="showTab('tab3')">
+                <div>BOT</div>
+                <div>30.5%</div>
+            </div>
+        </div>
+        <!-- 탭 메뉴 끝 -->
+        <!-- 탭 1내용 시작 -->
+        <div id="tab1-content" class="tab-content">
+            <div class="divide">
+                <div class="tab-flex">
+                    <div class="divide">1스킬빌드<br>1-2-3코어</div>
+                    <div class="divide">승률<br>00.0%</div>
+                    <div class="divide">픽률<br>00.0%</div>
+                    <div class="divide">밴률<br>00.0%</div>
+                </div>
+                <div class="tab-flex">
+                    <div class="divide">1아이템빌드<br>1-2-3코어</div>
+                    <div class="divide">
+                        승률<br>00.0%
+                    </div>
+                    <div class="divide">
+                        픽률<br>00.0%
+                    </div>
+                    <div class="divide">
+                        밴률<br>00.0%
+                    </div>
+                </div>
+                <div class="tab-flex">
+                    <div class="divide">카운터</div>
+                    <div class="divide">스펠</div>
+                </div>
+                <div class="tab-flex">
+                    <div class="tab-flex">
+                        <div class="divide">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
+                            00.0%(승률)<br>
+                            상대법
+                        </div>
+                        <div class="divide">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
+                            00.0%(승률)<br>
+                            상대법
+                        </div>
+                        <div class="divide">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
+                            00.0%(승률)<br>
+                            상대법
+                        </div>
+                    </div>
+                    <div class="divide">
+                        <img src="./img/Ignite.webp" alt="스펠1">
+                        <img src="./img/Flash.webp" alt="스펠2"><br>
+                        00.0% 00.0%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 탭1 내용 끝 -->
+        <!-- 탭2 내용 시작 -->
+        <div id="tab2-content" class="tab-content">
+            <div class="divide">
+                <div class="tab-flex">
+                    <div class="divide">2스킬빌드<br>1-2-3코어</div>
+                    <div class="divide">승률<br>00.0%</div>
+                    <div class="divide">픽률<br>00.0%</div>
+                    <div class="divide">밴률<br>00.0%</div>
+                </div>
+                <div class="tab-flex">
+                    <div class="divide">2아이템빌드<br>1-2-3코어</div>
+                    <div class="divide">
+                        승률<br>00.0%
+                    </div>
+                    <div class="divide">
+                        픽률<br>00.0%
+                    </div>
+                    <div class="divide">
+                        밴률<br>00.0%
+                    </div>
+                </div>
+                <div class="tab-flex">
+                    <div class="divide">카운터</div>
+                    <div class="divide">스펠</div>
+                </div>
+                <div class="tab-flex">
+                    <div class="tab-flex">
+                        <div class="divide">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
+                            00.0%(승률)<br>
+                            상대법
+                        </div>
+                        <div class="divide">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
+                            00.0%(승률)<br>
+                            상대법
+                        </div>
+                        <div class="divide">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
+                            00.0%(승률)<br>
+                            상대법
+                        </div>
+                    </div>
+                    <div class="divide">
+                        <img src="./img/Ignite.webp" alt="스펠1">
+                        <img src="./img/Flash.webp" alt="스펠2"><br>
+                        00.0% 00.0%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 탭2 내용 끝 -->
+        <!-- 탭3 내용 시작 -->
+        <div id="tab3-content" class="tab-content">
+            <div class="divide">
+                <div class="tab-flex">
+                    <div class="divide">3스킬빌드<br>1-2-3코어</div>
+                    <div class="divide">승률<br>00.0%</div>
+                    <div class="divide">픽률<br>00.0%</div>
+                    <div class="divide">밴률<br>00.0%</div>
+                </div>
+                <div class="tab-flex">
+                    <div class="divide">3아이템빌드<br>1-2-3코어</div>
+                    <div class="divide">
+                        승률<br>00.0%
+                    </div>
+                    <div class="divide">
+                        픽률<br>00.0%
+                    </div>
+                    <div class="divide">
+                        밴률<br>00.0%
+                    </div>
+                </div>
+                <div class="tab-flex">
+                    <div class="divide">카운터</div>
+                    <div class="divide">스펠</div>
+                </div>
+                <div class="tab-flex">
+                    <div class="tab-flex">
+                        <div class="divide">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
+                            00.0%(승률)<br>
+                            상대법
+                        </div>
+                        <div class="divide">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
+                            00.0%(승률)<br>
+                            상대법
+                        </div>
+                        <div class="divide">
+                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
+                            00.0%(승률)<br>
+                            상대법
+                        </div>
+                    </div>
+                    <div class="divide">
+                        <img src="./img/Ignite.webp" alt="스펠1">
+                        <img src="./img/Flash.webp" alt="스펠2"><br>
+                        00.0% 00.0%
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 탭3 내용 끝 -->
+        <div class="double-divide">룬이미지</div>
+    </div>
+</body>
+<script>
+    function showTab(tabId) {
+        // 모든 탭의 내용을 감춤
+        document.querySelectorAll('.tab-content').forEach(function (tabContent) {
+            tabContent.style.display = 'none';
+        });
+        // 선택한 탭의 내용을 보이게 함
+        document.getElementById(tabId + '-content').style.display = 'block';
+    }
+</script>
+
+</html>
