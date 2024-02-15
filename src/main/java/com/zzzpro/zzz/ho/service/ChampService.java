@@ -22,4 +22,8 @@ public class ChampService {
 		 String bbb =champdao.pickrate(champdto);
 		 return bbb;
 	}
+	public String runeRate(ChampDto champdto) {
+		String bbb = champdao.runeRate(champdto);
+		return bbb;
+	}
 }
