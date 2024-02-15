@@ -8,5 +8,6 @@ import com.zzzpro.zzz.ho.dto.ChampDto;
 public interface ChampDao {
 	String winrate(ChampDto champDto);
 	String pickrate(ChampDto champDto);
+	String runeRate(ChampDto champDto);
 
 }
