@@ -95,13 +95,16 @@ label{
 
 
 
-.Top,.Jungle,.Mid,.Support,.Bot{
+.pAll .Top,.Jungle,.Mid,.Support,.Bot{
 	width: 30px;
 	padding-bottom: 30px;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size : cover;
 	display: inline-block;
+}
+.pAll{
+	background-image: url('../img/position/Diamond-pAll.png');
 }
 .Top{
 	background-image: url('../img/position/Silver-Top.png');
@@ -147,17 +150,64 @@ label{
 
 #lmNotionDiv{
 	width: 100%;
-	height: 60px;
+	height: 30%;
 	line-height: 30px;
-	padding: 10px;
+	padding: 20px;
 	background-color: aqua;
+	text-align: center;
+}
+#lmNotionDiv h3,h2{
+	display: inline-block;
+	margin: 0;
 }
 
 
+.btn-group button{
+	padding: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+.btn-group #duoBtn{
+	margin-right: -4px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+.btn-group #mentoBtn{
+	margin-left: -4px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+.btn-group #discodeOn{
+	margin-right: -4px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+.btn-group #discodeOff{
+	margin-left: -4px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.btn-group .selectBtn{
+	border: 1px solid #091428;
+	background-color: #C89B3C;
+	color: #1E282D;
+}
+.btn-group .noSelectBtn{
+	border: 1px solid #C89B3C;
+	background-color: #091428;
+	color: #C89B3C;
+}
 
-
-
-
+#lmWriteBtn{
+	border: 1px solid #091428;
+	background-color: #C89B3C;
+	color: #1E282D;
+	position: absolute;
+	bottom: 5%;
+	right: 5%;
+}
 
 
 
