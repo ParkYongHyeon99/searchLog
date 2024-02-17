@@ -8,21 +8,22 @@
 
 $(()=>{
 /* ====================== 포지션 이미지 설정 ====================== */
-	/*document.getElementById('pAll').style.backgroundImage = "url('../img/position/angle-square-up.png')";
-	document.getElementById('pAll').style.backgroundRepeat = "no-repeat";
-	document.getElementById('pAll').style.backgroundSize = "30px";*/
 	let position = ["pAll","Top","Mid","Support","Jungle","Bot"];
-	for(p of position){
-		if(p=="pAll"){
-			document.getElementById(p).style.backgroundImage = "url('../img/position/Diamond-"+p+".png')";
-		}else{
-			document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
+	for(let i=0; i<3; i++){
+		for(p of position){
+			if(p=="pAll"){
+				document.getElementById(p).style.backgroundImage = "url('../img/position/Diamond-"+p+".png')";
+			}else{
+				document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
+			}
+			document.getElementById(p).style.backgroundRepeat = "no-repeat";
+			document.getElementById(p).style.backgroundSize = "30px";
 		}
-		document.getElementById(p).style.backgroundRepeat = "no-repeat";
-		document.getElementById(p).style.backgroundSize = "30px";
 	}
 	
 	
+
+
 /* ====================== 리스트 가져오는 함수 실행 ====================== */
 	lmAjax();
 	setInterval(function(){lmAjax()},5000);		// <- 5초마다 리스트 갱신
@@ -42,24 +43,18 @@ $('#lmInfoChoice').on('click',function(){
 	}
 })
 
-$(".btn-modal").click(function(){
-	var data = $(this).data('id');
-    $("#contents.body-contents").val(data);
-    $("#text-contents.body-contents").html(data);
-});
-
 
 /* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
-$('input[name=lm_gameMate],select[name=lm_gameMode],select[name=lm_tier],input[name=lm_findPosition]').on('change',function(){
+$('input[name=lm_gameMate_find],select[name=lm_gameMode_find],select[name=lm_tier_find],input[name=lm_findPosition_find]')
+	.on('change',function(){
 	let position = ["pAll","Top","Mid","Support","Jungle","Bot"];
 	for(p of position){
 		document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
 	}
-	let selectP = $('input[name=lm_findPosition]:checked')[0].id.substr(1);
+	let selectP = $('input[name=lm_findPosition_find]:checked')[0].id.substr(1);
 	console.log('lm_findPosition: '+selectP);
 	document.getElementById(selectP).style.backgroundImage = "url('../img/position/Diamond-"+selectP+".png')";
 	lmAjax();
-	document.getElementsByClassName(selectP)[0].style.backgroundImage = "url('../img/position/Diamond-"+selectP+".png')";
 	console.log("변경");
 })
 
@@ -70,15 +65,21 @@ function lmAjax(){
 		method:'get',
 		url: '/lolmate/lmList',
 		data: {
-			lm_gameMate:$('input[name=lm_gameMate]:checked').val(),
-			lm_gameMode:$('select[name=lm_gameMode]').val(),
-			lm_tier:$('select[name=lm_tier]').val(),
-			lm_findPosition:$('input[name=lm_findPosition]:checked').val()
+			lm_gameMate:$('input[name=lm_gameMate_find]:checked').val(),
+			lm_gameMode:$('select[name=lm_gameMode_find]').val(),
+			lm_tier:$('select[name=lm_tier_find]').val(),
+			lm_findPosition:$('input[name=lm_findPosition_find]:checked').val()
 		},
 	}).done(function(lmList){
 		console.log(lmList)
 		var html = '';
+		let cntHtml = '';
 		if(lmList.length!=0){
+			var topCnt = 0;
+			var jugCnt = 0;
+			var midCnt = 0;
+			var supCnt = 0;
+			var adcCnt = 0;
 			for(var lm of lmList){
 				html += '<tr>';
 				html += '<td>'+lm.lm_gameMode+'</td>';		// 게임 모드
@@ -90,21 +91,48 @@ function lmAjax(){
 				html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
 				html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')" disabled>신청</button></td>';
 				html += '</tr>';
+				
+				var fp = lm.lm_findPosition;
+				if(fp.search("All")!=-1){
+					topCnt+=1; jugCnt+=1; midCnt+=1; supCnt+=1; adcCnt+=1;
+				}else{
+					if(fp.search("top")!=-1){ topCnt+=1; }
+					if(fp.search("jug")!=-1){ jugCnt+=1; }
+					if(fp.search("mid")!=-1){ midCnt+=1; }
+					if(fp.search("sup")!=-1){ supCnt+=1; }
+					if(fp.search("adc")!=-1){ adcCnt+=1; }
+				}
+
 			}
-		}else{
-			html += '<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>';
-		}
-			$("#lmTbody").empty();
-			$("#lmTbody").append(html);
-			
-			let id = document.getElementById('b_writer').value
-			if(id != ""){
-				$('#lmInfoChoice').css('display','inline-block')
-				document.getElementById('dmPBtn').disabled = false;
-				for(let i=0; i<lmList.length; i++){
-					document.getElementsByClassName('appBtn')[i].disabled = false;
+			let cnt = [topCnt, jugCnt, midCnt, supCnt, adcCnt]
+			let pKr = ['탑','정글','미드','서포터','봇(원딜)']
+			let maxCnt = Math.max(...cnt)
+			cntHtml += '<h3>전체 글 '+lmList.length+'개 중,</h3><br><h3>사람들이 많이 찾은 포지션은</h3><h2>&ensp;'
+			for(let i=0; i<cnt.length; i++){
+				if(maxCnt == cnt[i]){
+					cntHtml += pKr[i];
+					cntHtml += '&ensp;';
 				}
 			}
+			cntHtml += '</h2><h3>입니다.</h3>'
+		}else{
+			html += '<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>';
+			cntHtml += '<h3>아직 글이 존재하지 않아 사람들이 많이 찾은 포지션을 확인할 수 없습니다.</h3>';
+		}
+		$("#lmTbody").empty();
+		$("#lmTbody").append(html);
+		$("#lmNotionDiv").empty();
+		$("#lmNotionDiv").append(cntHtml);
+		
+		let id = document.getElementById('b_writer').value
+		if(id != ""){
+			$('#lmInfoChoice').css('display','inline-block')
+			document.getElementById('dmPBtn').disabled = false;
+			document.getElementById('dmBtn').disabled = false;
+			for(let i=0; i<lmList.length; i++){
+				document.getElementsByClassName('appBtn')[i].disabled = false;
+			}
+		}
 		
 	}).fail((err,status)=>{
 		console.log("err:", err);
@@ -136,8 +164,8 @@ function divHtml(tp,img){
 			if(tp.search("adc")!=-1){html += divT+'Bot'+spanT+'봇(원딜)'+spanTE;}
 		}
 	}
-	return html+"</div>";
-}
+	return html+"</div>";}
+
 /*html+divT+dClass+'Top'+spanT+'탑+spanTE+"</div>"
 
 	<div class="positionImgDiv">
@@ -149,23 +177,11 @@ function divHtml(tp,img){
 */
 
 
-
-
-
-/* ====================== 모달 띄우기 ====================== */
-//모달 열기
-const modal = document.getElementById("modal")
-const btn_modal = document.getElementById("btn-modal")
-btn_modal.addEventListener("click", e => {
-	modal.style.display = "flex"
-
+$('#lmWriteBtn').on('click',function(){
+	alert('아직 준비 중');
 })
 
-//모달 닫기
-const closeBtn = modal.querySelector(".close-area")
-closeBtn.addEventListener("click", e => {
-	modal.style.display = "none"
-})
+
 
 
 
