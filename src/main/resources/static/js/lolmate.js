@@ -8,40 +8,60 @@
 
 $(()=>{
 /* ====================== 포지션 이미지 설정 ====================== */
-	document.getElementById('pAll').style.backgroundImage = "url('../img/position/angle-square-up.png')";
+	/*document.getElementById('pAll').style.backgroundImage = "url('../img/position/angle-square-up.png')";
 	document.getElementById('pAll').style.backgroundRepeat = "no-repeat";
-	document.getElementById('pAll').style.backgroundSize = "30px";
-	let position = ["Top","Mid","Support","Jungle","Bot"];
+	document.getElementById('pAll').style.backgroundSize = "30px";*/
+	let position = ["pAll","Top","Mid","Support","Jungle","Bot"];
 	for(p of position){
-		document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
+		if(p=="pAll"){
+			document.getElementById(p).style.backgroundImage = "url('../img/position/Diamond-"+p+".png')";
+		}else{
+			document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
+		}
 		document.getElementById(p).style.backgroundRepeat = "no-repeat";
 		document.getElementById(p).style.backgroundSize = "30px";
+	}
+	
 	
 /* ====================== 리스트 가져오는 함수 실행 ====================== */
 	lmAjax();
 	setInterval(function(){lmAjax()},5000);		// <- 5초마다 리스트 갱신
 	
-}
-	
-	
-/* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
-$('input[name=lm_gameMate],select[name=lm_gameMode],select[name=lm_tier],input[name=lm_findPosition]').on('change',function(){
-		let position = ["Top","Mid","Support","Jungle","Bot"];
-		for(p of position){
-			document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
-		}
-		let selectP = $('input[name=lm_findPosition]:checked')[0].id.substr(1);
-		console.log('lm_findPosition: '+selectP);
-		if(selectP!="pAll"){
-			document.getElementById(selectP).style.backgroundImage = "url('../img/position/Diamond-"+selectP+".png')";
-		}
-		lmAjax();
-		document.getElementsByClassName(selectP)[0].style.backgroundImage = "url('../img/position/Diamond-"+selectP+".png')";
-		console.log("변경");
-	})
 })
 
 
+/* ====================== 탭 변경 ====================== */
+$('#lmListChoice').on('click',function(){
+	alert('list');
+	//$('#lmInfoChoice').css('display','inline-block')
+})
+$('#lmInfoChoice').on('click',function(){
+	let id = document.getElementById('b_writer').value
+	if(id != ""){
+		
+	}
+})
+
+$(".btn-modal").click(function(){
+	var data = $(this).data('id');
+    $("#contents.body-contents").val(data);
+    $("#text-contents.body-contents").html(data);
+});
+
+
+/* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
+$('input[name=lm_gameMate],select[name=lm_gameMode],select[name=lm_tier],input[name=lm_findPosition]').on('change',function(){
+	let position = ["pAll","Top","Mid","Support","Jungle","Bot"];
+	for(p of position){
+		document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
+	}
+	let selectP = $('input[name=lm_findPosition]:checked')[0].id.substr(1);
+	console.log('lm_findPosition: '+selectP);
+	document.getElementById(selectP).style.backgroundImage = "url('../img/position/Diamond-"+selectP+".png')";
+	lmAjax();
+	document.getElementsByClassName(selectP)[0].style.backgroundImage = "url('../img/position/Diamond-"+selectP+".png')";
+	console.log("변경");
+})
 
 
 /* ====================== gameMate,gameMode,tier에 따른 리스트 가져오기 ====================== */
@@ -79,6 +99,7 @@ function lmAjax(){
 			
 			let id = document.getElementById('b_writer').value
 			if(id != ""){
+				$('#lmInfoChoice').css('display','inline-block')
 				document.getElementById('dmPBtn').disabled = false;
 				for(let i=0; i<lmList.length; i++){
 					document.getElementsByClassName('appBtn')[i].disabled = false;
@@ -92,7 +113,7 @@ function lmAjax(){
 }
 
 
-/* ====================== 포지션 div 설정 ====================== */
+/* ====================== lmList 포지션 div 설정 ====================== */
 function divHtml(tp,img){
 	var divT = '<div class="tooltip positionImgDiv2" style="display: inline-block;"><div class="tooltip '
 	var spanT = '"><span class="tooltiptext tooltip-bottom">'
@@ -128,7 +149,23 @@ function divHtml(tp,img){
 */
 
 
+
+
+
 /* ====================== 모달 띄우기 ====================== */
+//모달 열기
+const modal = document.getElementById("modal")
+const btn_modal = document.getElementById("btn-modal")
+btn_modal.addEventListener("click", e => {
+	modal.style.display = "flex"
+
+})
+
+//모달 닫기
+const closeBtn = modal.querySelector(".close-area")
+closeBtn.addEventListener("click", e => {
+	modal.style.display = "none"
+})
 
 
 
