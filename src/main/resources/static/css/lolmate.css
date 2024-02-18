@@ -162,55 +162,5 @@ label{
 }
 
 
-.btn-group button{
-	padding: 5px;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	padding-right: 10px;
-	padding-left: 10px;
-}
-.btn-group #duoBtn{
-	margin-right: -4px;
-	border-top-left-radius: 6px;
-	border-bottom-left-radius: 6px;
-}
-.btn-group #mentoBtn{
-	margin-left: -4px;
-	border-top-right-radius: 6px;
-	border-bottom-right-radius: 6px;
-}
-.btn-group #discodeOn{
-	margin-right: -4px;
-	border-top-left-radius: 10px;
-	border-bottom-left-radius: 10px;
-}
-.btn-group #discodeOff{
-	margin-left: -4px;
-	border-top-right-radius: 10px;
-	border-bottom-right-radius: 10px;
-}
-.btn-group .selectBtn{
-	border: 1px solid #091428;
-	background-color: #C89B3C;
-	color: #1E282D;
-}
-.btn-group .noSelectBtn{
-	border: 1px solid #C89B3C;
-	background-color: #091428;
-	color: #C89B3C;
-}
-
-#lmWriteBtn{
-	border: 1px solid #091428;
-	background-color: #C89B3C;
-	color: #1E282D;
-	position: absolute;
-	bottom: 5%;
-	right: 5%;
-}
-
-
-
-
 
 

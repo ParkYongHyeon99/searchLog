@@ -26,7 +26,7 @@
 	-webkit-backdrop-filter: blur(13.5px);
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
-	width: 700px;
+	width: 680px;
 	height: 500px;
 	position: relative;
 	top: -100px;
@@ -58,9 +58,93 @@
 	padding: 0px 10px;
 	text-shadow: 1px 1px 2px gray;
 	color: white;
+	text-align: left;
 }
 .contents{
 	width : 300px;
 	height : 200px;
 	border: 1px solid black;
+}
+
+
+
+
+
+.btn-group button{
+	padding: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding-right: 10px;
+	padding-left: 10px;
+}
+.btn-group #duoBtn{
+	margin-right: -4px;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+.btn-group #mentoBtn{
+	margin-left: -4px;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+.btn-group #discodeOn{
+	margin-right: -4px;
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+.btn-group #discodeOff{
+	margin-left: -4px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+.btn-group .selectBtn{
+	border: 1px solid #091428;
+	background-color: #C89B3C;
+	color: #1E282D;
+}
+.btn-group .noSelectBtn{
+	border: 1px solid #C89B3C;
+	background-color: #091428;
+	color: #C89B3C;
+}
+
+#lmWriteBtn{
+	border: 1px solid #091428;
+	background-color: #C89B3C;
+	color: #1E282D;
+	position: absolute;
+	width: 60px;
+	height: 30px;
+	bottom: 4%;
+	right: 3%;
+	border-radius: 5px;
+}
+
+.positionSelect{
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+.myPoDivSelect{
+	margin-left: 20px;
+}
+.findPoDivSelect{
+	margin-left: 15%;
+}
+.btn-group, .lm_gameMode_write, .myPoDivSelect, .findPoDivSelect{
+	display: inline-block;
+}
+.myPoDivSelect h5,.findPoDivSelect h5{
+	margin: 0;
+}
+
+.lmMemoDiv{
+	margin: 15px 0px 15px 0px;
+	text-align: center;
+}
+.lmMemoDiv textarea{
+	resize: none;
+	background-color: #1E2328;
+	color: #C89B3C;
+	font-size: 1.2em;
+	padding: 10px;
 }
