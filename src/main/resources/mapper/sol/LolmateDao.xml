@@ -4,21 +4,30 @@
 
 <mapper namespace="com.zzzpro.zzz.sol.dao.LolmateDao">
 	
-	<select id="lmAllList">
-		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo from lolmateList
-			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode};
+	<select id="lmMMAllList">
+		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo,lm_date,lm_end from lolmateList
+			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} order by lm_num desc;
 	</select>
-	<select id="lmList">
-		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo from lolmateList
-			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_tier like #{lm_tier} and lm_findPosition like #{lm_findPosition};
+	<select id="lmSerchList">
+		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo,lm_date,lm_end from lolmateList
+			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_tier like #{lm_tier} and lm_findPosition like #{lm_findPosition}
+			order by lm_num desc;
 	</select>
 	<select id="lmAllTierList">
-		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo from lolmateList
-			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_findPosition like #{lm_findPosition};
+		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo,lm_date,lm_end from lolmateList
+			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_findPosition like #{lm_findPosition} order by lm_num desc;
 	</select>
 	<select id="lmAllPositionList">
-		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo from lolmateList
-			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_tier like #{lm_tier};
+		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo,lm_date,lm_end from lolmateList
+			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_tier like #{lm_tier} order by lm_num desc;
 	</select>
+	<select id="lmAllList">
+		select lm_gameMate,lm_findPosition from lolmateList order by lm_num desc;
+	</select>
+	
+	<insert id="lmWrite">
+		insert into lolmateList values(default,#{m_id},#{lm_gameMate},#{lm_gameMode},#{lm_tier},#{lm_summonerName},
+										#{lm_myPosition},#{lm_findPosition},#{lm_memo},#{lm_discord},default,0);
+	</insert>
 	
 </mapper>

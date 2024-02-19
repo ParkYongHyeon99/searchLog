@@ -1,6 +1,7 @@
 package com.zzzpro.zzz.sol.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,13 @@ public class RestLolmateController {
 	private LolmateService lmSer;
 	 
 	@GetMapping("/lolmate/lmList")
-	public ArrayList<LolmateDto> lmList(LolmateDto lmDto) {
+	public HashMap<String, ArrayList<LolmateDto>> lmList(LolmateDto lmDto) {
 		return lmSer.lmList(lmDto);
+	}
+	
+	@GetMapping("/lolmate/lmWrite")
+	public String lmWrite(LolmateDto lmDto) {
+		return lmSer.lmWrite(lmDto);
 	}
 
 }
