@@ -1,6 +1,7 @@
 package com.zzzpro.zzz.sol.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,20 +18,33 @@ public class LolmateService {
 	@Autowired
 	private LolmateDao lmDao;
 
-	public ArrayList<LolmateDto> lmList(LolmateDto lmDto) {
+	public HashMap<String, ArrayList<LolmateDto>> lmList(LolmateDto lmDto) {
 		System.out.println(lmDto.getLm_gameMate()+","+lmDto.getLm_gameMode()+","+lmDto.getLm_tier()+","+lmDto.getLm_findPosition());
 		
 		lmDto.setLm_tier("%"+lmDto.getLm_tier()+"%");
 		lmDto.setLm_findPosition("%"+lmDto.getLm_findPosition()+"%");
 		
+		HashMap<String, ArrayList<LolmateDto>> hm = new HashMap<>();
+		
 		if(lmDto.getLm_tier().equals("%All%") && lmDto.getLm_findPosition().equals("%All%")) {
-			return lmDao.lmAllList(lmDto);
+			hm.put("serch", lmDao.lmMMAllList(lmDto));
 		}else if(lmDto.getLm_tier().equals("%All%")) {
-			return lmDao.lmAllTierList(lmDto);
+			hm.put("serch", lmDao.lmAllTierList(lmDto));
 		}else if(lmDto.getLm_findPosition().equals("%All%")) {
-			return lmDao.lmAllPositionList(lmDto);
+			hm.put("serch", lmDao.lmAllPositionList(lmDto));
+		}else {
+			hm.put("serch", lmDao.lmSerchList(lmDto));
 		}
-		return lmDao.lmList(lmDto);
+		
+		hm.put("all", lmDao.lmAllList());
+		return hm;
+	}
+
+	public String lmWrite(LolmateDto lmDto) {
+		if(lmDao.lmWrite(lmDto)) {
+			return "ok";
+		}
+		return "no";
 	}
 	
 	

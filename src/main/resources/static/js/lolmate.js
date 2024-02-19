@@ -20,6 +20,7 @@ $(()=>{
 			document.getElementById(p).style.backgroundSize = "30px";
 		}
 	}
+
 	
 	
 
@@ -74,13 +75,8 @@ function lmAjax(){
 		console.log(lmList)
 		var html = '';
 		let cntHtml = '';
-		if(lmList.length!=0){
-			var topCnt = 0;
-			var jugCnt = 0;
-			var midCnt = 0;
-			var supCnt = 0;
-			var adcCnt = 0;
-			for(var lm of lmList){
+		if(lmList["serch"].length!=0){
+			for(var lm of lmList["serch"]){
 				html += '<tr>';
 				html += '<td>'+lm.lm_gameMode+'</td>';		// 게임 모드
 				html += '<td>'+divHtml(lm.lm_tier,'emblem')+'</td>';			// 티어
@@ -89,36 +85,65 @@ function lmAjax(){
 				html += '<td>'+lm.winrate+'</td>';			// 작성자 승률
 				html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>';	// 찾는 포지션
 				html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
-				html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')" disabled>신청</button></td>';
+				if(lm.lm_end==0){
+					html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')" disabled>신청</button></td>';
+				}else if(lm.lm_end==1){
+					html += '<td><button disabled>신청</button></td>'
+				}
 				html += '</tr>';
 				
+			}
+			
+			var topCntD = 0; var jugCntD = 0; var midCntD = 0; var supCntD = 0; var adcCntD = 0;
+			var topCntM = 0; var jugCntM = 0; var midCntM = 0; var supCntM = 0; var adcCntM = 0;
+			var lmD = 0; var lmM = 0;
+			for(var lm of lmList["all"]){
 				var fp = lm.lm_findPosition;
-				if(fp.search("All")!=-1){
-					topCnt+=1; jugCnt+=1; midCnt+=1; supCnt+=1; adcCnt+=1;
-				}else{
-					if(fp.search("top")!=-1){ topCnt+=1; }
-					if(fp.search("jug")!=-1){ jugCnt+=1; }
-					if(fp.search("mid")!=-1){ midCnt+=1; }
-					if(fp.search("sup")!=-1){ supCnt+=1; }
-					if(fp.search("adc")!=-1){ adcCnt+=1; }
+				if(lm.lm_gameMate == 0){
+					lmD+=1;
+					if(fp.search("All")!=-1){ topCntD+=1; jugCntD+=1; midCntD+=1; supCntD+=1; adcCntD+=1; }
+					else{
+						if(fp.search("top")!=-1){ topCntD+=1; }
+						if(fp.search("jug")!=-1){ jugCntD+=1; }
+						if(fp.search("mid")!=-1){ midCntD+=1; }
+						if(fp.search("sup")!=-1){ supCntD+=1; }
+						if(fp.search("adc")!=-1){ adcCntD+=1; }
+						console.log(" - 듀오\ntop: "+topCntD+"\tjug: "+jugCntD+"\tmid: "+midCntD+"\tsup: "+supCntD+"\tadc: "+adcCntD)
+					}
+				}else if(lm.lm_gameMate == 1){
+					lmM+=1;
+					if(fp.search("All")!=-1){ topCntM+=1; jugCntM+=1; midCntM+=1; supCntM+=1; adcCntM+=1; }
+					else{
+						if(fp.search("top")!=-1){ topCntM+=1; }
+						if(fp.search("jug")!=-1){ jugCntM+=1; }
+						if(fp.search("mid")!=-1){ midCntM+=1; }
+						if(fp.search("sup")!=-1){ supCntM+=1; }
+						if(fp.search("adc")!=-1){ adcCntM+=1; }
+						console.log(" - 멘토\ntop: "+topCntM+"\tjug: "+jugCntM+"\tmid: "+midCntM+"\tsup: "+supCntM+"\tadc: "+adcCntM)
+					}
 				}
-
 			}
-			let cnt = [topCnt, jugCnt, midCnt, supCnt, adcCnt]
+			let dCnt = [topCntD, jugCntD, midCntD, supCntD, adcCntD]
+			let mCnt = [topCntM, jugCntM, midCntM, supCntM, adcCntM]
 			let pKr = ['탑','정글','미드','서포터','봇(원딜)']
-			let maxCnt = Math.max(...cnt)
-			cntHtml += '<h3>전체 글 '+lmList.length+'개 중,</h3><br><h3>사람들이 많이 찾은 포지션은</h3><h2>&ensp;'
-			for(let i=0; i<cnt.length; i++){
-				if(maxCnt == cnt[i]){
-					cntHtml += pKr[i];
-					cntHtml += '&ensp;';
-				}
+			let maxDCnt = Math.max(...dCnt)
+			let maxMCnt = Math.max(...mCnt)
+			cntHtml += '<h3>듀오에서 전체 글 '+lmD+'개 중, 사람들이 많이 찾은 포지션은</h3><h2>&ensp;'
+			for(let i=0; i<dCnt.length; i++){
+				if(maxDCnt == dCnt[i]){ cntHtml += pKr[i]+'&ensp;'; }
 			}
-			cntHtml += '</h2><h3>입니다.</h3>'
+			cntHtml += '</h2><h3>입니다.</h3><br><h3>멘토에서 전체 글 '+lmM+'개 중, 사람들이 많이 찾은 포지션은</h3><h2>&ensp;'
+			for(let i=0; i<mCnt.length; i++){
+				if(maxMCnt == mCnt[i]){ cntHtml += pKr[i]+'&ensp;'; }
+			}
+			cntHtml += '</h2><h3>입니다.</h3><br><p>- lolmate(듀오/멘토) 글 작성 및 신청은 로그인 시에만 가능합니다.</p>'
+			
 		}else{
 			html += '<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>';
-			cntHtml += '<h3>아직 글이 존재하지 않아 사람들이 많이 찾은 포지션을 확인할 수 없습니다.</h3>';
+			cntHtml += '<h3>아직 글이 존재하지 않아 사람들이 많이 찾은 포지션을 확인할 수 없습니다.</h3><br>'
+						+'<p>- lolmate(듀오/멘토) 글 작성 및 신청은 로그인 시에만 가능합니다.</p>';
 		}
+		
 		$("#lmTbody").empty();
 		$("#lmTbody").append(html);
 		$("#lmNotionDiv").empty();
@@ -127,9 +152,8 @@ function lmAjax(){
 		let id = document.getElementById('b_writer').value
 		if(id != ""){
 			$('#lmInfoChoice').css('display','inline-block')
-			document.getElementById('dmPBtn').disabled = false;
 			document.getElementById('dmBtn').disabled = false;
-			for(let i=0; i<lmList.length; i++){
+			for(let i=0; i<$('.appBtn').length; i++){
 				document.getElementsByClassName('appBtn')[i].disabled = false;
 			}
 		}
@@ -143,19 +167,27 @@ function lmAjax(){
 
 /* ====================== lmList 포지션 div 설정 ====================== */
 function divHtml(tp,img){
-	var divT = '<div class="tooltip positionImgDiv2" style="display: inline-block;"><div class="tooltip '
+	var divT = '<div class="tooltip tooltipImgDiv2" style="display: inline-block;"><div class="tooltip '
 	var spanT = '"><span class="tooltiptext tooltip-bottom">'
 	var spanTE = '</span></div></div>'
-	var html = '<div class="positionImgDiv">'
+	var html = '<div class="tooltipImgDiv">'
 	if(img=='emblem'){
-		html += divT+tp+spanT+tp+spanTE;
+		html += divT+tp+'" style="background-image: url(\'../img/emblem/Rank='+tp+'.png\'); width: 40px; '
+		html +='padding-bottom: 40px; background-repeat: no-repeat; background-position: center; background-size : cover;'+spanT;
+		if(tp.search("Iron")!=-1){ html += '아이언'}
+		else if(tp.search("Bronze")!=-1){ html += '브론즈' }
+		else if(tp.search("Silver")!=-1){ html += '실버' }
+		else if(tp.search("Gold")!=-1){ html += '골드' }
+		else if(tp.search("Diamond")!=-1){ html += '다이아몬드' }
+		else if(tp.search("Emerald")!=-1){ html += '에메랄드' }
+		else if(tp.search("Platinum")!=-1){ html += '플래티넘' }
+		else if(tp.search("Grandmaster")!=-1){ html += '그랜드마스터' }
+		else if(tp.search("Master")!=-1){ html += '마스터' }
+		else if(tp.search("Challenger")!=-1){html += '챌린저'}
+		html += spanTE;
 	}else if(img=='position'){
 		if(tp.search("All")!=-1){
-			html += divT+'Top'+spanT+'탑'+spanTE;
-			html += divT+'Jungle'+spanT+'정글'+spanTE;
-			html += divT+'Mid'+spanT+'미드'+spanTE;
-			html += divT+'Support'+spanT+'서폿'+spanTE;
-			html += divT+'Bot'+spanT+'봇(원딜)'+spanTE;
+			html += divT+'pAll" style="background-image: url(\'../img/position/Silver-pAll.png\');'+spanT+'모든 포지션'+spanTE;
 		}else{
 			if(tp.search("top")!=-1){html += divT+'Top'+spanT+'탑'+spanTE;}
 			if(tp.search("jug")!=-1){html += divT+'Jungle'+spanT+'정글'+spanTE;}
@@ -166,19 +198,90 @@ function divHtml(tp,img){
 	}
 	return html+"</div>";}
 
-/*html+divT+dClass+'Top'+spanT+'탑+spanTE+"</div>"
 
-	<div class="positionImgDiv">
-		<div class="tooltip positionImgDiv2">
-			<div class="tooltip Top"><span class="tooltiptext tooltip-bottom">탑</span></div>
-		</div>
-	</div>
+/* ====================== 롤메이트 글 작성 포지션 변경 체크 ====================== */
+$('input[name=lm_myPosition_write]').on('change',function(){
+	let myPoCheck = [];
+	$('input[name=lm_myPosition_write]:checked').each(function(){
+		let p = $(this).val();
+		for(let i=0; i<=5; i++){
+			if(p=='All'){ myPoCheck.push('pAll') }
+			else if(p=='top'){ myPoCheck.push('Top') }
+			else if(p=='mid'){ myPoCheck.push('Mid') }
+			else if(p=='sup'){ myPoCheck.push('Support') }
+			else if(p=='jug'){ myPoCheck.push('Jungle') }
+			else if(p=='adc'){ myPoCheck.push('Bot') }
+		}
+	})
+	let po = ["pAll","Top","Mid","Support","Jungle","Bot"];
+	for(let i=0; i<po.length; i++){
+		poImgSet('write'+po[i],'Silver',po[i]);
+	}
+	for(let i=0; i<myPoCheck.length; i++){
+		poImgSet('write'+myPoCheck[i],'Diamond',myPoCheck[i]);
+		po = po.filter((element) => element !== myPoCheck[i]);
+	}
+})
+$('input[name=lm_myPosition_write][value=All]:checked').on(function(){
+	console.log("All걸림")
+	let po = ["pAll","Top","Mid","Support","Jungle","Bot"];
+	for(let i=0; i<po.length; i++){
+		poImgSet('write'+po[i],'Silver',po[i]);
+	}
+	$("input[name=lm_myPosition_write]").prop("checked",false);
+	$("input[name=lm_myPosition_write][value=All]").prop("checked",true);
+	poImgSet('writepAll','Diamond','pAll');
+})
 
-*/
 
 
+function poImgSet(id,sel,p){
+	document.getElementById(id).style.backgroundImage = "url('../img/position/"+sel+"-"+p+".png')";
+}
+
+
+
+/* ====================== 롤메이트 글 작성 ====================== */
 $('#lmWriteBtn').on('click',function(){
-	alert('아직 준비 중');
+	var discordOn = $('#discodeOn').attr('class');
+	var duo = $('#duoBtn').attr('class');
+	var discord = 0;
+	var dmS = 0;
+	if(discordOn == 'selectBtn'){ discord=0; }else if(discordOn == 'noSelectBtn'){ discord=1; }
+	if(duo == 'selectBtn'){ dmS=0; }else if(duo == 'noSelectBtn'){ dmS=1; }
+	var tier = 'Gold'
+	/*var lm_myPosition = $('input[name=lm_myPosition_write]:checked').val();*/
+	$.ajax({
+		method:'get',
+		url: '/lolmate/lmWrite',
+		data: {
+			m_id:$('#b_writer').val(),
+			lm_summonerName:$('#lm_summonerName_write').val(),
+			lm_gameMate:dmS,
+			lm_gameMode:$('select[name=lm_gameMode_write]').val(),
+			lm_tier:tier,
+			lm_myPosition:$('input[name=lm_myPosition_write]:checked').val(),
+			lm_findPosition:$('input[name=lm_findPosition_write]:checked').val(),
+			lm_memo:$('#lmWriteMemo').val(),
+			lm_discord:discord
+		},
+	}).done(function(res){
+		if(res=="ok"){
+			Swal.fire({
+				icon : "success",
+				text : "작성 성공!",
+			});
+			$('#dmModal').hide();
+			lmAjax();
+		}else{
+			Swal.fire({
+				icon : "error",
+				text : "작성 실패..",
+			});
+			console.log('작성완료');
+			
+		}
+	})
 })
 
 

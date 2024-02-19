@@ -20,8 +20,8 @@ public class Paging {
 	
 	public Paging(int nowP, int bCnt) {
 		this.nowP = nowP;
-		lastP = (int)Math.ceil(bCnt/pageSize)+1;
-		leftP = ((int)(Math.floor((nowP-1)/pageSize))*pageSize) +1;
+		lastP = (int)Math.ceil((double)bCnt/(double)pageSize);
+		leftP = ((((nowP-1)/pageSize))*pageSize) +1;
 		rightP = leftP +pageSize -1;
 		beforeP = leftP -pageSize;
 		nextP = leftP +pageSize;
