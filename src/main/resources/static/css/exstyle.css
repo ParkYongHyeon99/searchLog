@@ -12,9 +12,28 @@ body {
 	height: 100vh;
 }
 
+ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	border: 1px solid black;
+}
+
+ul li {
+	width: 15%; /* 4개의 아이템이 한 줄에 들어가도록 너비를 조절합니다. */
+	box-sizing: border-box; /* padding, border를 포함한 전체 너비를 지정합니다. */
+	/* 	padding: 10px; 각 아이템의 여백을 설정합니다. */
+	/* 	border: 1px solid black; */
+	margin: 1px;
+	padding: 0;
+	height: 70px;
+}
+
 img {
 	display: inline-block;
-	width: 50px;
+	width: 45px;
 	/* float: left; */
 }
 
@@ -26,6 +45,8 @@ a {
 	transition: color 0.3s;
 	/* 색깔 변경에 애니메이션 효과를 줍니다. */
 	cursor: pointer;
+	margin: 0;
+	padding: 0;
 }
 
 /* 마우스를 가져다대면 색깔 변경 */
@@ -36,15 +57,15 @@ a:hover {
 
 .container {
 	display: flex;
-	width: 1000px;
+	width: 1200px;
 	margin: 0 auto;
 	text-align: center;
 }
 
 .head-container {
-	width: 1000px;
-	margin: 1px auto;
-	/* 중앙 정렬을 위한 마진 설정 */
+	width: 1200px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 .tab-container {
@@ -92,4 +113,21 @@ a:hover {
 
 .double-divide {
 	width: 25%;
+}
+
+.l-container {
+	width: 1100px;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.width33 {
+	width: 33%;
+}
+
+.set {
+	margin-top: -6px;
+	text-align: left;
+	font-size: 80%;
+	cursor: pointer;
 }

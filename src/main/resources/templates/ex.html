@@ -6,8 +6,33 @@
 <link rel="stylesheet" href="/css/exstyle.css">
 </head>
 <body>
-	<a th:each="champion : ${champions}" th:href="@{/ex/{champions}(champions=${champion.champion_name})}">
-    	<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.champion_name}.png|" alt="초상화">
-	</a>
+	<div class="l-container">
+        <div th:insert="~{exch :: header}"></div>
+        <div th:insert="~{exch :: nav}"></div>
+        <div>
+            <div class="width33">
+                <div th:insert="~{exch :: nav}"></div>
+                <span>
+                <a>전체</a>
+                <a>탑</a>
+                <a>정글</a>
+                <a>미드</a>
+                <a>봇</a>
+                <a>서폿</a>
+                </span>
+            </div>
+            <div>
+                <ul class="width33">
+                    <li th:each="champion : ${champions}">
+                        <a th:href="@{/ex/{champions}(champions=${champion.champion_name})}">
+                            <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.champion_name}.png|"
+                                alt="초상화">
+                            <div th:utext="${#strings.length(champion.champion_name_kr) > 3 ? champion.champion_name_kr.substring(0, 3) + '...' : champion.champion_name_kr}" class="set"></div>
+              	        </a>
+             	   </li>
+           		</ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

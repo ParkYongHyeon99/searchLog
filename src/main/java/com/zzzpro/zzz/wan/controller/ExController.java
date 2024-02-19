@@ -42,4 +42,24 @@ public class ExController {
 		}
 	}
 
+	@GetMapping("/ex/rune")
+	public String rune() {
+		return "exrune";
+	}
+
+	@GetMapping("/ex/spell")
+	public String spell() {
+		return "exspell";
+	}
+
+	@GetMapping("/ex/skill")
+	public String skill() {
+		return "exrune";
+	}
+
+	@GetMapping("/ex/item")
+	public String item() {
+		return "exrune";
+	}
+
 }

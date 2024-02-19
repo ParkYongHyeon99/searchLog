@@ -13,7 +13,7 @@ public class ExService {
 	@Autowired
 	public ExDao eDao;
 
-	public List<ExDto> champions() { // 다오로 리턴만 해줌
+	public List<ExDto> champions() {
 		return eDao.champions();
 	}
 

@@ -8,12 +8,14 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExDto {
-	private String champions; 
-	private String champion_name; 
+	private String champions;
+	private String champion_name;
+	private String champion_name_kr;
 	private String championName;
+	private String championName_KR;
 	private String teamPosition;
 	private String linePick;
-	
+
 	private String matchid;
 	private int gameduration;
 	private String riotidgamename;
@@ -24,7 +26,6 @@ public class ExDto {
 	private String pick_percentage;
 	private String skill_tree;
 	private String tier1;
-	private String championName_KR;
 	private String Count;
 	private String percentage;
 	private String item0;
