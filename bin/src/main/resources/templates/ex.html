@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="/css/exstyle.css">
+</head>
+<body>
+	<a th:each="champion : ${champions}" th:href="@{/ex/{champions}(champions=${champion.champion_name})}">
+    	<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.champion_name}.png|" alt="초상화">
+	</a>
+</body>
+</html>
