@@ -7,9 +7,9 @@
 <script src="/js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
-    <div class="head-container" id="head">
+    <div class="head-container">
         <header>나는 헤더</header>
-        <nav><input type="text" placeholder="챔피언 검색"></nav>
+        <nav>나는 검색창</nav>
         <header>
             <label>티어</label>
             <select>
@@ -21,7 +21,7 @@
             </select>
             <span>
                 <a th:href="@{/counter}">카운터</a>
-                <a th:href="@{/exrune}">룬</a>
+                <a th:href="@{/rune}">룬</a>
                 <a th:href="@{/item}">아이템</a>
                 <a th:href="@{/skill}">스킬</a>
             </span>
@@ -38,26 +38,26 @@
         <!-- 탭 메뉴 시작 -->
         <div class="tab-container">
             <div class="tab" onclick="showTab('tab1')">
-                <div th:each="matchInfo, index : ${linePick}">
-                    <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 0}">line1</p>
-                    <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 0}">pickRate1</p>
-                </div>
+				<div th:each="matchInfo, index : ${linePick}">
+					<p th:text="${matchInfo.teamPosition}" th:if="${index.index == 0}">line1</p>
+					<p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 0}">pickRate1</p>
+            	</div>
             </div>
             <div class="tab" onclick="showTab('tab2')">
-                <div th:each="matchInfo, index : ${linePick}">
-                    <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 1}">line2</p>
-                    <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 1}">pickRate2</p>
-                </div>
+				<div th:each="matchInfo, index : ${linePick}">
+					<p th:text="${matchInfo.teamPosition}" th:if="${index.index == 1}">line2</p>
+					<p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 1}">pickRate2</p>
+            	</div>
             </div>
             <div class="tab" onclick="showTab('tab3')">
-                <div th:each="matchInfo, index : ${linePick}">
-                    <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 2}">line3</p>
-                    <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 2}">pickRate3</p>
-                </div>
+				<div th:each="matchInfo, index : ${linePick}">
+					<p th:text="${matchInfo.teamPosition}" th:if="${index.index == 2}">line3</p>
+					<p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 2}">pickRate3</p>
+            	</div>
             </div>
         </div>
         <!-- 탭 메뉴 끝 -->
-
+        
         <!-- 탭 1내용 시작 -->
         <div id="tab1-content" class="tab-content">
             <div class="divide">

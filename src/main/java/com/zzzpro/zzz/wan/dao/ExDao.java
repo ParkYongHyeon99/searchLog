@@ -11,8 +11,11 @@ import com.zzzpro.zzz.wan.dto.ExDto;
 public interface ExDao {
 
 	// 챔피언이름 목록 전체 가져옴
-	@Select("select champion_name from champList")
+	@Select("select champion_name,champion_name_kr from champList order by champion_name_kr")
 	List<ExDto> champions();
 
 	List<ExDto> linePick(ExDto cDto);
+
+	List<ExDto> test(ExDto cDto);
+
 }

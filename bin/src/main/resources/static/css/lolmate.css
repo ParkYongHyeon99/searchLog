@@ -30,9 +30,6 @@
     padding-bottom: 30px;
     background-size: cover;
 }
-#poAll{
-    background-image: url("../img/position/angle-square-up.png");
-}
 label{
 	display: inline-block;
 }
@@ -42,3 +39,128 @@ label{
 	width: 0;
 	height: 0;
 }
+
+
+/* ============컨테이너 설정=========== */
+.positionImgDiv{
+	justify-content:center;
+	flex-direction: row;
+	text-align: center;
+}
+.positionImgDiv2{
+	flex-direction: column;
+	margin-left: auto;
+	text-align: center;
+}
+/* 툴팁 기본 스타일 설정 시작 */
+.tooltip { position: relative;	display: #1E2328; }
+.tooltip .tooltiptext {
+	text-align: center;
+	visibility: hidden;
+	width: 120px;
+	background-color: #1E2328;
+	color: #C89B3C;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+}
+.tooltip:hover .tooltiptext { visibility: visible; }
+/* 아래쪽 툴팁 시작 */
+.tooltip .tooltip-bottom {
+	width: 100px;
+	top: 130%;
+	left: 80%;
+	margin-left: -60px;
+}
+.tooltip .tooltip-bottom::after {
+	bottom: 100%;
+	left: 80%;
+	margin-left: -5px;
+	border-color: transparent transparent #1E2328 transparent;
+}
+.tooltip .tooltip-right {
+	width: 350px;
+	padding: 10px;
+	top: -5px;
+	left: 160%;
+	margin-left: -60px;
+}
+.tooltip .tooltip-right::after {
+	bottom: 100%;
+	left: 105%;
+	margin-left: -5px;
+	border-color: transparent transparent #1E2328 transparent;
+}
+
+
+
+.pAll .Top,.Jungle,.Mid,.Support,.Bot{
+	width: 30px;
+	padding-bottom: 30px;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size : cover;
+	display: inline-block;
+}
+.pAll{
+	background-image: url('../img/position/Diamond-pAll.png');
+}
+.Top{
+	background-image: url('../img/position/Silver-Top.png');
+}
+.Jungle{
+	background-image: url('../img/position/Silver-Jungle.png');
+}
+.Mid{
+	background-image: url('../img/position/Silver-Mid.png');
+}
+.Support{
+	background-image: url('../img/position/Silver-Support.png');
+}
+.Bot{
+	background-image: url('../img/position/Silver-Bot.png');
+}
+
+
+.lmTabChoice{
+	width: 400px;
+	height: 50px;
+	text-align: left;
+	vertical-align: middle;
+}
+.lmTabChoice div{
+	width: 30%;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	display: inline-block;
+}
+#lmListChoice{
+	background-color: olive;
+}
+#lmInfoChoice{
+	/* display: none; */
+	background-color: teal;
+}
+
+/* #lmInfoTab{
+	display: none;
+} */
+
+#lmNotionDiv{
+	width: 100%;
+	height: 30%;
+	line-height: 30px;
+	padding: 20px;
+	background-color: aqua;
+	text-align: center;
+}
+#lmNotionDiv h3,h2{
+	display: inline-block;
+	margin: 0;
+}
+
+
+
+

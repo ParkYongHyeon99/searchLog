@@ -9,7 +9,7 @@
 <th:block th:if="${champDto != null}">
 <!--	<div th:text="${champDto.tier1}티어"></div>-->
 <!--	<div th:text="|${champDto.teamPosition}에서 ${champDto.championName}|"></div>-->
-	<div th:text="|${champDto.tier1}티어 ${champDto.teamPosition}에서 ${champDto.championName} 픽률: ${champDto.pick_percentage}%, 승률: ${champDto.win_percentage}%|"></div>
+	<div th:text="|${champDto.tier1}티어 ${champDto.championName_KR} 메인룬: ${champDto.main_name}, 메인하위룬1: ${champDto.main_perks1}, 메인하위룬2: ${champDto.main_perks2}, 메인하위룬3: ${champDto.main_perks3}, 메인하위룬4: ${champDto.main_perks4}|"></div>
 	
 </th:block>
 </body>

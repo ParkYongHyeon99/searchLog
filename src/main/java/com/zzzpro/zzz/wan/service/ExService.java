@@ -13,12 +13,21 @@ public class ExService {
 	@Autowired
 	public ExDao eDao;
 
-	public List<ExDto> champions() { // 다오로 리턴만 해줌
+	public List<ExDto> champions() {
 		return eDao.champions();
 	}
 
 	public List<ExDto> linePick(ExDto cDto) {
 		return eDao.linePick(cDto);
+	}
+
+	public List<ExDto> test(ExDto cDto) {
+		cDto.setLine('%'+cDto.getLine()+'%');
+		if (cDto.getLine().equals("%all%")) {
+			return eDao.champions();
+		} else {
+			return eDao.test(cDto);
+		}
 	}
 
 }
