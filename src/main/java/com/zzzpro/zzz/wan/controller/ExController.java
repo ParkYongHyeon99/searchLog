@@ -27,7 +27,7 @@ public class ExController {
 		model.addAttribute("champions", champions);
 		return "ex";
 	}
-
+	
 	@GetMapping("/ex/{champions}")
 	public String detail(@PathVariable(name = "champions") String champions, Model model, ExDto cDto) {
 		log.info("@@챔피언이름 -> " + champions);

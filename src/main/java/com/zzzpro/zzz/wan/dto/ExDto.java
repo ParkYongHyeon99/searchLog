@@ -15,6 +15,8 @@ public class ExDto {
 	private String championName_KR;
 	private String teamPosition;
 	private String linePick;
+	private String test;
+	private String line;
 
 	private String matchid;
 	private int gameduration;

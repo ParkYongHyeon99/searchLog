@@ -21,4 +21,13 @@ public class ExService {
 		return eDao.linePick(cDto);
 	}
 
+	public List<ExDto> test(ExDto cDto) {
+		cDto.setLine('%'+cDto.getLine()+'%');
+		if (cDto.getLine().equals("%all%")) {
+			return eDao.champions();
+		} else {
+			return eDao.test(cDto);
+		}
+	}
+
 }

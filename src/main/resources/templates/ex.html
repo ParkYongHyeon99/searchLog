@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/exstyle.css">
-<script src="/js/jquery-3.7.0.min.js"></script>
+<script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
 	<div class="l-container">
@@ -14,15 +14,15 @@
             <div class="width33">
                 <div th:insert="~{exch :: nav}"></div>
                 <span>
-                <a>전체</a>
-                <a>탑</a>
-                <a>정글</a>
-                <a>미드</a>
-                <a>봇</a>
-                <a>서폿</a>
+                	<label><input type="radio" value="all" name="aa" class="po" checked="checked">전체</label>
+                	<label><input type="radio" value="top" name="aa" class="po">탑</label>
+                	<label><input type="radio" value="jug" name="aa" class="po">정글</label>
+                	<label><input type="radio" value="mid" name="aa" class="po">미드</label>
+                	<label><input type="radio" value="adc" name="aa" class="po">원딜</label>
+                	<label><input type="radio" value="sup" name="aa" class="po">서폿</label>
                 </span>
-            </div>
-            <div>
+			</div>
+            <div id="test">
                 <ul class="width33">
                     <li th:each="champion : ${champions}">
                         <a th:href="@{/ex/{champions}(champions=${champion.champion_name})}">
@@ -35,5 +35,6 @@
             </div>
         </div>
     </div>
+    	<script type="text/javascript" src="/js/ex.js"></script>
 </body>
 </html>

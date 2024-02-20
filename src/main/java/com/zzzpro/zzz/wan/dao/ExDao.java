@@ -15,4 +15,7 @@ public interface ExDao {
 	List<ExDto> champions();
 
 	List<ExDto> linePick(ExDto cDto);
+
+	List<ExDto> test(ExDto cDto);
+
 }
