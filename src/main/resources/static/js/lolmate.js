@@ -8,7 +8,7 @@
 
 $(()=>{
 /* ====================== 포지션 이미지 설정 ====================== */
-	let position = ["pAll","Top","Mid","Support","Jungle","Bot"];
+	let position = ["pAll","Top","Jungle","Mid","Bot","Support"];
 	for(let i=0; i<3; i++){
 		for(p of position){
 			if(p=="pAll"){
@@ -48,7 +48,7 @@ $('#lmInfoChoice').on('click',function(){
 /* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
 $('input[name=lm_gameMate_find],select[name=lm_gameMode_find],select[name=lm_tier_find],input[name=lm_findPosition_find]')
 	.on('change',function(){
-	let position = ["pAll","Top","Mid","Support","Jungle","Bot"];
+	let position = ["pAll","Top","Jungle","Mid","Bot","Support"];
 	for(p of position){
 		document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
 	}
@@ -75,23 +75,27 @@ function lmAjax(){
 		console.log(lmList)
 		var html = '';
 		let cntHtml = '';
-		if(lmList["serch"].length!=0){
-			for(var lm of lmList["serch"]){
-				html += '<tr>';
-				html += '<td>'+lm.lm_gameMode+'</td>';		// 게임 모드
-				html += '<td>'+divHtml(lm.lm_tier,'emblem')+'</td>';			// 티어
-				html += '<td>'+lm.lm_summonerName+'</td>';	// 작성자 게임닉
-				html += '<td>'+divHtml(lm.lm_myPosition,'position')+'</td>';	// 작성자 포지션
-				html += '<td>'+lm.winrate+'</td>';			// 작성자 승률
-				html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>';	// 찾는 포지션
-				html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
-				if(lm.lm_end==0){
-					html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')" disabled>신청</button></td>';
-				}else if(lm.lm_end==1){
-					html += '<td><button disabled>신청</button></td>'
+		if(lmList["all"].length!=0){
+			if(lmList["serch"].length!=0){
+				for(var lm of lmList["serch"]){
+					html += '<tr>';
+					html += '<td>'+lm.lm_gameMode+'</td>';		// 게임 모드
+					html += '<td>'+divHtml(lm.lm_tier,'emblem')+'</td>';			// 티어
+					html += '<td>'+lm.lm_summonerName+'</td>';	// 작성자 게임닉
+					html += '<td>'+divHtml(lm.lm_myPosition,'position')+'</td>';	// 작성자 포지션
+					html += '<td>'+lm.winrate+'</td>';			// 작성자 승률
+					html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>';	// 찾는 포지션
+					html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
+					if(lm.lm_end==0){
+						html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')" disabled>신청</button></td>';
+					}else if(lm.lm_end==1){
+						html += '<td><button disabled>신청</button></td>'
+					}
+					html += '</tr>';
+					
 				}
-				html += '</tr>';
-				
+			}else{
+				html += '<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>';
 			}
 			
 			var topCntD = 0; var jugCntD = 0; var midCntD = 0; var supCntD = 0; var adcCntD = 0;
@@ -101,31 +105,31 @@ function lmAjax(){
 				var fp = lm.lm_findPosition;
 				if(lm.lm_gameMate == 0){
 					lmD+=1;
-					if(fp.search("All")!=-1){ topCntD+=1; jugCntD+=1; midCntD+=1; supCntD+=1; adcCntD+=1; }
+					if(fp.search("All")!=-1){ topCntD+=1; jugCntD+=1; midCntD+=1; adcCntD+=1; supCntD+=1; }
 					else{
 						if(fp.search("top")!=-1){ topCntD+=1; }
 						if(fp.search("jug")!=-1){ jugCntD+=1; }
 						if(fp.search("mid")!=-1){ midCntD+=1; }
-						if(fp.search("sup")!=-1){ supCntD+=1; }
 						if(fp.search("adc")!=-1){ adcCntD+=1; }
-						console.log(" - 듀오\ntop: "+topCntD+"\tjug: "+jugCntD+"\tmid: "+midCntD+"\tsup: "+supCntD+"\tadc: "+adcCntD)
+						if(fp.search("sup")!=-1){ supCntD+=1; }
+						console.log(" - 듀오\ntop: "+topCntD+"\tjug: "+jugCntD+"\tmid: "+supCntD+"\tadc: "+adcCntD+midCntD+"\tsup: ")
 					}
 				}else if(lm.lm_gameMate == 1){
 					lmM+=1;
-					if(fp.search("All")!=-1){ topCntM+=1; jugCntM+=1; midCntM+=1; supCntM+=1; adcCntM+=1; }
+					if(fp.search("All")!=-1){ topCntM+=1; jugCntM+=1; midCntM+=1; adcCntM+=1; supCntM+=1; }
 					else{
 						if(fp.search("top")!=-1){ topCntM+=1; }
 						if(fp.search("jug")!=-1){ jugCntM+=1; }
 						if(fp.search("mid")!=-1){ midCntM+=1; }
-						if(fp.search("sup")!=-1){ supCntM+=1; }
 						if(fp.search("adc")!=-1){ adcCntM+=1; }
-						console.log(" - 멘토\ntop: "+topCntM+"\tjug: "+jugCntM+"\tmid: "+midCntM+"\tsup: "+supCntM+"\tadc: "+adcCntM)
+						if(fp.search("sup")!=-1){ supCntM+=1; }
+						console.log(" - 멘토\ntop: "+topCntM+"\tjug: "+jugCntM+"\tmid: "+midCntM+"\tadc: "+adcCntM+"\tsup: "+supCntM)
 					}
 				}
 			}
-			let dCnt = [topCntD, jugCntD, midCntD, supCntD, adcCntD]
-			let mCnt = [topCntM, jugCntM, midCntM, supCntM, adcCntM]
-			let pKr = ['탑','정글','미드','서포터','봇(원딜)']
+			let dCnt = [topCntD, jugCntD, midCntD, adcCntD, supCntD]
+			let mCnt = [topCntM, jugCntM, midCntM, adcCntM, supCntM]
+			let pKr = ['탑','정글','미드','봇(원딜)','서포터']
 			let maxDCnt = Math.max(...dCnt)
 			let maxMCnt = Math.max(...mCnt)
 			cntHtml += '<h3>듀오에서 전체 글 '+lmD+'개 중, 사람들이 많이 찾은 포지션은</h3><h2>&ensp;'
@@ -192,46 +196,57 @@ function divHtml(tp,img){
 			if(tp.search("top")!=-1){html += divT+'Top'+spanT+'탑'+spanTE;}
 			if(tp.search("jug")!=-1){html += divT+'Jungle'+spanT+'정글'+spanTE;}
 			if(tp.search("mid")!=-1){html += divT+'Mid'+spanT+'미드'+spanTE;}
-			if(tp.search("sup")!=-1){html += divT+'Support'+spanT+'서포터'+spanTE;}
 			if(tp.search("adc")!=-1){html += divT+'Bot'+spanT+'봇(원딜)'+spanTE;}
+			if(tp.search("sup")!=-1){html += divT+'Support'+spanT+'서포터'+spanTE;}
 		}
 	}
 	return html+"</div>";}
 
 
 /* ====================== 롤메이트 글 작성 포지션 변경 체크 ====================== */
-$('input[name=lm_myPosition_write]').on('change',function(){
-	let myPoCheck = [];
-	$('input[name=lm_myPosition_write]:checked').each(function(){
-		let p = $(this).val();
-		for(let i=0; i<=5; i++){
-			if(p=='All'){ myPoCheck.push('pAll') }
-			else if(p=='top'){ myPoCheck.push('Top') }
-			else if(p=='mid'){ myPoCheck.push('Mid') }
-			else if(p=='sup'){ myPoCheck.push('Support') }
-			else if(p=='jug'){ myPoCheck.push('Jungle') }
-			else if(p=='adc'){ myPoCheck.push('Bot') }
-		}
-	})
-	let po = ["pAll","Top","Mid","Support","Jungle","Bot"];
-	for(let i=0; i<po.length; i++){
-		poImgSet('write'+po[i],'Silver',po[i]);
-	}
-	for(let i=0; i<myPoCheck.length; i++){
-		poImgSet('write'+myPoCheck[i],'Diamond',myPoCheck[i]);
-		po = po.filter((element) => element !== myPoCheck[i]);
-	}
-})
-$('input[name=lm_myPosition_write][value=All]:checked').on(function(){
-	console.log("All걸림")
-	let po = ["pAll","Top","Mid","Support","Jungle","Bot"];
-	for(let i=0; i<po.length; i++){
-		poImgSet('write'+po[i],'Silver',po[i]);
-	}
-	$("input[name=lm_myPosition_write]").prop("checked",false);
-	$("input[name=lm_myPosition_write][value=All]").prop("checked",true);
-	poImgSet('writepAll','Diamond','pAll');
-})
+$('input[name=lm_myPosition_write]').on('change', function() {
+    let po = ["Top","Jungle","Mid","Bot","Support"];
+    let myPoCheck = [];
+    
+    // 모든 포지션 포함 다른 포지션들을 실버로 변경
+    for(let i=0; i<po.length; i++) { poImgSet('write'+po[i],'Silver',po[i]); }
+    poImgSet('writepAll','Silver','pAll');
+
+    // 선택된 모든 항목을 배열에 추가
+    $('input[name=lm_myPosition_write]:checked').each(function() {
+        myPoCheck.push($(this).val());
+    });
+
+    // "All"을 선택한 경우
+    if ($(this).val() === 'All' && $(this).prop('checked')) {
+        poImgSet('writepAll','Diamond','pAll');
+        $("input[name=lm_myPosition_write]").not(this).prop("checked", false);
+        console.log('select Position: pAll')
+    } else {
+        // "All"을 선택하지 않은 경우
+        // 선택된 항목의 수가 전체 항목 수와 같은 경우
+        if (myPoCheck.length === po.length) {
+            $("input[name=lm_myPosition_write]").not(this).prop("checked", false);
+            $("input[name=lm_myPosition_write][value=All]").prop("checked", true);
+            po = ['pAll']
+        } else {
+			po = []
+            $("input[name=lm_myPosition_write][value=All]").prop("checked", false);
+            for(let i=0; i<myPoCheck.length; i++) {
+                if(myPoCheck[i] === 'top'){ po.push('Top') }
+                else if(myPoCheck[i] === 'jug'){ po.push('Jungle') }
+                else if(myPoCheck[i] === 'mid'){ po.push('Mid') }
+                else if(myPoCheck[i] === 'adc'){ po.push('Bot') }
+                else if(myPoCheck[i] === 'sup'){ po.push('Support') }
+            }
+        }
+        // 선택된 항목에 대한 처리
+        for(let i=0; i<po.length; i++) {
+            poImgSet('write'+po[i],'Diamond',po[i]);
+        }
+        console.log('select Position: '+po)
+    }
+});
 
 
 
