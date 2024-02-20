@@ -18,20 +18,16 @@
 </head>
 <body style="background-color: #E0FFFF">
 	<div>
-		<div class="btnDIV">
-		<button onclick="location.href='/board/list?page=1'">챔피언랭킹</button>
-
-			<button onclick="location.href='/board/list?page=1'">챔피언분석</button>
-
-
-			<button onclick="location.href='/lolmate/list'">롤메이트</button>
-
-			<button onclick="location.href='/board/list?page=1'">게시판</button>
-			<img src="img/zzzlogo.png" onclick="location.href='/main'">
-			
-		</div>
+	<div th:insert="~{header :: div}"></div>
+	
+	</div>
+	
 
 		<div class="allBigBox">
+		<div th:if="${session.member != null}">
+			<p th:text="|현재 로그인중인 계정: ${session.member.m_nick}|"></p>
+			<button onclick="location.href='/member/logout'">로그아웃</button>
+			</div>
 			<div th:if="${session.member == null}">
 			<button onclick="location.href='/member/loginfrm'">로그인</button>
 			<button onclick="location.href='/member/joinfrm'">회원가입</button>
@@ -50,14 +46,10 @@
 				<br>
 				<hr>
 				<br>
-
-				<button type="button" class="crudBtn"
-					onclick="location.href='/board/list?page=1'" style="float: left;">게시판</button>
-				<br>
 				<br>
 
 				<table
-					style="border: 1px solid black; text-align: center; width: 50%;">
+					style="border: 1px solid black; text-align: center; width: 50%; margin-left: auto; margin-right: auto;">
 					<tr>
 						<th>&ensp;글 번호&ensp;</th>
 						<th>&ensp;제목&ensp;</th>
@@ -92,6 +84,8 @@
 
 			</form>
 		</div>
-	</div>
+
+
+	
 </body>
 </html>
