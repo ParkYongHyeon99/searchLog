@@ -18,6 +18,7 @@ public class LolmateDto {
 	private String lm_findPosition;	// 글 올린 사람이 찾는 포지션
 	private String lm_memo;	// 글 올린 사람의 메모(할 말)
 	private int lm_discord;	// 디스코드(통화) 여부
+	private int lm_end;
 	
 	/* DB 저장 X */
 	private double winrate;	// 글 올린 사람의 승률 (리스트를 불러올때 검색)

@@ -27,7 +27,7 @@ public class ExController {
 		model.addAttribute("champions", champions);
 		return "ex";
 	}
-
+	
 	@GetMapping("/ex/{champions}")
 	public String detail(@PathVariable(name = "champions") String champions, Model model, ExDto cDto) {
 		log.info("@@챔피언이름 -> " + champions);
@@ -40,6 +40,26 @@ public class ExController {
 			log.info("상세페이지 이동 실패");
 			return "redirect:/ex";
 		}
+	}
+
+	@GetMapping("/ex/rune")
+	public String rune() {
+		return "exrune";
+	}
+
+	@GetMapping("/ex/spell")
+	public String spell() {
+		return "exspell";
+	}
+
+	@GetMapping("/ex/skill")
+	public String skill() {
+		return "exrune";
+	}
+
+	@GetMapping("/ex/item")
+	public String item() {
+		return "exrune";
 	}
 
 }

@@ -3,10 +3,15 @@
 <mapper namespace="com.zzzpro.zzz.wan.dao.ExDao">
 	<select id="linePick">
 		SELECT teamPosition,
-		concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_detail WHERE championName =
+		concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_personal1 WHERE championName =
 		#{champions}) * 100), 1),'%') AS linePick
-		FROM zzz_datas_detail WHERE championName = #{champions}
+		FROM zzz_datas_personal1 WHERE championName = #{champions}
 		GROUP BY teamPosition ORDER BY COUNT(*) DESC LIMIT 3
 	</select>
-
+	
+	<select id="test">
+		select champion_name,champion_name_kr
+		from champList where line like #{line} order by champion_name_kr
+	</select>
+	
 </mapper>
