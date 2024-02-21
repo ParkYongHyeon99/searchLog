@@ -1,4 +1,4 @@
-package com.zzzpro.zzz.wan.controller;
+package com.zzzpro.zzz.wan;
 
 import java.util.List;
 
@@ -8,9 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import com.zzzpro.zzz.wan.controller.ExController;
-import com.zzzpro.zzz.wan.dto.ExDto;
-import com.zzzpro.zzz.wan.service.ExService;
+import com.zzzpro.zzz.wan.ExController;
 
 import lombok.extern.slf4j.Slf4j;
 

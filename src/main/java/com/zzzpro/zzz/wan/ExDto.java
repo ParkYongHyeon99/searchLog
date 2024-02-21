@@ -1,4 +1,4 @@
-package com.zzzpro.zzz.wan.dto;
+package com.zzzpro.zzz.wan;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

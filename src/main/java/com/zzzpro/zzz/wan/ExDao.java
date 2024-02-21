@@ -1,11 +1,9 @@
-package com.zzzpro.zzz.wan.dao;
+package com.zzzpro.zzz.wan;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
-
-import com.zzzpro.zzz.wan.dto.ExDto;
 
 @Mapper
 public interface ExDao {

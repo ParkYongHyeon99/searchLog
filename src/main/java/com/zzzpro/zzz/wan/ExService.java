@@ -1,12 +1,9 @@
-package com.zzzpro.zzz.wan.service;
+package com.zzzpro.zzz.wan;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.zzzpro.zzz.wan.dao.ExDao;
-import com.zzzpro.zzz.wan.dto.ExDto;
 
 @Service
 public class ExService {
