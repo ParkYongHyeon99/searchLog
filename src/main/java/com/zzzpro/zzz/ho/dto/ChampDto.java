@@ -1,5 +1,7 @@
 package com.zzzpro.zzz.ho.dto;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,30 +10,69 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ChampDto {
-	private String matchid;
-	private int gameduration;
-	private String riotidgamename;
-	private String riotidtagline;
-	private int participantid;
-	private String championName;
-	private String teamPosition;
-	private String win;
-	private String win_percentage;
-	private String pick_percentage;
-	private String skill_tree;
-	private String tier1;
-	private String championName_KR;
-	private String Count;
-	private String percentage;
-	private String item0;
-	private String item1;
-	private String item2;
-	private String item3;
-	private String item4;
-	private String item5;
-	private String item6;
-	private String shoes;
-	private String core1;
-	private String core2;
-	private String core3;
+	public String championName;
+	public String championName_KR;
+	public String banChampionName_KR;
+	public String teamPosition;
+	public String win;
+	public String tier1;
+	
+	//======================================================================= Rune
+
+	public String main_name;
+	public String main_perks1;
+	public String main_perks2;
+	public String main_perks3;
+	public String main_perks4;
+	public String sub_name;
+	public String sub_perks1;
+	public String sub_perks2;
+	public String stat_perks1;
+	public String stat_perks2;
+	public String stat_perks3;
+	public String rune_count;
+	public String rune_percentage;
+	public String rune_win_percentage;
+	
+	public String Count;
+	public String percentage;
+	public String win_percentage;
+	public String pick_percentage;
+	public String ban_percentage;
+	
+	//======================================================================= item
+
+	public String item6;
+	public String shoes;
+	public String shoes_count;
+	public String shoes_pickRate;
+	public String shoes_win_percentage;
+	public String core1;
+	public String core2;
+	public String core3;
+	public String item_count;
+	public String item_percentage;
+	public String item_win_percentage;
+
+	//======================================================================= skll_tree
+	
+	public String value1;
+	public String value2;
+	public String value3;
+	public String value4;
+	public String value5;
+	public String value6;
+	public String value7;
+	public String value8;
+	public String value9;
+	public String value10;
+	public String value11;
+	public String value12;
+	public String value13;
+	public String value14;
+	public String value15;
+	public String skill_count;
+	public String skill_percentage;
+	
+
 }

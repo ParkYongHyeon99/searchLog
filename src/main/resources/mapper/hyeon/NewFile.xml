@@ -18,7 +18,7 @@
 		round(COUNT(*)/(SELECT COUNT(*) FROM
 		zzz_datas_rune WHERE championName_KR = #{championName_KR})*100, 2)
 		as
-		percentage,
+		rune_percentage,
 		round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) *
 		100),2) AS win_percentage
 		FROM zzz_datas_rune
@@ -71,7 +71,7 @@
 		value11,
 		value12,
 		COUNT(*) AS Count,
-		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_personal2 WHERE championName = #{championName} and
+		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_personal1 WHERE championName = #{championName} and
 		teamPosition = #{teamPosition})*100, 2) as percentage
 		FROM (
 		SELECT JSON_EXTRACT(skill_tree, '$[0]') AS value1,
@@ -86,7 +86,7 @@
 		JSON_EXTRACT(skill_tree, '$[9]') AS value10,
 		JSON_EXTRACT(skill_tree, '$[10]') AS value11,
 		JSON_EXTRACT(skill_tree, '$[11]') AS value12
-		FROM zzz_datas_personal2
+		FROM zzz_datas_personal1
 		WHERE teamPosition = #{teamPosition} and championName_KR = #{championName_KR}
 		) AS subquery
 		GROUP BY value1,

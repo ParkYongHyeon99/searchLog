@@ -53,9 +53,9 @@ public class controller {
 			RuneDto.setCore2(item_winrate.core2);
 			RuneDto.setCore3(item_winrate.core3);
 			//------------------------------------------------------
-			RuneDto.setValue1(item_winrate.value1);
-			RuneDto.setValue2(item_winrate.value2);
-			RuneDto.setValue3(item_winrate.value3);
+			RuneDto.setValue1(skill_tree_winrate.value1);
+			RuneDto.setValue2(skill_tree_winrate.value2);
+			RuneDto.setValue3(skill_tree_winrate.value3);
 
 
 
@@ -65,7 +65,7 @@ public class controller {
 //			RuneDto.setWin_percentage(Rune_winrate);
 			System.out.println(RuneDto);
 			model.addAttribute("RuneDto",RuneDto);
-			return "test";
+			return "testhyeon";
 		}else {
 			return "redirect:/test";
 		}
