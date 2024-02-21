@@ -15,11 +15,11 @@
 			th:text="|${champDto.tier1}티어 ${champDto.championName_KR} 승률: ${champDto.win_percentage}% 픽률 :${champDto.pick_percentage}% 밴률:${champDto.ban_percentage}%|">
 		</div>
 		<div>
-			<img th:src = "{champDto.teamPosition == 'Top' ? './img/position/Silver-Top.png' : 
-							(champDto.teamPosition == 'Jungle' ? '정글' : 
-							(champDto.teamPosition == 'Middle' ? '미드' : 
-							(champDto.teamPosition == 'Bottom' ? '원딜' : 
-							(champDto.teamPosition == 'UTILITY' ? '서폿' : champDto.teamPosition))))}">
+			<img th:src = "|${champDto.teamPosition == 'Top' ? '../img/position/Silver-Top.png' : 
+							(champDto.teamPosition == 'Jungle' ? '../img/position/Silver-Jungle.png' : 
+							(champDto.teamPosition == 'Middle' ? '../img/position/Silver-Mid.png' : 
+							(champDto.teamPosition == 'Bottom' ? '../img/position/Silver-Bot.png' : 
+							(champDto.teamPosition == 'UTILITY' ? '../img/position/Silver-Support.png' : champDto.teamPosition))))}|">
 <!--			th:text="|${champDto.teamPosition == 'Top' ? 'img/position/Silver-Top.png' : (champDto.teamPosition == 'Jungle' ? '정글' : (champDto.teamPosition == 'Middle' ? '미드' : (champDto.teamPosition == 'Bottom' ? '원딜' : (champDto.teamPosition == 'UTILITY' ? '서폿' : champDto.teamPosition))))}라인|">-->
 		</div>
 
