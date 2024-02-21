@@ -40,16 +40,16 @@ public class MainController {
 		}
 	}
 	
-	@GetMapping("/fast-api")
-	public String callFastApi() {
-		return "hello";
-	}
-	
-	
-	@GetMapping("/summonerSearch")
-    public String searchSummoner(@RequestParam String name, @RequestParam String tag) {
-        // 받은 데이터로 처리를 수행하고 결과를 반환
-        // 여기서는 간단히 받은 데이터를 합쳐서 반환하는 예시를 보여줍니다.
-        return "summonerSearch";
-	}
+//	@GetMapping("/fast-api")
+//	public String callFastApi() {
+//		return "hello";
+//	}
+//	
+//	
+//	@GetMapping("/summonerSearch")
+//    public String searchSummoner(@RequestParam String name, @RequestParam String tag) {
+//        // 받은 데이터로 처리를 수행하고 결과를 반환
+//        // 여기서는 간단히 받은 데이터를 합쳐서 반환하는 예시를 보여줍니다.
+//        return "summonerSearch";
+//	}
 }
