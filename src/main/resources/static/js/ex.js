@@ -5,7 +5,7 @@ $('input[name=aa]').on('change', function() {
 		data: { line: $('input[name=aa]:checked').val() },   // 서버에 전달할 데이터
 		success: function(champions) {
 			if (champions.length != 0) {
-				html = '<ul class="width33">'
+				html = '<ul class="width100">'
 				for (let i = 0; i < champions.length; i++) {
 					html += '<li><a href="/ex/' + champions[i].champion_name + '">'
 					html += '<img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/' + champions[i].champion_name + '.png">'

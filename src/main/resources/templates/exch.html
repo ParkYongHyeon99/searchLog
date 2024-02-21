@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/exstyle.css">
-<script src="/js/jquery-3.7.0.min.js"></script>
+<script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
     <div class="head-container" id="head">
         <header>나는 헤더</header>
-        <nav><input type="text" placeholder="챔피언 검색"></nav>
+        <div th:insert="~{ex :: nav}"></div>
         <header>
             <label>티어</label>
             <select>
