@@ -16,68 +16,84 @@
 </script>
 
 </head>
-<body style="background-color:#E0FFFF">
-<div>
-<div>
- <img src="img/zzzlogo.png" onclick = "location.href='/main'">
+<body style="background-image:url('img/JIN.jpg');
+background-repeat:no-repeat; background-size:cover">
+	 <div class="header">
+ 	<nav>
+ 	<ul>
+ 		<li><button onclick="location.href='/testho'">용호님 작업공간</button></li>
+ 		<li><button onclick="location.href='/주소/적으세용'">용현님 작업공간</button></li>
+ 		<li><button onclick="location.href='/main'">태수님 작업공간</button></li>
+ 		<li><button onclick="location.href='/wan'">지완님 작업공간</button></li>
+ 	</ul>
+ 	</nav>
  </div>
 
-<div class="allBigBox">
-<form id="loginfrm" method="post" action="/member/login" style="float: right;">
-			<div class="frm_item">아이디
-				<input type="text" name="m_id" class="input" placeholder="아이디를 입력하세요" maxlength="20" autocapitalize="off">
+		<div class="allBigBox">
+		<div th:if="${session.member != null}" style="float:right">
+			<p th:text="|현재 로그인중인 계정: ${session.member.m_nick}|"></p>
+			<button onclick="location.href='/member/logout'">로그아웃</button>
 			</div>
-			<div class="frm_item">비밀번호
-				<input type="password" name="m_pw" class="input" placeholder="비밀번호를 입력하세요" maxlength="20" autocapitalize="off">
-			</div>
-			<br>
-			<button type="button" onclick="location.href='/'">메인화면</button>
-			<button type="button" onclick="location.href='/member/joinfrm'">회원가입하러가기</button>
-			<button type="submit" id="loginBtn">login!</button>
-		</form>
-		
-		
-<form action="/main" method="post">
-	<input type="text" name="championname" autofocus required placeholder="챔피언 및 소환사 이름">
-	<input type="submit" value="검색">
-	
-	<br><hr><br>	
+			<div th:if="${session.member == null}" style="float:right" >
+			<button onclick="location.href='/member/loginfrm'">로그인</button>
+			<button onclick="location.href='/member/joinfrm'">회원가입</button>
+		</div>
+		<br><br><br><br><br><br>
+		 <div><img id=img1 src="img/zzzlogo.png" onclick="location.href='/'"></div>
+<br><br><br>
 
-	<button type="button" class="crudBtn" onclick="location.href='/board/list?page=1'" style="float: left;" >게시판</button>
-		<br><br>
+			<form action="/" method="post">
+				<input type="text" name="championname" autofocus required
+					placeholder="챔피언 및 소환사 이름"style="  width: 25%;
+  					border: 1px solid #bbb;
+  					border-radius: 8px;
+  					padding: 10px 12px;
+  					font-size: 14px;
+  					margin-left: auto; 
+  					margin-right: auto;"> 
+  				<input type="submit">
 
-		<table style="border: 1px solid black; text-align: center; width: 90%;">
-			<tr>
-				<th>&ensp;글 번호&ensp;</th>
-				<th>&ensp;제목&ensp;</th>
-				<th>&ensp;작성자&ensp;</th>
-				<th>&ensp;작성 날짜&ensp;</th>
-				<th>&ensp;조회수&ensp;</th>
-			</tr>
-			
-			<th:block th:if="${bList}==null">
-				<tr>
-					<td colspan="5">글이 존재하지 않습니다.</td>
-				</tr>
-			</th:block>
-			
-			<th:block th:if="${bList}!=null" th:each="b : ${bList}">
-				<tr>
-					<td th:text=" ' &ensp; ' + ${b.b_num} + ' &ensp; '"></td>
-					<td><a th:href="|/board/detail?b_num=${b.b_num}|" th:text=" ' &ensp; ' + ${b.b_title} + ' &ensp; '"></a></td>
-					<th:block>
-						<td th:if="${b.unnamed == 0}" th:text=" ' &ensp; ' + ${b.b_writer} + ' &ensp; '"></td>
-						<td th:if="${b.unnamed == 1}" th:text=" ' &ensp; 익명) ' + ${b.b_writerNick} + ' &ensp; '"></td>
+				<br>
+				<br>
+				<br>
+				<hr>
+				<table	style="border: 1px solid white; text-align: center; width: 50%; margin-left: auto; margin-right: auto; color:white;">
+					<tr>
+						<th>&ensp;글 번호&ensp;</th>
+						<th>&ensp;제목&ensp;</th>
+						<th>&ensp;작성자&ensp;</th>
+						<th>&ensp;작성 날짜&ensp;</th>
+						<th>&ensp;조회수&ensp;</th>
+					</tr>
+
+					<th:block th:if="${bList}==null">
+						<tr>
+							<td colspan="5">글이 존재하지 않습니다.</td>
+						</tr>
 					</th:block>
-					<td th:text=" ' &ensp; ' + ${b.b_date} + ' &ensp; '"></td>
-					<td th:text=" ' &ensp; ' + ${b.b_view} + ' &ensp; '"></td>
-				</tr>
-			</th:block>
-			
-	</table>
+
+					<th:block th:if="${bList}!=null" th:each="b : ${bList}">
+						<tr>
+							<td th:text=" ' &ensp; ' + ${b.b_num} + ' &ensp; '"></td>
+							<td><a th:href="|/board/detail?b_num=${b.b_num}|"
+								th:text=" ' &ensp; ' + ${b.b_title} + ' &ensp; '"></a></td>
+							<th:block>
+								<td th:if="${b.unnamed == 0}"
+									th:text=" ' &ensp; ' + ${b.b_writer} + ' &ensp; '"></td>
+								<td th:if="${b.unnamed == 1}"
+									th:text=" ' &ensp; 익명) ' + ${b.b_writerNick} + ' &ensp; '"></td>
+							</th:block>
+							<td th:text=" ' &ensp; ' + ${b.b_date} + ' &ensp; '"></td>
+							<td th:text=" ' &ensp; ' + ${b.b_view} + ' &ensp; '"></td>
+						</tr>
+					</th:block>
+
+				</table>
+
+			</form>
+		</div>
+
+
 	
-</form>
-</div>
-</div>	
 </body>
 </html>

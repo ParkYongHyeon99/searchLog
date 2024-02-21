@@ -2,40 +2,117 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zzzpro.zzz.ho.dao.ChampDao">
 	<select id="winrate">
-		select * from zzz_datas;
 		SELECT round((COUNT(CASE WHEN win ='True' THEN 1
 		END)
 		/ COUNT(*) * 100),2)
 		AS win_percentage
-		FROM zzz_datas1
+		FROM zzz_datas_rune
 		WHERE
-		championName
-		= #{championName} and teamPosition = #{teamPosition} and
-		tier1 =
-		#{tier1}
+		championName_KR = #{championName_KR} 
+		and teamPosition = #{teamPosition} 
+		and tier1 = #{tier1}
 	</select>
 	<select id="pickrate">
-		select round(((COUNT(CASE WHEN championName =
-		#{championName} THEN 1 END)/5 /
+		select round(((COUNT(CASE WHEN championName_KR =
+		#{championName_KR} THEN 1 END)/5 /
 		(COUNT(*)/10))* 100),2) AS
 		pick_percentage
-		FROM zzz_datas1 where teamPosition = #{teamPosition}
+		FROM zzz_datas_rune where teamPosition = #{teamPosition}
 	</select>
-	<select id="skilltree">
+	<select id="banrate">
+		SELECT round(((COUNT(CASE WHEN banChampionName_KR = #{championName_KR} THEN 1 END ) / (COUNT(*)/10))
+		 * (COUNT(DISTINCT CASE WHEN teamPosition = #{teamPosition} and championName_KR = #{championName_KR} THEN match_id END) / COUNT(DISTINCT case when championName_KR = #{championName_KR} then match_id end)) * 100),2) AS ban_percentage
+		FROM zzz_datas_detail where tier1 = #{tier1};
+	</select>
+	<select id="skill_tree_winrate">
 		SELECT
-		skill_tree,
-		COUNT(*) AS Count,
-		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas1 WHERE championName =
-		#{championName})*100, 2) as
-		pickRate
-		FROM zzz_datas1
-		WHERE championName =
-		#{championName}
-		GROUP BY skill_tree
-		ORDER BY Count DESC
-		limit 3;
+		value1,
+		value2,
+		value3,
+		value4,
+		value5,
+		value6,
+		value7,
+		value8,
+		value9,
+		value10,
+		value11,
+		value12,
+		value13,
+		value14,
+		value15,
+		value16,
+		COUNT(*) AS skill_count,
+		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_personal1 WHERE championName_KR = #{championName_KR} and
+		teamPosition = #{teamPosition})*100, 2) as skill_percentage
+		FROM (
+		SELECT JSON_EXTRACT(skill_tree, '$[0]') AS value1,
+		JSON_EXTRACT(skill_tree, '$[1]') AS value2,
+		JSON_EXTRACT(skill_tree, '$[2]') AS value3,
+		JSON_EXTRACT(skill_tree, '$[3]') AS value4,
+		JSON_EXTRACT(skill_tree, '$[4]') AS value5,
+		JSON_EXTRACT(skill_tree, '$[5]') AS value6,
+		JSON_EXTRACT(skill_tree, '$[6]') AS value7,
+		JSON_EXTRACT(skill_tree, '$[7]') AS value8,
+		JSON_EXTRACT(skill_tree, '$[8]') AS value9,
+		JSON_EXTRACT(skill_tree, '$[9]') AS value10,
+		JSON_EXTRACT(skill_tree, '$[10]') AS value11,
+		JSON_EXTRACT(skill_tree, '$[11]') AS value12,
+		JSON_EXTRACT(skill_tree, '$[12]') AS value13,
+		JSON_EXTRACT(skill_tree, '$[13]') AS value14,
+		JSON_EXTRACT(skill_tree, '$[14]') AS value15,
+		JSON_EXTRACT(skill_tree, '$[15]') AS value16
+		FROM zzz_datas_personal1
+		WHERE teamPosition = #{teamPosition} and championName_KR = #{championName_KR}
+		) AS subquery
+		GROUP BY value1,
+		value2,
+		value3,
+		value4,
+		value5,
+		value6,
+		value7,
+		value8,
+		value9,
+		value10,
+		value11,
+		value12,
+		value13,
+		value14,
+		value15,
+		value16
+		ORDER BY skill_count DESC
+		LIMIT 1;
 	</select>
-	<select id = "runeRate">
+	<select id="item_winrate">
+		SELECT
+		core1, core2, core3,
+		COUNT(*) AS item_count,
+		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_item WHERE championName_KR = #{championName_KR} and teamPosition = #{teamPosition} and tier1 = #{tier1})*100, 2) as item_percentage,
+		round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) * 100),2) AS item_win_percentage
+		FROM zzz_datas_item
+		WHERE
+		championName_KR = #{championName_KR} and teamPosition = #{teamPosition}
+		and tier1 = #{tier1} and core2 != 0 and core3 != 0
+		GROUP BY core1
+		ORDER BY item_count DESC
+		LIMIT 1;
+	</select>
+	<select id="shoes_winrate">
+		SELECT 
+    	shoes,
+    	COUNT(*) AS shoes_count,
+    	round((count(*))/(select count(*) from zzz_datas_item where championName_KR = #{championName_KR} and shoes != 0 and teamPosition = #{teamPosition} and tier1 = #{tier1})*100, 2) as shoes_pickRate,
+    	round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) * 100),2) AS shoes_win_percentage
+		FROM zzz_datas_item
+		WHERE championName_KR = #{championName_KR} and shoes != 0 and teamPosition = #{teamPosition} and tier1 = #{tier1}
+		GROUP BY shoes
+		ORDER BY shoes_count DESC
+		limit 1;
+	</select>
+
+	
+	<select id="Rune_winrate">
 		SELECT
 		main_name,
 		main_perks1,
@@ -48,21 +125,15 @@
 		stat_perks1,
 		stat_perks2,
 		stat_perks3,
-		COUNT(*) AS
-		Count,
-		round(COUNT(*)/(SELECT COUNT(*) FROM
-		zzz_rune WHERE
-		championName_KR = #{championName_KR} and tier1 = #{tier1})*100, 2)
-		as percentage,
-		round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) * 100),2) AS
-		win_percentage
-		FROM zzz_rune
-		WHERE championName_KR = #{championName_KR} and tier1 =
-		#{tier1}
-		GROUP BY
-		main_name, sub_name
-		ORDER BY
-		Count DESC
+		COUNT(*) AS rune_count,
+		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_rune WHERE championName_KR = #{championName_KR})*100, 2) as rune_percentage,
+		round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) * 100),2) AS rune_win_percentage
+		FROM zzz_datas_rune
+		WHERE championName_KR =
+		#{championName_KR} and teamPosition = #{teamPosition} 
+		and tier1 = #{tier1}
+		GROUP BY main_name, sub_name
+		ORDER BY rune_count DESC
 		LIMIT 1;
 	</select>
 
