@@ -14,16 +14,24 @@ public class ExService {
 		return eDao.champions();
 	}
 
-	public List<ExDto> linePick(ExDto cDto) {
-		return eDao.linePick(cDto);
+	public List<ExDto> linePick(ExDto eDto) {
+		return eDao.linePick(eDto);
 	}
 
-	public List<ExDto> test(ExDto cDto) {
-		cDto.setLine('%'+cDto.getLine()+'%');
-		if (cDto.getLine().equals("%all%")) {
+	public List<ExDto> allWinRate(ExDto eDto) {
+		return eDao.allWinRate(eDto);
+	}
+
+	public List<ExDto> allPickRate(ExDto eDto) {
+		return eDao.allPickRate(eDto);
+	}
+
+	public List<ExDto> test(ExDto eDto) {
+		eDto.setLine('%' + eDto.getLine() + '%');
+		if (eDto.getLine().equals("%all%")) {
 			return eDao.champions();
 		} else {
-			return eDao.test(cDto);
+			return eDao.test(eDto);
 		}
 	}
 

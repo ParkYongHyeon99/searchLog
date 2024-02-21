@@ -47,23 +47,33 @@
                 </div>
 				<table class="width67">
 					<thead>
-                        <td>순위</td>
-                        <td>챔피언</td>
-                        <td>포지션</td>
-                        <td>승률</td>
-                        <td>픽률</td>
-                        <td>밴률</td>
-                        <td>카운터</td>
-                    </thead>
+						<tr>
+							<td style="width: 12.5%">1순위</td>
+							<td class="left" style="width: 25%">챔피언</td>
+							<td style="width: 12.5%">1티어</td>
+							<td style="width: 12.5%">1포지션</td>
+							<td style="width: 12.5%">1승률</td>
+							<td style="width: 12.5%">1픽률</td>
+							<td style="width: 12.5%">1밴률</td>
+							<td style="width: 12.5%">1카운터</td>
+						</tr>
+					</thead>
                     <tbody>
-                            <td>순위</td>
-                            <td>챔피언</td>
-                            <td>포지션</td>
-                            <td>승률</td>
-                            <td>픽률</td>
-                            <td>밴률</td>
-                            <td>카운터</td>
-                    </tbody>
+						<tr th:each="champ : ${champions}">
+							<td>순위</td>
+							<td class="left">
+								<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champ.champion_name}.png|"
+                                    alt="초상화">
+								<a th:text="${champ.champion_name_kr}">챔피언</a>
+							</td>
+							<td>티어</td>
+							<td>포지션</td>
+							<td>승률</td>
+							<td>픽률</td>
+							<td>밴률</td>
+							<td>카운터</td>
+						</tr>
+					</tbody>
                 </table>
             </div>
         </div>

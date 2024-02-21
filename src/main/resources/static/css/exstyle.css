@@ -85,6 +85,10 @@ a {
 .flex {
 	display: flex;
 }
+
+table tr td {
+	border: 1px solid black;
+}
 /* ====================== ex페이지 css ====================== */
 /* ====================== exch페이지 css ====================== */
 .container {
@@ -144,6 +148,10 @@ a {
 
 .double-divide {
 	width: 25%;
+}
+
+.left {
+	float: left;
 }
 
 /* ====================== exch페이지 css ====================== */

@@ -12,8 +12,14 @@ public interface ExDao {
 	@Select("select champion_name,champion_name_kr from champList order by champion_name_kr")
 	List<ExDto> champions();
 
-	List<ExDto> linePick(ExDto cDto);
+	List<ExDto> linePick(ExDto eDto);
 
-	List<ExDto> test(ExDto cDto);
+	List<ExDto> test(ExDto eDto);
+
+	List<ExDto> allPickRate(ExDto eDto);
+
+	List<ExDto> allWinRate(ExDto eDto);
+
+//	List<ExDto> allBanRate(ExDto eDto);
 
 }
