@@ -16,40 +16,48 @@
 </script>
 
 </head>
-<body style="background-color: #E0FFFF">
-	<div>
-	<div th:insert="~{header :: div}"></div>
-	
-	</div>
-	
+<body style="background-image:url('img/JIN.jpg');
+background-repeat:no-repeat; background-size:cover">
+	 <div class="header">
+ 	<nav>
+ 	<ul>
+ 		<li><button onclick="location.href='/testho'">용호님 작업공간</button></li>
+ 		<li><button onclick="location.href='/주소/적으세용'">용현님 작업공간</button></li>
+ 		<li><button onclick="location.href='/main'">태수님 작업공간</button></li>
+ 		<li><button onclick="location.href='/wan'">지완님 작업공간</button></li>
+ 	</ul>
+ 	</nav>
+ </div>
 
 		<div class="allBigBox">
-		<div th:if="${session.member != null}">
+		<div th:if="${session.member != null}" style="float:right">
 			<p th:text="|현재 로그인중인 계정: ${session.member.m_nick}|"></p>
 			<button onclick="location.href='/member/logout'">로그아웃</button>
 			</div>
-			<div th:if="${session.member == null}">
+			<div th:if="${session.member == null}" style="float:right" >
 			<button onclick="location.href='/member/loginfrm'">로그인</button>
 			<button onclick="location.href='/member/joinfrm'">회원가입</button>
 		</div>
+		<br><br><br><br><br><br>
+		 <div><img id=img1 src="img/zzzlogo.png" onclick="location.href='/'"></div>
+<br><br><br>
 
-
-			<form action="/main" method="post">
+			<form action="/" method="post">
 				<input type="text" name="championname" autofocus required
-					placeholder="챔피언 및 소환사 이름"style="  width: 50%;
+					placeholder="챔피언 및 소환사 이름"style="  width: 25%;
   					border: 1px solid #bbb;
   					border-radius: 8px;
   					padding: 10px 12px;
-  					font-size: 14px;"> 
+  					font-size: 14px;
+  					margin-left: auto; 
+  					margin-right: auto;"> 
   				<input type="submit">
 
 				<br>
+				<br>
+				<br>
 				<hr>
-				<br>
-				<br>
-
-				<table
-					style="border: 1px solid black; text-align: center; width: 50%; margin-left: auto; margin-right: auto;">
+				<table	style="border: 1px solid white; text-align: center; width: 50%; margin-left: auto; margin-right: auto; color:white;">
 					<tr>
 						<th>&ensp;글 번호&ensp;</th>
 						<th>&ensp;제목&ensp;</th>

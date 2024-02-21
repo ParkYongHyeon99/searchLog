@@ -1,10 +1,18 @@
 @charset "UTF-8";
 
-img{
-  height: 100px;
+.img{
+  height: 50px;
   display: block;
-  margin-left: auto;
+  float:left;
+  margin-left: 10%;
   margin-right: auto;
+  
+}
+.img1{
+	height: 300px;
+	display: block;
+	margin: 0 auto;	
+		
 }
 
 div{
@@ -19,6 +27,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #f2f2f2;
 }
 
 ul {
