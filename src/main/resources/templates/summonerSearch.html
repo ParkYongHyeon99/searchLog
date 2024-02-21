@@ -8,9 +8,11 @@
 </head>
 <button onclick="submitForm()">더보기</button>
 
+<div id="data"></div>
+
 <body>
 	<script>
-		
+
 		var start = 0;
 
 		$(document).ready(function () {
@@ -28,7 +30,8 @@
 				data: {name: name, tag: tag, start: start},
 				success: function (result) {
 					console.log(result);
-
+					
+					$('#data').text(result)
 					alert("Insert 완료 되었습니다!");
 				},
 				error: function (xhr, status, error) {
@@ -43,7 +46,7 @@
 			var name = params.get('name');
 			var tag = params.get('tag');
 			start += 5;
-		
+
 
 			// AJAX 요청 실행
 			$.ajax({
