@@ -28,6 +28,15 @@ a {
 	padding: 0;
 }
 
+td {
+	font-size: 0.8em;
+}
+
+td img{
+	display: inline-block;
+	width: 50px;
+}
+
 /* ====================== ex페이지 css ====================== */
 .l-container {
 	width: 1100px;
