@@ -27,7 +27,7 @@ $(()=>{
 
 /* ====================== 리스트 가져오는 함수 실행 ====================== */
 	lmAjax();
-	setInterval(function(){lmAjax()},5000);		// <- 5초마다 리스트 갱신
+	//setInterval(function(){lmAjax()},5000);		// <- 5초마다 리스트 갱신
 	
 })
 
@@ -83,7 +83,7 @@ function lmAjax(){
 					html += '<td>'+divHtml(lm.lm_tier,'emblem')+'</td>';			// 티어
 					html += '<td>'+lm.lm_summonerName+'</td>';	// 작성자 게임닉
 					html += '<td>'+divHtml(lm.lm_myPosition,'position')+'</td>';	// 작성자 포지션
-					html += '<td>'+lm.winrate+'</td>';			// 작성자 승률
+					html += '<td>'+lm.lm_winrate+'</td>';			// 작성자 승률
 					html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>';	// 찾는 포지션
 					html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
 					if(lm.lm_end==0){
@@ -92,7 +92,6 @@ function lmAjax(){
 						html += '<td><button disabled>신청</button></td>'
 					}
 					html += '</tr>';
-					
 				}
 			}else{
 				html += '<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>';
@@ -169,6 +168,7 @@ function lmAjax(){
 }
 
 
+
 /* ====================== lmList 포지션 div 설정 ====================== */
 function divHtml(tp,img){
 	var divT = '<div class="tooltip tooltipImgDiv2" style="display: inline-block;"><div class="tooltip '
@@ -200,14 +200,8 @@ function divHtml(tp,img){
 			if(tp.search("sup")!=-1){html += divT+'Support'+spanT+'서포터'+spanTE;}
 		}
 	}
-	return html+"</div>";}
-
-
-/* ====================== 이미지 변경 함수 ====================== */
-function poImgSet(id,sel,p){
-	document.getElementById(id).style.backgroundImage = "url('../img/position/"+sel+"-"+p+".png')";
+	return html+"</div>";
 }
-/* ====================== 이미지 변경 함수 끝 ====================== */
 
 
 /* ====================== 롤메이트 글 작성 포지션 변경 체크 ====================== */
@@ -247,7 +241,6 @@ $('input[name=lm_myPosition_write]').on('change', function() {
                 else if(myPoCheck[i] === 'sup'){ po.push('Support') }
             }
         }
-        // 선택된 항목에 대한 처리
         for(let i=0; i<po.length; i++) {
             poImgSet('writemy'+po[i],'Diamond',po[i]);
         }
@@ -290,7 +283,6 @@ $('input[name=lm_findPosition_write]').on('change', function() {
                 else if(fiPoCheck[i] === 'sup'){ po.push('Support') }
             }
         }
-        // 선택된 항목에 대한 처리
         for(let i=0; i<po.length; i++) {
             poImgSet('writefind'+po[i],'Diamond',po[i]);
         }
@@ -301,8 +293,11 @@ $('input[name=lm_findPosition_write]').on('change', function() {
 
 
 
-
-
+/* ====================== 이미지 변경 함수 ====================== */
+function poImgSet(id,sel,p){
+	document.getElementById(id).style.backgroundImage = "url('../img/position/"+sel+"-"+p+".png')";
+}
+/* ====================== 이미지 변경 함수 끝 ====================== */
 
 
 /* ====================== 롤메이트 글 작성 ====================== */
@@ -313,7 +308,6 @@ $('#lmWriteBtn').on('click',function(){
 	var dmS = 0;
 	if(discordOn == 'selectBtn'){ discord=0; }else if(discordOn == 'noSelectBtn'){ discord=1; }
 	if(duo == 'selectBtn'){ dmS=0; }else if(duo == 'noSelectBtn'){ dmS=1; }
-	var tier = 'Gold'
 	/*var lm_myPosition = $('input[name=lm_myPosition_write]:checked').val();*/
 	$.ajax({
 		method:'get',
@@ -323,7 +317,6 @@ $('#lmWriteBtn').on('click',function(){
 			lm_summonerName:$('#lm_summonerName_write').val(),
 			lm_gameMate:dmS,
 			lm_gameMode:$('select[name=lm_gameMode_write]').val(),
-			lm_tier:tier,
 			lm_myPosition:$('input[name=lm_myPosition_write]:checked').val(),
 			lm_findPosition:$('input[name=lm_findPosition_write]:checked').val(),
 			lm_memo:$('#lmWriteMemo').val(),
@@ -342,12 +335,10 @@ $('#lmWriteBtn').on('click',function(){
 				icon : "error",
 				text : "작성 실패..",
 			});
-			console.log('작성완료');
-			
 		}
 	})
 })
-
+/* ====================== 롤메이트 글 작성 끝 ====================== */
 
 
 
