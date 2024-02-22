@@ -22,17 +22,10 @@ public class ExController {
 
 	@GetMapping("/ex") // 챔피언 전체목록 가져오는 컨트롤러
 	public String champions(Model model, ExDto eDto) {
-		List<ExDto> champions = eSer.champions();
-//		List<ExDto> allPickRate = eSer.allWinRate(eDto);
-//		List<ExDto> allWinRate = eSer.allPickRate(eDto);
-//		List<ExDto> allBanRate = eSer.allBanRate();
+		List<ExDto> champions = eSer.champions(eDto);
 		model.addAttribute("champions", champions);
-//		model.addAttribute("allWinRate", allWinRate);
-//		model.addAttribute("allPickRate", allPickRate);
-		log.info("champions" + champions);
-//		log.info("allWinRate" + allWinRate);
-//		log.info("allPickRate" + allPickRate);
-
+		log.info("@@챔피언 전체이름 -> " + champions);
+		List<ExDto> allWinRate = eSer.allWinRate(eDto);
 		return "ex";
 	}
 

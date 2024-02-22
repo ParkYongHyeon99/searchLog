@@ -10,12 +10,10 @@ import lombok.NoArgsConstructor;
 public class ExDto {
 	// champList
 	private String champions;
-	private String champion_name;
-	private String champion_name_kr;
+	private String championName;
+	private String championName_kr;
 	// =================================
 	// zzz_datas_detail
-	private String championName;
-	private String championName_KR;
 	private String teamPosition;
 	private String linePick;
 	private String line;
