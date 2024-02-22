@@ -5,10 +5,11 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/exstyle.css">
 <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="/js/ex.js"></script> <!-- 라인별 챔피언 스크립트 -->
 </head>
 <body>
     <div class="l-container">
-        <div th:insert="~{exch :: header}"></div>
+        <header>나는 헤더</header>
         <nav><input type="text" placeholder="챔피언 검색"></nav>
         <div>
             <div class="flex" id="topbar">
@@ -23,31 +24,60 @@
                         <label><input type="radio" value="sup" name="aa" class="po">서폿</label>
                     </span>
                 </span>
-                <span class="width67">티어 포지션 승 픽 밴 카운터</span>
+                <span class="width67">
+                    <span>티어별 드랍다운</span>
+                    <span>전체</span>
+                    <span>탑</span>
+                    <span>정글</span>
+                    <span>미드</span>
+                    <span>봇</span>
+                    <span>서포터</span>
+                </span>
             </div>
-            <div class="flex" id="main" style="background-color: red">
+            <div class="flex" id="main">
                 <div id="test" class="width33">
                     <ul class="width100">
                         <li th:each="champion : ${champions}">
                             <a th:href="@{/ex/{champions}(champions=${champion.champion_name})}">
                                 <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.champion_name}.png|"
                                     alt="초상화">
-                            </a>
                             <div th:utext="${#strings.length(champion.champion_name_kr) > 3 ? champion.champion_name_kr.substring(0, 3) + '...' : champion.champion_name_kr}" class="set"></div>
+                            </a>
     	                </li>
         	        </ul>
                 </div>
-				<div class="width67">
-					<div>전체</div>
-					<div>탑</div>
-					<div>정글</div>
-					<div>미드</div>
-					<div>바텀</div>
-					<div>서포터</div>
-				</div>
+				<table class="width67">
+					<thead>
+						<tr>
+							<td style="width: 6.25%">순위</td>
+							<td class="left" style="width: 18.25%">챔피언</td>
+							<td style="width: 12.5%">티어</td>
+							<td style="width: 12.5%">포지션</td>
+							<td style="width: 12.5%">승률</td>
+							<td style="width: 12.5%">픽률</td>
+							<td style="width: 12.5%">밴률</td>
+							<td style="width: 25%">카운터</td>
+						</tr>
+					</thead>
+                    <tbody>
+						<tr th:each="stat : ${champions}">
+							<td>순위</td>
+							<td class="left">
+								<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${stat.champion_name}.png|"
+                                    alt="초상화">
+								<a th:text="${stat.champion_name_kr}">챔피언</a>
+							</td>
+							<td>티어</td>
+							<td>포지션</td>
+							<td>승률</td>
+							<td>픽률</td>
+							<td>밴률</td>
+							<td>카운터</td>
+						</tr>
+					</tbody>
+                </table>
             </div>
         </div>
     </div>
-<script type="text/javascript" src="/js/ex.js"></script> <!-- 라인별 챔피언 스크립트 -->
 </body>
 </html>

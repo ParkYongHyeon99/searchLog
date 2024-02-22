@@ -23,9 +23,6 @@
 
 .positionImg{
 	float: left;
-}
-
-.positionImg{
     width:30px;
     padding-bottom: 30px;
     background-size: cover;
@@ -42,12 +39,12 @@ label{
 
 
 /* ============컨테이너 설정=========== */
-.positionImgDiv{
+.tooltipImgDiv{
 	justify-content:center;
 	flex-direction: row;
 	text-align: center;
 }
-.positionImgDiv2{
+.tooltipImgDiv2{
 	flex-direction: column;
 	margin-left: auto;
 	text-align: center;
@@ -95,7 +92,7 @@ label{
 
 
 
-.pAll .Top,.Jungle,.Mid,.Support,.Bot{
+.pAll, .Top,.Jungle,.Mid,.Support,.Bot{
 	width: 30px;
 	padding-bottom: 30px;
 	background-repeat: no-repeat;
@@ -103,24 +100,12 @@ label{
 	background-size : cover;
 	display: inline-block;
 }
-.pAll{
-	background-image: url('../img/position/Diamond-pAll.png');
-}
-.Top{
-	background-image: url('../img/position/Silver-Top.png');
-}
-.Jungle{
-	background-image: url('../img/position/Silver-Jungle.png');
-}
-.Mid{
-	background-image: url('../img/position/Silver-Mid.png');
-}
-.Support{
-	background-image: url('../img/position/Silver-Support.png');
-}
-.Bot{
-	background-image: url('../img/position/Silver-Bot.png');
-}
+.pAll{ background-image: url('../img/position/Diamond-pAll.png'); }
+.Top{ background-image: url('../img/position/Silver-Top.png'); }
+.Jungle{ background-image: url('../img/position/Silver-Jungle.png'); }
+.Mid{ background-image: url('../img/position/Silver-Mid.png'); }
+.Support{ background-image: url('../img/position/Silver-Support.png'); }
+.Bot{ background-image: url('../img/position/Silver-Bot.png'); }
 
 
 .lmTabChoice{
@@ -159,6 +144,10 @@ label{
 #lmNotionDiv h3,h2{
 	display: inline-block;
 	margin: 0;
+}
+#lmNotionDiv p{
+	margin: 0;
+	margin-top: 5px;
 }
 
 

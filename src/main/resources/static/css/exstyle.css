@@ -28,6 +28,15 @@ a {
 	padding: 0;
 }
 
+td {
+	font-size: 0.8em;
+}
+
+td img {
+	display: inline-block;
+	width: 50px;
+}
+
 /* ====================== ex페이지 css ====================== */
 .l-container {
 	width: 1100px;
@@ -84,6 +93,10 @@ a {
 
 .flex {
 	display: flex;
+}
+
+table tr td {
+	border: 1px solid black;
 }
 /* ====================== ex페이지 css ====================== */
 /* ====================== exch페이지 css ====================== */
@@ -144,6 +157,10 @@ a {
 
 .double-divide {
 	width: 25%;
+}
+
+.left {
+	text-align: left;
 }
 
 /* ====================== exch페이지 css ====================== */
