@@ -5,6 +5,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="/css/exstyle.css">
 <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
+<script type="text/javascript" src="/js/ex.js"></script> <!-- 라인별 챔피언 스크립트 -->
 </head>
 <body>
     <div class="l-container">
@@ -33,7 +34,7 @@
                     <span>서포터</span>
                 </span>
             </div>
-            <div class="flex" id="main" style="background-color: red">
+            <div class="flex" id="main">
                 <div id="test" class="width33">
                     <ul class="width100">
                         <li th:each="champion : ${champions}">
@@ -48,23 +49,23 @@
 				<table class="width67">
 					<thead>
 						<tr>
-							<td style="width: 12.5%">순위</td>
-							<td class="left" style="width: 25%">챔피언</td>
+							<td style="width: 6.25%">순위</td>
+							<td class="left" style="width: 18.25%">챔피언</td>
 							<td style="width: 12.5%">티어</td>
 							<td style="width: 12.5%">포지션</td>
 							<td style="width: 12.5%">승률</td>
 							<td style="width: 12.5%">픽률</td>
 							<td style="width: 12.5%">밴률</td>
-							<td style="width: 12.5%">카운터</td>
+							<td style="width: 25%">카운터</td>
 						</tr>
 					</thead>
                     <tbody>
-						<tr th:each="champ : ${champions}">
-							<td th:each></td>
+						<tr th:each="stat : ${champions}">
+							<td>순위</td>
 							<td class="left">
-								<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champ.champion_name}.png|"
+								<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${stat.champion_name}.png|"
                                     alt="초상화">
-								<a th:text="${champ.champion_name_kr}">챔피언</a>
+								<a th:text="${stat.champion_name_kr}">챔피언</a>
 							</td>
 							<td>티어</td>
 							<td>포지션</td>
@@ -78,6 +79,5 @@
             </div>
         </div>
     </div>
-<script type="text/javascript" src="/js/ex.js"></script> <!-- 라인별 챔피언 스크립트 -->
 </body>
 </html>

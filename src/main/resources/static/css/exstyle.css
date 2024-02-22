@@ -32,7 +32,7 @@ td {
 	font-size: 0.8em;
 }
 
-td img{
+td img {
 	display: inline-block;
 	width: 50px;
 }
@@ -160,7 +160,7 @@ table tr td {
 }
 
 .left {
-	float: left;
+	text-align: left;
 }
 
 /* ====================== exch페이지 css ====================== */
