@@ -22,23 +22,6 @@ public class MainController {
 	@Autowired
 	public MainService mSer;
 	
-	@Autowired
-	private BoardService bSer;
-
-
-
-	@PostMapping("/search")
-	public String search(MainDto sm, Model model, HttpSession session, RedirectAttributes rttr) {
-		MainDto md = mSer.search(sm);
-		log.info("=====검색 성송md " + md);
-		if (md != null) {
-			session.setAttribute("md", md);
-			return "redirect:/main/search";
-		} else {
-			rttr.addFlashAttribute("msg", "검색 실패");
-			return "redirect:/";
-		}
-	}
 	
 //	@GetMapping("/fast-api")
 //	public String callFastApi() {
