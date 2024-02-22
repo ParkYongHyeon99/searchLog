@@ -1,44 +1,66 @@
 @charset "UTF-8";
 
-.img{
-  height: 50px;
-  display: block;
-  float:left;
-  margin-left: 10%;
-  margin-right: auto;
-  
-}
-.img1{
-	height: 300px;
+.img {
+	height: 50px;
 	display: block;
-	margin: 0 auto;	
-		
+	float: left;
+	margin-left: 10%;
+	margin-right: auto;
 }
 
-div{
-  text-align: center;
+.img1 {
+	height: 300px;
+	display: block;
+	margin: 0 auto;
+	cursor: pointer;
+}
+
+div {
+	text-align: center;
 }
 
 header {
-  position: sticky;
-  top: 0;
-  padding-left: 32px;
-  padding-right: 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #f2f2f2;
+    position: relative;
+    top: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    z-index: 1; /* 배경 이미지 위에 헤더가 표시되도록 z-index 지정 */
+}
+body {
+    background-image: url('../img/JIN.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 1; /* 배경 이미지의 투명도 조절 */
+}
+nav ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+	background-color: rgba(52, 152, 219, 0.7);
+
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
+nav li {
+	display: inline;
+	margin-left: 16px;
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
 }
 
-li {
-  display: inline-block;
-  margin-left: 16px;
-  font-size: 18px;
-  font-weight: bold;
+nav li button {
+	background: none;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	padding: 0;
+	font: inherit;
+	outline: inherit;
 }
 
+nav li button:hover {
+	text-decoration: underline;
+}
