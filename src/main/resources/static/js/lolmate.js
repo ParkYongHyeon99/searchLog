@@ -40,7 +40,7 @@ $('#lmListChoice').on('click',function(){
 $('#lmInfoChoice').on('click',function(){
 	let id = document.getElementById('b_writer').value
 	if(id != ""){
-		
+		alert('info 준비중');
 	}
 })
 
@@ -303,11 +303,11 @@ function poImgSet(id,sel,p){
 /* ====================== 롤메이트 글 작성 ====================== */
 $('#lmWriteBtn').on('click',function(){
 	var discordOn = $('#discodeOn').attr('class');
-	var duo = $('#duoBtn').attr('class');
+	var gameMateSelect = $('#duoBtn').attr('class');
 	var discord = 0;
-	var dmS = 0;
+	var gameMate = 0;
 	if(discordOn == 'selectBtn'){ discord=0; }else if(discordOn == 'noSelectBtn'){ discord=1; }
-	if(duo == 'selectBtn'){ dmS=0; }else if(duo == 'noSelectBtn'){ dmS=1; }
+	if(gameMateSelect == 'selectBtn'){ gameMate=0; }else if(gameMateSelect == 'noSelectBtn'){ gameMate=1; }
 	/*var lm_myPosition = $('input[name=lm_myPosition_write]:checked').val();*/
 	$.ajax({
 		method:'get',
@@ -315,7 +315,7 @@ $('#lmWriteBtn').on('click',function(){
 		data: {
 			m_id:$('#b_writer').val(),
 			lm_summonerName:$('#lm_summonerName_write').val(),
-			lm_gameMate:dmS,
+			lm_gameMate:gameMate,
 			lm_gameMode:$('select[name=lm_gameMode_write]').val(),
 			lm_myPosition:$('input[name=lm_myPosition_write]:checked').val(),
 			lm_findPosition:$('input[name=lm_findPosition_write]:checked').val(),
