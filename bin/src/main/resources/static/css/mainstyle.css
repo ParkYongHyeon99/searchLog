@@ -1,14 +1,44 @@
 @charset "UTF-8";
 
-img{
-  height: 300px;
+.img{
+  height: 50px;
   display: block;
-  margin-left: auto;
+  float:left;
+  margin-left: 10%;
   margin-right: auto;
+  
+}
+.img1{
+	height: 300px;
+	display: block;
+	margin: 0 auto;	
+		
 }
 
 div{
   text-align: center;
 }
 
+header {
+  position: sticky;
+  top: 0;
+  padding-left: 32px;
+  padding-right: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f2f2f2;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: inline-block;
+  margin-left: 16px;
+  font-size: 18px;
+  font-weight: bold;
+}
 

@@ -203,14 +203,21 @@ function divHtml(tp,img){
 	return html+"</div>";}
 
 
+/* ====================== 이미지 변경 함수 ====================== */
+function poImgSet(id,sel,p){
+	document.getElementById(id).style.backgroundImage = "url('../img/position/"+sel+"-"+p+".png')";
+}
+/* ====================== 이미지 변경 함수 끝 ====================== */
+
+
 /* ====================== 롤메이트 글 작성 포지션 변경 체크 ====================== */
 $('input[name=lm_myPosition_write]').on('change', function() {
     let po = ["Top","Jungle","Mid","Bot","Support"];
     let myPoCheck = [];
     
     // 모든 포지션 포함 다른 포지션들을 실버로 변경
-    for(let i=0; i<po.length; i++) { poImgSet('write'+po[i],'Silver',po[i]); }
-    poImgSet('writepAll','Silver','pAll');
+    for(let i=0; i<po.length; i++) { poImgSet('writemy'+po[i],'Silver',po[i]); }
+    poImgSet('writemypAll','Silver','pAll');
 
     // 선택된 모든 항목을 배열에 추가
     $('input[name=lm_myPosition_write]:checked').each(function() {
@@ -219,7 +226,7 @@ $('input[name=lm_myPosition_write]').on('change', function() {
 
     // "All"을 선택한 경우
     if ($(this).val() === 'All' && $(this).prop('checked')) {
-        poImgSet('writepAll','Diamond','pAll');
+        poImgSet('writemypAll','Diamond','pAll');
         $("input[name=lm_myPosition_write]").not(this).prop("checked", false);
         console.log('select Position: pAll')
     } else {
@@ -242,17 +249,59 @@ $('input[name=lm_myPosition_write]').on('change', function() {
         }
         // 선택된 항목에 대한 처리
         for(let i=0; i<po.length; i++) {
-            poImgSet('write'+po[i],'Diamond',po[i]);
+            poImgSet('writemy'+po[i],'Diamond',po[i]);
         }
         console.log('select Position: '+po)
     }
 });
+$('input[name=lm_findPosition_write]').on('change', function() {
+    let po = ["Top","Jungle","Mid","Bot","Support"];
+    let fiPoCheck = [];
+    
+    // 모든 포지션 포함 다른 포지션들을 실버로 변경
+    for(let i=0; i<po.length; i++) { poImgSet('writefind'+po[i],'Silver',po[i]); }
+    poImgSet('writefindpAll','Silver','pAll');
+
+    // 선택된 모든 항목을 배열에 추가
+    $('input[name=lm_findPosition_write]:checked').each(function() {
+        fiPoCheck.push($(this).val());
+    });
+
+    // "All"을 선택한 경우
+    if ($(this).val() === 'All' && $(this).prop('checked')) {
+        poImgSet('writefindpAll','Diamond','pAll');
+        $("input[name=lm_findPosition_write]").not(this).prop("checked", false);
+        console.log('select Position: pAll')
+    } else {
+        // "All"을 선택하지 않은 경우
+        // 선택된 항목의 수가 전체 항목 수와 같은 경우
+        if (fiPoCheck.length === po.length) {
+            $("input[name=lm_findPosition_write]").not(this).prop("checked", false);
+            $("input[name=lm_findPosition_write][value=All]").prop("checked", true);
+            po = ['pAll']
+        } else {
+			po = []
+            $("input[name=lm_findPosition_write][value=All]").prop("checked", false);
+            for(let i=0; i<fiPoCheck.length; i++) {
+                if(fiPoCheck[i] === 'top'){ po.push('Top') }
+                else if(fiPoCheck[i] === 'jug'){ po.push('Jungle') }
+                else if(fiPoCheck[i] === 'mid'){ po.push('Mid') }
+                else if(fiPoCheck[i] === 'adc'){ po.push('Bot') }
+                else if(fiPoCheck[i] === 'sup'){ po.push('Support') }
+            }
+        }
+        // 선택된 항목에 대한 처리
+        for(let i=0; i<po.length; i++) {
+            poImgSet('writefind'+po[i],'Diamond',po[i]);
+        }
+        console.log('select Position: '+po)
+    }
+});
+/* ====================== 롤메이트 글 작성 포지션 변경 체크 끝 ====================== */
 
 
 
-function poImgSet(id,sel,p){
-	document.getElementById(id).style.backgroundImage = "url('../img/position/"+sel+"-"+p+".png')";
-}
+
 
 
 

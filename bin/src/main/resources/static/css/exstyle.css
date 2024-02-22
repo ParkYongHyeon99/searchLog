@@ -2,7 +2,6 @@
 	margin: 1px;
 	text-align: center;
 	background-color: lightgreen;
-	border: 1px solid black;
 	padding: 0;
 }
 
@@ -15,7 +14,6 @@ body {
 img {
 	display: inline-block;
 	width: 50px;
-	/* float: left; */
 }
 
 a {
@@ -26,25 +24,84 @@ a {
 	transition: color 0.3s;
 	/* 색깔 변경에 애니메이션 효과를 줍니다. */
 	cursor: pointer;
+	margin: 0;
+	padding: 0;
 }
 
-/* 마우스를 가져다대면 색깔 변경 */
-a:hover {
-	color: yellow;
-	/* 링크의 색깔을 마우스를 가져다대면 빨간색으로 변경 */
+/* ====================== ex페이지 css ====================== */
+.l-container {
+	width: 1100px;
+	margin: 0 auto;
+	text-align: center;
 }
 
+.width33 {
+	width: 33%;
+}
+
+.width67 {
+	width: 67%;
+}
+
+.width100 {
+	width: 100%;
+	display: flex;
+	list-style: none; /* 기본 목록 스타일 제거 */
+	padding: 0;
+	margin: 0;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin: 0;
+	padding: 0;
+	list-style: none; /* 왼쪽으로 정렬 */
+}
+
+.width100 li {
+	flex: 0 1 calc(16.6667% - 10px); /* 6개의 아이템이 가로로 꽉 차게 나열되도록 설정 */
+	box-sizing: border-box; /* 여백을 포함한 크기로 요소를 계산하도록 설정 */
+	margin: 0 5px 0 0;
+	text-align: center;
+}
+
+.width100 li img {
+	max-width: 100%;
+	height: auto;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.set {
+	text-align: center;
+	font-size: 0.8em;
+	cursor: pointer;
+}
+
+.po {
+	opacity: 0;
+	position: absolute;
+	cursor: pointer;
+}
+
+.flex {
+	display: flex;
+}
+
+table tr td {
+	border: 1px solid black;
+}
+/* ====================== ex페이지 css ====================== */
+/* ====================== exch페이지 css ====================== */
 .container {
 	display: flex;
-	width: 1000px;
+	width: 1200px;
 	margin: 0 auto;
 	text-align: center;
 }
 
 .head-container {
-	width: 1000px;
-	margin: 1px auto;
-	/* 중앙 정렬을 위한 마진 설정 */
+	width: 1200px;
+	margin: 0 auto;
+	text-align: center;
 }
 
 .tab-container {
@@ -78,7 +135,6 @@ a:hover {
 	display: block;
 }
 
-/* ==================================건들지 말것====================== */
 .tab-flex {
 	display: flex;
 	width: 100%;
@@ -93,3 +149,10 @@ a:hover {
 .double-divide {
 	width: 25%;
 }
+
+.left {
+	float: left;
+}
+
+/* ====================== exch페이지 css ====================== */
+/* ====================== excasdasdh페이지 css ====================== */

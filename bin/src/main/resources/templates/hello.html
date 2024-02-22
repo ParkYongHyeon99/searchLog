@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riot tier search</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+
+<body>
+
+    <form id="myForm">
+        <label for="name">name:</label>
+        <input type="text" id="name" name="name" value="패드립박는기계" required>
+        <br>
+
+        <label for="tag">tag:</label>
+        <input type="text" id="tag" name="tag" value="KR1">
+        <br>
+
+        <button type="button" id="button">제출</button>
+    </form>
+
+    <div id="result">
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $("#button").click(function () {
+                var name = $("#name").val();
+                var tag = $("#tag").val();
+                // 두 번째 HTML 파일로 이동하면서 데이터 전달
+                window.location.href = "/summonerSearch?name=" + name + "&tag=" + tag;
+            });
+        });
+    </script>
+
+</body>
+
+</html>

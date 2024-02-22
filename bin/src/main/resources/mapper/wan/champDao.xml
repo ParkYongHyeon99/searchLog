@@ -1,12 +1,30 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.zzzpro.zzz.wan.dao.ExDao">
+<mapper namespace="com.zzzpro.zzz.wan.ExDao">
 	<select id="linePick">
 		SELECT teamPosition,
-		concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_detail WHERE championName =
+		concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_personal1 WHERE championName =
 		#{champions}) * 100), 1),'%') AS linePick
-		FROM zzz_datas_detail WHERE championName = #{champions}
+		FROM zzz_datas_personal1 WHERE championName = #{champions}
 		GROUP BY teamPosition ORDER BY COUNT(*) DESC LIMIT 3
 	</select>
-
+	
+	<select id="test">
+		select champion_name,champion_name_kr
+		from champList where line like #{line} order by champion_name_kr
+	</select>
+	
+	<select id="allWinRate">
+	SELECT concat(round((COUNT(CASE WHEN win ='True' THEN 1 END) / COUNT(*) * 100),2),'%')
+		AS allWinRate
+		FROM zzz_datas_detail
+		WHERE championName_KR = #{championName_KR};
+	</select>
+	<select id="allPickRate">
+	SELECT concat(round((COUNT(CASE WHEN championName = #{championName} THEN 1 END) / COUNT(*) * 100),2),'%')
+		AS allPickRate
+		FROM zzz_datas_detail;
+	</select>
+<!-- 	<select id="allBanrate"></select> -->
+	
 </mapper>
