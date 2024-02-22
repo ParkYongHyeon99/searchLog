@@ -9,16 +9,18 @@ import org.apache.ibatis.annotations.Select;
 public interface ExDao {
 
 	// 챔피언이름 목록 전체 가져옴
-	@Select("select champion_name,champion_name_kr from champList order by champion_name_kr")
-	List<ExDto> champions();
+	@Select("select championName,championName_kr from champList order by championName_kr")
+	List<ExDto> champions(ExDto eDto);
 
 	List<ExDto> linePick(ExDto eDto);
 
 	List<ExDto> test(ExDto eDto);
 
-	List<ExDto> allPickRate(ExDto eDto);
-
 	List<ExDto> allWinRate(ExDto eDto);
+
+//	List<ExDto> allPickRate(ExDto eDto);
+
+//	List<ExDto> allWinRate(ExDto eDto);
 
 //	List<ExDto> allBanRate(ExDto eDto);
 
