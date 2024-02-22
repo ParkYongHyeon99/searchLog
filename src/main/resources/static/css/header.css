@@ -1,25 +1,13 @@
 @charset "UTF-8";
 
-.img {
+img {
 	height: 50px;
 	display: block;
 	float: left;
-	margin-left: 10%;
+	margin-left: 0;
 	margin-right: auto;
-
+	cursor:pointer;
 }
-
-.img1 {
-	height: 300px;
-	display: block;
-	margin: 0 auto;
-	cursor: pointer;
-}
-
-div {
-	text-align: center;
-}
-
 header {
     position: relative;
     top: 0;
@@ -30,26 +18,20 @@ header {
     text-align: center;
     z-index: 1; /* 배경 이미지 위에 헤더가 표시되도록 z-index 지정 */
 }
-body {
-    background-image: url('../img/JIN.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    opacity: 1; /* 배경 이미지의 투명도 조절 */
-}
 nav ul {
+	float:right;
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-	background-color: rgba(52, 152, 219, 0.7);
+
 
 }
-
 nav li {
 	display: inline;
 	margin-left: 16px;
 	font-size: 18px;
 	font-weight: bold;
-	color: #fff;
+	color: black;
 }
 
 nav li button {
