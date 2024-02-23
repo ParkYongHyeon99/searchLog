@@ -23,8 +23,8 @@
 	<div class="allBigBox">
 
 		<div th:if="${session.member != null}">
-			<input type="hidden" id="b_writer" name="b_writer"
-				th:value="${session.member.m_nick}">
+			<input type="hidden" id="m_id" name="m_id"
+				th:value="${session.member.m_id}">
 		</div>
 
 		<h3>LOL-mate</h3>

@@ -38,7 +38,7 @@ $('#lmListChoice').on('click',function(){
 	//$('#lmInfoChoice').css('display','inline-block')
 })
 $('#lmInfoChoice').on('click',function(){
-	let id = document.getElementById('b_writer').value
+	let id = document.getElementById('m_id').value
 	if(id != ""){
 		alert('info 준비중');
 	}
@@ -111,7 +111,7 @@ function lmAjax(){
 						if(fp.search("mid")!=-1){ midCntD+=1; }
 						if(fp.search("adc")!=-1){ adcCntD+=1; }
 						if(fp.search("sup")!=-1){ supCntD+=1; }
-						console.log(" - 듀오\ntop: "+topCntD+"\tjug: "+jugCntD+"\tmid: "+supCntD+"\tadc: "+adcCntD+midCntD+"\tsup: ")
+						console.log(" - 듀오\ntop: "+topCntD+"\tjug: "+jugCntD+"\tmid: "+midCntD+"\tadc: "+adcCntD+"\tsup: "+supCntD)
 					}
 				}else if(lm.lm_gameMate == 1){
 					lmM+=1;
@@ -152,7 +152,7 @@ function lmAjax(){
 		$("#lmNotionDiv").empty();
 		$("#lmNotionDiv").append(cntHtml);
 		
-		let id = document.getElementById('b_writer').value
+		let id = document.getElementById('m_id').value
 		if(id != ""){
 			$('#lmInfoChoice').css('display','inline-block')
 			document.getElementById('dmBtn').disabled = false;
@@ -300,8 +300,17 @@ function poImgSet(id,sel,p){
 /* ====================== 이미지 변경 함수 끝 ====================== */
 
 
+
 /* ====================== 롤메이트 글 작성 ====================== */
 $('#lmWriteBtn').on('click',function(){
+	// 선택된 목록 가져오기
+	const mpSel = document.querySelectorAll('input[name=lm_myPosition_write]:checked');
+	// 선택된 목록에서 value 찾기
+		let mpVal = '';
+		mpSel.forEach((el) => {mpVal += el.value + ' ';
+	});
+	console.log(mpVal)
+	
 	var discordOn = $('#discodeOn').attr('class');
 	var gameMateSelect = $('#duoBtn').attr('class');
 	var discord = 0;
@@ -313,12 +322,12 @@ $('#lmWriteBtn').on('click',function(){
 		method:'get',
 		url: '/lolmate/lmWrite',
 		data: {
-			m_id:$('#b_writer').val(),
+			m_id:$('#m_id').val(),
 			lm_summonerName:$('#lm_summonerName_write').val(),
 			lm_gameMate:gameMate,
 			lm_gameMode:$('select[name=lm_gameMode_write]').val(),
-			lm_myPosition:$('input[name=lm_myPosition_write]:checked').val(),
-			lm_findPosition:$('input[name=lm_findPosition_write]:checked').val(),
+			lm_myPosition:mpVal,
+			lm_findPosition:$('input[name=lm_findPosition_write]:checked').val().toString(),
 			lm_memo:$('#lmWriteMemo').val(),
 			lm_discord:discord
 		},
