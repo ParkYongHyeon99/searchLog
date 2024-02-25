@@ -21,9 +21,10 @@ public class MemberController {
 	@Autowired
 	private MemberService mSer;
 	
-	@GetMapping("/member/joinfrm")
-	public String joinfrm() {
-		return "join";
+	
+	@GetMapping("/member/loginfrm")
+	public String loginfrm() {
+		return "login_join";
 	}
 	@PostMapping("/member/join")
 	public String join(MemberDto mDto, RedirectAttributes ra) {
@@ -32,11 +33,6 @@ public class MemberController {
 			return "redirect:/member/loginfrm";
 		}
 		return "redirect:/member/joinfrm";
-	}
-	
-	@GetMapping("/member/loginfrm")
-	public String loginfrm() {
-		return "login";
 	}
 	@PostMapping("/member/login")
 	public String login(MemberDto mDto, RedirectAttributes ra, HttpSession session) {

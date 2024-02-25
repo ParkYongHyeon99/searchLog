@@ -8,7 +8,9 @@ import org.springframework.stereotype.Service;
 
 import com.zzzpro.zzz.sol.dao.LolmateDao;
 import com.zzzpro.zzz.sol.dto.LolmateDto;
+import com.zzzpro.zzz.sol.dto.MemberDto;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -40,7 +42,7 @@ public class LolmateService {
 		return hm;
 	}
 
-	public String lmWrite(LolmateDto lmDto) {
+	public String lmWrite(LolmateDto lmDto, HttpSession session) {
 		if(lmDao.lmWrite(lmDto)) {
 			return "ok";
 		}

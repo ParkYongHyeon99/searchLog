@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link href="css/header.css" rel='stylesheet'>
+    <title>Player Info</title>
+</head>
+<body>
+<div th:insert="~{header.html :: div}" ></div>
+<br><br><br>
+	<div>
+    <p>닉네임: <span th:text="${riotIdGameName}"></span></p>
+    <p>태그: <span th:text="${riotIdTagLine}"></span></p>
+    <p>티어: <span th:text="${tier}"></span></p>
+<!--     <p>게임 판 수: <span th:text="${gameCount}"></span></p> -->
+    <p>승률: <span th:text="${winRate}"></span></p>
+    <p>레벨: <span th:text="${summonerLevel}"></span></p>
+    </div>
+   
+</body>
+</html>
