@@ -28,6 +28,22 @@ a {
 	padding: 0;
 }
 
+table tr td {
+	border: 1px solid black;
+	font-size: 0.8em;
+	margin: 0;
+	padding: 0;
+}
+
+td a img {
+	width: 40px;
+	height: 40px;
+}
+
+/* strong { */
+/* 	align-items: center; 수직 중앙 정렬 */
+/* 	justify-content: center; 수평 중앙 정렬 */
+/* } */
 /* ====================== ex페이지 css ====================== */
 .l-container {
 	width: 1100px;
@@ -86,9 +102,6 @@ a {
 	display: flex;
 }
 
-table tr td {
-	border: 1px solid black;
-}
 /* ====================== ex페이지 css ====================== */
 /* ====================== exch페이지 css ====================== */
 .container {
@@ -151,7 +164,7 @@ table tr td {
 }
 
 .left {
-	float: left;
+	text-align: left;
 }
 
 /* ====================== exch페이지 css ====================== */

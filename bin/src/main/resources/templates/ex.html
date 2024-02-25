@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="l-container">
-        <div th:insert="~{exch :: header}"></div>
+        <header>나는 헤더</header>
         <nav><input type="text" placeholder="챔피언 검색"></nav>
         <div>
             <div class="flex" id="topbar">
@@ -33,38 +33,40 @@
                     <span>서포터</span>
                 </span>
             </div>
-            <div class="flex" id="main" style="background-color: red">
+            <div class="flex" id="main">
                 <div id="test" class="width33">
                     <ul class="width100">
                         <li th:each="champion : ${champions}">
-                            <a th:href="@{/ex/{champions}(champions=${champion.champion_name})}">
-                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.champion_name}.png|"
+                            <a th:href="@{/ex/{champions}(champions=${champion.championName})}">
+                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.championName}.png|"
                                     alt="초상화">
+                            <div th:utext="${#strings.length(champion.championName_kr) > 3 ? champion.championName_kr.substring(0, 3) + '...' : champion.championName_kr}" class="set"></div>
                             </a>
-                            <div th:utext="${#strings.length(champion.champion_name_kr) > 3 ? champion.champion_name_kr.substring(0, 3) + '...' : champion.champion_name_kr}" class="set"></div>
     	                </li>
         	        </ul>
                 </div>
 				<table class="width67">
 					<thead>
 						<tr>
-							<td style="width: 12.5%">1순위</td>
+							<td style="width: 6.25%">순위</td>
 							<td class="left" style="width: 25%">챔피언</td>
-							<td style="width: 12.5%">1티어</td>
-							<td style="width: 12.5%">1포지션</td>
-							<td style="width: 12.5%">1승률</td>
-							<td style="width: 12.5%">1픽률</td>
-							<td style="width: 12.5%">1밴률</td>
-							<td style="width: 12.5%">1카운터</td>
+							<td style="width: 6.25%">티어</td>
+							<td style="width: 12.5%">포지션</td>
+							<td style="width: 12.5%">승률</td>
+							<td style="width: 12.5%">픽률</td>
+							<td style="width: 12.5%">밴률</td>
+							<td style="width: 25%">카운터</td>
 						</tr>
 					</thead>
                     <tbody>
-						<tr th:each="champ : ${champions}">
-							<td>순위</td>
+						<tr th:each="stat : ${champions}">
+							<td></td>
 							<td class="left">
-								<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champ.champion_name}.png|"
-                                    alt="초상화">
-								<a th:text="${champ.champion_name_kr}">챔피언</a>
+								<a th:href="@{/ex/{champions}(champions=${stat.championName})}">
+									<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${stat.championName}.png|"
+									alt="초상화">
+									<strong th:text="${stat.championName_kr}"></strong>
+								</a>
 							</td>
 							<td>티어</td>
 							<td>포지션</td>

@@ -289,6 +289,28 @@ $('input[name=lm_findPosition_write]').on('change', function() {
         console.log('select Position: '+po)
     }
 });
+$('.discordDiv').on('click',function(){
+	let on = document.getElementById('discodeOn')
+	let off = document.getElementById('discodeOff')
+	if(on.className=='selectBtn'){
+		on.className = 'noSelectBtn';
+		off.className = 'selectBtn';
+	}else if(on.className=='noSelectBtn'){
+		on.className = 'selectBtn';
+		off.className = 'noSelectBtn';
+	}
+})
+$('.discordDiv').on('click',function(){
+	let on = document.getElementById('discodeOn')
+	let off = document.getElementById('discodeOff')
+	if(on.className=='selectBtn'){
+		on.className = 'noSelectBtn';
+		off.className = 'selectBtn';
+	}else if(on.className=='noSelectBtn'){
+		on.className = 'selectBtn';
+		off.className = 'noSelectBtn';
+	}
+})
 /* ====================== 롤메이트 글 작성 포지션 변경 체크 끝 ====================== */
 
 
