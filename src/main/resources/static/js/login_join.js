@@ -1,10 +1,33 @@
 /*
 	
 	 =================================================================
- 	==================== join.html의 javascript 파일 ====================
+ 	================= login_join.html의 javascript 파일 =================
 	 =================================================================
  	
  */
+
+
+
+/* ====================== transition ====================== */
+$('#frmBtn').on('click',function(){
+	var btnClass = $('#frmBtn').attr('class');
+	if(btnClass == 'join'){
+		$('#login').css('display','none');
+		$('#join').css('display','block');
+		document.getElementById('frmBtn').className = 'login';
+		document.getElementById('frmBtn').innerHTML = '로그인하러가기';
+	}else if(btnClass == 'login'){
+		$('#join,#idTip,#nickTip,#emailTip,#chPw').css('display','none');
+		$('#login').css('display','block');
+		document.getElementById('frmBtn').className = 'join';
+		document.getElementById('frmBtn').innerHTML = '회원가입하러가기';
+	}
+	
+	const btnChange = document.querySelector('.allBigBox');
+	btnChange.classList.toggle('is-active');
+})
+/* ====================== transition ====================== */
+
 
 let useId = false;	// id 체크용
 let useNick = false;	// nick 체크용

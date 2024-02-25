@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.zzzpro.zzz.sol.dto.LolmateDto;
 import com.zzzpro.zzz.sol.service.LolmateService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 public class RestLolmateController {
 
@@ -21,8 +23,8 @@ public class RestLolmateController {
 	}
 	
 	@GetMapping("/lolmate/lmWrite")
-	public String lmWrite(LolmateDto lmDto) {
-		return lmSer.lmWrite(lmDto);
+	public String lmWrite(LolmateDto lmDto, HttpSession session) {
+		return lmSer.lmWrite(lmDto,session);
 	}
 
 }
