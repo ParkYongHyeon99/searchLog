@@ -8,14 +8,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExDto {
-	// champList
+	// =================ex.html=================
+	
 	private String champions;
-	private String championName;
-	private String championName_kr;
-	// =================================
+	private String linePick;
+	
+	
+	// =========================================
+
 	// zzz_datas_detail
 	private String teamPosition;
-	private String linePick;
 	private String line;
 	private String test;
 	private String allWinRate;
