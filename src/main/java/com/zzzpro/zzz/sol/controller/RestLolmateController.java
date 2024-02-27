@@ -23,8 +23,8 @@ public class RestLolmateController {
 	}
 	
 	@GetMapping("/lolmate/lmWrite")
-	public String lmWrite(LolmateDto lmDto, HttpSession session) {
-		return lmSer.lmWrite(lmDto,session);
+	public String lmWrite(LolmateDto lmDto) {
+		return lmSer.lmWrite(lmDto);
 	}
 
 }
