@@ -11,7 +11,7 @@ public class LolmateDto {
 	private int lm_num;	// 글 번호
 	private int lm_gameMate;	// 게임메이트 (듀오/멘토)
 	private String lm_gameMode;	// 게임모드 (솔로랭크 * * *)
-	private String m_nick;	// 작성자
+	private String m_id;	// 작성자
 	private String lm_summonerName;	// 작성자 닉네임#태그
 	private String lm_myPosition;	// 글 올린 사람의 주 포지션
 	private String lm_findPosition;	// 글 올린 사람이 찾는 포지션
