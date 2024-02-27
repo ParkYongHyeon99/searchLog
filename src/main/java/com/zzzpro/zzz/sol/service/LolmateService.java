@@ -65,7 +65,10 @@ public class LolmateService {
 	        	System.out.println("Result: " + tL);
 				
 				lmDto.setLm_winrate(Double.parseDouble(String.valueOf(tL.get(0))));
-				lmDto.setLm_tier((String)tL.get(1));
+				
+				String tier = ((String)tL.get(1)).toUpperCase();
+				tier = tier.substring(0, 1).toUpperCase() + tier.substring(1);
+				lmDto.setLm_tier(tier);
 				
 	        	System.out.println(lmDto);
 	        	
