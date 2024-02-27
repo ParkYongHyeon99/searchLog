@@ -16,10 +16,13 @@ public class HomeController {
 	private BoardService bSer;
 	
 	@GetMapping("/")
-	public String search(Model model) {
-		
+	public String index() {
+		return "index";
+	}
+	@GetMapping("/main")
+	public String main(Model model) {
 		bSer.boardList(1, model);
 		return "main";
 	}
 	
-} 	
+}
