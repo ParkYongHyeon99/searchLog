@@ -18,14 +18,14 @@
 	SELECT concat(round((COUNT(CASE WHEN win ='True' THEN 1 END) / COUNT(*) * 100),2),'%')
 		AS allWinRate
 		FROM zzz_datas_detail
-		WHERE championName_kr = #{championName_kr};
+		WHERE championName_kr = #{allName};
 	</select>
 	
-	<select id="allPickRate">
-	SELECT concat(round((COUNT(CASE WHEN championName = #{championName} THEN 1 END) / COUNT(*) * 100),2),'%')
-		AS allPickRate
-		FROM zzz_datas_detail;
-	</select>
-<!-- 	<select id="allBanrate"></select> -->
+<select id="linePicks" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT championName, teamPosition,
+    concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_detail WHERE championName = 'garen') * 100), 1),'%') AS pickrate
+FROM zzz_datas_detail WHERE championName = 'garen'
+GROUP BY teamPosition;
+</select>
 	
 </mapper>
