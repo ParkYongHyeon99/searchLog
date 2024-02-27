@@ -20,17 +20,24 @@ public class ExController {
 	public ExService eSer;
 
 	@GetMapping("/ex")
+	public String champPi(Model model, ExDto eDto) {
+		List<Map<String, Object>> champPi = eSer.champions(eDto);
+		model.addAttribute("champPi", champPi);
+		log.info("@@champPi 확인용 -> " + champPi);
+		return "ex";
+	}
+
+	@GetMapping("/exa")
 	public String champions(Model model, ExDto eDto, HttpSession session) {
 		List<Map<String, Object>> cList = eSer.champions(eDto);
 		log.info("@@cList" + cList);
 		session.setAttribute("cList", cList);
 		model.addAttribute("cList", cList);
-		
+
 		List<Map<String, Object>> linePicks = eSer.linePicks(session);
-		log.info("@@이름라인픽률 -> "+linePicks);
+		log.info("@@이름라인픽률 -> " + linePicks);
 //		log.info("@@linePicks" + linePicks);
 		model.addAttribute("linePicks", linePicks);
-
 
 		return "aa";
 	}
@@ -47,11 +54,6 @@ public class ExController {
 			log.info("상세페이지 이동 실패");
 			return "redirect:/ex";
 		}
-	}
-
-	@GetMapping("/test")
-	public List<Map<String, Object>> test(ExDto cDto) {
-		return eSer.test(cDto);
 	}
 
 	@GetMapping("/ex/rune")

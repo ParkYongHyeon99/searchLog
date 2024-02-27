@@ -19,4 +19,6 @@ public interface ExDao {
 
 	List<Map<String, Object>> linePicks(List<Map<String, Object>> cList);
 
+	List<Map<String, Object>> champPi(ExDto eDto);
+
 }

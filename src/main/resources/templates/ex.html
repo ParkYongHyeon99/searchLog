@@ -36,11 +36,11 @@
             <div class="flex" id="main">
                 <div id="test" class="width33">
                     <ul class="width100">
-                        <li th:each="champion : ${cList}">
+                        <li th:each="champion : ${champPi}">
                             <a th:href="@{/ex/{championName}(championName=${champion['championName']})}">
                                 <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion['championName']}.png|"
                                     alt="초상화">
-                            <div th:utext="${#strings.length(champion['championName_kr']) > 3 ? champion.championName_kr.substring(0, 3) + '...' : champion['championName_kr']}" class="set"></div>
+<!--                             <div th:utext="${#strings.length(champion['championName_KR']) > 3 ? champion.championName_KR.substring(0, 3) + '...' : champion['championName_KR']}" class="set"></div> -->
                             </a>
     	                </li>
         	        </ul>
@@ -59,20 +59,20 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="stat, statIndex : ${cList}">
-							<td th:text="${statIndex.index + 1}">순위</td>
+						<tr th:each="champion, chIndex : ${champPi}">
+							<td th:text="${chIndex.index + 1}">순위</td>
 							<td class="left">
-								<a th:href="@{/ex/{championName}(championName=${stat['championName']})}">
+								<a th:href="@{/ex/{championName}(championName=${champion['championName']})}">
 									<img
-									th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${stat['championName']}.png|"
+									th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion['championName']}.png|"
 									alt="초상화"> 
-									<strong th:text="${stat['championName_kr']}"></strong>
+									<strong th:text="${champion['championName_KR']}">이름</strong>
 								</a>
 							</td>
 							<td>티어</td>
-							<td>포지션</td>
+							<td th:text="${champion['highest_pick_rate_position']}">포지션</td>
 							<td>승률</td>
-							<td>픽률</td>
+							<td th:text="${champion['highest_pick_rate']}">픽률</td>
 							<td>밴률</td>
 							<td>카운터</td>
 						</tr>

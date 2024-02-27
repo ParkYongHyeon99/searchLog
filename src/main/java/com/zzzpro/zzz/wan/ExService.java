@@ -35,7 +35,7 @@ public class ExService {
 	public List<Map<String, Object>> linePicks(HttpSession session) {
 		// 세션에서 cList 가져오기
 		List<Map<String, Object>> cList = (List<Map<String, Object>>) session.getAttribute("cList");
-		log.info("@@세션으로 서비스에 온 cList -> "+cList);
+		log.info("@@세션으로 서비스에 온 cList -> " + cList);
 		return eDao.linePicks(cList);
 	}
 
