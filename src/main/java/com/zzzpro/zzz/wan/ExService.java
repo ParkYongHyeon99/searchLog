@@ -18,6 +18,10 @@ public class ExService {
 		return eDao.champions(eDto);
 	}
 
+	public List<Map<String, Object>> counter(ExDto eDto) {
+		return eDao.counter(eDto);
+	}
+	
 	public List<ExDto> linePick(ExDto eDto) {
 		return eDao.linePick(eDto);
 	}
@@ -30,5 +34,7 @@ public class ExService {
 			return eDao.test(eDto);
 		}
 	}
+
+	
 
 }

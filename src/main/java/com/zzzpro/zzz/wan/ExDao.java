@@ -16,4 +16,6 @@ public interface ExDao {
 
 	List<Map<String, Object>> test(ExDto eDto);
 
+	List<Map<String, Object>> counter(ExDto eDto);
+
 }

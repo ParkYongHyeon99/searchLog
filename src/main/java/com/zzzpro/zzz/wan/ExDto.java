@@ -19,7 +19,9 @@ public class ExDto {
 	private String all_rate;
 	private String champion_win_rate;
 	private String win_percentage;
-
+	
+	private String enemy_champ;
+	
 	private String linePick;
 	private String tier1;
 	private String test;

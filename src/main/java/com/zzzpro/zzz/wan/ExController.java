@@ -1,5 +1,6 @@
 package com.zzzpro.zzz.wan;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,13 @@ public class ExController {
 	@GetMapping("/ex")
 	public String champions(Model model, ExDto eDto) {
 		List<Map<String, Object>> champions = eSer.champions(eDto);
+		log.info("@@전체 -> " + champions);
 		model.addAttribute("champions", champions);
-		log.info("@@이름모음 -> " + champions);
+		
+		List<Map<String, Object>> counter = eSer.counter(eDto);
+		log.info("@@카운터 -> " + counter);
+		model.addAttribute("counter", counter);
+		
 		return "ex";
 	}
 

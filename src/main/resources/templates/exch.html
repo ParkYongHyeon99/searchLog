@@ -32,7 +32,7 @@
         <!-- 탭 메뉴 시작 -->
         <div class="tab-container">
             <div class="tab" onclick="showTab('tab1')">
-                <div th:each="matchInfo, index : ${linePick}">
+                <div th:each="champion, index : ${linePick}">
                     <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 0}">line1</p>
                     <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 0}">pickRate1</p>
                 </div>
