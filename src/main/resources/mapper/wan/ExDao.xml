@@ -2,36 +2,6 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zzzpro.zzz.wan.ExDao">
 	
-	<select id="winrate">
-		select championName, championName_kr, teamPosition, count(*)as all_rate, 
-        (COUNT(CASE WHEN win ='True' THEN 1 END)) as champion_win_rate,
-        round((COUNT(CASE WHEN win ='True' THEN 1 END) / COUNT(*) * 100),2) as win_percentage
-        from zzz_datas_detail 
-        where championName = 'gragas' and tier1 = '에메랄드' and teamPosition IN ('TOP', 'JUNGLE', 'MIDDLE', 'BOTTOM', 'UTILITY')
-        group by championName_KR, teamPosition
-        ORDER BY win_percentage DESC LIMIT 1;
-	</select>
-	
-	<select id="pickrate">
-		select round(((COUNT(CASE WHEN championName =
-		#{champions} THEN 1 END)/5 /
-		(COUNT(*)/10))* 100),2) AS
-		pick_percentage
-		FROM zzz_datas_rune
-<!-- 		where teamPosition = #{teamPosition} -->
-	</select>
-	
-	<select id="banrate">
-		SELECT round(((COUNT(CASE WHEN banchampionName =
-		#{champions} THEN 1 END ) / (COUNT(*)/10))
-		* (COUNT(DISTINCT CASE WHEN teamPosition = #{teamPosition} and
-		championName = #{championName} THEN match_id END) /
-		COUNT(DISTINCT case when championName = #{champions} then
-		match_id end)) * 100),2) AS ban_percentage
-		FROM zzz_datas_detail
-<!-- 		where tier1 = #{tier1}; -->
-	</select>
-	
 	<select id="linePick">
 		SELECT teamPosition,
 		concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_personal1 WHERE championName =
@@ -44,19 +14,5 @@
 		select championName,championName_kr
 		from champList where line like #{line} order by championName_kr
 	</select>
-	
-	<select id="allWinRate">
-	SELECT concat(round((COUNT(CASE WHEN win ='True' THEN 1 END) / COUNT(*) * 100),2),'%')
-		AS allWinRate
-		FROM zzz_datas_detail
-		WHERE championName_kr = #{allName};
-	</select>
-	
-<select id="linePicks" parameterType="java.util.Map" resultType="java.util.Map">
-    SELECT championName, teamPosition,
-    concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_detail WHERE championName = 'garen') * 100), 1),'%') AS pickrate
-FROM zzz_datas_detail WHERE championName = 'garen'
-GROUP BY teamPosition;
-</select>
 	
 </mapper>

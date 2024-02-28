@@ -10,15 +10,9 @@
     <div class="head-container" id="head">
          <div th:insert="~{ex :: header}"></div> <!-- 메인페이지 헤더 따오기 -->
         <div th:insert="~{ex :: nav}"></div>     <!-- 메인페이지 헤더 따오기 -->
-        <header>
+        <header style="display: flex; justify-content: center">
             <label>티어</label>
-            <select>
-                <option value="diamond">diamond</option>
-                <option value="platinum">platinum</option>
-                <option value="gold">gold</option>
-                <option value="silver">silver</option>
-                <option value="bronze">bronze</option>
-            </select>
+            <div th:insert="~{ex :: select}"></div>
             <span>
                 <a th:href="@{/counter}">카운터</a>
                 <a th:href="@{/exrune}">룬</a>

@@ -24,7 +24,18 @@
                     </span>
                 </span>
                 <span class="width67">
-                    <span>티어별 드랍다운</span>
+                    <select>
+                		<option value="diamond">챌린저+</option>
+                		<option value="diamond">그랜드마스터+</option>
+                		<option value="diamond">마스터+</option>
+                		<option value="diamond">다이아+</option>
+                		<option value="platinum">에메랄드+</option>
+                		<option value="platinum">플래티넘+</option>
+                		<option value="gold">골드+</option>
+                		<option value="silver">실버+</option>
+                		<option value="bronze">브론즈+</option>
+                		<option value="bronze">아이언+</option>
+            		</select>
                     <span>전체</span>
                     <span>탑</span>
                     <span>정글</span>
@@ -69,17 +80,15 @@
                                 </a>
                             </td>
                             <td>티어</td>
-                            <!-- 							<td th:text="${champion['highest_pick_rate_position']}">포지션</td> -->
                             <td>
-                                <img style="width: 30px; height:30px" th:src=
-                            "|${champion.highest_pick_rate_position == 'top' ? '../img/position/Diamond-Top.png' : 
-							(champion.highest_pick_rate_position == 'jungle' ? '../img/position/Diamond-Jungle.png' : 
-							(champion.highest_pick_rate_position == 'middle' ? '../img/position/Diamond-Mid.png' : 
-							(champion.highest_pick_rate_position == 'bottom' ? '../img/position/Diamond-Bot.png' : 
-							(champion.highest_pick_rate_position == 'UTILITY' ? '../img/position/Diamond-Support.png' : champion.highest_pick_rate_position))))}|">
+                                <img style="width: 30px; height:30px" th:src="|${champion.highest_pick_rate_position == 'top' ? '../img/position/Diamond-Top.png' : 
+								(champion.highest_pick_rate_position == 'jungle' ? '../img/position/Diamond-Jungle.png' : 
+								(champion.highest_pick_rate_position == 'middle' ? '../img/position/Diamond-Mid.png' : 
+								(champion.highest_pick_rate_position == 'bottom' ? '../img/position/Diamond-Bot.png' : 
+								(champion.highest_pick_rate_position == 'UTILITY' ? '../img/position/Diamond-Support.png' : champion.highest_pick_rate_position))))}|">
                             </td>
-                            <td th:text="${champion['winrate']}">승률</td>
-                            <td>픽률</td>
+                            <td th:text="|${champion['winrate']}%|">승률</td>
+                            <td th:text="|${champion['pickrate']}%|">픽률</td>
                             <td>밴률</td>
                             <td>카운터</td>
                         </tr>
