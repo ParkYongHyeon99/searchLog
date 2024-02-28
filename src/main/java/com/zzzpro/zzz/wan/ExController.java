@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -20,26 +19,11 @@ public class ExController {
 	public ExService eSer;
 
 	@GetMapping("/ex")
-	public String champPi(Model model, ExDto eDto) {
-		List<Map<String, Object>> champPi = eSer.champions(eDto);
-		model.addAttribute("champPi", champPi);
-		log.info("@@champPi 확인용 -> " + champPi);
+	public String champions(Model model, ExDto eDto) {
+		List<Map<String, Object>> champions = eSer.champions(eDto);
+		model.addAttribute("champions", champions);
+		log.info("@@이름모음 -> " + champions);
 		return "ex";
-	}
-
-	@GetMapping("/exa")
-	public String champions(Model model, ExDto eDto, HttpSession session) {
-		List<Map<String, Object>> cList = eSer.champions(eDto);
-		log.info("@@cList" + cList);
-		session.setAttribute("cList", cList);
-		model.addAttribute("cList", cList);
-
-		List<Map<String, Object>> linePicks = eSer.linePicks(session);
-		log.info("@@이름라인픽률 -> " + linePicks);
-//		log.info("@@linePicks" + linePicks);
-		model.addAttribute("linePicks", linePicks);
-
-		return "aa";
 	}
 
 	@GetMapping("/ex/{championName}")
@@ -54,26 +38,6 @@ public class ExController {
 			log.info("상세페이지 이동 실패");
 			return "redirect:/ex";
 		}
-	}
-
-	@GetMapping("/ex/rune")
-	public String rune() {
-		return "exrune";
-	}
-
-	@GetMapping("/ex/spell")
-	public String spell() {
-		return "exspell";
-	}
-
-	@GetMapping("/ex/skill")
-	public String skill() {
-		return "exrune";
-	}
-
-	@GetMapping("/ex/item")
-	public String item() {
-		return "exrune";
 	}
 
 }

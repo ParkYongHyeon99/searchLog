@@ -2,58 +2,14 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zzzpro.zzz.wan.ExDao">
 	
-	<select id="champPi">
-SELECT 
-    championName,
-    championName_KR,
-    top_pick_rate,
-    jungle_pick_rate,
-    middle_pick_rate,
-    bottom_pick_rate,
-    UTILITY_pick_rate,
-    CASE
-        WHEN top_pick_rate = max_pick_rate THEN 'top'
-        WHEN jungle_pick_rate = max_pick_rate THEN 'jungle'
-        WHEN middle_pick_rate = max_pick_rate THEN 'middle'
-        WHEN bottom_pick_rate = max_pick_rate THEN 'bottom'
-        WHEN UTILITY_pick_rate = max_pick_rate THEN 'UTILITY'
-        ELSE 'unknown'
-    END AS highest_pick_rate_position,
-        GREATEST(top_pick_rate, jungle_pick_rate, middle_pick_rate, bottom_pick_rate, UTILITY_pick_rate) AS highest_pick_rate
-FROM
-    (SELECT 
-        championName,
-        championName_KR,
-        ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'top' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100 AS top_pick_rate,
-        ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'jungle' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100 AS jungle_pick_rate,
-        ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'middle' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100 AS middle_pick_rate,
-        ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'bottom' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100 AS bottom_pick_rate,
-        ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'UTILITY' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100 AS UTILITY_pick_rate,
-        GREATEST(
-            ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'top' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100,
-            ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'jungle' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100,
-            ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'middle' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100,
-            ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'bottom' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100,
-            ROUND(COUNT(DISTINCT CASE WHEN teamPosition = 'UTILITY' THEN match_id END) / NULLIF(COUNT(DISTINCT match_id), 0), 3) * 100
-        ) AS max_pick_rate
-    FROM 
-        zzz_datas_counter2
-    GROUP BY 
-        championName) AS pick_rates
-    ORDER BY
-    	championName_KR;
-	</select>
-	
 	<select id="winrate">
-		SELECT round((COUNT(CASE WHEN win ='True' THEN 1
-		END)
-		/ COUNT(*) * 100),2)
-		AS win_percentage
-		FROM zzz_datas_rune
-		WHERE
-		championName = #{champions}
-		and teamPosition = #{highest_pick_rate_position}
-<!-- 		and tier1 = #{tier1} -->
+		select championName, championName_kr, teamPosition, count(*)as all_rate, 
+        (COUNT(CASE WHEN win ='True' THEN 1 END)) as champion_win_rate,
+        round((COUNT(CASE WHEN win ='True' THEN 1 END) / COUNT(*) * 100),2) as win_percentage
+        from zzz_datas_detail 
+        where championName = 'gragas' and tier1 = '에메랄드' and teamPosition IN ('TOP', 'JUNGLE', 'MIDDLE', 'BOTTOM', 'UTILITY')
+        group by championName_KR, teamPosition
+        ORDER BY win_percentage DESC LIMIT 1;
 	</select>
 	
 	<select id="pickrate">

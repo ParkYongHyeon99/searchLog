@@ -3,7 +3,7 @@
 	text-align: center;
 	background-color: lightgreen;
 	padding: 0;
-	/* 	border: 1px solid black; */
+/* 	border: 1px solid black; */
 }
 
 body {
@@ -168,5 +168,7 @@ td a img {
 	text-align: left;
 }
 
-/* ====================== exch페이지 css ====================== */
-/* ====================== excasdasdh페이지 css ====================== */
+.aaa{
+	border-radius: 70%;
+/* 	사진을 둥글게 */
+}
