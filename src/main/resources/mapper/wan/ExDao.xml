@@ -23,7 +23,7 @@
 		FROM zzz_datas_counter2
 		WHERE championName_kr = '가렌' and teamPosition = 'top'
 		GROUP BY enemy_champ
-		ORDER BY total_count desc limit 1;
+		ORDER BY total_count desc limit 3;
 	</select>
 	
 </mapper>

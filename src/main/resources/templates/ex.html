@@ -86,7 +86,12 @@
                             <td th:text="|${champion['winrate']}%|">승률</td>
                             <td th:text="|${champion['pickrate']}%|">픽률</td>
                             <td>밴율</td>
-                            <td th:each="champion, Index : ${counter}" th:text="${champion['enemy_champ']}">카운터</td>
+                            <td>
+                    <div th:each="counterChampion : ${counter}">
+                        <span th:text="${counterChampion['enemy_champ']}">카운터</span>
+<!--                         <img th:src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${counterChampion['enemy_champ_en']}.png|"> -->
+                    </div>
+		            </td>
                         </tr>
                     </tbody>
 
