@@ -49,4 +49,11 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	@GetMapping("/lolmate/temporary")
+	public void temporary(RedirectAttributes ra, HttpSession session) {
+		MemberDto mDto = new MemberDto();
+		mDto.setM_id("bbb"); mDto.setM_pw("123456789");
+		mSer.login(mDto, ra, session);
+	}
+	
 }

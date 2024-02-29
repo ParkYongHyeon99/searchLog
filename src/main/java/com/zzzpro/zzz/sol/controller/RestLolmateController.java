@@ -26,5 +26,15 @@ public class RestLolmateController {
 	public String lmWrite(LolmateDto lmDto) {
 		return lmSer.lmWrite(lmDto);
 	}
-
+	
+	@GetMapping("/lolmate/myLmList")
+	public ArrayList<LolmateDto> myLmList(LolmateDto lmDto) {
+		return lmSer.myLmList(lmDto);
+	}
+	
+	@GetMapping("/lolmate/myAppList")
+	public ArrayList<LolmateDto> myAppList(String m_id) {
+		return lmSer.myAppList(m_id);
+	}
+	
 }

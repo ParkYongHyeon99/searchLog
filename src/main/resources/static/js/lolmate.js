@@ -6,6 +6,7 @@
  	
  */
 
+
 $(()=>{
 /* ====================== 포지션 이미지 설정 ====================== */
 	let position = ["pAll","Top","Jungle","Mid","Bot","Support"];
@@ -21,9 +22,6 @@ $(()=>{
 		}
 	}
 
-	
-	
-
 
 /* ====================== 리스트 가져오는 함수 실행 ====================== */
 	lmAjax();
@@ -34,15 +32,126 @@ $(()=>{
 
 /* ====================== 탭 변경 ====================== */
 $('#lmListChoice').on('click',function(){
-	alert('list');
-	//$('#lmInfoChoice').css('display','inline-block')
+	//location.href = '/lolmate/list';
+	$('#lmListTab').css('display','block');
+	$('#lmInfoTab').css('display','none');
 })
 $('#lmInfoChoice').on('click',function(){
 	let id = document.getElementById('m_id').value
-	if(id != ""){
-		alert('info 준비중');
+	if(id == ""){
+		alert('로그인 후 이용 가능합니다.');
+	}else{
+		$('#lmListTab').css('display','none');
+		$('#lmInfoTab').css('display','block');
+		$("input[name=lmInfoTabChoice][value=myList]").prop("checked", true);
+		infoTabMyList(id);
 	}
 })
+$('input[name=lmInfoTabChoice]').on('change',function(){
+	var infoTab = $('input[name=lmInfoTabChoice]:checked').val();
+	let id = document.getElementById('m_id').value
+	if(infoTab == 'myList'){
+		infoTabMyList(id);
+	}else if(infoTab == 'myAppList'){
+		$.ajax({
+			method:'get',
+			url:'/lolmate/myAppList',
+			data: {
+				m_id:id,
+			},
+		}).done(function(lmAppList){
+			$('#infoNoction').html('<p style="text-align:center;">리스트 클릭 시 신청한 글을 관리할 수 있습니다.</p>');
+			html = '<div>'
+			html += '<table id="mLAppList" style="width:80%; border: 1px solid black; padding: 1% 0 1% 0; margin: auto; text-align: center;">'
+			html += '<tr><th>번호</th><th>듀오/멘토</th><th>게임 모드</th><th>주 포지션</th><th>찾는 포지션</th><th>메모</th><th>신청</th></tr>'
+			if(lmAppList.length!=0){
+				let num = lmAppList.length;
+				for(let lm of lmAppList){
+					html += '<tr onclick="myApp_Detail('+lm.lm_num+')">'
+					html += '<td>'+num+'</td>'
+					if(lm.lm_gameMate == 0){ html += '<td>듀오</td>' }
+						else if(lm.lm_gameMate == 1){ html += '<td>멘토</td>' }
+					html += '<td>'+lm.lm_gameMode+'</td>'
+					html += '<td>'+divHtml(lm.lm_myPosition,'position')+'</td>'
+					html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>'
+					html += '<td>'+lm.lm_memo+'</td>'
+					html += '<td><button type="button" onclick="myLmAppDel('+lm.lm_num+',event)">신청 취소</button></td>'
+					html += '</tr>'
+					num--;
+				}
+			}else{
+				html += '<tr><td colspan="7"><div class="lmListDiv">신청한 글이 존재하지 않습니다.</div></td></tr>'
+			}
+			html += '</table></div>'
+			$('#lmInfoContents').html(html);
+		})
+	}
+})
+function infoTabMyList(id){
+	$.ajax({
+		method:'get',
+		url:'/lolmate/myLmList',
+		data: {
+			m_id:id,
+		},
+	}).done(function(lmList){
+		$('#infoNoction').html('<p style="text-align:center;">리스트 클릭 시 글/신청자를 관리할 수 있습니다.</p>');
+		html = '<div>'
+		html += '<table id="mLList" style="width:80%; border: 1px solid black; padding: 1% 0 1% 0; margin: auto; text-align: center;">'
+		html += '<thead><tr><th>번호</th><th>듀오/멘토</th><th>게임 모드</th><th>주 포지션</th><th>찾는 포지션</th><th>메모</th><th>신청자 수</th><th>신청 가능 여부</th></tr></thead>'
+		html += '<tbody id="lmTbody">'
+		if(lmList.length!=0){
+			let num = lmList.length;
+			for(let lm of lmList){
+				html += '<tr onclick="mL_Detail('+lm.lm_num+')">'
+				html += '<td>'+num+'</td>'
+				if(lm.lm_gameMate == 0){ html += '<td>듀오</td>' }
+					else if(lm.lm_gameMate == 1){ html += '<td>멘토</td>' }
+				html += '<td>'+lm.lm_gameMode+'</td>'
+				html += '<td>'+divHtml(lm.lm_myPosition,'position')+'</td>'
+				html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>'
+				html += '<td>'+lm.lm_memo+'</td>'
+				if(lm.lm_app_summonerName.length<1){
+					html += '<td>&ensp;-&ensp;명</td>'
+				}else{
+					html += '<td>'+lm.lm_app_summonerName.length+'명</td>'
+				}
+				if(lm.lm_end == 0){ html += '<td>신청 가능</td>' }
+					else if(lm.lm_end == 1){ html += '<td>닫힘</td>' }
+				html += '</tr>'
+				num--;
+			}
+			
+			html += '<div id="mLDetailDiv" style="display:none;"></div>'
+			
+		}else{
+			html += '<tr><td colspan="8"><div class="lmListDiv">작성한 글이 존재하지 않습니다.</div></td></tr>'
+		}
+		html += '<tbody></table></div>'
+		$('#lmInfoContents').html(html);
+	})
+}
+function mL_Detail(lm_num){
+	$('#mLList').css('display','none');
+	$('#mLDetailDiv').css('display','block');
+	$('#mLDetailDiv').html(lm_num+'띄울 준비중');
+}
+function myApp_Detail(lm_num){
+	
+}
+function myLmAppDel(lm_num,e){
+	e.stopPropagation();
+	$.ajax({
+		method:'get',
+		url:'/lolmate/myLmList',
+		data: {
+			lm_num:lm_num,
+			m_id:id,
+		},
+	}).done(function(res){
+		
+	})
+}
 
 
 /* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
@@ -86,10 +195,18 @@ function lmAjax(){
 					html += '<td>'+lm.lm_winrate+'</td>';			// 작성자 승률
 					html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>';	// 찾는 포지션
 					html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
-					if(lm.lm_end==0){
-						html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')" disabled>신청</button></td>';
-					}else if(lm.lm_end==1){
-						html += '<td><button disabled>신청</button></td>'
+					if(lm.m_id == document.getElementById('m_id').value){
+						if(lm.lm_end==0){
+							html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')">확인</button></td>';
+						}else if(lm.lm_end==1){
+							html += '<td><button disabled>확인</button></td>'
+						}
+					}else{
+						if(lm.lm_end==0){
+							html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')" disabled>신청</button></td>';
+						}else if(lm.lm_end==1){
+							html += '<td><button disabled>닫힘</button></td>'
+						}
 					}
 					html += '</tr>';
 				}
@@ -177,10 +294,10 @@ function divHtml(tp,img){
 	var html = '<div class="tooltipImgDiv">'
 	if(img=='emblem'){
 		if(tp.search("unranked")!=-1){
-			
+			html += divT+tp+'">'+tp+'</div></div>'
 		}else{
-			html += divT+tp+'" style="background-image: url(\'../img/emblem/Rank='+tp+'.png\'); width: 40px; '
-			html +='padding-bottom: 40px; background-repeat: no-repeat; background-position: center; background-size : cover;'+spanT;
+			html += divT+tp+'" style="background-image: url(\'../img/emblem/Rank='+tp+'.png\'); width:40px; '
+			html +='padding-bottom:40px; background-repeat: no-repeat; background-position: center; background-size : cover;'+spanT;
 			if(tp.search("Iron")!=-1){ html += '아이언'}
 			else if(tp.search("Bronze")!=-1){ html += '브론즈' }
 			else if(tp.search("Silver")!=-1){ html += '실버' }
