@@ -21,6 +21,6 @@ public interface ExDao {
 
 	List<Map<String, Object>> counter(String championName, String highest_pick_rate_position);
 
-	List<Map<String, Object>> counters(List<Map<String, Object>> champions);
+	List<Map<String, Object>> rune(String championName, String highest_pick_rate_position);
 
 }

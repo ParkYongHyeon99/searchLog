@@ -44,14 +44,14 @@
 		stat_perks2,
 		stat_perks3,
 		COUNT(*) AS rune_count,
-		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_rune WHERE championName_KR = '마오카이')*100, 2) as rune_percentage,
+		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_rune WHERE championName = #{championName})*100, 2) as rune_percentage,
 		round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) * 100),2) AS rune_win_percentage
 		FROM zzz_datas_rune
-		WHERE championName_KR =
-		'maokai' and teamPosition = 'utility'
+		WHERE championName =
+		#{championName} and teamPosition = #{highest_pick_rate_position}
 		and tier1 = '에메랄드'
 		GROUP BY main_name, sub_name
-		ORDER BY rune_count DESC limit 2
+		ORDER BY rune_count DESC limit 1
 	</select>
 	
 </mapper>

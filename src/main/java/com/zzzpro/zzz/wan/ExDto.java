@@ -29,15 +29,21 @@ public class ExDto {
 	private String win_rate;
 	private String win_count;
 
+	// rune
+	private String main_name;
+	private String main_perks1;
+	private String main_perks2;
+	private String main_perks3;
+	private String main_perks4;
+	private String sub_name;
+	private String sub_perks1;
+	private String sub_perks2;
+	private String stat_perks1;
+	private String stat_perks2;
+	private String stat_perks3;
+
+	//
 	private String linePick;
 	private String tier1;
 	private String test;
-	private String top_pick_rate;
-	private String jungle_pick_rate;
-	private String middle_pick_rate;
-	private String bottom_pick_rate;
-	private String UTILITY_pick_rate;
-	private String highest_pick_rate_position;
-	private String highest_pick_rate;
-
 }

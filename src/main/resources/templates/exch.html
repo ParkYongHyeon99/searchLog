@@ -53,22 +53,22 @@
             </div>
         </div>
         <!-- 탭 메뉴 끝 -->
-		<div class="double-divide">
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/' + ${champDto.main_name} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<br> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.main_perks1} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.main_perks2} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.main_perks3} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.main_perks4} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<br> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/' + ${champDto.sub_name} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<br> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.sub_perks1} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.sub_perks2} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<br> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${champDto.stat_perks1} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${champDto.stat_perks2} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
-<!-- 		<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${champDto.stat_perks3} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}"> -->
+		<div th:each="rune : ${rune}" class="double-divide">
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/' + ${rune['main_name']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<br>
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${rune['main_perks1']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${rune['main_perks2']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${rune['main_perks3']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${rune['main_perks4']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<br>
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/' + ${rune['sub_name']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<br>
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${rune['sub_perks1']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${rune['sub_perks2']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<br>	
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${rune['stat_perks1']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${rune['stat_perks2']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+			<img th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${rune['stat_perks3']} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
 		</div>
 		
         <!-- 탭 1내용 시작 -->

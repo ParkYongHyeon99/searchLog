@@ -41,6 +41,10 @@ public class ExController {
 		log.info("@@카운터 -> " + counter);
 		model.addAttribute("counter", counter);
 		
+		List<Map<String, Object>> rune = eSer.rune(championName, highest_pick_rate_position);
+		log.info("@@룬 -> " + rune);
+		model.addAttribute("rune", rune);
+		
 		// 디폴트 티어 xml에 에메랄드로 설정하고 라인버튼에 
 		// 밸류넣어서 비동기로 teamposition바꿔서 값바꿔 html출력까지
 		
