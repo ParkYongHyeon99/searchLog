@@ -1,5 +1,7 @@
 package com.zzzpro.zzz.sol.dto;
 
+import java.util.ArrayList;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,4 +27,6 @@ public class LolmateDto {
 	
 	/* DB 저장 X */
 	private double duoWinrate;	// 글 올린 사람과 신청자의 듀오 시 예상 승률 확인
+	
+	private ArrayList<String> lm_app_summonerName;	// 작성자 닉네임#태그
 }

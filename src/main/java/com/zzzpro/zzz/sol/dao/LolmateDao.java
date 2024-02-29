@@ -13,5 +13,8 @@ public interface LolmateDao {
 	ArrayList<LolmateDto> lmAllTierList(LolmateDto lmDto);
 	ArrayList<LolmateDto> lmAllList();
 	boolean lmWrite(LolmateDto lmDto);
+	ArrayList<LolmateDto> mLList(LolmateDto lmDto);
+	ArrayList<String> mLAppList(LolmateDto lmDto);
+	ArrayList<LolmateDto> myAppList(String m_id);
 	
 }

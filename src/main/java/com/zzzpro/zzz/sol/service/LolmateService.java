@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zzzpro.zzz.sol.dao.LolmateDao;
+import com.zzzpro.zzz.sol.dto.LolmateAppDto;
 import com.zzzpro.zzz.sol.dto.LolmateDto;
 
 
@@ -82,6 +83,23 @@ public class LolmateService {
 	    }
 		return "no";
 	}
-	
+
+
+	public ArrayList<LolmateDto> myLmList(LolmateDto lmDto) {
+		ArrayList<LolmateDto> lmList = lmDao.mLList(lmDto);
+		for(int i=0; i<lmList.size(); i++) {
+			LolmateDto lm = lmList.get(i);
+			lm.setLm_app_summonerName(lmDao.mLAppList(lm));
+			lmList.set(i, lm);
+		}
+		return lmList;
+	}
+
+
+	public ArrayList<LolmateDto> myAppList(String m_id) {
+		return lmDao.myAppList(m_id);
+	}
+
+
 	
 }
