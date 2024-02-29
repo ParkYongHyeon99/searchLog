@@ -8,8 +8,11 @@
 </head>
 <body>
     <div class="l-container">
-        <header>나는 헤더</header>
-        <nav><input type="text" placeholder="챔피언 검색"></nav>
+        <header class="insert">
+        	<div th:insert="~{header :: h1}" class="logo">로고</div>
+        	<div th:insert="~{header :: ul}">헤더</div>
+        </header>
+        <nav><span>☆☆잼있는시너지찾기☆☆</span><input type="text" placeholder="챔피언 검색" class="search-box"></nav>
         <div>
             <div class="flex" id="topbar">
                 <span class="width33">
@@ -44,13 +47,12 @@
                 <div id="test" class="width33">
                     <ul class="width100">
                         <li th:each="champion : ${champions}">
-    <a th:href="@{/ex/{championName}/{highest_pick_rate_position}(championName=${champion.championName}, highest_pick_rate_position=${champion.highest_pick_rate_position})}">
-        <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.championName}.png|"
-            alt="초상화">
-        <div th:utext="${#strings.length(champion.championName_KR) > 3 ? champion.championName_KR.substring(0, 3) + '...' : champion.championName_KR}" class="set"></div>
-    </a>
-</li>
-
+    						<a th:href="@{/ex/{championName}/{highest_pick_rate_position}(championName=${champion.championName}, highest_pick_rate_position=${champion.highest_pick_rate_position})}">
+        						<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.championName}.png|"
+            						alt="초상화">
+        						<div th:utext="${#strings.length(champion.championName_KR) > 3 ? champion.championName_KR.substring(0, 3) + '...' : champion.championName_KR}" class="set"></div>
+    						</a>
+						</li>
                     </ul>
                 </div>
                 <table class="width67">
@@ -78,20 +80,21 @@
                             </td>
                             <td>티어</td>
                             <td>
-                                <img style="width: 30px; height:30px" th:src="|${champion.highest_pick_rate_position == 'top' ? '../img/position/Diamond-Top.png' : 
+                                <img th:src="|${champion.highest_pick_rate_position == 'top' ? '../img/position/Diamond-Top.png' : 
 								(champion.highest_pick_rate_position == 'jungle' ? '../img/position/Diamond-Jungle.png' : 
 								(champion.highest_pick_rate_position == 'middle' ? '../img/position/Diamond-Mid.png' : 
 								(champion.highest_pick_rate_position == 'bottom' ? '../img/position/Diamond-Bot.png' : 
-								(champion.highest_pick_rate_position == 'UTILITY' ? '../img/position/Diamond-Support.png' : champion.highest_pick_rate_position))))}|">
+								(champion.highest_pick_rate_position == 'UTILITY' ? '../img/position/Diamond-Support.png' : champion.highest_pick_rate_position))))}|"
+									style="width: 30px; height:30px" >
                             </td>
                             <td th:text="|${champion['winrate']}%|">승률</td>
                             <td th:text="|${champion['pickrate']}%|">픽률</td>
-                            <td>밴율</td>
+                            <td th:text="|${champion['banrate']}%|">밴율</td>
                             <td>
-                    <div th:each="counterChampion : ${counter}">
-                        <span th:text="${counterChampion['enemy_champ']}">카운터</span>
-                    </div>
-		            </td>
+                    			<div th:each="counterChampion : ${counters}">
+                        			<span>카운터</span>
+                    			</div>
+		            		</td>
                         </tr>
                     </tbody>
 

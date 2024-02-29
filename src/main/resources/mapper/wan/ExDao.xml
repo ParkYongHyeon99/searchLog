@@ -16,15 +16,15 @@
 	</select>
 	
 	<select id="counter">
-		SELECT enemy_champ, enemy_champ_en, 
+		SELECT enemy_champ, enemy_champ_en, tier1,
 		COUNT(CASE WHEN win = 1 THEN 1 END) AS win_count, COUNT(*) AS total_count, 
-    	round(((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*)) * 100),2) 
+    	round(((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*)) * 100),2)
     	AS win_rate
 		FROM zzz_datas_counter2
-		WHERE championName = #{championName} and teamPosition = 'bottom'
+		WHERE championName = #{championName} and teamPosition = #{highest_pick_rate_position} and tier1 = '에메랄드'
 		GROUP BY enemy_champ
-		HAVING total_count >= 50
-		ORDER BY win_rate DESC;
+		HAVING total_count >= 10
+		ORDER BY win_rate
 	</select>
 	
 	<select id="rune">
@@ -48,7 +48,7 @@
 		round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) * 100),2) AS rune_win_percentage
 		FROM zzz_datas_rune
 		WHERE championName_KR =
-		'마오카이' and teamPosition = 'utility'
+		'maokai' and teamPosition = 'utility'
 		and tier1 = '에메랄드'
 		GROUP BY main_name, sub_name
 		ORDER BY rune_count DESC limit 2

@@ -18,8 +18,8 @@ public class ExService {
 		return eDao.champions(eDto);
 	}
 
-	public List<Map<String, Object>> counter(String championName) {
-		return eDao.counter(championName);
+	public List<Map<String, Object>> counter(String championName, String highest_pick_rate_position) {
+		return eDao.counter(championName, highest_pick_rate_position);
 	}
 
 	public List<Map<String, Object>> championList(ExDto eDto) {
@@ -37,6 +37,11 @@ public class ExService {
 		} else {
 			return eDao.test(eDto);
 		}
+	}
+
+	public List<Map<String, Object>> counters(List<Map<String, Object>> champions) {
+		// TODO Auto-generated method stub
+		return eDao.counters(champions);
 	}
 
 }

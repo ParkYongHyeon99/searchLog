@@ -8,8 +8,8 @@
 </head>
 <body>
     <div class="head-container" id="head">
-         <div th:insert="~{ex :: header}"></div> <!-- 메인페이지 헤더 따오기 -->
-        <div th:insert="~{ex :: nav}"></div>     <!-- 메인페이지 헤더 따오기 -->
+         <div th:insert="~{ex :: header}"></div>
+        <div th:insert="~{ex :: nav}"></div>
         <header style="display: flex; justify-content: center">
             <label>티어</label>
             <div th:insert="~{ex :: select}"></div>
@@ -25,33 +25,42 @@
         <div>
             <div>
                 <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${championName}.png|" alt="초상화">
-                <!-- VS코드초상화 띄울때 <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Garen.png"> -->
             </div>
             <div>스킬 설명 및 영상</div>
         </div>
         <!-- 탭 메뉴 시작 -->
         <div class="tab-container">
             <div class="tab" onclick="showTab('tab1')">
-                <div th:each="champion, index : ${linePick}">
-                    <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 0}">line1</p>
-                    <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 0}">pickRate1</p>
-                </div>
+<!--                 <div th:each="champion, index : ${linePick}"> -->
+<!--                     <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 0}">line1</p> -->
+<!--                     <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 0}">pickRate1</p> -->
+<!--                 </div> -->
             </div>
             <div class="tab" onclick="showTab('tab2')">
-                <div th:each="matchInfo, index : ${linePick}">
-                    <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 1}">line2</p>
-                    <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 1}">pickRate2</p>
-                </div>
+<!--                 <div th:each="matchInfo, index : ${linePick}"> -->
+<!--                     <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 1}">line2</p> -->
+<!--                     <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 1}">pickRate2</p> -->
+<!--                 </div> -->
             </div>
             <div class="tab" onclick="showTab('tab3')">
-                <div th:each="matchInfo, index : ${linePick}">
-                    <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 2}">line3</p>
-                    <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 2}">pickRate3</p>
-                </div>
+<!--                 <div th:each="matchInfo, index : ${linePick}"> -->
+<!--                     <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 2}">line3</p> -->
+<!--                     <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 2}">pickRate3</p> -->
+<!--                 </div> -->
             </div>
         </div>
         <!-- 탭 메뉴 끝 -->
-
+		<div class="double-divide">
+		<img th:src="|https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/8300.png?image=q_auto,f_png,w_64,h_64&v=1707283412529|">
+		<img th:src="|https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/8300.png?image=q_auto,f_png,w_64,h_64&v=1707283412529|">
+		<img th:src="|https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/8300.png?image=q_auto,f_png,w_64,h_64&v=1707283412529|">
+		<img th:src="|https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/8300.png?image=q_auto,f_png,w_64,h_64&v=1707283412529|">
+		<img th:src="|https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/8300.png?image=q_auto,f_png,w_64,h_64&v=1707283412529|">
+		<img th:src="|https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/8300.png?image=q_auto,f_png,w_64,h_64&v=1707283412529|">
+		<img th:src="|https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/8300.png?image=q_auto,f_png,w_64,h_64&v=1707283412529|">
+		
+		</div>
+		
         <!-- 탭 1내용 시작 -->
         <div id="tab1-content" class="tab-content">
             <div class="divide">
@@ -74,36 +83,26 @@
                     </div>
                 </div>
                 <div class="tab-flex">
-                    <div class="divide">카운터</div>
                     <div class="divide">스펠</div>
+                    <div class="divide">카운터</div>
                 </div>
                 <div class="tab-flex">
-                    <div class="tab-flex">
-                        <div class="divide">
-                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
-                            00.0%(승률)<br>
-                            상대법
-                        </div>
-                        <div class="divide">
-                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
-                            00.0%(승률)<br>
-                            상대법
-                        </div>
-                        <div class="divide">
-                            <img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/Ahri.png"><br>
-                            00.0%(승률)<br>
-                            상대법
-                        </div>
-                    </div>
-                    <div class="divide">
+					<div class="divide">
                         <img src=".././img/spell/Ignite.webp" alt="스펠1">
                         <img src=".././img/spell/Flash.webp" alt="스펠2"><br>
                         00.0% 00.0%
                     </div>
+                    <div th:each="champion, Index : ${counter}" class="tab-flex" th:if="${Index.index < 3}">
+                        <div class="divide" style="font-size: 10px;">
+                            <img th:src="@{|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion['enemy_champ_en']}.png|}" alt="초상화">
+                            <div th:text="|${champion['win_rate']}%|">승률</div>
+                            <div th:text="|${champion['win_count']}게임|">게임수</div>
+                            <div>상대법</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-
         <!-- 탭1 내용 끝 -->
         <!-- 탭2 내용 시작 -->
         <div id="tab2-content" class="tab-content">
@@ -127,8 +126,8 @@
                     </div>
                 </div>
                 <div class="tab-flex">
-                    <div class="divide">카운터</div>
                     <div class="divide">스펠</div>
+                    <div class="divide">카운터</div>
                 </div>
                 <div class="tab-flex">
                     <div class="tab-flex">
@@ -210,7 +209,7 @@
             </div>
         </div>
         <!-- 탭3 내용 끝 -->
-        <div class="double-divide">룬이미지</div>
+        
     </div>
 </body>
 <script>

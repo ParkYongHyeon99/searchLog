@@ -14,18 +14,21 @@ public class ExDto {
 	private String championName;
 	private String championName_kr;
 	private String champions;
+	private String winrate;
+	private String pickrate;
+	private String banrate;
 
 	private String teamPosition;
 	private String all_rate;
 	private String champion_win_rate;
 	private String win_percentage;
-	
+
 	// counter
 	private String enemy_champ;
 	private String enemy_champ_en;
 	private String win_rate;
 	private String win_count;
-	
+
 	private String linePick;
 	private String tier1;
 	private String test;
