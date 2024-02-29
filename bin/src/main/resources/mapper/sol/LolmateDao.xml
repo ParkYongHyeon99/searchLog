@@ -26,8 +26,11 @@
 	</select>
 	
 	<insert id="lmWrite">
-		insert into lolmateList values(default,#{m_id},#{lm_gameMate},#{lm_gameMode},#{lm_tier},#{lm_summonerName},
-										#{lm_myPosition},#{lm_findPosition},#{lm_memo},#{lm_discord},default,0,#{lm_winrate);
+	    INSERT INTO lolmateList VALUES (
+	        DEFAULT, #{m_id}, #{lm_gameMate}, #{lm_gameMode}, #{lm_tier}, #{lm_summonerName},
+	        #{lm_myPosition}, #{lm_findPosition}, #{lm_memo}, #{lm_discord}, DEFAULT, DEFAULT, #{lm_winrate}
+	    );
 	</insert>
+
 	
 </mapper>

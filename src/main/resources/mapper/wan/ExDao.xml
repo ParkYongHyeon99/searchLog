@@ -1,6 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zzzpro.zzz.wan.ExDao">
+	
 	<select id="linePick">
 		SELECT teamPosition,
 		concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_personal1 WHERE championName =
@@ -14,18 +15,43 @@
 		from champList where line like #{line} order by championName_kr
 	</select>
 	
-	<select id="allWinRate">
-	SELECT concat(round((COUNT(CASE WHEN win ='True' THEN 1 END) / COUNT(*) * 100),2),'%')
-		AS allWinRate
-		FROM zzz_datas_detail
-		WHERE championName_kr = #{allName};
+	<select id="counter">
+		SELECT enemy_champ, enemy_champ_en, 
+		COUNT(CASE WHEN win = 1 THEN 1 END) AS win_count, COUNT(*) AS total_count, 
+    	round(((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*)) * 100),2) 
+    	AS win_rate
+		FROM zzz_datas_counter2
+		WHERE championName = #{championName} and teamPosition = 'bottom'
+		GROUP BY enemy_champ
+		HAVING total_count >= 50
+		ORDER BY win_rate DESC;
 	</select>
 	
-<select id="linePicks" parameterType="java.util.Map" resultType="java.util.Map">
-    SELECT championName, teamPosition,
-    concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_detail WHERE championName = 'garen') * 100), 1),'%') AS pickrate
-FROM zzz_datas_detail WHERE championName = 'garen'
-GROUP BY teamPosition;
-</select>
+	<select id="rune">
+		SELECT
+		championName_kr,
+        teamPosition,
+        tier1,
+        main_name,
+		main_perks1,
+		main_perks2,
+		main_perks3,
+		main_perks4,
+		sub_name,
+		sub_perks1,
+		sub_perks2,
+		stat_perks1,
+		stat_perks2,
+		stat_perks3,
+		COUNT(*) AS rune_count,
+		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_rune WHERE championName_KR = '마오카이')*100, 2) as rune_percentage,
+		round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) * 100),2) AS rune_win_percentage
+		FROM zzz_datas_rune
+		WHERE championName_KR =
+		'마오카이' and teamPosition = 'utility'
+		and tier1 = '에메랄드'
+		GROUP BY main_name, sub_name
+		ORDER BY rune_count DESC limit 2
+	</select>
 	
 </mapper>

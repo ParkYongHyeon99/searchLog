@@ -8,43 +8,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ExDto {
-	// =================ex.html=================
-	
-	private String champions;
-	private String linePick;
-	
-	
-	// =========================================
 
-	// zzz_datas_detail
-	private String teamPosition;
 	private String line;
-	private String test;
-	private String allWinRate;
-	private String allPickRate;
-	private String allBanRate;
+	// champions
+	private String championName;
+	private String championName_kr;
+	private String champions;
 
-//	private String matchid;
-//	private int gameduration;
-//	private String riotidgamename;
-//	private String riotidtagline;
-//	private int participantid;
-//	private String win;
-//	private String win_percentage;
-//	private String pick_percentage;
-//	private String skill_tree;
-//	private String tier1;
-//	private String Count;
-//	private String percentage;
-//	private String item0;
-//	private String item1;
-//	private String item2;
-//	private String item3;
-//	private String item4;
-//	private String item5;
-//	private String item6;
-//	private String shoes;
-//	private String core1;
-//	private String core2;
-//	private String core3;
+	private String teamPosition;
+	private String all_rate;
+	private String champion_win_rate;
+	private String win_percentage;
+	
+	// counter
+	private String enemy_champ;
+	private String enemy_champ_en;
+	private String win_rate;
+	private String win_count;
+	
+	private String linePick;
+	private String tier1;
+	private String test;
+	private String top_pick_rate;
+	private String jungle_pick_rate;
+	private String middle_pick_rate;
+	private String bottom_pick_rate;
+	private String UTILITY_pick_rate;
+	private String highest_pick_rate_position;
+	private String highest_pick_rate;
+
 }

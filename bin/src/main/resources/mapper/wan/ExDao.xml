@@ -1,6 +1,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zzzpro.zzz.wan.ExDao">
+	
 	<select id="linePick">
 		SELECT teamPosition,
 		concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_personal1 WHERE championName =
@@ -14,18 +15,15 @@
 		from champList where line like #{line} order by championName_kr
 	</select>
 	
-	<select id="allWinRate">
-	SELECT concat(round((COUNT(CASE WHEN win ='True' THEN 1 END) / COUNT(*) * 100),2),'%')
-		AS allWinRate
-		FROM zzz_datas_detail
-		WHERE championName_kr = #{championName_kr};
+	<select id="counter">
+		SELECT championName_kr, enemy_champ, 
+		COUNT(CASE WHEN win = 1 THEN 1 END) AS win_count, COUNT(*) AS total_count, 
+    	round(((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*)) * 100),2) 
+    	AS win_rate
+		FROM zzz_datas_counter2
+		WHERE championName_kr = '가렌' and teamPosition = 'top'
+		GROUP BY enemy_champ
+		ORDER BY total_count desc limit 3;
 	</select>
-	
-	<select id="allPickRate">
-	SELECT concat(round((COUNT(CASE WHEN championName = #{championName} THEN 1 END) / COUNT(*) * 100),2),'%')
-		AS allPickRate
-		FROM zzz_datas_detail;
-	</select>
-<!-- 	<select id="allBanrate"></select> -->
 	
 </mapper>
