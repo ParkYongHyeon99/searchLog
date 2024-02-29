@@ -12,10 +12,13 @@ public interface ExDao {
 	@Select("select * from champList order by championName_kr")
 	List<Map<String, Object>> champions(ExDto eDto);
 
+	@Select("select * from champList order by case when pickrate >= 10 then 0 else 1 end, winrate desc")
+	List<Map<String, Object>> championList(ExDto eDto);
+
 	List<ExDto> linePick(ExDto eDto);
 
 	List<Map<String, Object>> test(ExDto eDto);
 
-	List<Map<String, Object>> counter(ExDto eDto);
+	List<Map<String, Object>> counter(String championName);
 
 }

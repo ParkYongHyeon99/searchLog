@@ -17,7 +17,7 @@ public class restController {
 
 	@GetMapping("/test")
 	public List<Map<String, Object>> test(ExDto eDto) {
-		log.info("eDto" + eDto);
+		log.info("라인별 탭변경" + eDto);
 		return eSer.test(eDto);
 	}
 

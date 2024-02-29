@@ -40,16 +40,17 @@
                     <span>서포터</span>
                 </span>
             </div>
-            <div class="flex" id="main">
+            <div class="flex">
                 <div id="test" class="width33">
                     <ul class="width100">
                         <li th:each="champion : ${champions}">
-                            <a th:href="@{/ex/{championName}(championName=${champion.championName})}">
-                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.championName}.png|"
-                                    alt="초상화">
-                                <div th:utext="${#strings.length(champion.championName_KR) > 3 ? champion.championName_KR.substring(0, 3) + '...' : champion.championName_KR}" class="set"></div>
-                            </a>
-                        </li>
+    <a th:href="@{/ex/{championName}/{highest_pick_rate_position}(championName=${champion.championName}, highest_pick_rate_position=${champion.highest_pick_rate_position})}">
+        <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.championName}.png|"
+            alt="초상화">
+        <div th:utext="${#strings.length(champion.championName_KR) > 3 ? champion.championName_KR.substring(0, 3) + '...' : champion.championName_KR}" class="set"></div>
+    </a>
+</li>
+
                     </ul>
                 </div>
                 <table class="width67">
@@ -66,10 +67,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="champion, chIndex : ${champions}">
+                        <tr th:each="champion, chIndex : ${championList}">
                             <td th:text="${chIndex.index + 1}">순위</td>
                             <td class="left">
-                                <a th:href="@{/ex/{championName}(championName=${champion['championName']})}">
+                                <a th:href="@{/ex/{championName}/{highest_pick_rate_position}(championName=${champion.championName}, highest_pick_rate_position=${champion.highest_pick_rate_position})}">
                                     <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion['championName']}.png|"
                                         alt="초상화">
                                     <strong class="strong" th:text="${champion['championName_KR']}">이름</strong>
@@ -89,7 +90,6 @@
                             <td>
                     <div th:each="counterChampion : ${counter}">
                         <span th:text="${counterChampion['enemy_champ']}">카운터</span>
-<!--                         <img th:src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${counterChampion['enemy_champ_en']}.png|"> -->
                     </div>
 		            </td>
                         </tr>

@@ -10,15 +10,9 @@
     <div class="head-container" id="head">
          <div th:insert="~{ex :: header}"></div> <!-- 메인페이지 헤더 따오기 -->
         <div th:insert="~{ex :: nav}"></div>     <!-- 메인페이지 헤더 따오기 -->
-        <header>
+        <header style="display: flex; justify-content: center">
             <label>티어</label>
-            <select>
-                <option value="diamond">diamond</option>
-                <option value="platinum">platinum</option>
-                <option value="gold">gold</option>
-                <option value="silver">silver</option>
-                <option value="bronze">bronze</option>
-            </select>
+            <div th:insert="~{ex :: select}"></div>
             <span>
                 <a th:href="@{/counter}">카운터</a>
                 <a th:href="@{/exrune}">룬</a>
@@ -38,7 +32,7 @@
         <!-- 탭 메뉴 시작 -->
         <div class="tab-container">
             <div class="tab" onclick="showTab('tab1')">
-                <div th:each="matchInfo, index : ${linePick}">
+                <div th:each="champion, index : ${linePick}">
                     <p th:text="${matchInfo.teamPosition}" th:if="${index.index == 0}">line1</p>
                     <p th:text="'픽률&#160;' + ${matchInfo.linePick}" th:if="${index.index == 0}">pickRate1</p>
                 </div>

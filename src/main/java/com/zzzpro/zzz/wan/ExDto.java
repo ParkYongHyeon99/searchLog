@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class ExDto {
 
 	private String line;
-
+	// champions
 	private String championName;
 	private String championName_kr;
 	private String champions;
@@ -20,7 +20,11 @@ public class ExDto {
 	private String champion_win_rate;
 	private String win_percentage;
 	
+	// counter
 	private String enemy_champ;
+	private String enemy_champ_en;
+	private String win_rate;
+	private String win_count;
 	
 	private String linePick;
 	private String tier1;
