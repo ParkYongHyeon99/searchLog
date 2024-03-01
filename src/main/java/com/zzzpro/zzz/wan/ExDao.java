@@ -9,14 +9,16 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ExDao {
 
-	// 챔피언이름 목록 전체 가져옴
-	@Select("select championName,championName_kr from champList order by championName_kr")
+	@Select("select * from champList order by championName_kr")
 	List<Map<String, Object>> champions(ExDto eDto);
+
+	@Select("select * from champList order by case when pickrate >= 10 then 0 else 1 end, winrate desc")
+	List<Map<String, Object>> championList(ExDto eDto);
 
 	List<ExDto> linePick(ExDto eDto);
 
 	List<Map<String, Object>> test(ExDto eDto);
 
-	List<Map<String, Object>> linePicks(List<Map<String, Object>> cList);
+	List<Map<String, Object>> counter(String championName);
 
 }

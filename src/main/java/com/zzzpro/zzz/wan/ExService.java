@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -17,6 +16,14 @@ public class ExService {
 
 	public List<Map<String, Object>> champions(ExDto eDto) {
 		return eDao.champions(eDto);
+	}
+
+	public List<Map<String, Object>> counter(String championName) {
+		return eDao.counter(championName);
+	}
+
+	public List<Map<String, Object>> championList(ExDto eDto) {
+		return eDao.championList(eDto);
 	}
 
 	public List<ExDto> linePick(ExDto eDto) {
@@ -30,13 +37,6 @@ public class ExService {
 		} else {
 			return eDao.test(eDto);
 		}
-	}
-
-	public List<Map<String, Object>> linePicks(HttpSession session) {
-		// 세션에서 cList 가져오기
-		List<Map<String, Object>> cList = (List<Map<String, Object>>) session.getAttribute("cList");
-		log.info("@@세션으로 서비스에 온 cList -> "+cList);
-		return eDao.linePicks(cList);
 	}
 
 }

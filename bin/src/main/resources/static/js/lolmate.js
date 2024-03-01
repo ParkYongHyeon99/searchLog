@@ -176,19 +176,24 @@ function divHtml(tp,img){
 	var spanTE = '</span></div></div>'
 	var html = '<div class="tooltipImgDiv">'
 	if(img=='emblem'){
-		html += divT+tp+'" style="background-image: url(\'../img/emblem/Rank='+tp+'.png\'); width: 40px; '
-		html +='padding-bottom: 40px; background-repeat: no-repeat; background-position: center; background-size : cover;'+spanT;
-		if(tp.search("Iron")!=-1){ html += '아이언'}
-		else if(tp.search("Bronze")!=-1){ html += '브론즈' }
-		else if(tp.search("Silver")!=-1){ html += '실버' }
-		else if(tp.search("Gold")!=-1){ html += '골드' }
-		else if(tp.search("Diamond")!=-1){ html += '다이아몬드' }
-		else if(tp.search("Emerald")!=-1){ html += '에메랄드' }
-		else if(tp.search("Platinum")!=-1){ html += '플래티넘' }
-		else if(tp.search("Grandmaster")!=-1){ html += '그랜드마스터' }
-		else if(tp.search("Master")!=-1){ html += '마스터' }
-		else if(tp.search("Challenger")!=-1){html += '챌린저'}
-		html += spanTE;
+		if(tp.search("unranked")!=-1){
+			
+		}else{
+			html += divT+tp+'" style="background-image: url(\'../img/emblem/Rank='+tp+'.png\'); width: 40px; '
+			html +='padding-bottom: 40px; background-repeat: no-repeat; background-position: center; background-size : cover;'+spanT;
+			if(tp.search("Iron")!=-1){ html += '아이언'}
+			else if(tp.search("Bronze")!=-1){ html += '브론즈' }
+			else if(tp.search("Silver")!=-1){ html += '실버' }
+			else if(tp.search("Gold")!=-1){ html += '골드' }
+			else if(tp.search("Diamond")!=-1){ html += '다이아몬드' }
+			else if(tp.search("Emerald")!=-1){ html += '에메랄드' }
+			else if(tp.search("Platinum")!=-1){ html += '플래티넘' }
+			else if(tp.search("Grandmaster")!=-1){ html += '그랜드마스터' }
+			else if(tp.search("Master")!=-1){ html += '마스터' }
+			else if(tp.search("Challenger")!=-1){html += '챌린저'}
+			html += spanTE;
+		}
+		
 	}else if(img=='position'){
 		if(tp.search("All")!=-1){
 			html += divT+'pAll" style="background-image: url(\'../img/position/Silver-pAll.png\');'+spanT+'모든 포지션'+spanTE;
@@ -289,6 +294,28 @@ $('input[name=lm_findPosition_write]').on('change', function() {
         console.log('select Position: '+po)
     }
 });
+$('.discordDiv').on('click',function(){
+	let on = document.getElementById('discodeOn')
+	let off = document.getElementById('discodeOff')
+	if(on.className=='selectBtn'){
+		on.className = 'noSelectBtn';
+		off.className = 'selectBtn';
+	}else if(on.className=='noSelectBtn'){
+		on.className = 'selectBtn';
+		off.className = 'noSelectBtn';
+	}
+})
+$('.gamemateDiv').on('click',function(){
+	let duo = document.getElementById('duoBtn')
+	let mento = document.getElementById('mentoBtn')
+	if(duo.className=='selectBtn'){
+		duo.className = 'noSelectBtn';
+		mento.className = 'selectBtn';
+	}else if(duo.className=='noSelectBtn'){
+		duo.className = 'selectBtn';
+		mento.className = 'noSelectBtn';
+	}
+})
 /* ====================== 롤메이트 글 작성 포지션 변경 체크 끝 ====================== */
 
 
@@ -303,13 +330,14 @@ function poImgSet(id,sel,p){
 
 /* ====================== 롤메이트 글 작성 ====================== */
 $('#lmWriteBtn').on('click',function(){
-	// 선택된 목록 가져오기
-	const mpSel = document.querySelectorAll('input[name=lm_myPosition_write]:checked');
-	// 선택된 목록에서 value 찾기
-		let mpVal = '';
-		mpSel.forEach((el) => {mpVal += el.value + ' ';
-	});
-	console.log(mpVal)
+	let sName = $('.lm_summonerName_write').val();
+/*	if(sName.search("#")==-1){
+		Swal.fire({
+			icon : "error",
+			text : "닉네임 형식이 맞는지 확인해주세요.",
+		});
+		return
+	}*/
 	
 	var discordOn = $('#discodeOn').attr('class');
 	var gameMateSelect = $('#duoBtn').attr('class');
@@ -317,17 +345,23 @@ $('#lmWriteBtn').on('click',function(){
 	var gameMate = 0;
 	if(discordOn == 'selectBtn'){ discord=0; }else if(discordOn == 'noSelectBtn'){ discord=1; }
 	if(gameMateSelect == 'selectBtn'){ gameMate=0; }else if(gameMateSelect == 'noSelectBtn'){ gameMate=1; }
-	/*var lm_myPosition = $('input[name=lm_myPosition_write]:checked').val();*/
+	// 선택된 목록 가져오기
+	const mpSel = document.querySelectorAll('input[name=lm_myPosition_write]:checked');
+	const fpSel = document.querySelectorAll('input[name=lm_findPosition_write]:checked');
+	let mpVal = '';	let fpVal = '';		// 선택된 목록에서 value 찾기
+	mpSel.forEach((el) => {mpVal += el.value + ' ';});
+	fpSel.forEach((el) => {fpVal += el.value + ' ';});
+	console.log('myPosition: ',mpVal,'\tfindPosition: ',fpVal)
 	$.ajax({
 		method:'get',
 		url: '/lolmate/lmWrite',
 		data: {
 			m_id:$('#m_id').val(),
-			lm_summonerName:$('#lm_summonerName_write').val(),
+			lm_summonerName:sName,
 			lm_gameMate:gameMate,
 			lm_gameMode:$('select[name=lm_gameMode_write]').val(),
 			lm_myPosition:mpVal,
-			lm_findPosition:$('input[name=lm_findPosition_write]:checked').val().toString(),
+			lm_findPosition:fpVal,
 			lm_memo:$('#lmWriteMemo').val(),
 			lm_discord:discord
 		},
@@ -335,14 +369,23 @@ $('#lmWriteBtn').on('click',function(){
 		if(res=="ok"){
 			Swal.fire({
 				icon : "success",
-				text : "작성 성공!",
+				title : "작성 성공!",
 			});
+			$('.lm_summonerName_write').val('');
+			document.getElementById('discodeOn').className = 'selectBtn';
+			document.getElementById('discodeOff').className = 'noSelectBtn';
+			document.getElementById('duoBtn').className = 'selectBtn';
+			document.getElementById('mentoBtn').className = 'noSelectBtn';
+			$("input[name=lm_myPosition_write][value=All]").prop("checked", true);
+			$("input[name=lm_findPosition_write][value=All]").prop("checked", true);
+			$('#lmWriteMemo').val('');
 			$('#dmModal').hide();
 			lmAjax();
 		}else{
 			Swal.fire({
 				icon : "error",
-				text : "작성 실패..",
+				title : "작성 실패..",
+				text : "닉네임을 제대로 작성하셨는지 확인해주세요",
 			});
 		}
 	})

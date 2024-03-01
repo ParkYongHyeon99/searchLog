@@ -9,10 +9,10 @@ $('input[name=aa]').on('change', function() {
 				for (let i = 0; i < champions.length; i++) {
 					html += '<li><a href="/ex/' + champions[i].championName + '">'
 					html += '<img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/' + champions[i].championName + '.png">'
-					if(champions[i].championName_kr.length > 3){
-						html += '<div class="set">'+champions[i].championName_kr.substring(0, 3) + '...'
-					}else{
-						html += '<div class="set">'+champions[i].championName_kr
+					if (champions[i].championName_kr.length > 3) {
+						html += '<div class="set">' + champions[i].championName_kr.substring(0, 3) + '...'
+					} else {
+						html += '<div class="set">' + champions[i].championName_kr
 					}
 					html += '</div></a></li>'
 				}

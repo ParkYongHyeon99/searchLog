@@ -22,10 +22,12 @@
 	<!-- https://appsnuri.tistory.com/405 나중에 이거 적용할것 -->
 	<div class="allBigBox">
 
-		<div th:if="${session.member != null}">
-			<input type="hidden" id="m_id" name="m_id"
-				th:value="${session.member.m_id}">
-		</div>
+		<th:block th:if="${session.member != null}">
+			<input type="hidden" id="m_id" name="m_id" th:value="${session.member.m_id}">
+		</th:block>
+		<th:block th:if="${session.member == null}">
+			<input type="hidden" id="m_id" name="m_id">
+		</th:block>
 
 		<h3>LOL-mate</h3>
 
@@ -38,12 +40,12 @@
 			<div id="lmListChoice" class="tooltip">
 				lolmate 목록
 				<span class="tooltiptext tooltip-right">
-					<p>듀오를 구하거나 멘토를 구하는 글 목록입니다.</p>
+					<p>듀오를 구하거나<br>멘토를 구하는 글 목록입니다.</p>
 				</span>
 			</div>
 			<div id="lmInfoChoice" class="tooltip">
 				신청 관리
-				<span class="tooltiptext tooltip-right">
+				<span class="tooltiptext tooltip-right" id="lmInfoTooltip">
 					<p>작성한 글의 신청자를 관리하거나,<br>신청한 글을 관리합니다.</p>
 				</span>
 			</div>
@@ -52,8 +54,6 @@
 		<!-- lmTabChoice 끝 -->
 
 		<div>
-			<div id="lmInfoTab">ffff</div>
-			<!-- lmInfoTab 끝 -->
 			<div id="lmListTab">
 				<div class="serchMateDiv">
 					<label><input type="radio" name="lm_gameMate_find" value="0"
@@ -110,9 +110,9 @@
 				</div>
 				<!-- serchMateDiv 끝 -->
 
-				<button id="dmBtn" disabled>듀오/멘토 찾기 modal</button>
+				<button id="dmBtn" disabled>듀오/멘토 찾기</button>
 				<br> <br>
-
+				
 				<table class="lmListT">
 					<thead>
 						<tr class="trF">
@@ -136,6 +136,16 @@
 				</table>
 			</div>
 			<!-- lmListTab 끝 -->
+			
+			<div id="lmInfoTab">
+				<div>
+					<label><input type="radio" name="lmInfoTabChoice" value="myList" checked="checked">작성한 글</label>
+					<label><input type="radio" name="lmInfoTabChoice" value="myAppList">신청한 글</label>
+				</div>
+				<div id="infoNoction"></div>
+				<div id="lmInfoContents"></div>
+			</div>
+			<!-- lmInfoTab 끝 -->
 		</div>
 
 	</div>
