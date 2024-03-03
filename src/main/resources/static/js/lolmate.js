@@ -220,15 +220,16 @@ function mL_Detail(lm_num,division){
 			let id = document.getElementById('m_id').value;
 			if(lm.lm_app_summonerName.includes(id)){
 				// 한 상태
-				appChat(lm_num,id);
+				appChat(lm_num,id,'0');
 			}else{
 				// 안 한 상태
 				var container = document.getElementById('lmDMContent2');
 				const appSName = Object.assign(document.createElement('input'), { type: 'text', id: 'appSName', placeholder:'닉네임#태그' });
 				const appBtn = document.createElement('button');
-				appBtn.textContent = '신청';
-				appBtn.addEventListener('click', () => appChat());
-				container.appendChild(appSName,button);
+				appBtn.textContent = '  신청  ';
+				appBtn.addEventListener('click', () => appChat(lm_num,id,'1'));
+				container.appendChild(appSName);
+				container.appendChild(appBtn);
 			}
 			
 		}
@@ -277,9 +278,18 @@ function positionHtml(clName, selP) {
     return html;
 }
 
+function appChat(lm_num,id,category){
+	if(category=='1'){
+		
+	}else if(category=='1'){
+		
+	}
+}
 
 function myApp_Detail(lm_num){
-	$('#lmDMContent').html(lm_num+'  준비중');
+	mL_Detail(lm_num,'0');
+	const lmDModal = document.getElementById('lmDModal');
+	lmDModal.style.display = 'flex';
 }
 function myAppDel(lm_num,id,e){	// lolmate 글 삭제
 	e.stopPropagation();
