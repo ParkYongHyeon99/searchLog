@@ -1,15 +1,20 @@
 * {
 	margin: 1px;
 	text-align: center;
-	background-color: lightgreen;
+	background-color: #0A1428;
 	padding: 0;
-	border: 1px solid black;
+	border: 1px solid grey;
+	color: orange;
 }
 
 body {
 	justify-content: center;
 	align-items: center;
 	height: 100vh;
+}
+
+nav * {
+	width: 50%;
 }
 
 img {
@@ -27,10 +32,10 @@ a {
 	cursor: pointer;
 	margin: 0;
 	padding: 0;
+	color: orange;
 }
 
 table tr td {
-	border: 1px solid black;
 	font-size: 0.8em;
 	margin: 0;
 	padding: 0;
@@ -38,7 +43,6 @@ table tr td {
 
 td a img {
 	width: 40px;
-	height: 40px;
 }
 
 ul {
@@ -47,11 +51,10 @@ ul {
 	margin: 0;
 }
 
-.strong {
-	align-items: center; /*수직 중앙 정렬 */
-	justify-content: center; /*수평 중앙 정렬 */
+seection span {
+	display: flex;
 }
-/* ====================== ex페이지 css ====================== */
+
 .l-container {
 	width: 1100px;
 	margin: 0 auto;
@@ -60,10 +63,20 @@ ul {
 
 .width33 {
 	width: 33%;
+	background-color: #1E282D;
+}
+
+.width33 * {
+	background-color: inherit;
 }
 
 .width67 {
 	width: 67%;
+	background-color: #1E282D;
+}
+
+.width67 * {
+	background-color: inherit;
 }
 
 .width100 {
@@ -109,8 +122,39 @@ ul {
 	display: flex;
 }
 
-/* ====================== ex페이지 css ====================== */
-/* ====================== exch페이지 css ====================== */
+.insert {
+	display: flex;
+}
+
+.insert * {
+	display: flex;
+	align-items: center; /*수직 중앙 정렬 */
+	justify-content: center; /*수평 중앙 정렬 */
+	width: 100%;
+	height: 100%;
+}
+
+.logo {
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+}
+
+.logo * {
+	width: 100%;
+	height: 100%;
+}
+
+.header {
+	cursor: pointer;
+	width: 100%;
+	height: 50px;
+}
+
+.header * {
+	cursor: pointer;
+}
+
 .container {
 	display: flex;
 	width: 1200px;
@@ -128,7 +172,7 @@ ul {
 	display: flex;
 	flex-direction: column;
 	/* 세로로 배치 */
-	width: 200px;
+	width: 50px;
 	/* 전체 탭 메뉴의 너비 */
 }
 
@@ -158,7 +202,6 @@ ul {
 .tab-flex {
 	display: flex;
 	width: 100%;
-	/* padding: 100px; */
 }
 
 .divide {
@@ -174,7 +217,47 @@ ul {
 	text-align: left;
 }
 
-.aaa {
-	border-radius: 70%;
-	/* 	사진을 둥글게 */
+.search-box {
+	height: 50px;
+	border-radius: 10px;
+	background-color: #F0F0F0;
+	color: black;
+	font-size: 100%;
+}
+
+.rune {
+	width: 100%;
+	flex-direction: column;
+}
+
+.rune img {
+	width: 30px;
+	height: 30px;
+}
+
+.arrow-right {
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 15px solid orange;
+	display: inline-block;
+	margin-bottom: 15px;
+}
+
+.section-container {
+	display: flex;
+	height: 75%;
+}
+
+.rune {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.spell-container {
+	display: flex;
+	flex: 1;
+	justify-content: space-around;
+	align-items: center;
 }

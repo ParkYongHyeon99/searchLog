@@ -161,6 +161,7 @@ ORDER BY
 		LIMIT
 		5;
 	</select>
+	
 	<select id="shoes_winrate">
 		SELECT
 		shoes,
