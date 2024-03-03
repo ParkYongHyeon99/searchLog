@@ -33,7 +33,7 @@
 	</insert>
 	
 	<select id="mLList">
-		select lm_num,lm_gameMate,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo,lm_end from lolmateList 
+		select * from lolmateList 
 			where m_id=#{m_id} order by lm_num desc;
 	</select>
 	
@@ -47,6 +47,14 @@
 			INNER JOIN lolmateAPP ON lolmateList.lm_num = lolmateAPP.lm_num 
 			WHERE lolmateAPP.lm_app_m_id = #{m_id};
 	</select>
+	
+	<select id="lmDetail">
+		select * from lolmateList where lm_num=#{lm_num};
+	</select>
+	
+	<delete id="myAppDel">
+		delete from lolmateAPP where lm_num = #{lm_num} and lm_app_m_id=#{m_id};
+	</delete>
 	
 	
 </mapper>

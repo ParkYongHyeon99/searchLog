@@ -37,4 +37,14 @@ public class RestLolmateController {
 		return lmSer.myAppList(m_id);
 	}
 	
+	@GetMapping("/lolmate/lmDetail")
+	public LolmateDto lmDetail(int lm_num) {
+		return lmSer.lmDetail(lm_num);
+	}
+	
+	@GetMapping("/lolmate/myAppDel")
+	public String myAppDel(int lm_num, String m_id) {
+		return lmSer.myAppDel(lm_num, m_id);
+	}
+	
 }

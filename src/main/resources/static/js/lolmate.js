@@ -53,38 +53,7 @@ $('input[name=lmInfoTabChoice]').on('change',function(){
 	if(infoTab == 'myList'){
 		infoTabMyList(id);
 	}else if(infoTab == 'myAppList'){
-		$.ajax({
-			method:'get',
-			url:'/lolmate/myAppList',
-			data: {
-				m_id:id,
-			},
-		}).done(function(lmAppList){
-			$('#infoNoction').html('<p style="text-align:center;">리스트 클릭 시 신청한 글을 관리할 수 있습니다.</p>');
-			html = '<div>'
-			html += '<table id="mLAppList" style="width:80%; border: 1px solid black; padding: 1% 0 1% 0; margin: auto; text-align: center;">'
-			html += '<tr><th>번호</th><th>듀오/멘토</th><th>게임 모드</th><th>주 포지션</th><th>찾는 포지션</th><th>메모</th><th>신청</th></tr>'
-			if(lmAppList.length!=0){
-				let num = lmAppList.length;
-				for(let lm of lmAppList){
-					html += '<tr onclick="myApp_Detail('+lm.lm_num+')">'
-					html += '<td>'+num+'</td>'
-					if(lm.lm_gameMate == 0){ html += '<td>듀오</td>' }
-						else if(lm.lm_gameMate == 1){ html += '<td>멘토</td>' }
-					html += '<td>'+lm.lm_gameMode+'</td>'
-					html += '<td>'+divHtml(lm.lm_myPosition,'position')+'</td>'
-					html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>'
-					html += '<td>'+lm.lm_memo+'</td>'
-					html += '<td><button type="button" onclick="myLmAppDel('+lm.lm_num+',event)">신청 취소</button></td>'
-					html += '</tr>'
-					num--;
-				}
-			}else{
-				html += '<tr><td colspan="7"><div class="lmListDiv">신청한 글이 존재하지 않습니다.</div></td></tr>'
-			}
-			html += '</table></div>'
-			$('#lmInfoContents').html(html);
-		})
+		infoTabMyAppList(id);
 	}
 })
 function infoTabMyList(id){
@@ -96,62 +65,247 @@ function infoTabMyList(id){
 		},
 	}).done(function(lmList){
 		$('#infoNoction').html('<p style="text-align:center;">리스트 클릭 시 글/신청자를 관리할 수 있습니다.</p>');
-		html = '<div>'
-		html += '<table id="mLList" style="width:80%; border: 1px solid black; padding: 1% 0 1% 0; margin: auto; text-align: center;">'
-		html += '<thead><tr><th>번호</th><th>듀오/멘토</th><th>게임 모드</th><th>주 포지션</th><th>찾는 포지션</th><th>메모</th><th>신청자 수</th><th>신청 가능 여부</th></tr></thead>'
-		html += '<tbody id="lmTbody">'
+		
+		$('#mLAppList thead').empty();
+		const thRow = $('<tr>');
+		let th = ['번호','듀오/멘토','게임 모드','주 포지션','찾는 포지션','메모','신청자 수','신청 가능 여부'];
+		for(let i=0; i<th.length; i++){
+			const thCell = $('<th>').text('  '+th[i]+'  ');
+			thRow.append(thCell);
+			$('#mLAppList thead').append(thRow);
+		}
+		
+		$('#mLAppList tbody').empty();
 		if(lmList.length!=0){
 			let num = lmList.length;
 			for(let lm of lmList){
-				html += '<tr onclick="mL_Detail('+lm.lm_num+')">'
-				html += '<td>'+num+'</td>'
-				if(lm.lm_gameMate == 0){ html += '<td>듀오</td>' }
-					else if(lm.lm_gameMate == 1){ html += '<td>멘토</td>' }
-				html += '<td>'+lm.lm_gameMode+'</td>'
-				html += '<td>'+divHtml(lm.lm_myPosition,'position')+'</td>'
-				html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>'
-				html += '<td>'+lm.lm_memo+'</td>'
+				const newRow = $('<tr>');
+				newRow.attr('id', lm.lm_num);
+				newRow.attr('class', 'lmDBtn');
+				newRow.on('click',function(){
+					mL_Detail(lm.lm_num,'0');
+					const lmDModal = document.getElementById('lmDModal');
+					lmDModal.style.display = 'flex';
+				})
+				
+				const numCell = $('<td>').text(num)
+				const gameMateCell = $('<td>').text('');
+				if(lm.lm_gameMate == 0){ gameMateCell.text('듀오') }
+					else if(lm.lm_gameMate == 1){ gameMateCell.text('멘토') }
+				const gameModeCell = $('<td>').text(lm.lm_gameMode)
+				const myPCell = $('<td>').html(divHtml(lm.lm_myPosition,'position'))
+				const findPCell = $('<td>').html(divHtml(lm.lm_findPosition,'position'))
+				const memoCell = $('<td>').text(lm.lm_memo)
+				const appCtnCell = $('<td>').text('');
 				if(lm.lm_app_summonerName.length<1){
-					html += '<td>&ensp;-&ensp;명</td>'
+					appCtnCell.text('  -  명');
 				}else{
-					html += '<td>'+lm.lm_app_summonerName.length+'명</td>'
+					appCtnCell.text('  '+lm.lm_app_summonerName.length+'  명');
 				}
-				if(lm.lm_end == 0){ html += '<td>신청 가능</td>' }
-					else if(lm.lm_end == 1){ html += '<td>닫힘</td>' }
-				html += '</tr>'
+				const endCell = $('<td>').text('');
+				if(lm.lm_end == 0){ endCell.text('신청 가능'); }
+					else if(lm.lm_end == 1){ endCell.text('닫힘'); }
 				num--;
+				
+				newRow.append(numCell,gameMateCell,gameModeCell,myPCell,findPCell,memoCell,appCtnCell,endCell)
+				$('#mLAppList tbody').append(newRow);
 			}
-			
-			html += '<div id="mLDetailDiv" style="display:none;"></div>'
-			
 		}else{
-			html += '<tr><td colspan="8"><div class="lmListDiv">작성한 글이 존재하지 않습니다.</div></td></tr>'
+			const newRow = $('<tr>');
+			const newCell = $('<td>').attr('colspan', '8').append('<div class="lmListDiv">작성한 글이 존재하지 않습니다.</div>');
+			newRow.append(newCell);
+			$('#mLAppList tbody').append(newRow);
 		}
-		html += '<tbody></table></div>'
-		$('#lmInfoContents').html(html);
 	})
 }
-function mL_Detail(lm_num){
-	$('#mLList').css('display','none');
-	$('#mLDetailDiv').css('display','block');
-	$('#mLDetailDiv').html(lm_num+'띄울 준비중');
+function infoTabMyAppList(id){
+	$.ajax({
+		method:'get',
+		url:'/lolmate/myAppList',
+		data: {
+			m_id:id,
+		},
+	}).done(function(lmAppList){
+		$('#infoNoction').html('<p style="text-align:center;">리스트 클릭 시 신청한 글을 관리할 수 있습니다.</p>');
+		
+		$('#mLAppList thead').empty();
+		const thRow = $('<tr>');
+		let th = ['번호','듀오/멘토','게임 모드','소환사 명','주 포지션','찾는 포지션','메모','신청'];
+		for(let i=0; i<th.length; i++){
+			const thCell = $('<th>').text('  '+th[i]+'  ');
+			thRow.append(thCell);
+			$('#mLAppList thead').append(thRow);
+		}
+		
+		$('#mLAppList tbody').empty();
+		if(lmAppList.length!=0){
+			let num = lmAppList.length;
+			for(let lm of lmAppList){
+				const newRow = $('<tr>');
+				newRow.on('click',function(){
+					myApp_Detail(lm.lm_num);
+					const lmDModal = document.getElementById('lmDModal');
+					lmDModal.style.display = 'flex';
+				})
+				
+				const numCell = $('<td>').text(num)
+				const gameMateCell = $('<td>');
+				if(lm.lm_gameMate == 0){ gameMateCell.text('듀오') }
+					else if(lm.lm_gameMate == 1){ gameMateCell.text('멘토') }
+				const gameModeCell = $('<td>').text(lm.lm_gameMode)
+				const summonerNameCell = $('<td>').text(lm.lm_summonerName)
+				const myPCell = $('<td>').html(divHtml(lm.lm_myPosition,'position'))
+				const findPCell = $('<td>').html(divHtml(lm.lm_findPosition,'position'))
+				const memoCell = $('<td>').text(lm.lm_memo)
+				const btnCell = $('<td>').append($('<button>').attr('type', 'button').text('  신청 취소  ').on('click', function(event) {myAppDel(lm.lm_num, id, event);}));
+				
+				newRow.append(numCell,gameMateCell,gameModeCell,summonerNameCell,myPCell,findPCell,memoCell,btnCell)
+				num--;
+				$('#mLAppList tbody').append(newRow);
+			}
+		}else{
+			const newRow = $('<tr>');
+			const newCell = $('<td>').attr('colspan', '8').append('<div class="lmListDiv">신청한 글이 존재하지 않습니다.</div>');
+			newRow.append(newCell);
+			$('#mLAppList tbody').append(newRow);
+		}
+	})
 }
+
+function mL_Detail(lm_num,division){
+	$.ajax({
+		method:'get',
+		url:'/lolmate/lmDetail',
+		data: {
+			lm_num:lm_num,
+		},
+	}).done(function(lm){
+		$('#lm_detailT').html(lm.lm_summonerName+'님의 lolmate 상세 페이지');
+		let html = ''
+		
+		html += '<div><h5 class="lmWrite_h5">소환사 닉네임</h5><input class="lm_summonerName" type="text" value="'+lm.lm_summonerName+'" disabled></div><br>'
+		html += '<div class="floatLeft"><h5 class="lmWrite_h5">티어</h5><input type="text" value="'+lm.lm_tier+'" disabled></div>'
+		html += '<div><h5 class="lmWrite_h5">승률</h5><input type="text" value="'+lm.lm_winrate+'%" disabled></div><br>'
+		
+		html += '<div class="btn-group floatLeft"><h5 class="lmWrite_h5">디스코드 여부</h5>'
+		if(lm.lm_discord==0){
+			html += '<button type="button" id="dOn" class="selectBtn">on</button><button type="button" id="dOff" class="noSelectBtn">off</button></div></div>'
+		}else{
+			html += '<button type="button" id="dOn" class="noSelectBtn">on</button><button type="button" id="dOff" class="selectBtn">off</button></div></div>'
+		}
+		html += '<div class="btn-group floatLeft"><h5 class="lmWrite_h5">lolmate</h5>'
+		if(lm.lm_gameMate==0){
+			html += '<button type="button" id="duoBtn" class="selectBtn">듀오</button><button type="button" id="mentoBtn" class="noSelectBtn">멘토</button></div>'
+		}else{
+			html += '<button type="button" id="duoBtn" class="noSelectBtn">듀오</button><button type="button" id="mentoBtn" class="selectBtn">멘토</button></div>'
+		}
+		html += '<div class="lm_serchSelectDiv"><h5 class="lmWrite_h5">게임모드</h5><input type="text" value="'+lm.lm_gameMode+'" disabled></div><br>'
+		
+		html += '<div class="positionSelect"><div class="myPoDivSelect"><h5>내 포지션</h5>'
+		html += positionHtml('myPoRadio',lm.lm_myPosition)+'</div>'
+		html += '<div class="findPoDivSelect"><h5>찾는 포지션</h5>'
+		html += positionHtml('findPoRadio',lm.lm_findPosition)+'</div></div>'
+		
+		html += '<div class="lmMemoDiv"><textarea id="lmWriteMemo" rows="6%" cols="78%" disabled>'+lm.lm_memo+'</textarea></div>'
+		
+		$('#lmDMContent').html(html);
+		
+		
+		$('#lmDMContent2').html('');
+		if(division == '0'){
+			// 확인
+			
+		}else if(division == '1'){
+			// 신청
+			let id = document.getElementById('m_id').value;
+			if(lm.lm_app_summonerName.includes(id)){
+				// 한 상태
+				appChat(lm_num,id);
+			}else{
+				// 안 한 상태
+				var container = document.getElementById('lmDMContent2');
+				const appSName = Object.assign(document.createElement('input'), { type: 'text', id: 'appSName', placeholder:'닉네임#태그' });
+				const appBtn = document.createElement('button');
+				appBtn.textContent = '신청';
+				appBtn.addEventListener('click', () => appChat());
+				container.appendChild(appSName,button);
+			}
+			
+		}
+	})
+}
+function positionHtml(clName, selP) {
+    console.log(selP);
+    let po = ['top', 'jug', 'mid', 'adc', 'sup'];
+    let po1 = ["Top", "Jungle", "Mid", "Bot", "Support"];
+    let po2 = ["selTop", "selJungle", "selMid", "selBot", "selSupport"];
+    let poKr = ['탑', '정글', '미드', '원딜(봇)', '서포터'];
+    let html = '';
+
+    if (selP === "All ") {
+        html += '<label class="positionImg tooltip pAll" id="' + clName + 'pAll">';
+        html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+        html += '<span class="tooltiptext tooltip-bottom">전체 라인</span></label>';
+        for (let i = 0; i < po.length; i++) {
+            html += '<label class="positionImg tooltip ' + po1[i] + '" id="' + clName + 'pAll">';
+            html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+            html += '<span class="tooltiptext tooltip-bottom">' + poKr[i] + '</span></label>';
+        }
+    } else {
+        let selectedPositions = selP.split(" ");
+        html += '<label class="positionImg tooltip npAll" id="' + clName + 'pAll">';
+        html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+        html += '<span class="tooltiptext tooltip-bottom">전체 라인</span></label>';
+        for (let i = 0; i < po.length; i++) {
+            let positionFound = false;
+            for (let j = 0; j < selectedPositions.length; j++) {
+                if (po[i] === selectedPositions[j]) {
+                    html += '<label class="positionImg tooltip ' + po2[i] + '" id="' + clName + 'pAll">';
+                    html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+                    html += '<span class="tooltiptext tooltip-bottom">' + poKr[i] + '</span></label>';
+                    positionFound = true;
+                    break;
+                }
+            }
+            if (!positionFound) {
+                html += '<label class="positionImg tooltip ' + po1[i] + '" id="' + clName + 'pAll">';
+                html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+                html += '<span class="tooltiptext tooltip-bottom">' + poKr[i] + '</span></label>';
+            }
+        }
+    }
+    return html;
+}
+
+
 function myApp_Detail(lm_num){
-	
+	$('#lmDMContent').html(lm_num+'  준비중');
 }
-function myLmAppDel(lm_num,e){
+function myAppDel(lm_num,id,e){	// lolmate 글 삭제
 	e.stopPropagation();
 	$.ajax({
 		method:'get',
-		url:'/lolmate/myLmList',
+		url:'/lolmate/myAppDel',
 		data: {
 			lm_num:lm_num,
 			m_id:id,
 		},
 	}).done(function(res){
-		
+		if(res=='ok'){
+			Swal.fire({
+				icon : "success",
+				title : "취소 성공!",
+			});
+			infoTabMyAppList(id);
+			return;
+		}
 	})
+	Swal.fire({
+		icon : "error",
+		text : "취소 실패..",
+	});
 }
+
 
 
 /* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
@@ -184,34 +338,54 @@ function lmAjax(){
 		console.log(lmList)
 		var html = '';
 		let cntHtml = '';
+		let id = document.getElementById('m_id').value;
 		if(lmList["all"].length!=0){
 			if(lmList["serch"].length!=0){
-				for(var lm of lmList["serch"]){
-					html += '<tr>';
-					html += '<td>'+lm.lm_gameMode+'</td>';		// 게임 모드
-					html += '<td>'+divHtml(lm.lm_tier,'emblem')+'</td>';			// 티어
-					html += '<td>'+lm.lm_summonerName+'</td>';	// 작성자 게임닉
-					html += '<td>'+divHtml(lm.lm_myPosition,'position')+'</td>';	// 작성자 포지션
-					html += '<td>'+lm.lm_winrate+'</td>';			// 작성자 승률
-					html += '<td>'+divHtml(lm.lm_findPosition,'position')+'</td>';	// 찾는 포지션
-					html += '<td>'+lm.lm_memo+'</td>';			// 작성자 메모
-					if(lm.m_id == document.getElementById('m_id').value){
+				$('#lmListT tbody').empty();
+				for(let lm of lmList["serch"]){
+					let newRow = $('<tr>');
+					const gameModeCell = $('<td>').text(lm.lm_gameMode) // 게임 모드
+					const tierCell = $('<td>').html(divHtml(lm.lm_tier,'emblem')) // 티어
+					const summonerNameCell = $('<td>').text(lm.lm_summonerName) // 작성자 게임닉
+					const myPCell = $('<td>').html(divHtml(lm.lm_myPosition,'position')) // 작성자 포지션
+					const winrateCell = $('<td>').text(lm.lm_winrate) // 작성자 승률
+					const findPCell = $('<td>').html(divHtml(lm.lm_findPosition,'position')) // 찾는 포지션
+					const memoCell = $('<td>').text(lm.lm_memo) // 작성자 메모
+					
+					
+					const btnCell = $('<td>');
+					if(lm.m_id == id){
 						if(lm.lm_end==0){
-							html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')">확인</button></td>';
+							btnCell.append($('<button>').attr('type', 'button').text('  확인  ').on('click', function() {
+										mL_Detail(lm.lm_num,'0');
+										const lmDModal = document.getElementById('lmDModal');
+										lmDModal.style.display = 'flex';
+									}));
 						}else if(lm.lm_end==1){
-							html += '<td><button disabled>확인</button></td>'
+							btnCell.append($('<button>').attr('type', 'button').prop('disabled', true).text('  닫힘  '));
 						}
 					}else{
 						if(lm.lm_end==0){
-							html += '<td><button class="appBtn" onclick="popup(\'app\','+lm.lm_num+')" disabled>신청</button></td>';
+							btnCell.append($('<button>').attr('type', 'button').attr('class', 'appBtn').text('  신청  ').on('click', function() {
+										mL_Detail(lm.lm_num,'1');
+										const lmDModal = document.getElementById('lmDModal');
+										lmDModal.style.display = 'flex';
+									}).prop('disabled', true));
 						}else if(lm.lm_end==1){
-							html += '<td><button disabled>닫힘</button></td>'
+							btnCell.append($('<button>').attr('type', 'button').prop('disabled', true).text('  닫힘  '));
 						}
 					}
-					html += '</tr>';
+					
+					
+					newRow.append(gameModeCell,tierCell,summonerNameCell,myPCell,winrateCell,findPCell,memoCell,btnCell)
+					
+					$('#lmListT #lmTbody').append(newRow);
 				}
 			}else{
-				html += '<tr><td colspan="8"><div class="lmListDiv">글이 존재하지 않습니다.</div></td></tr>';
+				const newRow = $('<tr>');
+				const newCell = $('<td>').attr('colspan', '8').append('<div class="lmListDiv">글이 존재하지 않습니다.</div>');
+				newRow.append(newCell);
+				$('#lmListT #lmTbody').append(newRow);
 			}
 			
 			var topCntD = 0; var jugCntD = 0; var midCntD = 0; var supCntD = 0; var adcCntD = 0;
@@ -264,12 +438,9 @@ function lmAjax(){
 						+'<p>- lolmate(듀오/멘토) 글 작성 및 신청은 로그인 시에만 가능합니다.</p>';
 		}
 		
-		$("#lmTbody").empty();
-		$("#lmTbody").append(html);
 		$("#lmNotionDiv").empty();
 		$("#lmNotionDiv").append(cntHtml);
 		
-		let id = document.getElementById('m_id').value
 		if(id != ""){
 			$('#lmInfoChoice').css('display','inline-block')
 			document.getElementById('dmBtn').disabled = false;
@@ -310,7 +481,6 @@ function divHtml(tp,img){
 			else if(tp.search("Challenger")!=-1){html += '챌린저'}
 			html += spanTE;
 		}
-		
 	}else if(img=='position'){
 		if(tp.search("All")!=-1){
 			html += divT+'pAll" style="background-image: url(\'../img/position/Silver-pAll.png\');'+spanT+'모든 포지션'+spanTE;
@@ -448,13 +618,6 @@ function poImgSet(id,sel,p){
 /* ====================== 롤메이트 글 작성 ====================== */
 $('#lmWriteBtn').on('click',function(){
 	let sName = $('.lm_summonerName_write').val();
-/*	if(sName.search("#")==-1){
-		Swal.fire({
-			icon : "error",
-			text : "닉네임 형식이 맞는지 확인해주세요.",
-		});
-		return
-	}*/
 	
 	var discordOn = $('#discodeOn').attr('class');
 	var gameMateSelect = $('#duoBtn').attr('class');
@@ -509,23 +672,3 @@ $('#lmWriteBtn').on('click',function(){
 })
 /* ====================== 롤메이트 글 작성 끝 ====================== */
 
-
-
-
-
-
-
-
-
-/* ====================== 팝업창 띄우기 ====================== */
-function popup(menu,lm_num){
-	// https://w94dev.tistory.com/45
-	if(menu=="find"){
-	    var url = "write";
-	}else if(menu=="app"){
-	    var url = "detail";
-	}
-    var name = "lolmate popup";
-    var option = "width=500, height= 500, top=200, left=800, location=no, resizable=no"
-    window.open(url, name, option);
-}
