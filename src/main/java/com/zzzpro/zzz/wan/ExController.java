@@ -40,25 +40,24 @@ public class ExController {
 		List<Map<String, Object>> counter = eSer.counter(championName, highest_pick_rate_position);
 		log.info("@@카운터 -> " + counter);
 		model.addAttribute("counter", counter);
-		
+
 		List<Map<String, Object>> rune = eSer.rune(championName, highest_pick_rate_position);
 		log.info("@@룬 -> " + rune);
 		model.addAttribute("rune", rune);
-		
-		// 디폴트 티어 xml에 에메랄드로 설정하고 라인버튼에 
+
+		List<Map<String, Object>> item = eSer.item(championName, highest_pick_rate_position);
+		log.info("@@아이템 -> " + item);
+		model.addAttribute("item", item);
+
+		List<Map<String, Object>> mostLine = eSer.mostLine(championName);
+		log.info("@@라인픽비율 -> " + mostLine);
+		model.addAttribute("mostLine", mostLine);
+
+		// 디폴트 티어 xml에 에메랄드로 설정하고 라인버튼에
 		// 밸류넣어서 비동기로 teamposition바꿔서 값바꿔 html출력까지
-		
+
 		return "exch";
 
-//		List<ExDto> linePick = eSer.linePick(eDto);
-//		if (linePick != null) {
-//			model.addAttribute("linePick", linePick);
-//			log.info("@@라인, 픽률 -> " + linePick);
-//			return "exch";
-//		} else {
-//			log.info("상세페이지 이동 실패");
-//			return "redirect:/ex";
-//		}
 	}
 
 }

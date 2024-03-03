@@ -6,9 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import lombok.extern.slf4j.Slf4j;
-
-@Slf4j
 @Service
 public class ExService {
 	@Autowired
@@ -30,9 +27,13 @@ public class ExService {
 		return eDao.rune(championName, highest_pick_rate_position);
 	}
 
-	public List<ExDto> linePick(ExDto eDto) {
-		return eDao.linePick(eDto);
+	public List<Map<String, Object>> item(String championName, String highest_pick_rate_position) {
+		return eDao.item(championName, highest_pick_rate_position);
 	}
+
+//	public List<Map<String, Object>> skill(String championName, String highest_pick_rate_position) {
+//		return eDao.skill(championName, highest_pick_rate_position);
+//	}
 
 	public List<Map<String, Object>> test(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
 		eDto.setLine('%' + eDto.getLine() + '%');
@@ -41,6 +42,10 @@ public class ExService {
 		} else {
 			return eDao.test(eDto);
 		}
+	}
+
+	public List<Map<String, Object>> mostLine(String championName) {
+		return eDao.mostLine(championName);
 	}
 
 }

@@ -51,6 +51,10 @@ ul {
 	margin: 0;
 }
 
+seection span {
+	display: flex;
+}
+
 .strong {
 	align-items: center; /*수직 중앙 정렬 */
 	justify-content: center; /*수평 중앙 정렬 */
@@ -146,6 +150,16 @@ ul {
 	height: 100%;
 }
 
+.header {
+	cursor: pointer;
+	width: 100%;
+	height: 50px;
+}
+
+.header * {
+	cursor: pointer;
+}
+
 .container {
 	display: flex;
 	width: 1200px;
@@ -163,7 +177,7 @@ ul {
 	display: flex;
 	flex-direction: column;
 	/* 세로로 배치 */
-	width: 200px;
+	width: 50px;
 	/* 전체 탭 메뉴의 너비 */
 }
 
@@ -193,7 +207,6 @@ ul {
 .tab-flex {
 	display: flex;
 	width: 100%;
-	/* padding: 100px; */
 }
 
 .divide {
@@ -215,4 +228,22 @@ ul {
 	background-color: #F0F0F0;
 	color: black;
 	font-size: 100%;
+}
+
+.rune {
+	width: 100%;
+	flex-direction: column;
+}
+
+.rune img {
+	width: 30px;
+	height: 30px;
+}
+
+.arrow-right {
+	border-top: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 15px solid orange;
+	display: inline-block;
+	margin-bottom: 15px;
 }
