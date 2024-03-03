@@ -100,6 +100,24 @@ public class LolmateService {
 		return lmDao.myAppList(m_id);
 	}
 
+	
+	public LolmateDto lmDetail(int lm_num) {
+		LolmateDto lm = lmDao.lmDetail(lm_num);
+		if(lm.getLm_num()!=0) {
+			lm.setLm_app_summonerName(lmDao.mLAppList(lm));
+			return lm;
+		}
+		return null;
+	}
+
+	public String myAppDel(int lm_num, String m_id) {
+		if(lmDao.myAppDel(lm_num,m_id)) {
+			return "ok";
+		}
+		return "no";
+	}
+
+
 
 	
 }

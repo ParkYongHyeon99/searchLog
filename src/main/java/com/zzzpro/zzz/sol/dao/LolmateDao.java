@@ -16,5 +16,7 @@ public interface LolmateDao {
 	ArrayList<LolmateDto> mLList(LolmateDto lmDto);
 	ArrayList<String> mLAppList(LolmateDto lmDto);
 	ArrayList<LolmateDto> myAppList(String m_id);
+	LolmateDto lmDetail(int lm_num);
+	boolean myAppDel(int lm_num, String m_id);
 	
 }
