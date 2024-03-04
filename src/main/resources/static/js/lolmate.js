@@ -214,8 +214,8 @@ function mL_Detail(lm_num,division){
 		
 		$('#lmDMContent2').html('');
 		if(division == '0'){
-			// 확인
-			
+			// 확인(작성자)
+			appList(lm_num);
 		}else if(division == '1'){
 			// 신청
 			var al = lm.lm_app;
@@ -238,7 +238,6 @@ function mL_Detail(lm_num,division){
 				container.appendChild(appSName);
 				container.appendChild(appBtn);
 			}
-			
 		}
 	})
 }
@@ -311,10 +310,10 @@ function appChat(lm_num,id,category){	// 신청자의 채팅
 		})
 	}
 	// 채팅 출력
-	chat(lm_num)
+	chat(lm_num,'0')
 }
 
-function chat(lm_num){
+function chat(lm_num,category){
 	$('#lmDMContent2').html('');
 	$.ajax({
 		method:'get',
@@ -326,6 +325,14 @@ function chat(lm_num){
 		var id = document.getElementById('m_id').value
 		var parentDiv = document.getElementById('lmDMContent2');
 		var childDiv = document.createElement('div');
+		if(category==1){
+			var backBtn = document.createElement('button');
+			backBtn.textContent = '  ⇐  ';
+	        chatDiv.setAttribute('id', 'chat-backBtn');
+	        backBtn.onclick = function(){
+				chat(lm_num,'0')
+			}
+		}
 		var chatDiv = document.createElement('div');
         chatDiv.setAttribute('id', 'chat-div');
 		for(let i=0; i<appChatList.length; i++){
@@ -367,7 +374,7 @@ function chat(lm_num){
 			}).done(function(res){
 				console.log('res: '+res)
 				if(res){
-					chat(lm_num);
+					chat(lm_num,0);
 				}else{
 					Swal.fire({
 						icon : "error",
