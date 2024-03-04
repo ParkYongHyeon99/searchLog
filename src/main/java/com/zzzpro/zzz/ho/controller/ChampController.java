@@ -25,43 +25,6 @@ public class ChampController {
 	ChampService champser;
 	
 
-//	@PostMapping("/champ/champinfo")
-//	public String champinfo(ChampDto cDto,Model model, HttpSession session) {
-//		log.info("==cDTO={}",cDto);
-//		String runeRate = champser.runeRate(cDto);
-//
-//		log.info("==runerate={}",runeRate);
-//		
-//		if(runeRate != null) {
-//			ChampDto champDto = new ChampDto();
-//			
-//			champDto.setChampionName_KR(cDto.getChampionName_KR());
-//			champDto.setTier1(cDto.getTier1());
-//			champDto.setMain_name(cDto.getMain_name());
-//			champDto.setMain_perks1(cDto.getMain_perks1());
-//			champDto.setMain_perks2(cDto.getMain_perks2());
-//			champDto.setMain_perks3(cDto.getMain_perks3());
-//			champDto.setMain_perks4(cDto.getMain_perks4());
-//			
-//			model.addAttribute("champDto",champDto);
-//			return "champinfo";
-//		}else {
-//			return "redirect:/testmain";
-//		}
-//	}
-	@GetMapping("/testmain")
-	public String champions(Model model, ChampDto cDto, HttpSession session) {
-//		String champions = (String) session.getAttribute("champions");
-//		cDto.setChampions(champions);
-//		List<ChampDto> champion = champser.champions(champions);
-//		List<ChampDto> champpi = champser.champpick_pi(champions);
-//		log.info("==이름={}",champion);
-//		model.addAttribute("champions",champion);
-//		model.addAttribute("champpi",champpi);
-//		log.info("==champpi={}",champpi);
-		return "testmain";
-		
-	}
 	
 	@GetMapping("/champ/champinfo")
 	public String champinfo(ChampDto cDto, Model model, HttpSession session) {
