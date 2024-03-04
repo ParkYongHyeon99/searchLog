@@ -2,28 +2,81 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.zzzpro.zzz.wan.ExDao">
 	
-	<select id="linePick">
-		SELECT teamPosition,
-		concat(ROUND((COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_personal1 WHERE championName =
-		#{champions}) * 100), 1),'%') AS linePick
-		FROM zzz_datas_personal1 WHERE championName = #{champions}
-		GROUP BY teamPosition ORDER BY COUNT(*) DESC LIMIT 3
-	</select>
-	
 	<select id="test">
 		select championName,championName_kr
 		from champList where line like #{line} order by championName_kr
 	</select>
 	
+	<select id="mostLine">
+   SELECT t1.championName_kr, t1.teamPosition, t1.line_pick_rate, t1.tier1,
+   round(line_pick_rate / t2.championPickrate * 100, 2) AS line_percentage
+   FROM (
+      SELECT championName_kr, teamPosition, COUNT(*) AS line_pick_rate, tier1
+      FROM zzz_datas_detail
+      WHERE championName = #{championName} AND teamPosition != '' AND tier1 = '에메랄드'
+      GROUP BY championName_kr, teamPosition, tier1
+   ) t1
+   JOIN (
+      SELECT COUNT(*) AS championPickrate
+      FROM zzz_datas_detail
+      WHERE championName = #{championName} AND teamPosition != '' AND tier1 = '에메랄드'
+   ) t2 ON 1 = 1
+   ORDER BY line_percentage DESC;
+</select>
+
+	
 	<select id="counter">
-		SELECT championName_kr, enemy_champ, 
+		SELECT enemy_champ, enemy_champ_en, tier1,
 		COUNT(CASE WHEN win = 1 THEN 1 END) AS win_count, COUNT(*) AS total_count, 
-    	round(((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*)) * 100),2) 
+    	round(((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*)) * 100),2)
     	AS win_rate
 		FROM zzz_datas_counter2
-		WHERE championName_kr = '가렌' and teamPosition = 'top'
+		WHERE championName = #{championName} and teamPosition = #{highest_pick_rate_position} and tier1 = '에메랄드'
 		GROUP BY enemy_champ
-		ORDER BY total_count desc limit 3;
+		HAVING total_count >= 10
+		ORDER BY win_rate
+	</select>
+	
+	<select id="rune">
+		SELECT
+		championName_kr,
+        teamPosition,
+        tier1,
+        main_name,
+		main_perks1,
+		main_perks2,
+		main_perks3,
+		main_perks4,
+		sub_name,
+		sub_perks1,
+		sub_perks2,
+		stat_perks1,
+		stat_perks2,
+		stat_perks3,
+		COUNT(*) AS rune_count,
+		round(COUNT(*)/(SELECT COUNT(*) FROM zzz_datas_rune WHERE championName = #{championName})*100, 2) as rune_percentage,
+		round((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) * 100),2) AS rune_win_percentage
+		FROM zzz_datas_rune
+		WHERE championName =
+		#{championName} and teamPosition = #{highest_pick_rate_position}
+		and tier1 = '에메랄드'
+		GROUP BY main_name, sub_name
+		ORDER BY rune_count DESC limit 1
+	</select>
+	
+	<select id="item">
+		SELECT
+		core1, core2, core3,
+		COUNT(*) AS item_count,
+		ROUND(COUNT(*) / (SELECT COUNT(*) FROM zzz_datas_item WHERE championName = #{championName} AND teamPosition = 'utility' AND tier1 = #{highest_pick_rate_position}) * 100, 2) AS item_percentage,
+		ROUND((COUNT(CASE WHEN win = 1 THEN 1 END) / COUNT(*) * 100), 2) AS item_win_percentage
+		FROM zzz_datas_item
+		WHERE
+		championName = #{championName} AND teamPosition = #{highest_pick_rate_position}
+		AND tier1 = '에메랄드' AND core2 != 0 AND core3 != 0
+		GROUP BY core1
+		ORDER BY item_count DESC
+		LIMIT 1;
 	</select>
 	
 </mapper>

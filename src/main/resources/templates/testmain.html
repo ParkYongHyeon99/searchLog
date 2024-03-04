@@ -3,11 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="/css/exstyle.css">
 </head>
 <body>
 
 
-	<form action = "/champ/champinfo" method = "post">
+	<form action = "/champ/champinfo" >
 	<select name ="tier1" size="1">
 		<option value="아이언" selected>아이언</option>
 		<option value="브론즈" selected>브론즈</option>
@@ -21,7 +22,7 @@
 		<option value="챌린저" selected>챌린저</option>
 	</select>
 	
-	<input type = "text" name ="championName_KR" placeholder="챔피언 이름" value = "블리츠크랭크">
+	<input type = "text" name ="championName" placeholder="챔피언 이름" value = "Maokai">
 	
 	<select name ="teamPosition" size="1">
 		<option value="Top" selected>탑</option>
@@ -31,7 +32,18 @@
 		<option value="UTILITY" selected>서폿</option>
 	</select>
 	<input type = "submit" value = "챔피언 정보">
+	</form>
+<!--	<div id="test" class="width33">-->
+<!--                    <ul class="width100">-->
+<!--						<li th:each ="lane: ${champpi}">-->
+<!--                            <a th:href="@{/champ/champinfo/{champions}(champions=${lane.championName})/{lane}(lane=${lane.highest_pick_rate_position})}">-->
+<!--                                <img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${lane.championName}.png|" alt="초상화">-->
+<!--                            </a>-->
+<!--                        </li>-->
+<!--        	        </ul>-->
+<!--                </div>-->
 	
-</form>
+	
+<script type="text/javascript" src="/js/ex.js"></script> <!-- 라인별 챔피언 스크립트 -->
 </body>
 </html>
