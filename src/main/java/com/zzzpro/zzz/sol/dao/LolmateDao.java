@@ -2,6 +2,9 @@ package com.zzzpro.zzz.sol.dao;
 
 import java.util.ArrayList;
 import org.apache.ibatis.annotations.Mapper;
+
+import com.zzzpro.zzz.sol.dto.LolmateAPPChatDto;
+import com.zzzpro.zzz.sol.dto.LolmateAppDto;
 import com.zzzpro.zzz.sol.dto.LolmateDto;
 
 @Mapper
@@ -14,9 +17,12 @@ public interface LolmateDao {
 	ArrayList<LolmateDto> lmAllList();
 	boolean lmWrite(LolmateDto lmDto);
 	ArrayList<LolmateDto> mLList(LolmateDto lmDto);
-	ArrayList<String> mLAppList(LolmateDto lmDto);
+	ArrayList<LolmateAppDto> mLAppList(LolmateDto lmDto);
 	ArrayList<LolmateDto> myAppList(String m_id);
 	LolmateDto lmDetail(int lm_num);
 	boolean myAppDel(int lm_num, String m_id);
+	boolean myLmApp(LolmateAppDto lmApp);
+	ArrayList<LolmateAPPChatDto> appChatList(int lm_num);
+	boolean chatAppend(LolmateAPPChatDto lmACDto);
 	
 }

@@ -97,10 +97,10 @@ function infoTabMyList(id){
 				const findPCell = $('<td>').html(divHtml(lm.lm_findPosition,'position'))
 				const memoCell = $('<td>').text(lm.lm_memo)
 				const appCtnCell = $('<td>').text('');
-				if(lm.lm_app_summonerName.length<1){
+				if(lm.lm_app.length<1){
 					appCtnCell.text('  -  명');
 				}else{
-					appCtnCell.text('  '+lm.lm_app_summonerName.length+'  명');
+					appCtnCell.text('  '+lm.lm_app.length+'  명');
 				}
 				const endCell = $('<td>').text('');
 				if(lm.lm_end == 0){ endCell.text('신청 가능'); }
@@ -173,6 +173,7 @@ function infoTabMyAppList(id){
 }
 
 function mL_Detail(lm_num,division){
+	let id = document.getElementById('m_id').value;
 	$.ajax({
 		method:'get',
 		url:'/lolmate/lmDetail',
@@ -217,8 +218,14 @@ function mL_Detail(lm_num,division){
 			
 		}else if(division == '1'){
 			// 신청
-			let id = document.getElementById('m_id').value;
-			if(lm.lm_app_summonerName.includes(id)){
+			var al = lm.lm_app;
+			var idOk = false;
+			al.forEach(function(item) {
+			    if (item.lm_app_m_id === id) {
+					idOk = true;
+			    }
+			});
+			if(idOk){
 				// 한 상태
 				appChat(lm_num,id,'0');
 			}else{
@@ -278,12 +285,107 @@ function positionHtml(clName, selP) {
     return html;
 }
 
-function appChat(lm_num,id,category){
-	if(category=='1'){
-		
-	}else if(category=='1'){
-		
+function appChat(lm_num,id,category){	// 신청자의 채팅
+	if(category=='1'){	// 신청버튼 클릭 시 신청부터 진행
+		$.ajax({
+			method:'get',
+			url:'/lolmate/myLmApp',
+			data: {
+				lm_num:lm_num,
+				lm_app_m_id:id,
+				lm_app_summonerName:document.getElementById('appSName').value,
+			},
+		}).done(function(res){
+			if(res){
+				Swal.fire({
+					icon : "success",
+					title : "신청 성공!",
+				});
+			}else{
+				Swal.fire({
+					icon : "error",
+					text : "신청 실패..",
+				});
+				return;
+			}
+		})
 	}
+	// 채팅 출력
+	chat(lm_num)
+}
+
+function chat(lm_num){
+	$('#lmDMContent2').html('');
+	$.ajax({
+		method:'get',
+		url:'/lolmate/appChatList',
+		data: {
+			lm_num:lm_num,
+		},
+	}).done(function(appChatList){
+		var id = document.getElementById('m_id').value
+		var parentDiv = document.getElementById('lmDMContent2');
+		var childDiv = document.createElement('div');
+		var chatDiv = document.createElement('div');
+        chatDiv.setAttribute('id', 'chat-div');
+		for(let i=0; i<appChatList.length; i++){
+			var chatText = document.createElement('div');
+			var chatDate = document.createElement('h5');
+			
+			chatText.textContent = appChatList[i].lm_app_chat;
+			chatDate.textContent = appChatList[i].lm_app_chat_date;
+			
+			var chatDivBox = document.createElement('div');
+			if(appChatList[i].lm_app_m_id===id){
+				chatDivBox.setAttribute('class','myAppendChat')
+			}else{
+				chatDivBox.setAttribute('class','appAppendChat')
+			}
+			chatDivBox.appendChild(chatText);
+			chatDivBox.appendChild(chatDate);
+			chatDiv.appendChild(chatDivBox);
+		}
+		var appendChatDiv = document.createElement('div');
+        appendChatDiv.setAttribute('id', 'chat-box');
+		
+		var appendChat = document.createElement('textarea');
+        appendChat.setAttribute('type', 'text');
+        appendChat.setAttribute('id', 'chat-text');
+        appendChat.setAttribute('placeholder', '채팅을 입력하세요.');
+        
+        var appendChatBtn = document.createElement('button');
+        appendChatBtn.textContent = '  ↲  ';
+        appendChatBtn.onclick = function() {
+            $.ajax({
+				method:'get',
+				url:'/lolmate/chatAppend',
+				data: {
+					lm_num:lm_num,
+					lm_app_m_id:id,
+					lm_app_chat:$('#chat-text').val(),
+				},
+			}).done(function(res){
+				console.log('res: '+res)
+				if(res){
+					chat(lm_num);
+				}else{
+					Swal.fire({
+						icon : "error",
+						text : "보내기 실패..",
+					});
+				}
+			})
+        };
+		
+		childDiv.appendChild(chatDiv);
+		appendChatDiv.appendChild(appendChat);
+		appendChatDiv.appendChild(appendChatBtn);
+		childDiv.appendChild(appendChatDiv);
+		parentDiv.appendChild(childDiv);
+		
+		var element = document.getElementById('chat-div');
+		element.scrollTop = element.scrollHeight;
+	})
 }
 
 function myApp_Detail(lm_num){

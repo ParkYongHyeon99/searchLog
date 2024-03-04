@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zzzpro.zzz.sol.dao.LolmateDao;
+import com.zzzpro.zzz.sol.dto.LolmateAPPChatDto;
 import com.zzzpro.zzz.sol.dto.LolmateAppDto;
 import com.zzzpro.zzz.sol.dto.LolmateDto;
 
@@ -89,7 +90,8 @@ public class LolmateService {
 		ArrayList<LolmateDto> lmList = lmDao.mLList(lmDto);
 		for(int i=0; i<lmList.size(); i++) {
 			LolmateDto lm = lmList.get(i);
-			lm.setLm_app_summonerName(lmDao.mLAppList(lm));
+			lm.setLm_app(lmDao.mLAppList(lm));
+			System.out.println(lm.getLm_app());
 			lmList.set(i, lm);
 		}
 		return lmList;
@@ -104,7 +106,7 @@ public class LolmateService {
 	public LolmateDto lmDetail(int lm_num) {
 		LolmateDto lm = lmDao.lmDetail(lm_num);
 		if(lm.getLm_num()!=0) {
-			lm.setLm_app_summonerName(lmDao.mLAppList(lm));
+			lm.setLm_app(lmDao.mLAppList(lm));
 			return lm;
 		}
 		return null;
@@ -117,6 +119,27 @@ public class LolmateService {
 		return "no";
 	}
 
+
+	public Boolean myLmApp(LolmateAppDto lmApp) {
+		if(lmDao.myLmApp(lmApp)) {
+			return true;
+		}
+		return false;
+	}
+
+
+	public ArrayList<LolmateAPPChatDto> appChatList(int lm_num) {
+		return lmDao.appChatList(lm_num);
+	}
+
+
+	public Boolean chatAppend(LolmateAPPChatDto lmACDto) {
+		if(lmDao.chatAppend(lmACDto)) {
+			System.out.println(lmACDto);
+			return true;
+		}
+		return false;
+	}
 
 
 	

@@ -38,7 +38,7 @@
 	</select>
 	
 	<select id="mLAppList">
-		select lm_app_summonerName from lolmateAPP where lm_num=#{lm_num} order by lm_app_date desc;
+		select lm_app_m_id,lm_app_summonerName from lolmateAPP where lm_num=#{lm_num} order by lm_app_date desc;
 	</select>
 	
 	<select id="myAppList">
@@ -56,5 +56,16 @@
 		delete from lolmateAPP where lm_num = #{lm_num} and lm_app_m_id=#{m_id};
 	</delete>
 	
+	<insert id="myLmApp">
+		insert into lolmateAPP values(#{lm_num},#{lm_app_m_id},#{lm_app_summonerName},default);
+	</insert>
+	
+	<select id="appChatList">
+		select * from lolmateAPPChat where lm_num=#{lm_num} order by lm_app_chat_date
+	</select>
+	
+	<insert id="chatAppend">
+		insert into lolmateAPPChat values(#{lm_num},#{lm_app_m_id},#{lm_app_chat},default);
+	</insert>
 	
 </mapper>
