@@ -122,11 +122,8 @@ public class LolmateService {
 	}
 
 
-	public boolean myLmApp(LolmateAppDto lmApp) {
-		if(lmDao.myLmApp(lmApp)) {
-			return true;
-		}
-		return false;
+	public String myLmApp(LolmateAppDto lmApp) {
+		return lmDao.myLmApp(lmApp);
 	}
 	
 	
@@ -143,12 +140,15 @@ public class LolmateService {
 	}
 
 
-	public ArrayList<LolmateAPPChatDto> appChatList(int lm_num) {
-		return lmDao.appChatList(lm_num);
+	public ArrayList<LolmateAPPChatDto> appChatList(int lm_num, String app_name) {
+		return lmDao.appChatList(lm_num,app_name);
 	}
 
 
 	public boolean chatAppend(LolmateAPPChatDto lmACDto) {
+		if(lmACDto.getRecipient_m_id()=="app") {
+			lmACDto.setRecipient_m_id(null);
+		}
 		if(lmDao.chatAppend(lmACDto)) {
 			System.out.println(lmACDto);
 			return true;
