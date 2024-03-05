@@ -28,6 +28,6 @@ public class LolmateDto {
 	private double duoWinrate;	// 글 올린 사람과 신청자의 듀오 시 예상 승률 확인
 	
 	
-	private ArrayList<String> lm_app_summonerName;	// 작성자 닉네임#태그
+	private ArrayList<LolmateAppDto> lm_app;	// 신청자 리스트
 	private ArrayList<LolmateAPPChatDto> lm_app_chat;	// 채팅 내역 리스트
 }
