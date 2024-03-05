@@ -229,14 +229,14 @@ function mL_Detail(lm_num,division){
 			});
 			if(idOk){
 				// 한 상태
-				appChat(lm_num,id,'0');
+				appChat(lm_num,id,lm.m_id,'0');
 			}else{
 				// 안 한 상태
 				var container = document.getElementById('lmDMContent2');
 				const appSName = Object.assign(document.createElement('input'), { type: 'text', id: 'appSName', placeholder:'닉네임#태그' });
 				const appBtn = document.createElement('button');
 				appBtn.textContent = '  신청  ';
-				appBtn.addEventListener('click', () => appChat(lm_num,id,'1'));
+				appBtn.addEventListener('click', () => appChat(lm_num,id,lm.m_id,'1'));
 				container.appendChild(appSName);
 				container.appendChild(appBtn);
 			}
@@ -310,7 +310,7 @@ function appList(lm_num){
 				var chatDate = document.createElement('h5');
 				
 				appDiv.setAttribute('class','lmAppDiv')
-				appDiv.onclick = function(){ chat(lm_num,'1') }
+				appDiv.onclick = function(){ chat(lm_num,lm.lm_app[i].lm_app_m_id,'1') }
 				
 				sNameText.textContent = lm.lm_app[i].lm_app_summonerName;
 				sNameText.setAttribute('class','sNameText')
@@ -376,7 +376,7 @@ function appList(lm_num){
 	})
 }
 
-function appChat(lm_num,id,category){	// 신청자의 채팅
+function appChat(lm_num,id,lm_master,category){	// 신청자의 채팅
 	if(category=='1'){	// 신청버튼 클릭 시 신청부터 진행
 		$.ajax({
 			method:'get',
@@ -387,29 +387,35 @@ function appChat(lm_num,id,category){	// 신청자의 채팅
 				lm_app_summonerName:document.getElementById('appSName').value,
 			},
 		}).done(function(res){
-			if(!res){
+			if(res==null){
 				Swal.fire({
 					icon : "error",
 					text : "신청 실패..",
 				});
 				return;
+			}else{
 			}
 		})
 	}
 	// 채팅 출력
-	chat(lm_num,'0')
+	console.log('lm_master: '+lm_master)
+	chat(lm_num,lm_master,'0')
 }
 
-function chat(lm_num,category){
+function chat(lm_num,lm_id,category){
+	var id = document.getElementById('m_id').value
+	let app_name = ''
+	if(category == '1'){ app_name = lm_id }
+		else{ app_name = id }
 	$('#lmDMContent2').html('');
 	$.ajax({
 		method:'get',
 		url:'/lolmate/appChatList',
 		data: {
 			lm_num:lm_num,
+			app_name:app_name,
 		},
 	}).done(function(appChatList){
-		var id = document.getElementById('m_id').value
 		var parentDiv = document.getElementById('lmDMContent2');
 		var childDiv = document.createElement('div');
 		if(category=='1'){
@@ -423,6 +429,7 @@ function chat(lm_num,category){
 		}
 		var chatDiv = document.createElement('div');
         chatDiv.setAttribute('id', 'chat-div');
+        
         if(appChatList.length<1){
 			var chatText = document.createElement('div');
 			chatText.textContent = '아직 대화 내역이 없습니다.';
@@ -458,6 +465,9 @@ function chat(lm_num,category){
         var appendChatBtn = document.createElement('button');
         appendChatBtn.textContent = '  ↲  ';
         appendChatBtn.onclick = function() {
+			let lm_master=''
+			if(category=='1'){ lm_master=id; }
+				else{ lm_master=lm_id }
             $.ajax({
 				method:'get',
 				url:'/lolmate/chatAppend',
@@ -465,14 +475,16 @@ function chat(lm_num,category){
 					lm_num:lm_num,
 					lm_app_m_id:id,
 					lm_app_chat:$('#chat-text').val(),
+					recipient_m_id:lm_id,
+					lm_master:lm_master
 				},
 			}).done(function(res){
 				console.log('res: '+res)
 				if(res){
 					if(category=='1'){
-						chat(lm_num,'1');
+						chat(lm_num,lm_id,'1');
 					}else{
-						chat(lm_num,'0');
+						chat(lm_num,lm_master,'0');
 					}
 				}else{
 					Swal.fire({
