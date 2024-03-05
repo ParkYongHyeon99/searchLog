@@ -4,425 +4,179 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<style>
-		.hidden {
-			display: none;
-		}
-	</style>
-	<link rel="stylesheet" href="/css/hocss.css">
-
 </head>
 
-<body style="background: linear-gradient(to right, lightCyan, skyBlue, deepSkyBlue);">
+<body>
 
 	<th:block th:if="${champDto != null}">
-		<!--			<div th:text=|"${champDto.tier1}티어"|></div>-->
+<!--			<div th:text=|"${champDto.tier1}티어"|></div>-->
 		<!--	<div th:text="|${champDto.teamPosition}에서 ${champDto.championName}|"></div>-->
 		<div
-			th:text="|${champDto.tier1}티어 ${champDto.championName} 승률: ${champDto.win_percentage}% 픽률 :${champDto.pick_percentage}% 밴률:${champDto.ban_percentage}%|">
+			th:text="|${champDto.tier1}티어 ${champDto.championName_KR} 승률: ${champDto.win_percentage}% 픽률 :${champDto.pick_percentage}% 밴률:${champDto.ban_percentage}%|">
 		</div>
 		<div>
-			<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/champion/'+ ${champDto.championName} +'.png'}"
-				class="champion">
+			<img th:src = "|${champDto.teamPosition == 'Top' ? '../img/position/Silver-Top.png' : 
+							(champDto.teamPosition == 'Jungle' ? '../img/position/Silver-Jungle.png' : 
+							(champDto.teamPosition == 'Middle' ? '../img/position/Silver-Mid.png' : 
+							(champDto.teamPosition == 'Bottom' ? '../img/position/Silver-Bot.png' : 
+							(champDto.teamPosition == 'UTILITY' ? '../img/position/Silver-Support.png' : champDto.teamPosition))))}|">
+<!--			th:text="|${champDto.teamPosition == 'Top' ? 'img/position/Silver-Top.png' : (champDto.teamPosition == 'Jungle' ? '정글' : (champDto.teamPosition == 'Middle' ? '미드' : (champDto.teamPosition == 'Bottom' ? '원딜' : (champDto.teamPosition == 'UTILITY' ? '서폿' : champDto.teamPosition))))}라인|">-->
 		</div>
-		<!--		<div>-->
-		<!--			<img th:src="|${champDto.teamPosition == 'Top' ? '../img/position/Silver-Top.png' : -->
-		<!--							(champDto.teamPosition == 'Jungle' ? '../img/position/Silver-Jungle.png' : -->
-		<!--							(champDto.teamPosition == 'Middle' ? '../img/position/Silver-Mid.png' : -->
-		<!--							(champDto.teamPosition == 'Bottom' ? '../img/position/Silver-Bot.png' : -->
-		<!--							(champDto.teamPosition == 'UTILITY' ? '../img/position/Silver-Support.png' : champDto.teamPosition))))}|">-->
-		<!--		</div>-->
-		<!--		<div th:text="|${champpi.top_pick_rate}%|" >-->
-
-		<!--		</div>-->
-
-		<!--		<div th:text="|${champpi.jungle_pick_rate}%|">-->
-		<!--			<img th:src = "../img/position/Silver-Jungle.png">-->
-		<!--		</div>-->
-		<!--		<div th:text="|${champpi.middle_pick_rate}%|">-->
-		<!--			<img th:src = "../img/position/Silver-Mid.png">-->
-		<!--		</div>-->
-		<!--		<div th:text="|${champpi.bottom_pick_rate}%|">-->
-		<!--			<img th:src = "../img/position/Silver-Bot.png">-->
-		<!--		</div>-->
-		<!--		<div th:text="|${champpi.UTILITY_pick_rate}%|">-->
-		<!--			<img th:src = "../img/position/Silver-Support.png">-->
-		<!--		</div>-->
 
 
-		<!--		<br>-->
 
-		<table class="right">
+
+		<table border="3" align="center">
 			<thead>
 				<tr>
-					<td>시작 아이템 </td>
-					<td style="border-left: none;"></td>
-					<td style="border-left: none;"></td>
+					<td>1</td>
+					<td>2</td>
+					<td>3</td>
+					<td>4</td>
+					<td>5</td>
+					<td>6</td>
+					<td>7</td>
+					<td>8</td>
+					<td>9</td>
+					<td>10</td>
+					<td>11</td>
+					<td>12</td>
+					<td>13</td>
+					<td>14</td>
+					<td>채택수</td>
+					<td>채택률</td>
 				</tr>
 			</thead>
 			<tbody>
-				<tr style="background-color: lightgray;">
-					<td></td>
-					<td>픽률</td>
-					<td>승률</td>
-				</tr>
-				<div th:each="sitem, index: ${sitemrate}">
-					<tr>
-						<td class="inner">
-							<img
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${sitem.sitem1} +'.png'}">
-							<img
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${sitem.sitem2} +'.png'}">
-							<img
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${sitem.sitem3} +'.png'}">
-							<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${sitem.sitem4} +'.png'}"
-								id="myImage">
-						</td>
-						<td class="pickrate">
-							<p th:text="|${sitem.sitem_percentage}%|"></p>
-							<p th:text="|${sitem.sitem_count}게임|"></p>
-						</td>
-						<td class="winrate">
-							<p th:text="|${sitem.sitem_win_rate}%|"></p>
-						</td>
-					</tr>
-				</div>
-			</tbody>
-
-		</table>
-		<table>
-			<thead>
 				<tr>
-					<td>스킬트리 (3렙)</td>
-					<td style="border-left: none;"></td>
-					<td style="border-left: none;"></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr style="background-color: lightgray;">
-					<td></td>
-					<td>픽률</td>
-					<td>승률</td>
-				</tr>
-				<tr th:each="skill, index: ${skilltree_3lv}">
-					<td class="inner">
-						<div th:switch="${skill.value1}" class="skill">
-
-							<img th:case="'1'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'Q.png'}"
-								alt="Champion Skill">
-							<img th:case="'2'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'W.png'}"
-								alt="Champion Skill">
-							<img th:case="'3'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'E.png'}"
-								alt="Champion Skill">
-							<img th:case="'4'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'R.png'}"
-								alt="Champion Skill">
-						</div>
-						<img th:src="@{/img/화살표.png}" class="skillarrow">
-						<div th:switch="${skill.value2}" class="skill">
-							<img th:case="'1'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'Q.png'}"
-								alt="Champion Skill">
-							<img th:case="'2'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'W.png'}"
-								alt="Champion Skill">
-							<img th:case="'3'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'E.png'}"
-								alt="Champion Skill">
-							<img th:case="'4'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'R.png'}"
-								alt="Champion Skill">
-						</div>
-						<img th:src="@{/img/화살표.png}" class="skillarrow">
-						<div th:switch="${skill.value3}" class="skill">
-							<img th:case="'1'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'Q.png'}"
-								alt="Champion Skill">
-							<img th:case="'2'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'W.png'}"
-								alt="Champion Skill">
-							<img th:case="'3'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'E.png'}"
-								alt="Champion Skill">
-							<img th:case="'4'"
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/' + ${champDto.championName} + 'R.png'}"
-								alt="Champion Skill">
-						</div>
+					<td>
+						<p
+							th:text="${champDto.value1 == '1' ? 'q' : (champDto.value1 == '2' ? 'w' : (champDto.value1 == '3' ? 'e' : (champDto.value1 == '4' ? 'r' : champDto.value1)))}">
+						</p>
 					</td>
-					<td class="pickrate">
-						<p th:text="|${skill.skill_percentage}%|"></p>
-						<p th:text="|${skill.skill_count}게임|"></p>
+					<td>
+						<p
+							th:text="${champDto.value2 == '1' ? 'q' : (champDto.value2 == '2' ? 'w' : (champDto.value2 == '3' ? 'e' : (champDto.value2 == '4' ? 'r' : champDto.value2)))}">
+						</p>
 					</td>
-					<td class="winrate">
-						<p th:text="|${skill.skill_win_rate}%|"></p>
+					<td>
+						<p
+							th:text="${champDto.value3 == '1' ? 'q' : (champDto.value3 == '2' ? 'w' : (champDto.value3 == '3' ? 'e' : (champDto.value3 == '4' ? 'r' : champDto.value3)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value4 == '1' ? 'q' : (champDto.value4 == '2' ? 'w' : (champDto.value4 == '3' ? 'e' : (champDto.value4 == '4' ? 'r' : champDto.value4)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value5 == '1' ? 'q' : (champDto.value5 == '2' ? 'w' : (champDto.value5 == '3' ? 'e' : (champDto.value5 == '4' ? 'r' : champDto.value5)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value6 == '1' ? 'q' : (champDto.value6 == '2' ? 'w' : (champDto.value6 == '3' ? 'e' : (champDto.value6 == '4' ? 'r' : champDto.value6)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value7 == '1' ? 'q' : (champDto.value7 == '2' ? 'w' : (champDto.value7 == '3' ? 'e' : (champDto.value7 == '4' ? 'r' : champDto.value7)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value8 == '1' ? 'q' : (champDto.value8 == '2' ? 'w' : (champDto.value8 == '3' ? 'e' : (champDto.value8 == '4' ? 'r' : champDto.value8)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value9 == '1' ? 'q' : (champDto.value9 == '2' ? 'w' : (champDto.value9 == '3' ? 'e' : (champDto.value9 == '4' ? 'r' : champDto.value9)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value10 == '1' ? 'q' : (champDto.value10 == '2' ? 'w' : (champDto.value10 == '3' ? 'e' : (champDto.value10 == '4' ? 'r' : champDto.value10)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value11 == '1' ? 'q' : (champDto.value11 == '2' ? 'w' : (champDto.value11 == '3' ? 'e' : (champDto.value11 == '4' ? 'r' : champDto.value11)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value12 == '1' ? 'q' : (champDto.value12 == '2' ? 'w' : (champDto.value12 == '3' ? 'e' : (champDto.value12 == '4' ? 'r' : champDto.value12)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value13 == '1' ? 'q' : (champDto.value13 == '2' ? 'w' : (champDto.value13 == '3' ? 'e' : (champDto.value13 == '4' ? 'r' : champDto.value13)))}">
+						</p>
+					</td>
+					<td>
+						<p
+							th:text="${champDto.value14 == '1' ? 'q' : (champDto.value14 == '2' ? 'w' : (champDto.value14 == '3' ? 'e' : (champDto.value14 == '4' ? 'r' : champDto.value14)))}">
+						</p>
+					</td>
+					<td>
+						<p th:text="|${champDto.skill_count}게임|"></p>
+					</td>
+					<td>
+						<p th:text="|${champDto.skill_percentage}%|"></p>
 					</td>
 				</tr>
 			</tbody>
-
 		</table>
-
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/' + ${champDto.main_name} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
 		<br>
-		<table class="right">
-			<thead>
-				<tr>
-					<td>스탯 </td>
-					<td style="border-left: none;"></td>
-					<td style="border-left: none;"></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr style="background-color: lightgray;">
-					<td></td>
-					<td>픽률</td>
-					<td>승률</td>
-				</tr>
-				<div th:each="stat, index: ${statrate}">
-					<tr>
-						<td class="inner">
-							<img th:src="@{'https://cdn.lol.ps/assets/img/runes/'+ ${stat.stat_perks1} +'_60.webp'}">
-							<img th:src="@{'https://cdn.lol.ps/assets/img/runes/'+ ${stat.stat_perks2} +'_60.webp'}">
-							<img th:src="@{'https://cdn.lol.ps/assets/img/runes/'+ ${stat.stat_perks3} +'_60.webp'}">
-
-<!--							<img-->
-<!--								th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${stat.stat_perks2} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">-->
-<!--							<img-->
-<!--								th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${stat.stat_perks3} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">-->
-						</td>
-						<td class="pickrate">
-							<p th:text="|${stat.stat_percentage}%|"></p>
-							<p th:text="|${stat.stat_count}게임|"></p>
-						</td>
-						<td class="winrate">
-							<p th:text="|${stat.stat_win_percentage}%|"></p>
-						</td>
-					</tr>
-				</div>
-			</tbody>
-
-		</table>
-		<table>
-			<thead>
-				<tr>
-					<td>룬 </td>
-					<td style="border-left: none;"></td>
-					<td style="border-left: none;"></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr style="background-color: lightgray;">
-					<td></td>
-					<td>픽률</td>
-					<td>승률</td>
-				</tr>
-				<div th:each="rune, index: ${runerate}">
-					<tr>
-						<td class="inner">
-							<img th:src="@{'https://cdn.lol.ps/assets/img/runes/'+ ${rune.main_perks1} +'_60.webp'}">
-							<img th:src="@{'https://cdn.lol.ps/assets/img/runes/'+ ${rune.main_perks2} +'_60.webp'}">
-							<img th:src="@{'https://cdn.lol.ps/assets/img/runes/'+ ${rune.main_perks3} +'_60.webp'}">
-							<img th:src="@{'https://cdn.lol.ps/assets/img/runes/'+ ${rune.main_perks4} +'_60.webp'}">
-							<img th:src="@{'https://cdn.lol.ps/assets/img/runes/'+ ${rune.sub_perks1} +'_60.webp'}">
-							<img th:src="@{'https://cdn.lol.ps/assets/img/runes/'+ ${rune.sub_perks2} +'_60.webp'}">
-						</td>
-						<td class="pickrate">
-							<p th:text="|${rune.rune_percentage}%|"></p>
-							<p th:text="|${rune.rune_count}게임|"></p>
-						</td>
-						<td class="winrate">
-							<p th:text="|${rune.rune_win_percentage}%|"></p>
-						</td>
-					</tr>
-				</div>
-			</tbody>
-
-		</table>
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.main_perks1} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.main_perks2} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.main_perks3} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.main_perks4} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+		<br>
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perkStyle/' + ${champDto.sub_name} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+		<br>
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.sub_perks1} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/14.3.1/perk/' + ${champDto.sub_perks2} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+		<br>
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${champDto.stat_perks1} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${champDto.stat_perks2} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
+		<img
+			th:src="@{'https://opgg-static.akamaized.net/meta/images/lol/perkShard/' + ${champDto.stat_perks3} + '.png?image=q_auto,f_png,w_64,h_64&v=1707283412529'}">
 
 
 		<br>
-
-
-		<div class="right">
-			<table class="core1">
-				<thead>
-					<tr>
-						<td>1코어 top3 </td>
-						<td style="border-left: none;"></td>
-						<td style="border-left: none;"></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr style="background-color: lightgray;">
-						<td></td>
-						<td>픽률</td>
-						<td>승률</td>
-					</tr>
-					<div th:each="core1, index: ${core1}">
-						<tr>
-							<td class="inner"><img
-									th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${core1.core1} +'.png'}">
-							</td>
-							<td class="pickrate">
-								<p th:text="|${core1.core1_percentage}%|"></p>
-								<p th:text="|${core1.core1_count}게임|"></p>
-							</td>
-							<td class="winrate">
-								<p th:text="|${core1.core1_win_percentage}%|"></p>
-							</td>
-						</tr>
-					</div>
-				</tbody>
-
-			</table>
+		<div
+			th:text="|채택 수 : ${champDto.rune_count}회 픽률: ${champDto.rune_percentage}% 승률 :${champDto.rune_win_percentage}%|">
 		</div>
-		<table>
-			<thead>
-				<td>아이템</td>
-				<td style="border-left: none;"></td>
-				<td style="border-left: none;"></td>
-			</thead>
+<!--		<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${champDto.item6} +'.png'}">-->
 
-			<tbody>
-				<tr style="background-color: lightgray;">
-					<td></td>
-					<td>픽률</td>
-					<td>승률</td>
-				</tr>
-				<div th:each="item, index: ${itemrate}">
-					<tr>
-						<td class="inner">
-							<img
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${item.core1} +'.png'}">
-							<img th:src="@{/img/화살표.png}" class="arrow">
-
-							<img
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${item.core2} +'.png'}">
-							<img th:src="@{/img/화살표.png}" class="arrow">
-							<img
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${item.core3} +'.png'}">
-						</td>
-						<td class="pickrate">
-							<p th:text="|${item.item_percentage}%|"></p>
-							<p th:text="|${item.item_count}게임|"></p>
-						</td>
-						<td class="winrate">
-							<p th:text="|${item.item_win_percentage}%|"></p>
-						</td>
-					</tr>
-				</div>
-			</tbody>
-
-		</table>
-		<div class="right">
-			<table>
-				<thead>
-					<tr>
-						<td>1 2코어 조합 top3 </td>
-						<td style="border-left: none;"></td>
-						<td style="border-left: none;"></td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr style="background-color: lightgray;">
-						<td></td>
-						<td>픽률</td>
-						<td>승률</td>
-					</tr>
-					<div th:each="core2, index: ${core2}">
-						<tr>
-							<td class="inner"><img
-									th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${core2.core1} +'.png'}">
-								<img th:src="@{/img/화살표.png}" class="arrow">
-								<img
-									th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${core2.core2} +'.png'}">
-							</td>
-							<td class="pickrate">
-								<p th:text="|${core2.core2_percentage}%|"></p>
-								<p th:text="|${core2.core2_count}게임|"></p>
-							</td>
-							<td class="winrate">
-								<p th:text="|${core2.core2_win_percentage}%|"></p>
-							</td>
-						</tr>
-					</div>
-				</tbody>
-
-			</table>
+		<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${champDto.core1} +'.png'}">
+		<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${champDto.core2} +'.png'}">
+		<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${champDto.core3} +'.png'}">
+		<div
+			th:text="|채택 수 : ${champDto.item_count}회 픽률: ${champDto.item_percentage}% 승률 :${champDto.item_win_percentage}%|">
+		</div>
+		<br>
+		<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${champDto.shoes} +'.png'}">
+		<div
+			th:text="|채택 수 : ${champDto.shoes_count}회 픽률: ${champDto.shoes_pickRate}% 승률 :${champDto.shoes_win_percentage}%|">
 		</div>
 
-		<table>
-			<thead>
-				<tr>
-					<td>신발 </td>
-					<td style="border-left: none;"></td>
-					<td style="border-left: none;"></td>
-				</tr>
-			</thead>
-			<tbody>
-				<tr style="background-color: lightgray;">
-					<td></td>
-					<td>픽률</td>
-					<td>승률</td>
-				</tr>
-				<div th:each="shoes, index: ${shoesrate}">
-					<tr>
-						<td class="inner"><img
-								th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${shoes.shoes} +'.png'}">
-							<p th:text="${shoes.shoesName}"></p>
-						</td>
-						<td class="pickrate">
-							<p th:text="|${shoes.shoes_pickRate}%|"></p>
-							<p th:text="|${shoes.shoes_count}게임|"></p>
-						</td>
-						<td class="winrate">
-							<p th:text="|${shoes.shoes_win_percentage}%|"></p>
-						</td>
-					</tr>
-				</div>
-			</tbody>
-
-		</table>
-
-
-
-
-		<br>
-
-		<br>
-		<!--		<div>스펠</div>-->
-		<!--		<div th:each="spell, index: ${spellrate}">-->
-		<!--			<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/'+${spell.summoner1Id}+'.png'}" >-->
-
-		<!--			<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/spell/'+${spell.summoner2Id}+'.png'}" >-->
-		<!--			<div-->
-		<!--				th:text="|채택 수 : ${spell.spell_count}회 픽률: ${spell.spell_rate}% 승률 :${spell.spell_win_percentage}%|">-->
-		<!--			</div>-->
-		<!--		</div>-->
-		<!--		<div>장신구</div>-->
-		<!--		<div th:each="acc, index: ${accrate}">-->
-		<!--			<img th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/'+ ${acc.item6} +'.png'}">-->
-		<!--			<div-->
-		<!--				th:text="|채택 수 : ${acc.acc_count}회 픽률: ${acc.acc_pickRate}% 승률 :${acc.acc_win_percentage}%|">-->
-		<!--			</div>-->
-		<!--		</div>-->
 	</th:block>
 
-	<script>
-		// JavaScript로 null 값 체크
-		window.onload = function () {
-			var imageUrl = null; // 여기에 실제 이미지 URL 또는 null을 할당
 
-			// 이미지 엘리먼트 가져오기
-			var imageElement = document.getElementById('myImage');
-
-			// 만약 이미지 URL이 null이라면 hidden 클래스 추가하여 이미지를 숨김
-			if (imageUrl === null) {
-				imageElement.classList.add('hidden');
-			}
-		};
-	</script>
 
 </body>
 

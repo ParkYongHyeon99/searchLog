@@ -1,28 +1,14 @@
 @charset "UTF-8";
 
-* {
-	margin: 1px;
-	text-align: center;
-	background-color: #0A1428;
-	padding: 0;
-
-	color: orange;
-}
 
 .allBigBox {
 	width: 450px;
-	height: 500px;
+	height: 400px;
+	padding-top: 10%;
+	padding-left: 10%;
 	position: relative;
-/* 	transition: margin-left 0.3s linear; */
-	margin: 0 auto;
-	border: 1px solid grey;
-}
-
-img{
-	height: 50px;
-	display: block;
-	margin: 0 auto;
-	cursor: pointer;
+	transition: margin-left 0.3s linear;
+	background-color: #33ae74;
 }
 
 .allBigBox>#ljBox {
@@ -31,11 +17,11 @@ img{
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	border: 1px solid grey;
 }
 
 .allBigBox.is-active {
-	margin:0 auto;
+	background-color: #1ce;
+	margin-left: 450px;
 }
 
 .btnDiv{
