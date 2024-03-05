@@ -184,3 +184,122 @@ label{
 	float: left;
 	padding: 0 10%;
 }
+
+
+
+#chat-div{
+	overflow: auto;
+/* 	text-align: center; */
+	padding: auto;
+	width: 100%;
+	height: 200px;
+}
+
+.myAppendChat>div{
+	right: 10px;
+	text-align: right;
+ 	background-color: #005A82;
+ 	color: #A09B8C;
+ 	display: inline-block;
+/*  	position: absolute; */
+ 	margin-left: 35%;
+}
+.appAppendChat>div{
+	left: 10px;
+	text-align: left;
+ 	background-color: #3C3C41;
+ 	color: #A09B8C;
+ 	margin-right: 30%;
+}
+.myAppendChat>div,.appAppendChat>div{
+ 	padding: 2%;
+ 	border: 1px solid black;
+ 	height: 90%;
+ 	width: 60%;
+}
+.myAppendChat>h5{
+	text-align: right;
+	margin: 0 auto;
+	margin-right: 15px;
+}
+.appAppendChat>h5{
+	text-align: left;
+	margin: 0 auto;
+	margin-left: 10px;
+}
+
+#chat-box{
+	position: absolute;
+	bottom: 0;
+	width: 95%;
+	margin: 2% auto;
+}
+#chat-box > textarea {
+	resize: none;
+	height: 60px;
+	width: 98%;
+	background-color: #1E2328;
+	color: #C89B3C;
+	font-size: 1.2em;
+	padding: 10px;
+	overflow-y: auto;
+}
+#chat-box > button {
+	position: absolute;
+	height: 55px;
+	width: 6%;
+	top: 13px;
+	right: 5px;
+}
+#chat-backBtn{
+/* 	position: absolute; */
+	height: 30px;
+	width: 30px;
+	top: 10px;
+	left: 5px;
+	margin: 5px;
+}
+.textDiv{
+	margin: auto;
+	text-align: center;
+}
+
+#lmAppList{
+	overflow: auto;
+/* 	text-align: center; */
+	padding: auto;
+	width: 100%;
+	height: 250px;
+}
+.lmAppDiv{
+	border: 1px solid black;
+	background-color: #1E2328;
+	color: #C89B3C;
+	height: 50px;
+	align-items: center;
+	display: flex;
+}
+.lmAppDiv > h5{
+	text-align: right;
+	color: #C8AA6E;
+	bottom: 0;
+	margin: 0 auto;
+    margin-right: 3%;
+}
+.lmAppDiv > div{
+	float: left;
+	text-align: center;
+	font-size: 1.4em;
+	margin-right: 80px;
+	padding-left: 20px;
+}
+#lmCDBtnDiv > button{
+	float: right;
+	margin-right: 10px;
+}
+
+
+
+
+
+
