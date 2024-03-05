@@ -6,10 +6,11 @@ import java.util.HashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.zzzpro.zzz.sol.dto.LolmateAPPChatDto;
+import com.zzzpro.zzz.sol.dto.LolmateAppDto;
 import com.zzzpro.zzz.sol.dto.LolmateDto;
 import com.zzzpro.zzz.sol.service.LolmateService;
-
-import jakarta.servlet.http.HttpSession;
 
 @RestController
 public class RestLolmateController {
@@ -45,6 +46,36 @@ public class RestLolmateController {
 	@GetMapping("/lolmate/myAppDel")
 	public String myAppDel(int lm_num, String m_id) {
 		return lmSer.myAppDel(lm_num, m_id);
+	}
+	
+	@GetMapping("/lolmate/myLmApp")
+	public boolean myLmApp(LolmateAppDto lmApp) {
+		return lmSer.myLmApp(lmApp);
+	}
+	
+	@GetMapping("/lolmate/lmAppList")
+	public LolmateDto lmAppList(LolmateDto lm) {
+		return lmSer.lmAppList(lm);
+	}
+	
+	@GetMapping("/lolmate/appChatList")
+	public ArrayList<LolmateAPPChatDto> appChatList(int lm_num) {
+		return lmSer.appChatList(lm_num);
+	}
+	
+	@GetMapping("/lolmate/chatAppend")
+	public boolean chatAppend(LolmateAPPChatDto lmACDto) {
+		return lmSer.chatAppend(lmACDto);
+	}
+	
+	@GetMapping("/lolmate/close")
+	public boolean close(int lm_num) {
+		return lmSer.close(lm_num);
+	}
+	
+	@GetMapping("/lolmate/delete")
+	public boolean delete(int lm_num) {
+		return lmSer.delete(lm_num);
 	}
 	
 }
