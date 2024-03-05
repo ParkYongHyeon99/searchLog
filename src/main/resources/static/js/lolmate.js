@@ -25,7 +25,7 @@ $(()=>{
 
 /* ====================== 리스트 가져오는 함수 실행 ====================== */
 	lmAjax();
-	//setInterval(function(){lmAjax()},5000);		// <- 5초마다 리스트 갱신
+	//setInterval(function(){lmAjax()},3000);		// <- 3초마다 리스트 갱신
 	
 })
 
@@ -469,7 +469,11 @@ function chat(lm_num,category){
 			}).done(function(res){
 				console.log('res: '+res)
 				if(res){
-					chat(lm_num,'0');
+					if(category=='1'){
+						chat(lm_num,'1');
+					}else{
+						chat(lm_num,'0');
+					}
 				}else{
 					Swal.fire({
 						icon : "error",
