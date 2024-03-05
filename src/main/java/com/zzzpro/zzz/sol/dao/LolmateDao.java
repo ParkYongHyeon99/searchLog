@@ -22,7 +22,10 @@ public interface LolmateDao {
 	LolmateDto lmDetail(int lm_num);
 	boolean myAppDel(int lm_num, String m_id);
 	boolean myLmApp(LolmateAppDto lmApp);
+	LolmateAPPChatDto lmAppFinalChatList(LolmateAppDto lmA);
 	ArrayList<LolmateAPPChatDto> appChatList(int lm_num);
 	boolean chatAppend(LolmateAPPChatDto lmACDto);
+	boolean close(int lm_num);
+	boolean delete(int lm_num);
 	
 }

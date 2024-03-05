@@ -59,6 +59,11 @@
 	<insert id="myLmApp">
 		insert into lolmateAPP values(#{lm_num},#{lm_app_m_id},#{lm_app_summonerName},default);
 	</insert>
+
+	<select id="lmAppFinalChatList">
+		select * from lolmateAPPChat where lm_num=#{lm_num} and lm_app_m_id=#{lm_app_m_id} order by lm_app_chat_date desc limit 1;
+	</select>
+	
 	
 	<select id="appChatList">
 		select * from lolmateAPPChat where lm_num=#{lm_num} order by lm_app_chat_date
@@ -67,5 +72,15 @@
 	<insert id="chatAppend">
 		insert into lolmateAPPChat values(#{lm_num},#{lm_app_m_id},#{lm_app_chat},default);
 	</insert>
+	
+	<update id="close">
+		UPDATE lolmateList SET lm_end = 1 WHERE lm_num=#{lm_num};
+	</update>
+	
+	<delete id="delete">
+		delete from lolmateList where lm_num = #{lm_num};
+	</delete>
+	
+	
 	
 </mapper>

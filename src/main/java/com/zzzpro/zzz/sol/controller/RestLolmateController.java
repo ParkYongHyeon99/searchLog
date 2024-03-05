@@ -49,8 +49,13 @@ public class RestLolmateController {
 	}
 	
 	@GetMapping("/lolmate/myLmApp")
-	public Boolean myLmApp(LolmateAppDto lmApp) {
+	public boolean myLmApp(LolmateAppDto lmApp) {
 		return lmSer.myLmApp(lmApp);
+	}
+	
+	@GetMapping("/lolmate/lmAppList")
+	public LolmateDto lmAppList(LolmateDto lm) {
+		return lmSer.lmAppList(lm);
 	}
 	
 	@GetMapping("/lolmate/appChatList")
@@ -59,8 +64,18 @@ public class RestLolmateController {
 	}
 	
 	@GetMapping("/lolmate/chatAppend")
-	public Boolean chatAppend(LolmateAPPChatDto lmACDto) {
+	public boolean chatAppend(LolmateAPPChatDto lmACDto) {
 		return lmSer.chatAppend(lmACDto);
+	}
+	
+	@GetMapping("/lolmate/close")
+	public boolean close(int lm_num) {
+		return lmSer.close(lm_num);
+	}
+	
+	@GetMapping("/lolmate/delete")
+	public boolean delete(int lm_num) {
+		return lmSer.delete(lm_num);
 	}
 	
 }

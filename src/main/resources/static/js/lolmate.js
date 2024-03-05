@@ -82,11 +82,13 @@ function infoTabMyList(id){
 				const newRow = $('<tr>');
 				newRow.attr('id', lm.lm_num);
 				newRow.attr('class', 'lmDBtn');
-				newRow.on('click',function(){
-					mL_Detail(lm.lm_num,'0');
-					const lmDModal = document.getElementById('lmDModal');
-					lmDModal.style.display = 'flex';
-				})
+				if(lm.lm_end == 0){
+					newRow.on('click',function(){
+						mL_Detail(lm.lm_num,'0');
+						const lmDModal = document.getElementById('lmDModal');
+						lmDModal.style.display = 'flex';
+					})
+				}
 				
 				const numCell = $('<td>').text(num)
 				const gameMateCell = $('<td>').text('');
@@ -284,6 +286,96 @@ function positionHtml(clName, selP) {
     return html;
 }
 
+function appList(lm_num){
+	$('#lmDMContent2').html('');
+	$.ajax({
+		method:'get',
+		url:'/lolmate/lmAppList',
+		data:{lm_num:lm_num},
+	}).done(function(lm){
+		console.log(lm)
+		var container = document.getElementById('lmDMContent2');
+		if(lm.lm_app.length<1){
+			const textDiv = document.createElement('div');
+			textDiv.setAttribute('class', 'textDiv');
+			textDiv.textContent = '아직 신청자가 없습니다.'
+			container.appendChild(textDiv);
+		}else{
+			var childDiv = document.createElement('div');
+			childDiv.setAttribute('id','lmAppList')
+			for(let i=0; i<lm.lm_app.length; i++){
+				var appDiv = document.createElement('div');
+				var sNameText = document.createElement('div');
+				var chatText = document.createElement('div');
+				var chatDate = document.createElement('h5');
+				
+				appDiv.setAttribute('class','lmAppDiv')
+				appDiv.onclick = function(){ chat(lm_num,'1') }
+				
+				sNameText.textContent = lm.lm_app[i].lm_app_summonerName;
+				sNameText.setAttribute('class','sNameText')
+				if(lm.lm_app_chat[i]==null){
+					chatText.textContent = '아직 채팅을 작성하지 않았습니다.';
+				}else{
+					chatText.textContent = lm.lm_app_chat[i].lm_app_chat;
+					chatDate.textContent = lm.lm_app_chat[i].lm_app_chat_date;
+				}
+				
+					
+				appDiv.appendChild(sNameText);
+				appDiv.appendChild(chatText);
+				if(lm.lm_app_chat[i]!=null){ appDiv.appendChild(chatDate); }
+				childDiv.appendChild(appDiv);
+			}
+			
+			var childDiv2 = document.createElement('div');
+			childDiv2.setAttribute('id','lmCDBtnDiv')
+			var closeBtn = document.createElement('button');
+			closeBtn.textContent = '  닫기  ';
+	        closeBtn.setAttribute('class', 'closeBtn');
+	        closeBtn.onclick = function(){
+				$.ajax({ url:"/lolmate/close", data:{lm_num:lm_num} }).done(function(res){ 
+					if(res){
+						Swal.fire({
+							icon : "success",
+							text : "닫기 성공!",
+						});
+						location.reload();
+					}else{
+						Swal.fire({
+							icon : "error",
+							text : "닫기 실패..",
+						});
+						return;
+					} })
+			}
+			var deleteBtn = document.createElement('button');
+			deleteBtn.textContent = '  삭제  ';
+	        deleteBtn.setAttribute('class', 'deleteBtn');
+	        deleteBtn.onclick = function(){
+				$.ajax({ url:"/lolmate/delete", data:{lm_num:lm_num} }).done(function(res){ 
+					if(res){ 
+						Swal.fire({
+							icon : "success",
+							text : "삭제 성공!",
+						});
+						location.reload();
+					}else{
+						Swal.fire({
+							icon : "error",
+							text : "삭제 실패..",
+						});
+						return;
+					} })
+			}
+			childDiv2.appendChild(closeBtn);
+			childDiv2.appendChild(deleteBtn);
+			container.appendChild(childDiv);
+			container.appendChild(childDiv2);
+		}
+	})
+}
+
 function appChat(lm_num,id,category){	// 신청자의 채팅
 	if(category=='1'){	// 신청버튼 클릭 시 신청부터 진행
 		$.ajax({
@@ -295,12 +387,7 @@ function appChat(lm_num,id,category){	// 신청자의 채팅
 				lm_app_summonerName:document.getElementById('appSName').value,
 			},
 		}).done(function(res){
-			if(res){
-				Swal.fire({
-					icon : "success",
-					title : "신청 성공!",
-				});
-			}else{
+			if(!res){
 				Swal.fire({
 					icon : "error",
 					text : "신청 실패..",
@@ -325,32 +412,40 @@ function chat(lm_num,category){
 		var id = document.getElementById('m_id').value
 		var parentDiv = document.getElementById('lmDMContent2');
 		var childDiv = document.createElement('div');
-		if(category==1){
+		if(category=='1'){
 			var backBtn = document.createElement('button');
 			backBtn.textContent = '  ⇐  ';
-	        chatDiv.setAttribute('id', 'chat-backBtn');
+	        backBtn.setAttribute('id', 'chat-backBtn');
 	        backBtn.onclick = function(){
-				chat(lm_num,'0')
+				appList(lm_num)
 			}
+			childDiv.appendChild(backBtn);
 		}
 		var chatDiv = document.createElement('div');
         chatDiv.setAttribute('id', 'chat-div');
-		for(let i=0; i<appChatList.length; i++){
+        if(appChatList.length<1){
 			var chatText = document.createElement('div');
-			var chatDate = document.createElement('h5');
-			
-			chatText.textContent = appChatList[i].lm_app_chat;
-			chatDate.textContent = appChatList[i].lm_app_chat_date;
-			
-			var chatDivBox = document.createElement('div');
-			if(appChatList[i].lm_app_m_id===id){
-				chatDivBox.setAttribute('class','myAppendChat')
-			}else{
-				chatDivBox.setAttribute('class','appAppendChat')
+			chatText.textContent = '아직 대화 내역이 없습니다.';
+			chatText.setAttribute('class','noText')				// << css 적용해야함
+			chatDiv.appendChild(chatText);
+		}else{
+			for(let i=0; i<appChatList.length; i++){
+				var chatDivBox = document.createElement('div');
+				var chatText = document.createElement('div');
+				var chatDate = document.createElement('h5');
+				
+				chatText.textContent = appChatList[i].lm_app_chat;
+				chatDate.textContent = appChatList[i].lm_app_chat_date;
+				if(appChatList[i].lm_app_m_id===id){
+					chatDivBox.setAttribute('class','myAppendChat')
+				}else{
+					chatDivBox.setAttribute('class','appAppendChat')
+				}
+				
+				chatDivBox.appendChild(chatText);
+				chatDivBox.appendChild(chatDate);
+				chatDiv.appendChild(chatDivBox);
 			}
-			chatDivBox.appendChild(chatText);
-			chatDivBox.appendChild(chatDate);
-			chatDiv.appendChild(chatDivBox);
 		}
 		var appendChatDiv = document.createElement('div');
         appendChatDiv.setAttribute('id', 'chat-box');
@@ -374,7 +469,7 @@ function chat(lm_num,category){
 			}).done(function(res){
 				console.log('res: '+res)
 				if(res){
-					chat(lm_num,0);
+					chat(lm_num,'0');
 				}else{
 					Swal.fire({
 						icon : "error",
@@ -396,7 +491,7 @@ function chat(lm_num,category){
 }
 
 function myApp_Detail(lm_num){
-	mL_Detail(lm_num,'0');
+	mL_Detail(lm_num,'1');
 	const lmDModal = document.getElementById('lmDModal');
 	lmDModal.style.display = 'flex';
 }
@@ -588,16 +683,16 @@ function divHtml(tp,img){
 		}else{
 			html += divT+tp+'" style="background-image: url(\'../img/emblem/Rank='+tp+'.png\'); width:40px; '
 			html +='padding-bottom:40px; background-repeat: no-repeat; background-position: center; background-size : cover;'+spanT;
-			if(tp.search("Iron")!=-1){ html += '아이언'}
-			else if(tp.search("Bronze")!=-1){ html += '브론즈' }
-			else if(tp.search("Silver")!=-1){ html += '실버' }
-			else if(tp.search("Gold")!=-1){ html += '골드' }
-			else if(tp.search("Diamond")!=-1){ html += '다이아몬드' }
-			else if(tp.search("Emerald")!=-1){ html += '에메랄드' }
-			else if(tp.search("Platinum")!=-1){ html += '플래티넘' }
-			else if(tp.search("Grandmaster")!=-1){ html += '그랜드마스터' }
-			else if(tp.search("Master")!=-1){ html += '마스터' }
-			else if(tp.search("Challenger")!=-1){html += '챌린저'}
+			if(tp.search("Iron")!=-1 || tp.search("IRON")!=-1){ html += '아이언'}
+			else if(tp.search("Bronze")!=-1 || tp.search("BRONZE")!=-1){ html += '브론즈' }
+			else if(tp.search("Silver")!=-1 || tp.search("SILVER")!=-1){ html += '실버' }
+			else if(tp.search("Gold")!=-1 || tp.search("GOLD")!=-1){ html += '골드' }
+			else if(tp.search("Platinum")!=-1 || tp.search("PLATINUM")!=-1){ html += '플래티넘' }
+			else if(tp.search("Emerald")!=-1 || tp.search("EMERALD")!=-1){ html += '에메랄드' }
+			else if(tp.search("Diamond")!=-1 || tp.search("DIAMOND")!=-1){ html += '다이아몬드' }
+			else if(tp.search("Master")!=-1 || tp.search("MASTER")!=-1){ html += '마스터' }
+			else if(tp.search("Grandmaster")!=-1 || tp.search("GRANDMASTER")!=-1){ html += '그랜드마스터' }
+			else if(tp.search("Challenger")!=-1 || tp.search("CHALLENGER")!=-1){html += '챌린저'}
 			html += spanTE;
 		}
 	}else if(img=='position'){
