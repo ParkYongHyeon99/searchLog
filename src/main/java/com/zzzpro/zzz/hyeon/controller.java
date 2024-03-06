@@ -46,7 +46,7 @@ public class controller {
 		RuneDto Rune_winrate = runeser.Rune_winrate(rDto);
 		RuneDto item_winrate = runeser.item_winrate(rDto);
 		RuneDto skill_tree_winrate = runeser.skill_tree_winrate(rDto);
-		RuneDto spell_winrate = runeser.spell_winrate(rDto);
+//		RuneDto spell_winrate = runeser.spell_winrate(rDto);
 
 		if (Rune_winrate != null) {
 			RuneDto RuneDto = new RuneDto();
@@ -76,8 +76,8 @@ public class controller {
 			RuneDto.setValue3(skill_tree_winrate.value3);
 
 			//------------------------------------------------------
-			RuneDto.setSummoner1Id(spell_winrate.summoner1Id);
-			RuneDto.setSummoner2Id(spell_winrate.summoner2Id);
+//			RuneDto.setSummoner1Id(spell_winrate.summoner1Id);
+//			RuneDto.setSummoner2Id(spell_winrate.summoner2Id);
 
 
 
