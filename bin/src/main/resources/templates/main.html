@@ -16,40 +16,38 @@
 </script>
 </head>
 <body>
+<div th:if="${session.member != null}" style="float:right">
+			<p style = "color:white"th:text="${session.member.m_nick}"></p>
+			<button onclick="location.href='/member/logout'">로그아웃</button>
+			</div>
+			<div th:if="${session.member == null}" style="float:right" >
+			<button onclick="location.href='/member/loginfrm'">로그인</button>
+			
+		</div>
 	 <div class="header">
  	<nav>
  	<ul>
- 		<li><button onclick="location.href='/testho'">용호님 작업공간</button></li>
- 		<li><button onclick="location.href='/ex'">지완님 작업공간</button></li>
- 		<li><button onclick="location.href='/lolmate/list'">롤메이트(한솔 작업공간)</button></li>
-		<li><button onclick="location.href='/board/list?page=1'">게시판(한솔 작업중)</button></li>
+ 		<li><button onclick="location.href='/'">홈</button></li>
+ 		<li><button onclick="location.href='/testmain'">챔피언 분석</button></li>
+ 		<li><button onclick="location.href='/ex'">챔피언랭킹</button></li>
+ 		<li><button onclick="location.href='/lolmate/list'">롤메이트</button></li>
+		<li><button onclick="location.href='/board/list?page=1'">게시판</button></li>
  	</ul>
  	</nav>
  </div>
 
 		<div class="allBigBox">
-		<div th:if="${session.member != null}" style="float:right">
-			<p style = "color:white"th:text="|현재 로그인중인 계정: ${session.member.m_nick}|"></p>
-			<button onclick="location.href='/member/logout'">로그아웃</button>
-			</div>
-			<div th:if="${session.member == null}" style="float:right" >
-			<button onclick="location.href='/member/loginfrm'">로그인</button>
-			<button onclick="location.href='/member/joinfrm'">회원가입</button>
-		</div>
+		
 		<br><br><br><br><br><br>
 		<img id=img1 src="../img/zzzlogo.png" onclick="location.href='/'">
 <br><br><br>
 
-			<form action="/search" method="get">
-				<input type="text" name="summonerName" autofocus required
-					placeholder="플레이어 이름"style="  width: 25%;
-  					border: 1px solid #bbb;
-  					border-radius: 8px;
-  					padding: 10px 12px;
-  					font-size: 14px;
-  					margin-left: auto; 
-  					margin-right: auto;"> 
-  				<input type="submit" value="검색">	
+		<form id="myform">
+		<div class="search">
+        <input type="text" class="input"id="nameAndTag" name="nameAndTag" autofocus required placeholder="플레이어 이름">
+        <input class="input2" type="button" value="검색" id="button">
+	</div>
+	</form>
 				<br>
 				<br>
 				<br>
@@ -86,9 +84,21 @@
 					</th:block>
 
 				</table>
-
-			</form>
+				
+			
 		</div>
+<script>
+		$(document).ready(function () {
+			$("#button").click(function () {
+				var nameAndTag = $("#nameAndTag").val();
+				var parts = nameAndTag.split("#");
+				var name = parts[0];
+				var tag = parts[1];
+				// 두 번째 HTML 파일로 이동하면서 데이터 전달
+				window.location.href = "/summonerSearch?name=" + name + "&tag=" + tag;
+			});
+		});
+	</script>
 
 
 	

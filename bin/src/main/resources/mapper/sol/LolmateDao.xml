@@ -5,20 +5,20 @@
 <mapper namespace="com.zzzpro.zzz.sol.dao.LolmateDao">
 	
 	<select id="lmMMAllList">
-		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo,lm_date,lm_end,lm_winrate from lolmateList
+		select * from lolmateList
 			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} order by lm_num desc;
 	</select>
 	<select id="lmSerchList">
-		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo,lm_date,lm_end,lm_winrate from lolmateList
+		select * from lolmateList
 			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_tier like #{lm_tier} and lm_findPosition like #{lm_findPosition}
 			order by lm_num desc;
 	</select>
 	<select id="lmAllTierList">
-		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo,lm_date,lm_end,lm_winrate from lolmateList
+		select * from lolmateList
 			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_findPosition like #{lm_findPosition} order by lm_num desc;
 	</select>
 	<select id="lmAllPositionList">
-		select lm_num,lm_gameMode,lm_tier,lm_summonerName,lm_myPosition,lm_findPosition,lm_memo,lm_date,lm_end,lm_winrate from lolmateList
+		select * from lolmateList
 			where lm_gameMate=#{lm_gameMate} and lm_gameMode=#{lm_gameMode} and lm_tier like #{lm_tier} order by lm_num desc;
 	</select>
 	<select id="lmAllList">
@@ -31,6 +31,56 @@
 	        #{lm_myPosition}, #{lm_findPosition}, #{lm_memo}, #{lm_discord}, DEFAULT, DEFAULT, #{lm_winrate}
 	    );
 	</insert>
+	
+	<select id="mLList">
+		select * from lolmateList 
+			where m_id=#{m_id} order by lm_num desc;
+	</select>
+	
+	<select id="mLAppList">
+		select lm_app_m_id,lm_app_summonerName from lolmateAPP where lm_num=#{lm_num} order by lm_app_date desc;
+	</select>
+	
+	<select id="myAppList">
+		SELECT lolmateList.* 
+			FROM lolmateList
+			INNER JOIN lolmateAPP ON lolmateList.lm_num = lolmateAPP.lm_num 
+			WHERE lolmateAPP.lm_app_m_id = #{m_id};
+	</select>
+	
+	<select id="lmDetail">
+		select * from lolmateList where lm_num=#{lm_num};
+	</select>
+	
+	<delete id="myAppDel">
+		delete from lolmateAPP where lm_num = #{lm_num} and lm_app_m_id=#{m_id};
+	</delete>
+	
+	<insert id="myLmApp">
+		insert into lolmateAPP values(#{lm_num},#{lm_app_m_id},#{lm_app_summonerName},default);
+	</insert>
 
+	<select id="lmAppFinalChatList">
+		select * from lolmateAPPChat where lm_num=#{lm_num} and lm_app_m_id=#{lm_app_m_id} order by lm_app_chat_date desc limit 1;
+	</select>
+	
+	
+	<select id="appChatList">
+		select * from lolmateAPPChat where lm_num=#{lm_num} order by lm_app_chat_date
+	</select>
+	
+	<insert id="chatAppend">
+		insert into lolmateAPPChat values(#{lm_num},#{lm_app_m_id},#{lm_app_chat},default);
+	</insert>
+	
+	<update id="close">
+		UPDATE lolmateList SET lm_end = 1 WHERE lm_num=#{lm_num};
+	</update>
+	
+	<delete id="delete">
+		delete from lolmateList where lm_num = #{lm_num};
+	</delete>
+	
+	
 	
 </mapper>

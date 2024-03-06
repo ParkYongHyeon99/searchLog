@@ -7,12 +7,21 @@
 <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
+<div th:if="${session.member != null}" style="float:right">
+			<p style = "color:white"th:text="${session.member.m_nick}"></p>
+			<button onclick="location.href='/member/logout'">로그아웃</button>
+			</div>
+			<div th:if="${session.member == null}" style="float:right" >
+			<button onclick="location.href='/member/loginfrm'">로그인</button>
+			
+		</div>
     <div class="l-container">
-        <nav><span>☆☆잼있는시너지찾기☆☆</span><input type="text" placeholder="챔피언 검색" class="search-box"></nav>
+        
         <header class="insert">
         	<div th:insert="~{header :: h1}" class="logo">로고</div>
         	<div th:insert="~{header :: ul}" class="header">헤더</div>
         </header>
+        <nav><span>☆☆잼있는시너지찾기☆☆</span><input type="text" placeholder="챔피언 검색" class="search-box"></nav>
         <div>
             <div class="flex" id="topbar">
                 <span class="width33">

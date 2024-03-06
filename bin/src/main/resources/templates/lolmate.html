@@ -22,10 +22,12 @@
 	<!-- https://appsnuri.tistory.com/405 나중에 이거 적용할것 -->
 	<div class="allBigBox">
 
-		<div th:if="${session.member != null}">
-			<input type="hidden" id="m_id" name="m_id"
-				th:value="${session.member.m_id}">
-		</div>
+		<th:block th:if="${session.member != null}">
+			<input type="hidden" id="m_id" name="m_id" th:value="${session.member.m_id}">
+		</th:block>
+		<th:block th:if="${session.member == null}">
+			<input type="hidden" id="m_id" name="m_id">
+		</th:block>
 
 		<h3>LOL-mate</h3>
 
@@ -38,12 +40,12 @@
 			<div id="lmListChoice" class="tooltip">
 				lolmate 목록
 				<span class="tooltiptext tooltip-right">
-					<p>듀오를 구하거나 멘토를 구하는 글 목록입니다.</p>
+					<p>듀오를 구하거나<br>멘토를 구하는 글 목록입니다.</p>
 				</span>
 			</div>
 			<div id="lmInfoChoice" class="tooltip">
 				신청 관리
-				<span class="tooltiptext tooltip-right">
+				<span class="tooltiptext tooltip-right" id="lmInfoTooltip">
 					<p>작성한 글의 신청자를 관리하거나,<br>신청한 글을 관리합니다.</p>
 				</span>
 			</div>
@@ -52,8 +54,6 @@
 		<!-- lmTabChoice 끝 -->
 
 		<div>
-			<div id="lmInfoTab">ffff</div>
-			<!-- lmInfoTab 끝 -->
 			<div id="lmListTab">
 				<div class="serchMateDiv">
 					<label><input type="radio" name="lm_gameMate_find" value="0"
@@ -110,10 +110,10 @@
 				</div>
 				<!-- serchMateDiv 끝 -->
 
-				<button id="dmBtn" disabled>듀오/멘토 찾기 modal</button>
+				<button id="dmBtn" disabled>듀오/멘토 찾기</button>
 				<br> <br>
-
-				<table class="lmListT">
+				
+				<table class="lmListT" id="lmListT">
 					<thead>
 						<tr class="trF">
 							<th>&ensp;게임모드&ensp;</th>
@@ -136,13 +136,27 @@
 				</table>
 			</div>
 			<!-- lmListTab 끝 -->
+			
+			<div id="lmInfoTab">
+				<div>
+					<label><input type="radio" name="lmInfoTabChoice" value="myList" checked="checked">작성한 글</label>
+					<label><input type="radio" name="lmInfoTabChoice" value="myAppList">신청한 글</label>
+				</div>
+				<div id="infoNoction"></div>
+				<div id="lmInfoContents">
+					<table id="mLAppList">
+						<thead></thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			</div>
+			<!-- lmInfoTab 끝 -->
 		</div>
 
 	</div>
 
 	
 	<!-- 모달 위 모달 https://goodsgoods.tistory.com/434 -->
-	
 	<div id="dmModal" class="modal-overlay">
 		<div class="modal-window">
 			<div class="title">
@@ -151,27 +165,33 @@
 			<div class="close-area">X</div>
 			<div class="content lmWriteDiv">
 				<form name="lmWriteFrm">
-					<div class="lmWriteBox1">
-						<input class="lm_summonerName_write" type="text" placeholder="닉네임#태그">
-						<div class="btn-group discordDiv">
-							<button type="button" id="discodeOn" class="selectBtn">on</button>
-							<button type="button" id="discodeOff" class="noSelectBtn">off</button>
+					<div class="lmWriteBox">
+						<div class="lm_serchSelectDiv">
+							<h5 class="lmWrite_h5">소환사 닉네임</h5>
+							<input class="lm_summonerName_write" type="text" placeholder="닉네임#태그">
 						</div>
-					</div>	<!-- lmWriteBox1 -->
-					<div class="lmWriteBox2">
-						<div class="btn-group gamemateDiv">
-							<button type="button" id="duoBtn" class="selectBtn">듀오</button>
-							<button type="button" id="mentoBtn" class="noSelectBtn">멘토</button>
+						<div class="lm_serchSelectDiv">
+							<div class="btn-group discordDiv floatLeft">
+								<h5 class="lmWrite_h5">디스코드 여부</h5>
+								<button type="button" id="discodeOn" class="selectBtn">on</button>
+								<button type="button" id="discodeOff" class="noSelectBtn">off</button>
+							</div>
+							<div class="btn-group gamemateDiv floatLeft">
+								<h5 class="lmWrite_h5">lolmate</h5>
+								<button type="button" id="duoBtn" class="selectBtn">듀오</button>
+								<button type="button" id="mentoBtn" class="noSelectBtn">멘토</button>
+							</div>
+							<div class="lm_serchSelectDiv">
+								<h5 class="lmWrite_h5">게임모드</h5>
+								<select name="lm_gameMode_write">
+									<option value="soloRank" selected="selected">솔로랭크</option>
+									<option value="teamRank">자유랭크</option>
+									<option value="quickMatch">빠른대전</option>
+									<option value="aram">칼바람</option>
+								</select>
+							</div>
 						</div>
-						<select name="lm_gameMode_write">
-							<option value="soloRank" selected="selected">솔로랭크</option>
-							<option value="teamRank">자유랭크</option>
-							<option value="quickMatch">빠른대전</option>
-							<option value="aram">칼바람</option>
-						</select>
-					</div>	<!-- lmWriteBox2 -->
-					
-	<!-- 				<hr> -->
+					</div>	<!-- lmWriteBox --><br>
 					
 					<div class="positionSelect">
 						<div class="myPoDivSelect">
@@ -239,6 +259,22 @@
 					
 					<button type="button" id="lmWriteBtn">작성</button>
 				</form>
+			</div>	<!-- content 끝 -->
+		</div>
+	</div>	<!-- dmModal 끝 -->
+	
+	
+	<div id="lmDModal" class="modal-overlay">
+		<div class="modal-window2">
+			<div class="title">
+				<h2 id="lm_detailT">summonerName님의 lolmate 상세 페이지</h2>
+			</div>
+			<div class="close-area">X</div>
+			<div class="content lmWriteDiv" id="lmDMContent">
+					내용 들어갈 예정
+			</div>
+			<div class="content" id="lmDMContent2">
+					(이벤트 추가한)내용 들어갈 예정2
 			</div>	<!-- content 끝 -->
 		</div>
 	</div>	<!-- dmModal 끝 -->
