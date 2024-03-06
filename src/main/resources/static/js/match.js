@@ -5,7 +5,7 @@ function search(position){
 //	let myteamPosition=$("#myteamPosition").val()
 	console.log(championName)
 	console.log(teamPosition)
-	console.log(myteamPosition)
+//	console.log(myteamPosition)
 	var data={"championName":championName,
 			  "teamPosition":teamPosition,
 			  "myteamPosition":position}
@@ -33,6 +33,8 @@ function search(position){
 		})
 		$('#result').next().remove();
         $('#result').after(temp);
+        $('#loading').hide();
+
 	})
 }
 
