@@ -1,15 +1,32 @@
 @charset "UTF-8";
+* {
+	margin: 1px;
+	text-align: center;
+	background-color: #0A1428;
+	padding: 0;
+	border: 1px solid grey;
+	color: orange;
+}
+body {
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
 
 img {
 	height: 50px;
 	display: block;
 	float: left;
-	margin-left: 0;
-	margin-right: auto;
-	cursor:pointer;
+	margin-left: 5%;
+	margin-right: 0;
+
 }
+div {
+	text-align: center;
+}
+
 header {
-    position: relative;
+    position: absolute;
     top: 0;
     padding: 20px;
     display: flex;
@@ -17,21 +34,28 @@ header {
     align-items: center;
     text-align: center;
     z-index: 1; /* 배경 이미지 위에 헤더가 표시되도록 z-index 지정 */
+
+}
+body {
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
 }
 nav ul {
-	float:right;
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-
+	height: 40px;
+	float:center;
 
 }
+
 nav li {
 	display: inline;
 	margin-left: 16px;
 	font-size: 18px;
 	font-weight: bold;
-	color: fff;
+	color: #fff;
 }
 
 nav li button {
@@ -47,3 +71,4 @@ nav li button {
 nav li button:hover {
 	text-decoration: underline;
 }
+
