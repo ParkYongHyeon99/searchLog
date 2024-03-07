@@ -12,7 +12,6 @@
 
 .sePoDiv{
 	display: inline-block;
-	vertical-align: middle;
 }
 
 .serchMateDiv,#dmBtn {
@@ -22,7 +21,7 @@
 
 
 input[disabled] {
-    background-color: #fff;
+    background-color: #091428;
 }
 
 
@@ -31,13 +30,20 @@ input[disabled] {
 }
 
 
-.lmListT{
+.lmListT, #mLAppList{
 	border: 1px solid black;
 	text-align: center;
 	width: 100%;
 	border-collapse: separate;
 	border-spacing: 0 5px;
 }
+/* #mLAppList{ */
+/* 	width:80%; */
+/*  	border: 1px solid black; */
+/*  	padding: 1% 0 1% 0; */
+/*  	margin: auto; */
+/*  	text-align: center; */
+/* } */
 
 .trF{
 	width: auto;
@@ -139,13 +145,6 @@ label{
 	padding: 0;
 }
 
-#mLAppList{
-	width:80%;
- 	border: 1px solid black;
- 	padding: 1% 0 1% 0;
- 	margin: auto;
- 	text-align: center;
-}
 
 #lmDMContent2{
 	margin: auto;
