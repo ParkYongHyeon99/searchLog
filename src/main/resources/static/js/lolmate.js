@@ -81,8 +81,8 @@ function infoTabMyList(id){
 					appCtnCell.text('  '+lm.lm_app.length+'  명');
 				}
 				const endCell = $('<td>').text('');
-				if(lm.lm_end == 0){ endCell.text('신청 가능'); }
-					else if(lm.lm_end == 1){ endCell.text('닫힘'); }
+				if(lm.lm_end == 0){ endCell.text('  신청 가능  '); }
+					else if(lm.lm_end == 1){ endCell.text('  닫힘  '); }
 				num--;
 				
 				newRow.append(numCell,gameMateCell,gameModeCell,myPCell,findPCell,memoCell,appCtnCell,endCell)
