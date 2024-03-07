@@ -13,7 +13,6 @@ public class ExDto {
 	// champions
 	private String championName;
 	private String championName_kr;
-	private String champions;
 	private String winrate;
 	private String pickrate;
 	private String banrate;

@@ -9,12 +9,12 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface ExDao {
 
-	@Select("select * from champList order by championName_kr")
+	@Select("SELECT * FROM champList_emerald ORDER BY championName_kr")
 	List<Map<String, Object>> champions(ExDto eDto);
 
-	@Select("select * from champList_emerald order by case when pickrate >= 10 then 0 else 1 end, winrate desc")
+	@Select("SELECT * FROM champList_emerald ORDER BY CASE WHEN pickrate >= 10 THEN 0 ELSE 1 END, winrate DESC")
 	List<Map<String, Object>> championList(ExDto eDto);
-
+	
 	List<Map<String, Object>> mostLine(String championName);
 
 	List<Map<String, Object>> rune(String championName, String highest_pick_rate_position);
@@ -23,12 +23,17 @@ public interface ExDao {
 	
 	List<Map<String, Object>> skill(String championName, String highest_pick_rate_position);
 
-	List<Map<String, Object>> item(String championName, String highest_pick_rate_position);
+	List<Map<String, Object>> core3(String championName, String highest_pick_rate_position);
 	
 	List<Map<String, Object>> shoes(String championName, String highest_pick_rate_position);
 
 	List<Map<String, Object>> counter(String championName, String highest_pick_rate_position);
+	
+	List<Map<String, Object>> counterDESC(String championName, String highest_pick_rate_position);
 
 	List<Map<String, Object>> test(ExDto eDto);
+	
+	List<Map<String, Object>> testt(ExDto eDto);
+
 
 }
