@@ -445,8 +445,8 @@ function lmAjax(){
 		let cntHtml = '';
 		let id = document.getElementById('m_id').value;
 		if(lmList["all"].length!=0){
+			$('#lmListT tbody').empty();
 			if(lmList["serch"].length!=0){
-				$('#lmListT tbody').empty();
 				for(let lm of lmList["serch"]){
 					let newRow = $('<tr>');
 					const gameModeCell = $('<td>').text(lm.lm_gameMode) // 게임 모드
