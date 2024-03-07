@@ -2846,7 +2846,6 @@ function submitForm() {
 			}, {});
 			let mostFrequent = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
 
-			console.log(mostFrequent)
 		}
 	});
 

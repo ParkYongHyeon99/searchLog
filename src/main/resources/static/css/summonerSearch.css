@@ -919,7 +919,6 @@ li::marker {
 }
 
 #tierList {
-	/* border: solid black 1px; */
 	width: 350px;
 	height: 100px;
 	position: absolute;
