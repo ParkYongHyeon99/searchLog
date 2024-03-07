@@ -6,8 +6,20 @@
 <link rel="stylesheet" href="/css/exstyle.css">
 </head>
 <body>
-
-
+<div th:if="${session.member != null}" style="float:right;">
+			<p style = "color:white"th:text="${session.member.m_nick}"></p>
+			<button onclick="location.href='/member/logout'">로그아웃</button>
+			</div>
+			<div th:if="${session.member == null}" style="float:right" >
+			<button onclick="location.href='/member/loginfrm'">로그인</button>
+			
+		</div>
+			<div class="l-container">
+	        <header class="insert">
+	        	<div th:insert="~{header :: h1}" class="logo">로고</div>
+	        	<div th:insert="~{header :: ul}" class="header">헤더</div>
+	        </header>
+</div>
 	<form action = "/champ/champinfo" >
 	<select name ="tier1" size="1">
 		<option value="아이언" selected>아이언</option>

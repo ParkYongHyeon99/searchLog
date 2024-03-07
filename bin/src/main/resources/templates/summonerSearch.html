@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link th:href="@{/css/summonerSearch.css}" rel="stylesheet" />
+	<script type="text/javascript" th:src="@{/js/test.js}"></script>
+	<script src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<style>
+	body {
+		display: flex;
+		justify-content: center;
+		height: 5700px;
+		align-items: center;
+	}
+
+	#container {
+		width: 1200px;
+		/* 원하는 너비로 설정 */
+		height: 5500px;
+		/* 원하는 높이로 설정 */
+		border: solid black 1px;
+		position: relative;
+		top: 10px;
+		padding: 50px;
+	}
+
+	#profill {
+		width: 1158px;
+		height: 200px;
+		padding: 20px;
+		border: solid black 1px;
+		display: flex;
+	}
+
+	#icon {
+		width: 100px;
+		height: 100px;
+		border: solid black 1px;
+
+	}
+
+	#name {
+		border: solid black 1px;
+		position: relative;
+		width: 200px;
+		height: 40px;
+		display: flex;
+		left: 20px;
+		line-height: 40px;
+		justify-content: left;
+		padding-left: 15px;
+	}
+
+	#game {
+		border: solid black 1px;
+		width: 824px;
+		height: 90%;
+		position: relative;
+		top: 20px;
+		right: 0px;
+		float: right;
+	}
+
+	#chart {
+		border: solid black 1px;
+		position: relative;
+		width: 330px;
+		height: 90%;
+		float: left;
+		top: 20px;
+		padding: 10px;
+	}
+
+	.ddd {
+		float: right;
+		position: relative;
+		top: 10px;
+		right: 50%;
+	}
+
+	.champion1 {
+		border: solid black 1px;
+		width: 320px;
+		height: 53px;
+		padding: 3px;
+		display: flex;
+
+	}
+
+	.champion1Img {
+		border: solid black 1px;
+		width: 50px;
+		height: 50px;
+	}
+
+	.champion1Stat {
+		border: solid black 1px;
+		width: 260px;
+		height: 50px;
+		position: relative;
+		float: left;
+		line-height: 50px;
+		left: 5px;
+		text-align: center;
+	}
+
+	#winrate {
+		border: solid black 1px;
+		width: 150px;
+		height: 150px;
+		display: flex;
+		position: relative;
+		float: right;
+		left: 687px;
+		top: 50px;
+
+	}
+
+	#winrate_title {
+		border: solid black 1px;
+		width: 150px;
+		height: 40px;
+		display: flex;
+		position: relative;
+		float: right;
+		left: 360px;
+		top: 160px;
+		align-items: center;
+		text-align: center;
+		line-height: 40px;
+	}
+	.winChart {
+		position: relative;
+		width: 150px;
+		height: 150px;
+		border-radius: 50%;
+		transition: 0.3s;
+		background: lightgray;
+		display: inline-block;
+	}
+
+	.winChart:after {
+		content: '';
+		background: #fff;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 75px;
+		height: 75px;
+		border-radius: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+		line-height: 200px;
+		/* 글자의 높이를 차트의 높이와 동일하게 설정 */
+	}
+
+	.winChart-bar {
+		width: inherit;
+		height: inherit;
+		border-radius: 50%;
+		background: conic-gradient(#8568ec 66%, #e42121 0%);
+		/* 차트 설정 */
+	}
+</style>
+
+
+<body>
+	<div id="container">
+		<div id="profill">
+			<div id="icon"></div>
+			<div id="name"></div>
+			<div id="winrate"></div>
+			<div id="winrate_title"></div>
+			<div id="pcentage"></div>
+
+		</div>
+		<div id="game">
+			<table id="123"></table>
+			<button class="ddd" onclick="submitForm()">더보기</button>
+
+		</div>
+
+		<div id="chart">
+			<!--			<div id="champion1">-->
+			<!--				<div id="champion1Img"></div>-->
+			<!--				<div id="champion1Stat"></div>-->
+			<!--			</div>-->
+		</div>
+	</div>
+
+
+</body>
+
+</html>

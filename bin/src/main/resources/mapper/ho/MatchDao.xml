@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzzpro.zzz.ho.dao.MatchDao">
+	<select id="getMatchData">
+SELECT
+	championName,
+    championName_KR,
+    COUNT(CASE WHEN win = 'true' THEN 1 END) AS win_count,
+    COUNT(*) AS total_count,
+    round((COUNT(CASE WHEN win = 'true' THEN 1 END) / COUNT(*)*100),2) AS win_ratio
+FROM
+    zzz_datas_runeN
+WHERE
+    match_id IN (
+        SELECT match_id
+        FROM zzz_datas_item
+        WHERE championName = #{championName} and teamPosition = #{teamPosition}
+    )
+    AND championName != #{championName}
+    and teamPosition != #{teamPosition}
+    AND teamPosition = #{myteamPosition}
+    
+GROUP BY
+    championName_KR
+order by total_count desc;
+
+	</select>
+</mapper>

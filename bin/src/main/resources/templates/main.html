@@ -24,18 +24,21 @@
 			<button onclick="location.href='/member/loginfrm'">로그인</button>
 			
 		</div>
+<div class="l-container">
 	 <div class="header">
+
  	<nav>
  	<ul>
+ 		<li><img style="float:left; margin-left:5%; height:50px;" src="img/zzzlogo.png" onclick="location.href='/'"></li>
  		<li><button onclick="location.href='/'">홈</button></li>
- 		<li><button onclick="location.href='/testmain'">챔피언 분석</button></li>
  		<li><button onclick="location.href='/ex'">챔피언랭킹</button></li>
+ 		<li><button onclick="location.href='/match'">시너지 분석</button></li>
  		<li><button onclick="location.href='/lolmate/list'">롤메이트</button></li>
 		<li><button onclick="location.href='/board/list?page=1'">게시판</button></li>
  	</ul>
  	</nav>
  </div>
-
+</div>
 		<div class="allBigBox">
 		
 		<br><br><br><br><br><br>
@@ -51,41 +54,7 @@
 				<br>
 				<br>
 				<br>
-				<hr>
-				<table	style="border: 1px solid white; text-align: center; width: 50%; margin-left: auto; margin-right: auto; color:white;">
-					<tr>
-						<th>&ensp;글 번호&ensp;</th>
-						<th>&ensp;제목&ensp;</th>
-						<th>&ensp;작성자&ensp;</th>
-						<th>&ensp;작성 날짜&ensp;</th>
-						<th>&ensp;조회수&ensp;</th>
-					</tr>
-
-					<th:block th:if="${bList}==null">
-						<tr>
-							<td colspan="5">글이 존재하지 않습니다.</td>
-						</tr>
-					</th:block>
-
-					<th:block th:if="${bList}!=null" th:each="b : ${bList}">
-						<tr>
-							<td th:text=" ' &ensp; ' + ${b.b_num} + ' &ensp; '"></td>
-							<td><a th:href="|/board/detail?b_num=${b.b_num}|"
-								th:text=" ' &ensp; ' + ${b.b_title} + ' &ensp; '"></a></td>
-							<th:block>
-								<td th:if="${b.unnamed == 0}"
-									th:text=" ' &ensp; ' + ${b.b_writer} + ' &ensp; '"></td>
-								<td th:if="${b.unnamed == 1}"
-									th:text=" ' &ensp; 익명) ' + ${b.b_writerNick} + ' &ensp; '"></td>
-							</th:block>
-							<td th:text=" ' &ensp; ' + ${b.b_date} + ' &ensp; '"></td>
-							<td th:text=" ' &ensp; ' + ${b.b_view} + ' &ensp; '"></td>
-						</tr>
-					</th:block>
-
-				</table>
-				
-			
+				<hr>			
 		</div>
 <script>
 		$(document).ready(function () {
