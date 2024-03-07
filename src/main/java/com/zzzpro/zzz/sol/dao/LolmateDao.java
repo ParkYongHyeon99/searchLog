@@ -21,9 +21,9 @@ public interface LolmateDao {
 	ArrayList<LolmateDto> myAppList(String m_id);
 	LolmateDto lmDetail(int lm_num);
 	boolean myAppDel(int lm_num, String m_id);
-	boolean myLmApp(LolmateAppDto lmApp);
+	String myLmApp(LolmateAppDto lmApp);
 	LolmateAPPChatDto lmAppFinalChatList(LolmateAppDto lmA);
-	ArrayList<LolmateAPPChatDto> appChatList(int lm_num);
+	ArrayList<LolmateAPPChatDto> appChatList(int lm_num, String app_name);
 	boolean chatAppend(LolmateAPPChatDto lmACDto);
 	boolean close(int lm_num);
 	boolean delete(int lm_num);

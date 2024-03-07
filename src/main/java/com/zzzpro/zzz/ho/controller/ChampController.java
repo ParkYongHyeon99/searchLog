@@ -25,6 +25,10 @@ public class ChampController {
 	ChampService champser;
 	
 
+	@GetMapping("/match")
+	public String match() {
+		return "match";
+	}
 	
 	@GetMapping("/champ/champinfo")
 	public String champinfo(ChampDto cDto, Model model, HttpSession session) {

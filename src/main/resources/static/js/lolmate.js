@@ -6,7 +6,6 @@
  	
  */
 
-
 $(()=>{
 /* ====================== 포지션 이미지 설정 ====================== */
 	let position = ["pAll","Top","Jungle","Mid","Bot","Support"];
@@ -21,41 +20,18 @@ $(()=>{
 			document.getElementById(p).style.backgroundSize = "30px";
 		}
 	}
+/* ====================== 포지션 이미지 설정 끝 ====================== */
 
 
 /* ====================== 리스트 가져오는 함수 실행 ====================== */
 	lmAjax();
-	//setInterval(function(){lmAjax()},5000);		// <- 5초마다 리스트 갱신
-	
+	//setInterval(function(){lmAjax()},3000);		// <- 3초마다 리스트 갱신
+/* ====================== 리스트 가져오는 함수 실행 끝 ====================== */
 })
 
 
-/* ====================== 탭 변경 ====================== */
-$('#lmListChoice').on('click',function(){
-	//location.href = '/lolmate/list';
-	$('#lmListTab').css('display','block');
-	$('#lmInfoTab').css('display','none');
-})
-$('#lmInfoChoice').on('click',function(){
-	let id = document.getElementById('m_id').value
-	if(id == ""){
-		alert('로그인 후 이용 가능합니다.');
-	}else{
-		$('#lmListTab').css('display','none');
-		$('#lmInfoTab').css('display','block');
-		$("input[name=lmInfoTabChoice][value=myList]").prop("checked", true);
-		infoTabMyList(id);
-	}
-})
-$('input[name=lmInfoTabChoice]').on('change',function(){
-	var infoTab = $('input[name=lmInfoTabChoice]:checked').val();
-	let id = document.getElementById('m_id').value
-	if(infoTab == 'myList'){
-		infoTabMyList(id);
-	}else if(infoTab == 'myAppList'){
-		infoTabMyAppList(id);
-	}
-})
+
+/* ====================== 내 작성 글 리스트 생성 ====================== */
 function infoTabMyList(id){
 	$.ajax({
 		method:'get',
@@ -120,6 +96,11 @@ function infoTabMyList(id){
 		}
 	})
 }
+/* ====================== 내 작성 글 리스트 생성 끝 ====================== */
+
+
+
+/* ====================== 내 신청글 리스트 생성 ====================== */
 function infoTabMyAppList(id){
 	$.ajax({
 		method:'get',
@@ -173,7 +154,11 @@ function infoTabMyAppList(id){
 		}
 	})
 }
+/* ====================== 내 신청글 리스트 생성 끝 ====================== */
 
+
+
+/* ====================== 글 모달 Div 상세 요소 생성 ====================== */
 function mL_Detail(lm_num,division){
 	let id = document.getElementById('m_id').value;
 	$.ajax({
@@ -213,7 +198,6 @@ function mL_Detail(lm_num,division){
 		
 		$('#lmDMContent').html(html);
 		
-		
 		$('#lmDMContent2').html('');
 		if(division == '0'){
 			// 확인(작성자)
@@ -229,63 +213,25 @@ function mL_Detail(lm_num,division){
 			});
 			if(idOk){
 				// 한 상태
-				appChat(lm_num,id,'0');
+				appChat(lm_num,id,lm.m_id,'0');
 			}else{
 				// 안 한 상태
 				var container = document.getElementById('lmDMContent2');
 				const appSName = Object.assign(document.createElement('input'), { type: 'text', id: 'appSName', placeholder:'닉네임#태그' });
 				const appBtn = document.createElement('button');
 				appBtn.textContent = '  신청  ';
-				appBtn.addEventListener('click', () => appChat(lm_num,id,'1'));
+				appBtn.addEventListener('click', () => appChat(lm_num,id,lm.m_id,'1'));
 				container.appendChild(appSName);
 				container.appendChild(appBtn);
 			}
 		}
 	})
 }
-function positionHtml(clName, selP) {
-    console.log(selP);
-    let po = ['top', 'jug', 'mid', 'adc', 'sup'];
-    let po1 = ["Top", "Jungle", "Mid", "Bot", "Support"];
-    let po2 = ["selTop", "selJungle", "selMid", "selBot", "selSupport"];
-    let poKr = ['탑', '정글', '미드', '원딜(봇)', '서포터'];
-    let html = '';
+/* ====================== 글 모달 Div 상세 요소 생성 끝 ====================== */
 
-    if (selP === "All ") {
-        html += '<label class="positionImg tooltip pAll" id="' + clName + 'pAll">';
-        html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
-        html += '<span class="tooltiptext tooltip-bottom">전체 라인</span></label>';
-        for (let i = 0; i < po.length; i++) {
-            html += '<label class="positionImg tooltip ' + po1[i] + '" id="' + clName + 'pAll">';
-            html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
-            html += '<span class="tooltiptext tooltip-bottom">' + poKr[i] + '</span></label>';
-        }
-    } else {
-        let selectedPositions = selP.split(" ");
-        html += '<label class="positionImg tooltip npAll" id="' + clName + 'pAll">';
-        html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
-        html += '<span class="tooltiptext tooltip-bottom">전체 라인</span></label>';
-        for (let i = 0; i < po.length; i++) {
-            let positionFound = false;
-            for (let j = 0; j < selectedPositions.length; j++) {
-                if (po[i] === selectedPositions[j]) {
-                    html += '<label class="positionImg tooltip ' + po2[i] + '" id="' + clName + 'pAll">';
-                    html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
-                    html += '<span class="tooltiptext tooltip-bottom">' + poKr[i] + '</span></label>';
-                    positionFound = true;
-                    break;
-                }
-            }
-            if (!positionFound) {
-                html += '<label class="positionImg tooltip ' + po1[i] + '" id="' + clName + 'pAll">';
-                html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
-                html += '<span class="tooltiptext tooltip-bottom">' + poKr[i] + '</span></label>';
-            }
-        }
-    }
-    return html;
-}
 
+
+/* ====================== 내 글 신청자 리스트 생성 ====================== */
 function appList(lm_num){
 	$('#lmDMContent2').html('');
 	$.ajax({
@@ -310,18 +256,23 @@ function appList(lm_num){
 				var chatDate = document.createElement('h5');
 				
 				appDiv.setAttribute('class','lmAppDiv')
-				appDiv.onclick = function(){ chat(lm_num,'1') }
+				appDiv.onclick = function(){ chat(lm_num,lm.lm_app[i].lm_app_m_id,'1') }
 				
 				sNameText.textContent = lm.lm_app[i].lm_app_summonerName;
 				sNameText.setAttribute('class','sNameText')
 				if(lm.lm_app_chat[i]==null){
-					chatText.textContent = '아직 채팅을 작성하지 않았습니다.';
+					chatText.textContent = '상대방이 아직 채팅을 작성하지 않았습니다.';
 				}else{
-					chatText.textContent = lm.lm_app_chat[i].lm_app_chat;
+					let chat = lm.lm_app_chat[i].lm_app_chat;
+					if(chat.length>10){
+						chatText.textContent = chat.substr(start[0, 10]);
+					}else{
+						chatText.textContent = chat;
+					}
 					chatDate.textContent = lm.lm_app_chat[i].lm_app_chat_date;
 				}
 				
-					
+				chatText.setAttribute('class', 'chatTextDiv');
 				appDiv.appendChild(sNameText);
 				appDiv.appendChild(chatText);
 				if(lm.lm_app_chat[i]!=null){ appDiv.appendChild(chatDate); }
@@ -375,127 +326,81 @@ function appList(lm_num){
 		}
 	})
 }
+/* ====================== 내 글 신청자 리스트 생성 끝 ====================== */
 
-function appChat(lm_num,id,category){	// 신청자의 채팅
-	if(category=='1'){	// 신청버튼 클릭 시 신청부터 진행
-		$.ajax({
-			method:'get',
-			url:'/lolmate/myLmApp',
-			data: {
-				lm_num:lm_num,
-				lm_app_m_id:id,
-				lm_app_summonerName:document.getElementById('appSName').value,
-			},
-		}).done(function(res){
-			if(!res){
-				Swal.fire({
-					icon : "error",
-					text : "신청 실패..",
-				});
-				return;
-			}
-		})
-	}
-	// 채팅 출력
-	chat(lm_num,'0')
-}
 
-function chat(lm_num,category){
-	$('#lmDMContent2').html('');
-	$.ajax({
-		method:'get',
-		url:'/lolmate/appChatList',
-		data: {
-			lm_num:lm_num,
-		},
-	}).done(function(appChatList){
-		var id = document.getElementById('m_id').value
-		var parentDiv = document.getElementById('lmDMContent2');
-		var childDiv = document.createElement('div');
-		if(category=='1'){
-			var backBtn = document.createElement('button');
-			backBtn.textContent = '  ⇐  ';
-	        backBtn.setAttribute('id', 'chat-backBtn');
-	        backBtn.onclick = function(){
-				appList(lm_num)
-			}
-			childDiv.appendChild(backBtn);
-		}
-		var chatDiv = document.createElement('div');
-        chatDiv.setAttribute('id', 'chat-div');
-        if(appChatList.length<1){
-			var chatText = document.createElement('div');
-			chatText.textContent = '아직 대화 내역이 없습니다.';
-			chatText.setAttribute('class','noText')				// << css 적용해야함
-			chatDiv.appendChild(chatText);
-		}else{
-			for(let i=0; i<appChatList.length; i++){
-				var chatDivBox = document.createElement('div');
-				var chatText = document.createElement('div');
-				var chatDate = document.createElement('h5');
-				
-				chatText.textContent = appChatList[i].lm_app_chat;
-				chatDate.textContent = appChatList[i].lm_app_chat_date;
-				if(appChatList[i].lm_app_m_id===id){
-					chatDivBox.setAttribute('class','myAppendChat')
-				}else{
-					chatDivBox.setAttribute('class','appAppendChat')
-				}
-				
-				chatDivBox.appendChild(chatText);
-				chatDivBox.appendChild(chatDate);
-				chatDiv.appendChild(chatDivBox);
-			}
-		}
-		var appendChatDiv = document.createElement('div');
-        appendChatDiv.setAttribute('id', 'chat-box');
-		
-		var appendChat = document.createElement('textarea');
-        appendChat.setAttribute('type', 'text');
-        appendChat.setAttribute('id', 'chat-text');
-        appendChat.setAttribute('placeholder', '채팅을 입력하세요.');
-        
-        var appendChatBtn = document.createElement('button');
-        appendChatBtn.textContent = '  ↲  ';
-        appendChatBtn.onclick = function() {
-            $.ajax({
-				method:'get',
-				url:'/lolmate/chatAppend',
-				data: {
-					lm_num:lm_num,
-					lm_app_m_id:id,
-					lm_app_chat:$('#chat-text').val(),
-				},
-			}).done(function(res){
-				console.log('res: '+res)
-				if(res){
-					chat(lm_num,'0');
-				}else{
-					Swal.fire({
-						icon : "error",
-						text : "보내기 실패..",
-					});
-				}
-			})
-        };
-		
-		childDiv.appendChild(chatDiv);
-		appendChatDiv.appendChild(appendChat);
-		appendChatDiv.appendChild(appendChatBtn);
-		childDiv.appendChild(appendChatDiv);
-		parentDiv.appendChild(childDiv);
-		
-		var element = document.getElementById('chat-div');
-		element.scrollTop = element.scrollHeight;
-	})
-}
 
+/* ====================== 내 신청글 모달 Div 상세 요소 생성 ====================== */
 function myApp_Detail(lm_num){
 	mL_Detail(lm_num,'1');
 	const lmDModal = document.getElementById('lmDModal');
 	lmDModal.style.display = 'flex';
 }
-function myAppDel(lm_num,id,e){	// lolmate 글 삭제
+/* ====================== 내 신청글 모달 Div 상세 요소 생성 끝 ====================== */
+
+
+
+/* ====================== 롤메이트 글 작성 ====================== */
+$('#lmWriteBtn').on('click',function(){
+	let sName = $('.lm_summonerName_write').val();
+	
+	var discordOn = $('#discodeOn').attr('class');
+	var gameMateSelect = $('#duoBtn').attr('class');
+	var discord = 0;
+	var gameMate = 0;
+	if(discordOn == 'selectBtn'){ discord=0; }else if(discordOn == 'noSelectBtn'){ discord=1; }
+	if(gameMateSelect == 'selectBtn'){ gameMate=0; }else if(gameMateSelect == 'noSelectBtn'){ gameMate=1; }
+	// 선택된 목록 가져오기
+	const mpSel = document.querySelectorAll('input[name=lm_myPosition_write]:checked');
+	const fpSel = document.querySelectorAll('input[name=lm_findPosition_write]:checked');
+	let mpVal = '';	let fpVal = '';		// 선택된 목록에서 value 찾기
+	mpSel.forEach((el) => {mpVal += el.value + ' ';});
+	fpSel.forEach((el) => {fpVal += el.value + ' ';});
+	console.log('myPosition: ',mpVal,'\tfindPosition: ',fpVal)
+	$.ajax({
+		method:'get',
+		url: '/lolmate/lmWrite',
+		data: {
+			m_id:$('#m_id').val(),
+			lm_summonerName:sName,
+			lm_gameMate:gameMate,
+			lm_gameMode:$('select[name=lm_gameMode_write]').val(),
+			lm_myPosition:mpVal,
+			lm_findPosition:fpVal,
+			lm_memo:$('#lmWriteMemo').val(),
+			lm_discord:discord
+		},
+	}).done(function(res){
+		if(res=="ok"){
+			Swal.fire({
+				icon : "success",
+				title : "작성 성공!",
+			});
+			$('.lm_summonerName_write').val('');
+			document.getElementById('discodeOn').className = 'selectBtn';
+			document.getElementById('discodeOff').className = 'noSelectBtn';
+			document.getElementById('duoBtn').className = 'selectBtn';
+			document.getElementById('mentoBtn').className = 'noSelectBtn';
+			$("input[name=lm_myPosition_write][value=All]").prop("checked", true);
+			$("input[name=lm_findPosition_write][value=All]").prop("checked", true);
+			$('#lmWriteMemo').val('');
+			$('#dmModal').hide();
+			lmAjax();
+		}else{
+			Swal.fire({
+				icon : "error",
+				title : "작성 실패..",
+				text : "닉네임을 제대로 작성하셨는지 확인해주세요",
+			});
+		}
+	})
+})
+/* ====================== 롤메이트 글 작성 끝 ====================== */
+
+
+
+/* ====================== 글 삭제 ====================== */
+function myAppDel(lm_num,id,e){	// 
 	e.stopPropagation();
 	$.ajax({
 		method:'get',
@@ -519,22 +424,8 @@ function myAppDel(lm_num,id,e){	// lolmate 글 삭제
 		text : "취소 실패..",
 	});
 }
+/* ====================== 글 삭제 끝 ====================== */
 
-
-
-/* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
-$('input[name=lm_gameMate_find],select[name=lm_gameMode_find],select[name=lm_tier_find],input[name=lm_findPosition_find]')
-	.on('change',function(){
-	let position = ["pAll","Top","Jungle","Mid","Bot","Support"];
-	for(p of position){
-		document.getElementById(p).style.backgroundImage = "url('../img/position/Silver-"+p+".png')";
-	}
-	let selectP = $('input[name=lm_findPosition_find]:checked')[0].id.substr(1);
-	console.log('lm_findPosition: '+selectP);
-	document.getElementById(selectP).style.backgroundImage = "url('../img/position/Diamond-"+selectP+".png')";
-	lmAjax();
-	console.log("변경");
-})
 
 
 /* ====================== gameMate,gameMode,tier에 따른 리스트 가져오기 ====================== */
@@ -566,7 +457,6 @@ function lmAjax(){
 					const findPCell = $('<td>').html(divHtml(lm.lm_findPosition,'position')) // 찾는 포지션
 					const memoCell = $('<td>').text(lm.lm_memo) // 작성자 메모
 					
-					
 					const btnCell = $('<td>');
 					if(lm.m_id == id){
 						if(lm.lm_end==0){
@@ -589,7 +479,6 @@ function lmAjax(){
 							btnCell.append($('<button>').attr('type', 'button').prop('disabled', true).text('  닫힘  '));
 						}
 					}
-					
 					
 					newRow.append(gameModeCell,tierCell,summonerNameCell,myPCell,winrateCell,findPCell,memoCell,btnCell)
 					
@@ -668,6 +557,7 @@ function lmAjax(){
 		console.log("status:", status);
 	})
 }
+/* ====================== gameMate,gameMode,tier에 따른 리스트 가져오기 끝 ====================== */
 
 
 
@@ -708,181 +598,51 @@ function divHtml(tp,img){
 	}
 	return html+"</div>";
 }
+/* ====================== lmList 포지션 div 설정 끝 ====================== */
 
 
-/* ====================== 롤메이트 글 작성 포지션 변경 체크 ====================== */
-$('input[name=lm_myPosition_write]').on('change', function() {
-    let po = ["Top","Jungle","Mid","Bot","Support"];
-    let myPoCheck = [];
+
+/* ====================== 포지션 이미지/툴팁 생성 ====================== */
+function positionHtml(clName, selP) {
+    console.log(selP);
+    let po = ['top', 'jug', 'mid', 'adc', 'sup'];	let poKr = ['탑', '정글', '미드', '원딜(봇)', '서포터'];
+    let po1 = ["Top", "Jungle", "Mid", "Bot", "Support"];	let po2 = ["selTop", "selJungle", "selMid", "selBot", "selSupport"];
     
-    // 모든 포지션 포함 다른 포지션들을 실버로 변경
-    for(let i=0; i<po.length; i++) { poImgSet('writemy'+po[i],'Silver',po[i]); }
-    poImgSet('writemypAll','Silver','pAll');
-
-    // 선택된 모든 항목을 배열에 추가
-    $('input[name=lm_myPosition_write]:checked').each(function() {
-        myPoCheck.push($(this).val());
-    });
-
-    // "All"을 선택한 경우
-    if ($(this).val() === 'All' && $(this).prop('checked')) {
-        poImgSet('writemypAll','Diamond','pAll');
-        $("input[name=lm_myPosition_write]").not(this).prop("checked", false);
-        console.log('select Position: pAll')
+    let html = '';
+    if (selP === "All ") {
+        html += '<label class="positionImg tooltip pAll" id="' + clName + 'pAll">';
+        html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+        html += '<span class="tooltiptext tooltip-bottom">전체 라인</span></label>';
+        for (let i = 0; i < po.length; i++) {
+            html += '<label class="positionImg tooltip ' + po1[i] + '" id="' + clName + 'pAll">';
+            html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+            html += '<span class="tooltiptext tooltip-bottom">' + poKr[i] + '</span></label>';
+        }
     } else {
-        // "All"을 선택하지 않은 경우
-        // 선택된 항목의 수가 전체 항목 수와 같은 경우
-        if (myPoCheck.length === po.length) {
-            $("input[name=lm_myPosition_write]").not(this).prop("checked", false);
-            $("input[name=lm_myPosition_write][value=All]").prop("checked", true);
-            po = ['pAll']
-        } else {
-			po = []
-            $("input[name=lm_myPosition_write][value=All]").prop("checked", false);
-            for(let i=0; i<myPoCheck.length; i++) {
-                if(myPoCheck[i] === 'top'){ po.push('Top') }
-                else if(myPoCheck[i] === 'jug'){ po.push('Jungle') }
-                else if(myPoCheck[i] === 'mid'){ po.push('Mid') }
-                else if(myPoCheck[i] === 'adc'){ po.push('Bot') }
-                else if(myPoCheck[i] === 'sup'){ po.push('Support') }
+        let selectedPositions = selP.split(" ");
+        html += '<label class="positionImg tooltip npAll" id="' + clName + 'pAll">';
+        html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+        html += '<span class="tooltiptext tooltip-bottom">전체 라인</span></label>';
+        for (let i = 0; i < po.length; i++) {
+            let positionFound = false;
+            for (let j = 0; j < selectedPositions.length; j++) {
+                if (po[i] === selectedPositions[j]) {
+                    html += '<label class="positionImg tooltip ' + po2[i] + '" id="' + clName + 'pAll">';
+                    html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+                    html += '<span class="tooltiptext tooltip-bottom">' + poKr[i] + '</span></label>';
+                    positionFound = true;
+                    break;
+                }
+            }
+            if (!positionFound) {
+                html += '<label class="positionImg tooltip ' + po1[i] + '" id="' + clName + 'pAll">';
+                html += '<input type="checkbox" class="' + clName + '" name="' + clName + '"></input>';
+                html += '<span class="tooltiptext tooltip-bottom">' + poKr[i] + '</span></label>';
             }
         }
-        for(let i=0; i<po.length; i++) {
-            poImgSet('writemy'+po[i],'Diamond',po[i]);
-        }
-        console.log('select Position: '+po)
     }
-});
-$('input[name=lm_findPosition_write]').on('change', function() {
-    let po = ["Top","Jungle","Mid","Bot","Support"];
-    let fiPoCheck = [];
-    
-    // 모든 포지션 포함 다른 포지션들을 실버로 변경
-    for(let i=0; i<po.length; i++) { poImgSet('writefind'+po[i],'Silver',po[i]); }
-    poImgSet('writefindpAll','Silver','pAll');
-
-    // 선택된 모든 항목을 배열에 추가
-    $('input[name=lm_findPosition_write]:checked').each(function() {
-        fiPoCheck.push($(this).val());
-    });
-
-    // "All"을 선택한 경우
-    if ($(this).val() === 'All' && $(this).prop('checked')) {
-        poImgSet('writefindpAll','Diamond','pAll');
-        $("input[name=lm_findPosition_write]").not(this).prop("checked", false);
-        console.log('select Position: pAll')
-    } else {
-        // "All"을 선택하지 않은 경우
-        // 선택된 항목의 수가 전체 항목 수와 같은 경우
-        if (fiPoCheck.length === po.length) {
-            $("input[name=lm_findPosition_write]").not(this).prop("checked", false);
-            $("input[name=lm_findPosition_write][value=All]").prop("checked", true);
-            po = ['pAll']
-        } else {
-			po = []
-            $("input[name=lm_findPosition_write][value=All]").prop("checked", false);
-            for(let i=0; i<fiPoCheck.length; i++) {
-                if(fiPoCheck[i] === 'top'){ po.push('Top') }
-                else if(fiPoCheck[i] === 'jug'){ po.push('Jungle') }
-                else if(fiPoCheck[i] === 'mid'){ po.push('Mid') }
-                else if(fiPoCheck[i] === 'adc'){ po.push('Bot') }
-                else if(fiPoCheck[i] === 'sup'){ po.push('Support') }
-            }
-        }
-        for(let i=0; i<po.length; i++) {
-            poImgSet('writefind'+po[i],'Diamond',po[i]);
-        }
-        console.log('select Position: '+po)
-    }
-});
-$('.discordDiv').on('click',function(){
-	let on = document.getElementById('discodeOn')
-	let off = document.getElementById('discodeOff')
-	if(on.className=='selectBtn'){
-		on.className = 'noSelectBtn';
-		off.className = 'selectBtn';
-	}else if(on.className=='noSelectBtn'){
-		on.className = 'selectBtn';
-		off.className = 'noSelectBtn';
-	}
-})
-$('.gamemateDiv').on('click',function(){
-	let duo = document.getElementById('duoBtn')
-	let mento = document.getElementById('mentoBtn')
-	if(duo.className=='selectBtn'){
-		duo.className = 'noSelectBtn';
-		mento.className = 'selectBtn';
-	}else if(duo.className=='noSelectBtn'){
-		duo.className = 'selectBtn';
-		mento.className = 'noSelectBtn';
-	}
-})
-/* ====================== 롤메이트 글 작성 포지션 변경 체크 끝 ====================== */
-
-
-
-/* ====================== 이미지 변경 함수 ====================== */
-function poImgSet(id,sel,p){
-	document.getElementById(id).style.backgroundImage = "url('../img/position/"+sel+"-"+p+".png')";
+    return html;
 }
-/* ====================== 이미지 변경 함수 끝 ====================== */
+/* ====================== 포지션 이미지/툴팁 생성 끝 ====================== */
 
-
-
-/* ====================== 롤메이트 글 작성 ====================== */
-$('#lmWriteBtn').on('click',function(){
-	let sName = $('.lm_summonerName_write').val();
-	
-	var discordOn = $('#discodeOn').attr('class');
-	var gameMateSelect = $('#duoBtn').attr('class');
-	var discord = 0;
-	var gameMate = 0;
-	if(discordOn == 'selectBtn'){ discord=0; }else if(discordOn == 'noSelectBtn'){ discord=1; }
-	if(gameMateSelect == 'selectBtn'){ gameMate=0; }else if(gameMateSelect == 'noSelectBtn'){ gameMate=1; }
-	// 선택된 목록 가져오기
-	const mpSel = document.querySelectorAll('input[name=lm_myPosition_write]:checked');
-	const fpSel = document.querySelectorAll('input[name=lm_findPosition_write]:checked');
-	let mpVal = '';	let fpVal = '';		// 선택된 목록에서 value 찾기
-	mpSel.forEach((el) => {mpVal += el.value + ' ';});
-	fpSel.forEach((el) => {fpVal += el.value + ' ';});
-	console.log('myPosition: ',mpVal,'\tfindPosition: ',fpVal)
-	$.ajax({
-		method:'get',
-		url: '/lolmate/lmWrite',
-		data: {
-			m_id:$('#m_id').val(),
-			lm_summonerName:sName,
-			lm_gameMate:gameMate,
-			lm_gameMode:$('select[name=lm_gameMode_write]').val(),
-			lm_myPosition:mpVal,
-			lm_findPosition:fpVal,
-			lm_memo:$('#lmWriteMemo').val(),
-			lm_discord:discord
-		},
-	}).done(function(res){
-		if(res=="ok"){
-			Swal.fire({
-				icon : "success",
-				title : "작성 성공!",
-			});
-			$('.lm_summonerName_write').val('');
-			document.getElementById('discodeOn').className = 'selectBtn';
-			document.getElementById('discodeOff').className = 'noSelectBtn';
-			document.getElementById('duoBtn').className = 'selectBtn';
-			document.getElementById('mentoBtn').className = 'noSelectBtn';
-			$("input[name=lm_myPosition_write][value=All]").prop("checked", true);
-			$("input[name=lm_findPosition_write][value=All]").prop("checked", true);
-			$('#lmWriteMemo').val('');
-			$('#dmModal').hide();
-			lmAjax();
-		}else{
-			Swal.fire({
-				icon : "error",
-				title : "작성 실패..",
-				text : "닉네임을 제대로 작성하셨는지 확인해주세요",
-			});
-		}
-	})
-})
-/* ====================== 롤메이트 글 작성 끝 ====================== */
 

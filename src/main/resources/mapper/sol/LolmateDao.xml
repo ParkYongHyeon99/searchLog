@@ -58,6 +58,8 @@
 	
 	<insert id="myLmApp">
 		insert into lolmateAPP values(#{lm_num},#{lm_app_m_id},#{lm_app_summonerName},default);
+		
+		select m_id from lolmateList where lm_num=#(lm_num);
 	</insert>
 
 	<select id="lmAppFinalChatList">
@@ -66,11 +68,14 @@
 	
 	
 	<select id="appChatList">
-		select * from lolmateAPPChat where lm_num=#{lm_num} order by lm_app_chat_date
+		SELECT *
+		FROM lolmateAPPChat
+		WHERE (lm_app_m_id = #{app_name} OR Recipient_m_id = #{app_name})
+		AND lm_num = #{lm_num};
 	</select>
 	
 	<insert id="chatAppend">
-		insert into lolmateAPPChat values(#{lm_num},#{lm_app_m_id},#{lm_app_chat},default);
+		insert into lolmateAPPChat values(#{lm_num},#{lm_app_m_id},#{lm_app_chat},default,#{recipient_m_id},#{lm_master});
 	</insert>
 	
 	<update id="close">
