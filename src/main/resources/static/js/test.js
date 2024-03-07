@@ -275,8 +275,13 @@ $(document).ready(function() {
 						champList.push(JSON.stringify(result.total_Data_list[l][i].championName).slice(1, -1));
 						winLoss.push(JSON.stringify(result.total_Data_list[l][i].win).slice(1, -1));
 
-
-
+						var I_tier = JSON.stringify(result.total_Data_list[l][i].solo_tier).slice(1, -1);
+						var I_rank = JSON.stringify(result.total_Data_list[l][i].solo_rank).slice(1, -1);
+						var I_point = JSON.stringify(result.total_Data_list[l][i].solo_rankpoint);
+						
+						console.log(I_tier)
+						console.log(I_rank)
+						console.log(I_point)
 
 
 
@@ -1420,17 +1425,41 @@ $(document).ready(function() {
 				"height": supPickkPcentage
 			})
 
-			
+
 			let counts = champList.reduce((map, item) => {
 				map[item] = (map[item] || 0) + 1;
 				return map;
 			}, {});
 			let mostFrequent = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-			
-			console.log(mostFrequent)
+
 			$('#mostPlay').append(`
 				<img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/${mostFrequent}.png" alt="">
 			`)
+
+			
+
+			if (I_tier == "unranked") {
+				$('#tierImg').append(`
+				<span> unranked </span>
+			`)
+				
+			} else {
+				$('#tierImg').append(`
+				<img src="https://opgg-static.akamaized.net/images/medals_new/${I_tier}.png?image=q_auto,f_png,w_144&v=1708681571653" alt="" width="100px" height="100px">
+				`)
+				
+				$('#tier').append(`
+				<span>${I_tier + " " +I_rank} </span>
+				`)
+				
+				$('#point').append(`
+				<span>${I_point} LP</span>
+				`)
+				
+			}
+
+
+
 		}
 	});
 
@@ -2816,7 +2845,7 @@ function submitForm() {
 				return map;
 			}, {});
 			let mostFrequent = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-			
+
 			console.log(mostFrequent)
 		}
 	});
