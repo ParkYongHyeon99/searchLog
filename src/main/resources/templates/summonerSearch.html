@@ -133,6 +133,7 @@
 		text-align: center;
 		line-height: 40px;
 	}
+
 	.winChart {
 		position: relative;
 		width: 150px;
@@ -162,7 +163,7 @@
 		width: inherit;
 		height: inherit;
 		border-radius: 50%;
-		background: conic-gradient(#8568ec 66%, #e42121 0%);
+		background: conic-gradient(#8ab4f8 66%, #e42121 0%);
 		/* 차트 설정 */
 	}
 </style>
@@ -176,6 +177,36 @@
 			<div id="winrate"></div>
 			<div id="winrate_title"></div>
 			<div id="pcentage"></div>
+			<div id="lanePick">
+				<div class="graph_wrap">
+					<strong class="tit">선호 포지션 (랭크)</strong>
+					<div class="graph">
+						<!-- 목록 -->
+						<ul class="x-axis" style="marker: none;">
+							<li><img src="https://s-lol-web.op.gg/images/icon/icon-position-top.svg?v=1708681571653"
+									alt=""></li>
+							<li><img src="https://s-lol-web.op.gg/images/icon/icon-position-jungle.svg?v=1708681571653"
+									alt=""></li>
+							<li><img src="https://s-lol-web.op.gg/images/icon/icon-position-mid.svg?v=1708681571653"
+									alt=""></li>
+							<li><img src="https://s-lol-web.op.gg/images/icon/icon-position-bot.svg?v=1708681571653"
+									alt=""></li>
+							<li><img src="https://s-lol-web.op.gg/images/icon/icon-position-sup.svg?v=1708681571653"
+									alt=""></li>
+						</ul>
+						<!-- 바 그래프 (백분율 만큼 height값) -->
+						<ul class="bar">
+							<li class="topPick" style="height:0%;"><span></span></li>
+							<li class="jgPick" style="height:0%;"><span></span></li>
+							<li class="midPick" style="height:0%;"><span></span></li>
+							<li class="botPick" style="height:0%;"><span></span></li>
+							<li class="supPick" style="height:0%;"><span></span></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<div id="mostPlay"></div>
+			<div id="mostPlayName">가장 많이 플레이한 챔피언</div>
 
 		</div>
 		<div id="game">
@@ -185,10 +216,6 @@
 		</div>
 
 		<div id="chart">
-			<!--			<div id="champion1">-->
-			<!--				<div id="champion1Img"></div>-->
-			<!--				<div id="champion1Stat"></div>-->
-			<!--			</div>-->
 		</div>
 	</div>
 
