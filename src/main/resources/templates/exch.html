@@ -195,22 +195,6 @@
 							</tr>
 						</table>
 					</div>
-<!-- 					<div th:alt="카운터" class="divide" style="display: flex; flex-direction: row;"> -->
-<!-- 						<table th:each="shoes, Index : ${shoes}" -->
-<!-- 							th:if="${Index.index == 0}" class="divide"> -->
-<!-- 							<tr> -->
-<!-- 								<td colspan="2">신발</td> -->
-<!-- 							</tr> -->
-<!-- 							<tr> -->
-<!-- 								<td colspan="1"><img -->
-<!-- 									th:src="@{'https://ddragon.leagueoflegends.com/cdn/14.3.1/img/item/' + ${shoes['shoes']} + '.png'}"> -->
-<!-- 								</td> -->
-<!-- 								<td -->
-<!-- 									th:utext="'승률 ' + ${shoes['shoes_win_percentage']} + '%' + '<br>픽률 ' + ${shoes['shoes_pickRate']} + '%'" -->
-<!-- 									colspan="1"></td> -->
-<!-- 							</tr> -->
-<!-- 						</table> -->
-<!-- 					</div> -->
                         <table th:alt="카운터" class="divide">
 					        <tr>
 					            <td colspan="10">
@@ -218,30 +202,32 @@
 					            </td>
 					        </tr>
 					        <tr>
-					            <td colspan="5">상대하기 쉬운 챔피언</td>
-					            <td colspan="5">상대하기 어려운 챔피언</td>
+					            <td colspan="5">상대하기 쉬운 챔피언(승률)</td>
+					            <td colspan="5">상대하기 어려운 챔피언(승률)</td>
 					        </tr>
 					        <tr>
 					            <td colspan="5">
-					                <span th:each="counterDESC : ${counterDESC}">
+					                <span th:each="counterDESC, Index : ${counterDESC}" th:if="${Index.index lt 5}">
 					                	<img alt="초상화" th:src="'https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/' + ${counterDESC.enemy_champ_en} + '.png'">
 					                </span>
 					            </td>
 					            <td colspan="5">
-					                <span th:each="counter : ${counter}">
+					                <span th:each="counter, Index : ${counter}" th:if="${Index.index lt 5}">
 					                	<img alt="초상화" th:src="'https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/' + ${counter.enemy_champ_en} + '.png'">
 					                </span>
 					            </td>
 					        </tr>
 					        <tr>
-					             <td colspan="10">
-					                <span th:each="counterDESC : ${counterDESC}">
-					                	<span th:text="'승률 ' + ${counterDESC.counter_win_rate} + '%'"></span>
-					                </span>
-					                <span th:each="counter : ${counter}">
-					                	<span th:text="'승률 ' + ${counter.counter_win_rate} + '%'"></span>
+					             <td colspan="5">
+					                <span th:each="counterDESC, Index : ${counterDESC}" th:if="${Index.index lt 5}">
+					                	<span th:text="${counterDESC.counter_win_rate} + '%'"></span>
 					                </span>
 					            </td>
+					            <td colspan="5">
+					            	<span th:each="counter, Index : ${counter}" th:if="${Index.index lt 5}">
+					                	<span th:text="${counter.counter_win_rate} + '%'"></span>
+					                </span>
+					             </td>   
 					        </tr>
 					    </table>
                 </section>

@@ -16,6 +16,7 @@ public class ExDto {
 	private String winrate;
 	private String pickrate;
 	private String banrate;
+	private String highest_pick_rate_position;
 
 	private String teamPosition;
 	private String all_rate;

@@ -38,9 +38,9 @@
 		SELECT *
 		FROM counter
 		WHERE championName=#{championName} AND
-		teamPosition=#{highest_pick_rate_position} AND tier1='그랜드마스터'
+		teamPosition=#{highest_pick_rate_position} AND tier1='마스터'
 		HAVING counter_win_rate != 100 AND counter_win_rate != 0 AND
-		counter_win_rate &gt;= 50
+		counter_win_rate &gt; 50
 		ORDER BY counter_win_rate DESC
 	</select>
 
@@ -48,15 +48,15 @@
 		SELECT *
 		FROM counter
 		WHERE championName=#{championName} AND
-		teamPosition=#{highest_pick_rate_position} AND tier1='그랜드마스터'
+		teamPosition=#{highest_pick_rate_position} AND tier1='마스터'
 		HAVING counter_win_rate != 100 AND counter_win_rate != 0 AND
 		counter_win_rate &lt; 50
 		ORDER BY counter_win_rate
 	</select>
 
 	<select id="test">
-		select championName,championName_kr
-		from champList
+		select championName, championName_kr, highest_pick_rate_position
+		from champList_emerald
 		where line like #{line} order by championName_kr
 	</select>
 
