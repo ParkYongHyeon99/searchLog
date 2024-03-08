@@ -24,23 +24,20 @@ $(()=>{
 
 
 /* ====================== 회원의 게시글 공개/익명 선택 버튼 ====================== */
-function anonymousChange(){
-	let nick = document.getElementById('nicknameBTN')
-	let anony = document.getElementById('anonymousBTN')
-	
-	if(nick.className=='btn btn-primary'){
-		nick.className = 'btn btn-outline-primary';
-		anony.className = 'btn btn-primary';
-		$('#b_writerNick').css('display','block')
-		ano = false
-	}else{
-		nick.className = 'btn btn-primary';
-		anony.className = 'btn btn-outline-primary';
-		$('#b_writerNick').css('display','none')
-		document.getElementById('b_writerNick').value="";
-		ano = true
-	}
-}
+$('#nicknameBTN').on('click',function(){
+	$('#nicknameBTN').addClass("selectBtn").removeClass("noSelectBtn");
+	$('#anonymousBTN').addClass("noSelectBtn").removeClass("selectBtn");
+	$('#b_writerNick').css('display','none')
+	document.getElementById('b_writerNick').value="";
+	document.getElementById('unNickCheckTip').textContent = '';
+	ano = true
+})
+$('#anonymousBTN').on('click',function(){
+	$('#anonymousBTN').addClass("selectBtn").removeClass("noSelectBtn");
+	$('#nicknameBTN').addClass("noSelectBtn").removeClass("selectBtn");
+	$('#b_writerNick').css('display','block')
+	ano = false
+})
 /* ====================== 회원의 게시글 공개/익명 선택 버튼 끝 ====================== */
 
 
@@ -165,9 +162,9 @@ $('#summernote').summernote({
 	toolbar : [ [ 'style', [ 'style' ] ],
 			[ 'font', [ 'bold', 'underline', 'clear' ] ],
 			[ 'color', [ 'color' ] ],
-			[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
-			[ 'table', [ 'table' ] ],
-			[ 'insert', [ 'link'] ],	// , 'picture', 'video' 
-			[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
+			[ 'para', [ 'ul', 'ol', 'paragraph', 'align' ] ],
+			[ 'insert', [ 'link'] ],	// , 'picture', 'video'
+			[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ],
+	//summernoteTheme: 'summernote_custom'
 });
 /* ====================== 썸머노트 설정 끝 ====================== */

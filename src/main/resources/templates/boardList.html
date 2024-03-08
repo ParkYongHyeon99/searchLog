@@ -6,6 +6,9 @@
 <!-- jquery -->
 <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
 
+<link rel="stylesheet" href="/css/allStyle.css">
+<link rel="stylesheet" href="/css/board.css">
+
 <script th:inline="javascript">
 	$(()=>{
 		let m = [[${msg}]];
@@ -17,81 +20,67 @@
 </head>
 <body>
 	
-	<div class="allBigBox">
+	<div class="allBigBox l-container">
 		
 		<header class="insert">
 			<div th:insert="~{header :: h1}" class="logo">로고</div>
 			<div th:insert="~{header :: ul}" class="header">헤더</div>
 		</header>
 		
-		<h3>Board List</h3>
-		
-		<div th:if="${session.member != null}">
-			<p th:text="${session.member.m_nick}"></p>
-			<button onclick="location.href='/member/logout'">로그아웃</button>
-		</div>
-		<div th:if="${session.member == null}">
-			<button onclick="location.href='/member/loginfrm'">로그인</button>
-			<button onclick="location.href='/member/joinfrm'">회원가입</button>
-		</div>
-		
-		<br><hr><br>
-		
-		<button type="button" class="crudBtn" onclick="location.href='/board/boardWrite'" style="float: left;">글 작성</button>
-		<br><br>
-		
-		<table style="border: 1px solid black; text-align: center; width: 90%;">
-			<tr>
-				<th>&ensp;글 번호&ensp;</th>
-				<th>&ensp;제목&ensp;</th>
-				<th>&ensp;작성자&ensp;</th>
-				<th>&ensp;작성 날짜&ensp;</th>
-				<th>&ensp;조회수&ensp;</th>
-			</tr>
+		<div class="allSmallBox">
 			
-			<th:block th:if="${bList}==null">
+			<button type="button" class="crudBtn" onclick="location.href='/board/boardWrite'">글 작성</button>
+			<br><br>
+			
+			<table class="boardListT">
 				<tr>
-					<td colspan="5">글이 존재하지 않습니다.</td>
+					<th>&ensp;글 번호&ensp;</th>
+					<th>&ensp;제목&ensp;</th>
+					<th>&ensp;작성자&ensp;</th>
+					<th>&ensp;작성 날짜&ensp;</th>
+					<th>&ensp;조회수&ensp;</th>
 				</tr>
-			</th:block>
+				
+				<th:block th:if="${bList}==null">
+					<tr>
+						<td colspan="5">글이 존재하지 않습니다.</td>
+					</tr>
+				</th:block>
+				
+				<th:block th:if="${bList}!=null" th:each="b : ${bList}">
+					<tr>
+						<td th:text=" ' &ensp; ' + ${b.b_num} + ' &ensp; '"></td>
+						<td><a th:href="|/board/detail?b_num=${b.b_num}|" th:text=" ' &ensp; ' + ${b.b_title} + ' &ensp; '"></a></td>
+						<th:block>
+							<td th:if="${b.unnamed == 0}" th:text=" ' &ensp; ' + ${b.b_writer} + ' &ensp; '"></td>
+							<td th:if="${b.unnamed == 1}" th:text=" ' &ensp; 익명) ' + ${b.b_writerNick} + ' &ensp; '"></td>
+						</th:block>
+						<td th:text=" ' &ensp; ' + ${b.b_date} + ' &ensp; '"></td>
+						<td th:text=" ' &ensp; ' + ${b.b_view} + ' &ensp; '"></td>
+					</tr>
+				</th:block>
+			</table>
 			
-			<th:block th:if="${bList}!=null" th:each="b : ${bList}">
+			
+			<table class="pagingTable">
 				<tr>
-					<td th:text=" ' &ensp; ' + ${b.b_num} + ' &ensp; '"></td>
-					<td><a th:href="|/board/detail?b_num=${b.b_num}|" th:text=" ' &ensp; ' + ${b.b_title} + ' &ensp; '"></a></td>
-					<th:block>
-						<td th:if="${b.unnamed == 0}" th:text=" ' &ensp; ' + ${b.b_writer} + ' &ensp; '"></td>
-						<td th:if="${b.unnamed == 1}" th:text=" ' &ensp; 익명) ' + ${b.b_writerNick} + ' &ensp; '"></td>
+					<th:block th:if="${paging.leftP != 1}">
+						<td><a th:href="|/board/list?page=1|"><<</a></td>
+						<td><a th:href="|/board/list?page=${paging.beforeP}|"><</a></td>
 					</th:block>
-					<td th:text=" ' &ensp; ' + ${b.b_date} + ' &ensp; '"></td>
-					<td th:text=" ' &ensp; ' + ${b.b_view} + ' &ensp; '"></td>
+					
+					<th:block th:each="i: ${#numbers.sequence(paging.leftP, paging.rightP)}">
+						<td th:if="${i <= paging.lastP}"><a th:href="|/board/list?page=${i}|" th:text="${i}"></a></td>
+					</th:block>
+					
+					<th:block th:if="${paging.rightP<paging.lastP}">
+						<td><a th:href="|/board/list?page=${paging.nextP}|">></a></td>
+						<td><a th:href="|/board/list?page=${paging.lastP}|">>></a></td>
+					</th:block>
 				</tr>
-			</th:block>
-		</table>
-		
-		
-		<table class="pagingTable" style="text-align: center; width: 90%;">
-			<tr>
-				<th:block th:if="${paging.leftP != 1}">
-					<td><a th:href="|/board/list?page=1|"><<</a></td>
-					<td><a th:href="|/board/list?page=${paging.beforeP}|"><</a></td>
-				</th:block>
-				
-				<th:block th:each="i: ${#numbers.sequence(paging.leftP, paging.rightP)}">
-					<td th:if="${i <= paging.lastP}"><a th:href="|/board/list?page=${i}|" th:text="${i}"></a></td>
-				</th:block>
-				
-				<th:block th:if="${paging.rightP<paging.lastP}">
-					<td><a th:href="|/board/list?page=${paging.nextP}|">></a></td>
-					<td><a th:href="|/board/list?page=${paging.lastP}|">>></a></td>
-				</th:block>
-			</tr>
-		</table>
-		
-		<br>
-		<button type="button" onclick="location.href='/'">메인화면</button>
-		
+			</table>
+			
+		</div>
 	</div>
-	
 </body>
 </html>
