@@ -12,11 +12,16 @@
 
 <!-- 썸머노트 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+<link rel="stylesheet" href="/css/allStyle.css">
 </head>
 <body>
 	
-	<div class="allBigBox">
+	<div class="allBigBox l-container">
+		
+		<header class="insert">
+			<div th:insert="~{header :: h1}" class="logo">로고</div>
+			<div th:insert="~{header :: ul}" class="header">헤더</div>
+		</header>
 		
 		<h3>Board Detail</h3>
 		
@@ -62,7 +67,6 @@
 		</div>
 		
 		
-		<button type="button" onclick="location.href='/'">메인화면</button>
 		<button type="button" onclick="location.href = '/board/list?page=1'">리스트로 돌아가기</button>
 		
 	</div>
