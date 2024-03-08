@@ -15,21 +15,16 @@ public class restController {
 	@Autowired
 	ExService eSer;
 
-	@GetMapping("/test")
-	public List<Map<String, Object>> test(ExDto eDto) {
-		log.info("라인별 탭변경" + eDto);
-		return eSer.test(eDto);
+	@GetMapping("/tabKr")
+	public List<Map<String, Object>> tabKr(ExDto eDto) {
+		log.info("이름 -> 라인 변경" + eDto);
+		return eSer.tabKr(eDto);
 	}
 
 	@GetMapping("/testt")
-	public List<Map<String, Object>> testt(ExDto eDto) {
-		log.info("챔피언 정렬 변경" + eDto);
-		return eSer.testt(eDto);
-	}
-
-	@GetMapping("/ex/mostLine")
-	public List<Map<String, Object>> mostLine(String championName) {
-		return eSer.mostLine(championName);
+	public List<Map<String, Object>> tabWin(ExDto eDto) {
+		log.info("승률 -> 라인 변경" + eDto);
+		return eSer.tabWin(eDto);
 	}
 
 }

@@ -21,6 +21,7 @@
 		SELECT * FROM rune
 		WHERE championName=#{championName}
 		AND teamPosition=#{highest_pick_rate_position} AND tier1='에메랄드'
+		ORDER BY rune_percentage DESC
 	</select>
 
 	<select id="spell">
@@ -86,7 +87,7 @@
 		ORDER BY counter_win_rate
 	</select>
 
-	<select id="test">
+	<select id="tabKr">
 		select championName, championName_kr,
 		highest_pick_rate_position
 		from champList_emerald
@@ -94,7 +95,7 @@
 		#{line} order by championName_kr
 	</select>
 
-	<select id="testt">
+	<select id="tabWin">
 		SELECT championName, championName_kr,
 		highest_pick_rate_position, winrate, pickrate, banrate
 		from

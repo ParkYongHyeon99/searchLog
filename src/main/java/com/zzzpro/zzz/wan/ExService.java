@@ -85,21 +85,21 @@ public class ExService {
 		model.addAttribute("counterDESC", counterDESC(championName, highest_pick_rate_position));
 	}
 
-	public List<Map<String, Object>> test(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
+	public List<Map<String, Object>> tabKr(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
 		eDto.setLine('%' + eDto.getLine() + '%');
 		if (eDto.getLine().equals("%all%")) {
-			return eDao.test(eDto);
+			return eDao.tabKr(eDto);
 		} else {
-			return eDao.test(eDto);
+			return eDao.tabKr(eDto);
 		}
 	}
 
-	public List<Map<String, Object>> testt(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
+	public List<Map<String, Object>> tabWin(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
 		eDto.setLine('%' + eDto.getLine() + '%');
 		if (eDto.getLine().equals("%all%")) {
 			return eDao.championList(eDto);
 		} else {
-			return eDao.testt(eDto);
+			return eDao.tabWin(eDto);
 		}
 	}
 

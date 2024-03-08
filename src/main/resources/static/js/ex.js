@@ -1,7 +1,7 @@
 $('input[name=aa]').on('change', function() {
 	$.ajax({
 		type: 'GET',
-		url: '/test',  // 실제 서버 엔드포인트로 변경
+		url: '/tabKr',  // 실제 서버 엔드포인트로 변경
 		data: { line: $('input[name=aa]:checked').val() },   // 서버에 전달할 데이터
 		success: function(champions) {
 			if (champions.length != 0) {
@@ -27,3 +27,25 @@ $('input[name=aa]').on('change', function() {
 		}
 	});
 });
+
+document.addEventListener("DOMContentLoaded", function() {
+	// select 요소에서 현재 선택된 값을 가져옴
+	const selectedValue = document.getElementById("dropDown").value;
+
+	// URL에 파라미터를 추가하여 새로운 URL을 만듦
+	const newUrl = updateQueryStringParameter(window.location.href, 'tier1', selectedValue);
+
+	// 새로운 URL로 페이지를 리로드
+	window.location.href = newUrl;
+});
+
+// URL에 파라미터를 추가 또는 업데이트하는 함수
+function updateQueryStringParameter(uri, key, value) {
+	const re = new RegExp("([?&])" + key + "=.*?(&|$)", "i");
+	const separator = uri.indexOf('?') !== -1 ? "&" : "?";
+	if (uri.match(re)) {
+		return uri.replace(re, '$1' + key + "=" + value + '$2');
+	} else {
+		return uri + separator + key + "=" + value;
+	}
+}
