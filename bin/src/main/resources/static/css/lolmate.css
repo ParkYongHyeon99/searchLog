@@ -1,8 +1,27 @@
 @charset "UTF-8";
 
 
+.left-align{
+	text-align: left;
+}
+
+#dmBtn{
+	float: right;
+	margin-right: 3%;
+}
+
+.sePoDiv{
+	display: inline-block;
+}
+
+.serchMateDiv,#dmBtn {
+    display: inline-block; /* 버튼을 블록 요소로 설정하여 한 줄에 하나의 요소만 표시 */
+    vertical-align: middle;
+}
+
+
 input[disabled] {
-    background-color: #fff;
+    background-color: #091428;
 }
 
 
@@ -11,12 +30,23 @@ input[disabled] {
 }
 
 
-.lmListT{
+.lmListT, #mLAppList{
 	border: 1px solid black;
 	text-align: center;
-	width: 90%;
+	width: 100%;
 	border-collapse: separate;
 	border-spacing: 0 5px;
+}
+/* #mLAppList{ */
+/* 	width:80%; */
+/*  	border: 1px solid black; */
+/*  	padding: 1% 0 1% 0; */
+/*  	margin: auto; */
+/*  	text-align: center; */
+/* } */
+
+.trF{
+	width: auto;
 }
 
 .trF>th{
@@ -98,7 +128,7 @@ label{
 	height: 30%;
 	line-height: 30px;
 	padding: 20px;
-	background-color: aqua;
+	background-color: #091428;
 	text-align: center;
 }
 #lmNotionDiv h3,h2{
@@ -115,13 +145,6 @@ label{
 	padding: 0;
 }
 
-#mLAppList{
-	width:80%;
- 	border: 1px solid black;
- 	padding: 1% 0 1% 0;
- 	margin: auto;
- 	text-align: center;
-}
 
 #lmDMContent2{
 	margin: auto;

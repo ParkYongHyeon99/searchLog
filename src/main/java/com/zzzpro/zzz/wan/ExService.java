@@ -44,12 +44,20 @@ public class ExService {
 		return eDao.spell(championName, highest_pick_rate_position);
 	}
 
-	public List<Map<String, Object>> skill(String championName, String highest_pick_rate_position) {
-		return eDao.skill(championName, highest_pick_rate_position);
+	public List<Map<String, Object>> skill3lv(String championName, String highest_pick_rate_position) {
+		return eDao.skill3lv(championName, highest_pick_rate_position);
+	}
+
+	public List<Map<String, Object>> skill6lv(String championName, String highest_pick_rate_position) {
+		return eDao.skill6lv(championName, highest_pick_rate_position);
 	}
 
 	public List<Map<String, Object>> core3(String championName, String highest_pick_rate_position) {
 		return eDao.core3(championName, highest_pick_rate_position);
+	}
+
+	public List<Map<String, Object>> sitem(String championName, String highest_pick_rate_position) {
+		return eDao.sitem(championName, highest_pick_rate_position);
 	}
 
 	public List<Map<String, Object>> shoes(String championName, String highest_pick_rate_position) {
@@ -68,8 +76,10 @@ public class ExService {
 		model.addAttribute("mostLine", mostLine(championName));
 		model.addAttribute("rune", rune(championName, highest_pick_rate_position));
 		model.addAttribute("spell", spell(championName, highest_pick_rate_position));
-//		model.addAttribute("skill_3lv", skill_3lv(championName, highest_pick_rate_position));
+		model.addAttribute("skill3lv", skill3lv(championName, highest_pick_rate_position));
+		model.addAttribute("skill6lv", skill6lv(championName, highest_pick_rate_position));
 		model.addAttribute("core3", core3(championName, highest_pick_rate_position));
+		model.addAttribute("sitem", sitem(championName, highest_pick_rate_position));
 		model.addAttribute("shoes", shoes(championName, highest_pick_rate_position));
 		model.addAttribute("counter", counter(championName, highest_pick_rate_position));
 		model.addAttribute("counterDESC", counterDESC(championName, highest_pick_rate_position));

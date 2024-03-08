@@ -1,5 +1,4 @@
 // URL에서 파라미터를 가져옴
-
 var params = new URLSearchParams(window.location.search);
 var name = params.get('name');
 var tag = params.get('tag');
@@ -7,6 +6,15 @@ var start = 0;
 var champList = [];
 var totalList = [];
 var winLoss = [];
+
+var topPick = 0;
+var jgPick = 0;
+var midPick = 0;
+var botPick = 0;
+var supPick = 0;
+
+
+
 $(document).ready(function() {
 	// AJAX 요청 실행
 	$.ajax({
@@ -180,9 +188,29 @@ $(document).ready(function() {
 						if (JSON.stringify(result.total_Data_list[l][i].win).slice(1, -1) ==
 							"True") {
 							var win = '승리';
+
 						} else {
 							var win = '패배';
 						}
+
+						var I_position = JSON.stringify(result.total_Data_list[l][i].teamPosition).slice(1, -1);
+
+						if (I_position === "TOP") {
+							topPick++;
+						} else if (I_position === "JUNGLE") {
+							jgPick++;
+						} else if (I_position === "MIDDLE") {
+							midPick++;
+						} else if (I_position === "BOTTOM") {
+							botPick++;
+						} else if (I_position === "UTILITY") {
+							supPick++;
+						}
+						var totalPick = topPick + jgPick + midPick + botPick + supPick
+
+
+
+
 						var I_summonerLevel = JSON.stringify(result.total_Data_list[l][i].champLevel)
 						var I_summonerName = JSON.stringify(result.total_Data_list[l][i].summonerName).slice(1, -1);
 						var I_championName = JSON.stringify(result.total_Data_list[l][i].championName).slice(1, -1);
@@ -247,8 +275,13 @@ $(document).ready(function() {
 						champList.push(JSON.stringify(result.total_Data_list[l][i].championName).slice(1, -1));
 						winLoss.push(JSON.stringify(result.total_Data_list[l][i].win).slice(1, -1));
 
-
-
+						var I_tier = JSON.stringify(result.total_Data_list[l][i].solo_tier).slice(1, -1);
+						var I_rank = JSON.stringify(result.total_Data_list[l][i].solo_rank).slice(1, -1);
+						var I_point = JSON.stringify(result.total_Data_list[l][i].solo_rankpoint);
+						
+						console.log(I_tier)
+						console.log(I_rank)
+						console.log(I_point)
 
 
 
@@ -272,7 +305,7 @@ $(document).ready(function() {
 
 				$("#123").append(`
     <table>
-     <div id="background">
+     <div id="background${l}">
         <div id="background_padding">
             <div id="win">
                 <span>${win}</span><br><br>
@@ -1178,6 +1211,24 @@ $(document).ready(function() {
                                             
 `)
 
+				if (win == '승리') {
+					$('#background' + l).css({
+						'background-color': '#6699cc',
+						'width': '800px',
+						'height': '100px',
+						'padding': '10px',
+						'margin-bottom': '5px'
+					});
+				} else {
+					$('#background' + l).css({
+						'background-color': '#ff3c38',
+						'width': '800px',
+						'height': '100px',
+						'padding': '10px',
+						'margin-bottom': '5px'
+					});
+				}
+
 				value1 = blueGold[9]
 				value2 = redGold[9]
 				aa = `<div class="goldProgress-bar${l}">
@@ -1280,10 +1331,8 @@ $(document).ready(function() {
 
 				})
 			} //for문 전적검색 수		
-			//console.log(champList)
-			//console.log(winLoss)
 			let resulttt = champList.map((item, index) => [item, winLoss[index]]);
-			//console.log(resulttt)
+
 
 			let resultt = resulttt.reduce((acc, cur) => {
 				let [champion, winLose] = cur;
@@ -1331,7 +1380,7 @@ $(document).ready(function() {
 			}, {});
 			let winTostring = parseInt(JSON.stringify(winResult.True));
 			let lossTostring = parseInt(JSON.stringify(winResult.False));
-			let win_rating = (winTostring / (winTostring + lossTostring) * 100)
+			let win_rating = Math.round((winTostring / (winTostring + lossTostring) * 100))
 
 
 
@@ -1347,12 +1396,70 @@ $(document).ready(function() {
 
 
 			$('.winChart-bar').css({
-				"background": "conic-gradient(#8568ec " + win_rating + "%, #e42121 0%)"
+				"background": "conic-gradient(#8ab4f8 " + win_rating + "%, #e42121 0%)"
 			})
-			
+
 			$('#pcentage').append(`
 				<span">${win_rating}%</span>
 			`)
+
+			var topPickPcentage = (((topPick / totalPick) * 100) + "%")
+			var jgPickkPcentage = (((jgPick / totalPick) * 100) + "%")
+			var midPickPcentage = (((midPick / totalPick) * 100) + "%")
+			var botPickPcentage = (((botPick / totalPick) * 100) + "%")
+			var supPickkPcentage = (((supPick / totalPick) * 100) + "%")
+
+			$('.topPick').css({
+				"height": topPickPcentage
+			})
+			$('.jgPick').css({
+				"height": jgPickkPcentage
+			})
+			$('.midPick').css({
+				"height": midPickPcentage
+			})
+			$('.botPick').css({
+				"height": botPickPcentage
+			})
+			$('.supPick').css({
+				"height": supPickkPcentage
+			})
+
+
+			let counts = champList.reduce((map, item) => {
+				map[item] = (map[item] || 0) + 1;
+				return map;
+			}, {});
+			let mostFrequent = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+
+			$('#mostPlay').append(`
+				<img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/${mostFrequent}.png" alt="">
+			`)
+
+			
+
+			if (I_tier == "unranked") {
+				$('#tierImg').append(`
+				<span> unranked </span>
+			`)
+				
+			} else {
+				$('#tierImg').append(`
+				<img src="https://opgg-static.akamaized.net/images/medals_new/${I_tier}.png?image=q_auto,f_png,w_144&v=1708681571653" alt="" width="100px" height="100px">
+				`)
+				
+				$('#tier').append(`
+				<span>${I_tier + " " +I_rank} </span>
+				`)
+				
+				$('#point').append(`
+				<span>${I_point} LP</span>
+				`)
+				
+			}
+
+
+
 		}
 	});
 
@@ -1364,7 +1471,7 @@ function submitForm() {
 	var params = new URLSearchParams(window.location.search);
 	var name = params.get('name');
 	var tag = params.get('tag');
-	start += 2;
+	start += 3;
 
 
 	// AJAX 요청 실행
@@ -1602,6 +1709,21 @@ function submitForm() {
 						champList.push(JSON.stringify(result.total_Data_list[l][i].championName).slice(1, -1));
 						winLoss.push(JSON.stringify(result.total_Data_list[l][i].win).slice(1, -1));
 
+						var I_position = JSON.stringify(result.total_Data_list[l][i].teamPosition).slice(1, -1);
+
+						if (I_position === "TOP") {
+							topPick++;
+						} else if (I_position === "JUNGLE") {
+							jgPick++;
+						} else if (I_position === "MIDDLE") {
+							midPick++;
+						} else if (I_position === "BOTTOM") {
+							botPick++;
+						} else if (I_position === "UTILITY") {
+							supPick++;
+						}
+						var totalPick = topPick + jgPick + midPick + botPick + supPick
+
 
 					} //검색한 소환사 확인
 
@@ -1613,7 +1735,7 @@ function submitForm() {
 
 				$("#123").append(`
     <table>
-    <div id="background">
+    <div id="background${(l + start)}">
        <div id="background_padding">
            <div id="win">
                <span>${win}</span><br><br>
@@ -2516,7 +2638,23 @@ function submitForm() {
                                            </div>
                                             
 				`)
-
+				if (win == '승리') {
+					$('#background' + (l + start)).css({
+						'background-color': '#6699cc',
+						'width': '800px',
+						'height': '100px',
+						'padding': '10px',
+						'margin-bottom': '5px'
+					});
+				} else {
+					$('#background' + (l + start)).css({
+						'background-color': '#ff3c38',
+						'width': '800px',
+						'height': '100px',
+						'padding': '10px',
+						'margin-bottom': '5px'
+					});
+				}
 
 				value1 = blueGold[9]
 				value2 = redGold[9]
@@ -2622,7 +2760,6 @@ function submitForm() {
 
 			} //for문 전적검색 수		
 			let resulttt = champList.map((item, index) => [item, winLoss[index]]);
-			//console.log(resulttt)
 
 			let resultt = resulttt.reduce((acc, cur) => {
 				let [champion, winLose] = cur;
@@ -2638,8 +2775,7 @@ function submitForm() {
 
 			let keys = Object.keys(resultt);
 
-			console.log(resultt)
-			console.log(keys)
+
 
 			for (var m = 0; m < keys.length; m++) {
 				var champImgg = "https://ddragon.leagueoflegends.com/cdn/14.4.1/img/champion/"
@@ -2648,7 +2784,7 @@ function submitForm() {
 				let objectToString1 = JSON.stringify(resultt[keys[m]].wins);
 				let objectToString2 = JSON.stringify(resultt[keys[m]].losses);
 				let objectToString3 = Math.round(JSON.stringify(resultt[keys[m]].winRate));
-				console.log(m)
+
 
 
 				$('#chart').append(`
@@ -2678,11 +2814,38 @@ function submitForm() {
 
 
 			$('.winChart-bar').css({
-				"background": "conic-gradient(#8568ec " + win_rating + "%, #e42121 0%)"
+				"background": "conic-gradient(#8ab4f8 " + win_rating + "%, #e42121 0%)"
 			})
 			$('#pcentage').append(`
 				<span">${win_rating}%</span>
 			`)
+			var topPickPcentage = (((topPick / totalPick) * 100) + "%")
+			var jgPickkPcentage = (((jgPick / totalPick) * 100) + "%")
+			var midPickPcentage = (((midPick / totalPick) * 100) + "%")
+			var botPickPcentage = (((botPick / totalPick) * 100) + "%")
+			var supPickkPcentage = (((supPick / totalPick) * 100) + "%")
+
+			$('.topPick').css({
+				"height": topPickPcentage
+			})
+			$('.jgPick').css({
+				"height": jgPickkPcentage
+			})
+			$('.midPick').css({
+				"height": midPickPcentage
+			})
+			$('.botPick').css({
+				"height": botPickPcentage
+			})
+			$('.supPick').css({
+				"height": supPickkPcentage
+			})
+			let counts = champList.reduce((map, item) => {
+				map[item] = (map[item] || 0) + 1;
+				return map;
+			}, {});
+			let mostFrequent = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+
 		}
 	});
 

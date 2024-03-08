@@ -47,10 +47,11 @@ a {
 	color: orange;
 }
 
-table tr td {
+table * {
 	font-size: 0.8em;
 	margin: 0;
 	padding: 0;
+	background-color: #1E282D;
 }
 
 td a img {
@@ -61,10 +62,6 @@ ul {
 	list-style-type: none;
 	padding: 0;
 	margin: 0;
-}
-
-seection span {
-	display: flex;
 }
 
 .l-container {
