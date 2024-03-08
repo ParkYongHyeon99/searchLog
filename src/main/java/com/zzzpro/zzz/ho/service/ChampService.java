@@ -19,8 +19,8 @@ public class ChampService {
 	@Autowired
 	ChampDao champdao;
 	
-	public List<ChampDto> champions(String champions){
-		return champdao.champions(champions);
+	public List<ChampDto> champions(ChampDto cDto){
+		return champdao.champions(cDto);
 	}
 	public List<ChampDto> champpick_pi(ChampDto cDto) {
 //		log.info("champdto : {}", session);

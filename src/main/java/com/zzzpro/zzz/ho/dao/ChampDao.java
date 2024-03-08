@@ -13,8 +13,8 @@ import jakarta.servlet.http.HttpSession;
 
 @Mapper
 public interface ChampDao {
-	@Select("select championName, championName_kr from champList1 order by championName_kr")
-	List<ChampDto> champions(String champoins);
+	@Select("select championName, championName_kr from champList order by championName_kr")
+	List<ChampDto> champions(ChampDto cDto);
 	List<ChampDto> champpick_pi(ChampDto cDto);
 	String winrate(ChampDto champDto);
 	String pickrate(ChampDto cDto);

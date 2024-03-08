@@ -26,9 +26,17 @@ public class ChampController {
 	
 
 	@GetMapping("/match")
-	public String match() {
+	public String match(Model model, ChampDto cDto) {
+		List<ChampDto> champions = champser.champions(cDto);
+		log.info("@@전체정보 -> " + champions);
+		model.addAttribute("champions", champions);
+
+//		List<Map<String, Object>> championList = eSer.championList(eDto);
+//		log.info("@@초상화 승률 정렬 -> " + championList);
+//		model.addAttribute("championList", championList);
 		return "match";
 	}
+	
 	
 	@GetMapping("/champ/champinfo")
 	public String champinfo(ChampDto cDto, Model model, HttpSession session) {

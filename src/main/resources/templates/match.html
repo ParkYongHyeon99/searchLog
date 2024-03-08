@@ -1,95 +1,167 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<!--<%@include file="/WEB-INF/tiles/header.jsp" %>-->
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<link rel="stylesheet" href="/css/synergy.css">
-<script defer src="/js/match.js"></script>
+	<!--<%@include file="/WEB-INF/tiles/header.jsp" %>-->
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<link rel="stylesheet" href="/css/synergy.css">
+	<link rel="stylesheet" href="/css/lolmate.css">
+	<script defer src="/js/match.js"></script>
 
-<!--<%--  <%@include file="/WEB-INF/tiles/header.jsp" %> --%>-->
+
+	<!--<%--  <%@include file="/WEB-INF/tiles/header.jsp" %> --%>-->
 </head>
+
 <body>
-<div th:if="${session.member != null}" style="float:right">
-			<p style = "color:white"th:text="${session.member.m_nick}"></p>
-			<button style="background-color: #1b5ac2;" onclick="location.href='/member/logout'">로그아웃</button>
+	<div th:if="${session.member != null}" style="float:right">
+		<p style="color:white" th:text="${session.member.m_nick}"></p>
+		<button style="background-color: #1b5ac2;" onclick="location.href='/member/logout'">로그아웃</button>
+	</div>
+	<div th:if="${session.member == null}" style="float:right">
+		<button style="background-color: #1b5ac2;" onclick="location.href='/member/loginfrm'">로그인</button>
+
+	</div>
+	<header class="insert">
+		<div th:insert="~{header :: h1}" class="logo">로고</div>
+		<div th:insert="~{header :: ul}" class="header">헤더</div>
+	</header>
+	<div class="back"></div>
+
+	<div id="wrap">
+
+		<div class="synergy-head">
+			<!--    <div class="inner">-->
+			<!--      <div class="search">-->
+			<!--			<input type="text" name="championName" class="championInput"-->
+			<!--				placeholder="&nbsp;&nbsp;챔피언 검색" />-->
+
+
+			<div class="sePoDiv">
+				<div class="material-symbols-outlined">내 포지션</div>
+
+				<label class="positionImg tooltip Top" id="Top">
+					<input type="radio" class="poRadio" name="teamPosition" value="top" id="rTop"></input>
+					<span class="tooltiptext tooltip-bottom">탑</span>
+				</label>
+				<label class="positionImg tooltip Jungle" id="Jungle">
+					<input type="radio" class="poRadio" name="teamPosition" value="jungle" id="rJungle"></input>
+					<span class="tooltiptext tooltip-bottom">정글</span>
+				</label>
+				<label class="positionImg tooltip Mid" id="Mid">
+					<input type="radio" class="poRadio" name="teamPosition" value="middle" id="rMid"></input>
+					<span class="tooltiptext tooltip-bottom">미드</span>
+				</label>
+				<label class="positionImg tooltip Bot" id="Bot">
+					<input type="radio" class="poRadio" name="teamPosition" value="bottom" id="rBot"></input>
+					<span class="tooltiptext tooltip-bottom">바텀</span>
+				</label>
+				<label class="positionImg tooltip Support" id="Support">
+					<input type="radio" class="poRadio" name="teamPosition" value="utility" id="rSupport"></input>
+					<span class="tooltiptext tooltip-bottom">서폿</span>
+				</label>
 			</div>
-			<div th:if="${session.member == null}" style="float:right" >
-			<button style="background-color: #1b5ac2;" onclick="location.href='/member/loginfrm'">로그인</button>
-			
+			<!--			<select id="teamPosition" name="teamPosition" class="championSelect">-->
+			<!--				<option value="">&nbsp;내 포지션</option>-->
+			<!--				<option value="top">탑</option>-->
+			<!--				<option value="jungle">정글</option>-->
+			<!--				<option value="middle">미드</option>-->
+			<!--				<option value="bottom">바텀</option>-->
+			<!--				<option value="utility">서폿</option>-->
+			<!--			</select>-->
+			<div class="position" onclick="handleClick(event)">
+				<p class="wantpo">알고 싶은 포지션</p>
+				<button class="myteamPosition tooltip" onclick="search('top')">
+					<img src="/img/position/Diamond-Top.png" alt="top" class="lineImage">
+					<span class="tooltiptext tooltip-bottom">탑</span></button>
+				<button class="myteamPosition tooltip" onclick="search('jungle')">
+					<img src="/img/position/Diamond-Jungle.png" alt="jungle" class="lineImage">
+					<span class="tooltiptext tooltip-bottom">정글</span></button>
+				<button class="myteamPosition tooltip" onclick="search('middle')">
+					<img src="/img/position/Diamond-Mid.png" alt="middle" class="lineImage">
+					<span class="tooltiptext tooltip-bottom">미드</span></button>	
+				<button class="myteamPosition tooltip" onclick="search('bottom')">
+					<img src="/img/position/Diamond-Bot.png" alt="bottom" class="lineImage">
+					<span class="tooltiptext tooltip-bottom">바텀</span></button>
+				<button class="myteamPosition tooltip" onclick="search('utility')">
+					<img src="/img/position/Diamond-Support.png" alt="supporter" class="lineImage">
+					<span class="tooltiptext tooltip-bottom hi">서폿</span></button>
+			</div>
+			<!--      </div>     -->
+			<!--    </div>-->
 		</div>
-<header class="insert">
-        	<div th:insert="~{header :: h1}" class="logo">로고</div>
-        	<div th:insert="~{header :: ul}" class="header">헤더</div>
-        </header>
-<div class="back"></div>
+		<div class="flex" id="topbar">
+			<span class="width33">
+				<input type="text" placeholder="챔피언 검색"><br>
+				<span>
+					<label><input type="radio" value="" name="aa" class="po" checked="checked">전체</label>
+					<label><input type="radio" value="top" name="aa" class="po">탑</label>
+					<label><input type="radio" value="jug" name="aa" class="po">정글</label>
+					<label><input type="radio" value="mid" name="aa" class="po">미드</label>
+					<label><input type="radio" value="adc" name="aa" class="po">원딜</label>
+					<label><input type="radio" value="sup" name="aa" class="po">서폿</label>
+				</span>
+			</span>
+		</div>
+		<div class="synergy-result">
+			<div class="tableinner">
+				<table id="synergy-table">
+					<colgroup>
+						<col width="15%">
+						<col width="15%">
+						<col width="55%">
+						<col width="15%">
+					</colgroup>
+					<thead id="result">
+						<tr class="result-head">
+							<th class="head-menu"><span>순&nbsp;&nbsp;위</span></th>
+							<th class="head-menu"><span>시너지&nbsp;&nbsp;챔피언</span></th>
+							<th class="head-menu"><span>시너지&nbsp;&nbsp;승률</span></th>
+							<th class="head-menu"><span>게임&nbsp;&nbsp;판수</span></th>
+						</tr>
+					</thead>
 
-<div id="wrap">
+				</table>
+			</div>
+		</div>
+		<div id="test" class="width33">
+			<ul class="width100">
+				<li th:each="champion, iterStat : ${champions}">
 
-  <div class="synergy-head">
-    <div class="inner">
-      <div class="search">
-        <input type="text" id="championName" name="championName" class="championInput" placeholder="&nbsp;&nbsp;챔피언 검색"/>
-        <div class="material-symbols-outlined">내 포지션을 입력하세요</div>
-        <select id= "teamPosition" name="teamPosition" class="championSelect">
-		  <option value="">&nbsp;내 포지션</option>
-		  <option value="top">탑</option>
-		  <option value="jungle">정글</option>
-		  <option value="middle">미드</option>
-		  <option value="bottom">바텀</option>
-		  <option value="utility">서폿</option>
-	    </select>
-	    <div class="position" onclick="handleClick(event)">
-	      <button class="myteamPosition" onclick="search('top')"><img src="/img/position/Diamond-Top.png" alt="top" class="lineImage"><span class="lineText">탑</span></button>
-	      <button class="myteamPosition" onclick="search('middle')"><img src="/img/position/Diamond-Mid.png" alt="middle" class="lineImage"><span class="lineText">미드</span></button>
-	      <button class="myteamPosition" onclick="search('jungle')"><img src="/img/position/Diamond-Jungle.png" alt="jungle" class="lineImage"><span class="lineText">정글</span></button>
-	      <button class="myteamPosition" onclick="search('bottom')"><img src="/img/position/Diamond-Bot.png" alt="bottom" class="lineImage"><span class="lineText">바텀</span></button>
-	      <button class="myteamPosition" onclick="search('utility')"><img src="/img/position/Diamond-Support.png" alt="supporter" class="lineImage"><span class="lineText">서폿</span></button>
-	    </div>
-      </div>     
-    </div>
-  </div>
-  
-  <div class="synergy-result">
-    <div class="tableinner">
-       <table id="synergy-table">
-    	 <colgroup>
-      	  <col width="15%">
-      	  <col width="15%">
-      	  <col width="55%">
-      	  <col width="15%"> 
-    	 </colgroup>
-    	 <thead id="result">
-      	  <tr class="result-head">
-       	    <th class="head-menu"><span>순&nbsp;&nbsp;위</span></th>
-       	    <th class="head-menu"><span>시너지&nbsp;&nbsp;챔피언</span></th>
-       	    <th class="head-menu"><span>시너지&nbsp;&nbsp;승률</span></th>
-       	    <th class="head-menu"><span>게임&nbsp;&nbsp;판수</span></th>
-      	  </tr>    
-    	</thead>
-    	
-  	  </table>
-    </div>
-  </div>
-  
-  	
-</div>
- <div id="loading" style="margin-left: 0px;">
-        <img src="/img/Book.gif">
-       <p class ="matchload">로딩중입니다..</p>
-    </div>
+					<input type="radio" name="championName" th:id="'championName_' + ${iterStat.index}"
+						th:value="${champion.championName}" th:onclick="displayChampionName(this)">
+					<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.championName}.png|"
+						alt="초상화">
+					<div th:utext="${#strings.length(champion.championName_KR) > 3 ? champion.championName_KR.substring(0, 3) + '...' : champion.championName_KR}"
+						class="set"></div>
 
-<!--<%@include file="/WEB-INF/tiles/footer.jsp" %>-->
+
+				</li>
+			</ul>
+
+		</div>
+
+
+
+
+	</div>
+	<div id="loading" style="margin-left: 0px;">
+		<img src="/img/Book.gif">
+		<p class="matchload">로딩중입니다..</p>
+	</div>
+
+	<!--<%@include file="/WEB-INF/tiles/footer.jsp" %>-->
 </body>
+
 </html>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-    $(document).ready(function() {
-    $('#loading').hide();
-    $('.myteamPosition').click(function(){
-        $('#loading').show();
-        return true;
-        });
-    });
+	$(document).ready(function () {
+		$('#loading').hide();
+		$('.myteamPosition').click(function () {
+			$('#loading').show();
+			return true;
+		});
+	});
 </script>
