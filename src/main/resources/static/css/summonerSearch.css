@@ -177,11 +177,14 @@
 .more {
 	/* background-color: brown; */
 	width: 40px;
-	height: 20px;
+	height: 100px;
 	float: left;
 	position: relative;
-	top: 80px;
+	top: 0px;
 	font-size: x-small;
+	border: none;
+	cursor: pointer;
+	border-radius: 10px;
 }
 
 .more {
@@ -206,7 +209,7 @@
 #screen1 {
 	width: 800px;
 	height: 32px;
-	background-color: rgb(113, 8, 212);
+	background-color: #673AB7;
 	color: white;
 
 }
@@ -449,7 +452,7 @@
 	width: 800px;
 	height: 25px;
 	float: inline-start;
-	background-color: #a4161a;
+	background-color: #ff3c38 ;
 
 }
 
@@ -529,7 +532,7 @@
 #screen3-1 {
 	width: 800px;
 	height: 50px;
-	background-color: rgb(0, 0, 176);
+	background-color: rgb(64 64 183);
 	color: white;
 	float: inline-start;
 }
@@ -800,7 +803,6 @@
 }
 
 #pcentage {
-	border: solid black 1px;
 	width: 80px;
 	height: 30px;
 	position: relative;
@@ -811,14 +813,12 @@
 }
 
 #lanePick {
-	border: solid black 1px;
 	position: relative;
 	right: 100px;
 	bottom: 14px;
-
 	width: 200px;
 	height: 230px;
-
+	display: none;
 }
 
 .graph_wrap {
@@ -836,7 +836,7 @@
 	position: relative;
 	font-size: 16px;
 	font-weight: 500;
-	color: #333333;
+	color: white;
 	left: 50px;
 }
 
@@ -845,8 +845,6 @@
 	height: 185px;
 	margin-top: 15px;
 }
-
-
 
 .graph .x-axis {
 	display: flex;
@@ -882,7 +880,6 @@
 
 }
 
-
 .graph .bar>li span {
 	display: inline-block;
 	width: 100%;
@@ -891,12 +888,7 @@
 	background: #8ab4f8;
 }
 
-li::marker {
-	color: white;
-}
-
 #mostPlay {
-	border: solid black 1px;
 	width: 150px;
 	height: 150px;
 	position: relative;
@@ -905,7 +897,6 @@ li::marker {
 }
 
 #mostPlayName {
-	border: solid black 1px;
 	width: 150px;
 	height: 30px;
 	position: relative;
@@ -916,6 +907,7 @@ li::marker {
 	justify-content: center;
 	font-size: x-small;
 	font-weight: bold;
+	display: none;
 }
 
 #tierList {
@@ -926,7 +918,6 @@ li::marker {
 }
 
 #tierImg {
-	border: solid black 1px;
 	width: 100px;
 	height: 100px;
 	text-align: center;
@@ -935,7 +926,6 @@ li::marker {
 }
 
 #tier {
-	border: solid black 1px;
 	width: 247px;
 	height: 50px;
 	position: relative;
@@ -948,7 +938,6 @@ li::marker {
 }
 
 #point {
-	border: solid black 1px;
 	width: 247px;
 	height: 49px;
 	position: relative;
