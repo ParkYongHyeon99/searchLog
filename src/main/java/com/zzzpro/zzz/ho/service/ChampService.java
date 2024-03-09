@@ -3,6 +3,7 @@ package com.zzzpro.zzz.ho.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,7 +20,7 @@ public class ChampService {
 	@Autowired
 	ChampDao champdao;
 	
-	public List<ChampDto> champions(ChampDto cDto){
+	public List<Map<String, Object>> champions(ChampDto cDto){
 		return champdao.champions(cDto);
 	}
 	public List<ChampDto> champpick_pi(ChampDto cDto) {

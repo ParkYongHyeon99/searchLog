@@ -3,6 +3,7 @@ package com.zzzpro.zzz.ho.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 import com.zzzpro.zzz.ho.dto.ChampDto;
+import com.zzzpro.zzz.ho.dto.MatchDto;
 import com.zzzpro.zzz.ho.service.ChampService;
+import com.zzzpro.zzz.ho.service.MatchService;
+import com.zzzpro.zzz.wan.ExDto;
+import com.zzzpro.zzz.wan.ExService;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -23,17 +28,14 @@ import lombok.extern.slf4j.Slf4j;
 public class ChampController {
 	@Autowired
 	ChampService champser;
+	MatchService mSer;
+
+
 	
 
 	@GetMapping("/match")
-	public String match(Model model, ChampDto cDto) {
-		List<ChampDto> champions = champser.champions(cDto);
-		log.info("@@전체정보 -> " + champions);
-		model.addAttribute("champions", champions);
-
-//		List<Map<String, Object>> championList = eSer.championList(eDto);
-//		log.info("@@초상화 승률 정렬 -> " + championList);
-//		model.addAttribute("championList", championList);
+	public String match(Model model, MatchDto mDto) {
+		
 		return "match";
 	}
 	
