@@ -8,8 +8,8 @@
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<link rel="stylesheet" href="/css/synergy.css">
 	<link rel="stylesheet" href="/css/tooltip.css">
-	
-	
+
+
 	<script defer src="/js/match.js"></script>
 
 
@@ -30,12 +30,11 @@
 		<div th:insert="~{header :: h1}" class="logo">로고</div>
 		<div th:insert="~{header :: ul}" class="header">헤더</div>
 	</header>
-
+<div class="question-mark1"></div>
 
 	<div id="synergy-head">
 		<div style="display: flex" id="con1">
 			<div class="hi">
-				<!--				<div class="question-mark1"></div>-->
 				<div class="myteampo">내 포지션</div>
 
 				<div class="teampo">
@@ -98,28 +97,29 @@
 
 		</div>
 	</div>
+	<div class="question-mark"></div>
 	<div class="con2">
 		<div onclick="handleClick(event)">
 			<p class="wantpo">알고 싶은 포지션</p>
 
 			<button class="myteamPosition tooltip" value="top" name="aa"
-				onclick="search('top'); displayInput(); showImage(this); showContent(this);">
+				onclick="search('top'); displayInput(); showImage(this); ">
 				<img src="/img/position/Diamond-Top.png" alt="top" class="lineImage">
 				<span class="tooltiptext tooltip-bottom2">탑</span></button>
 			<button class="myteamPosition tooltip" value="jug" name="aa"
-				onclick="search('jungle'); displayInput(); showImage(this); showContent(this);">
+				onclick="search('jungle'); displayInput(); showImage(this);">
 				<img src="/img/position/Diamond-Jungle.png" alt="jungle" class="lineImage">
 				<span class="tooltiptext tooltip-bottom2">정글</span></button>
 			<button class="myteamPosition tooltip" value="mid" name="aa"
-				onclick="search('middle'); displayInput(); showImage(this); showContent(this);">
+				onclick="search('middle'); displayInput(); showImage(this); ">
 				<img src="/img/position/Diamond-Mid.png" alt="middle" class="lineImage">
 				<span class="tooltiptext tooltip-bottom2">미드</span></button>
 			<button class="myteamPosition tooltip" value="adc" name="aa"
-				onclick="search('bottom'); displayInput(); showImage(this); showContent(this);">
+				onclick="search('bottom'); displayInput(); showImage(this); ">
 				<img src="/img/position/Diamond-Bot.png" alt="bottom" class="lineImage">
 				<span class="tooltiptext tooltip-bottom2">바텀</span></button>
 			<button class="myteamPosition tooltip" value="sup" name="aa"
-				onclick="search('utility'); displayInput(this); showImage(this); showContent(this);">
+				onclick="search('utility'); displayInput(this); showImage(this); ">
 				<img src="/img/position/Diamond-Support.png" alt="supporter" class="lineImage">
 				<span class="tooltiptext tooltip-bottom2">서폿</span></button>
 
@@ -127,6 +127,7 @@
 
 
 	</div>
+
 
 
 
@@ -147,12 +148,11 @@
 
 
 
-
 	<div id="loading" style="margin-left: 0px;">
 		<img src="/img/820.gif">
 		<p class="matchload">로딩중입니다..</p>
 	</div>
-								<div class="question-mark1"></div>
+	
 
 	<!--<%@include file="/WEB-INF/tiles/footer.jsp" %>-->
 </body>
@@ -161,12 +161,25 @@
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
 	$(document).ready(function () {
-		$('#loading').hide();
-		$('.myteamPosition').click(function () {
-			$('#loading').show();
-			return true;
-		});
-	});
+    $('#loading').hide();
+    $('.myteamPosition').click(function () {
+
+        var isChecked = $('input[name="teamPosition"]:checked').length > 0;
+        var isInputted = $('#championName').val().trim() !== '';
+        
+        if (isChecked && isInputted) {
+            $('#loading').show();
+            $('#outputImage').show();
+            $('.con4').show();
+            return true;
+        } else {
+			$('#outputImage').hide();
+            $('.con4').hide();
+        	
+            return false;
+        }
+    });
+});
 </script>
 <script>
 	document.addEventListener("DOMContentLoaded", function () {
@@ -217,5 +230,7 @@
 				}
 			});
 		});
+		
 	});
+
 </script>
