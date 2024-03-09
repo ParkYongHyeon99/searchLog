@@ -462,59 +462,7 @@ p {
 	border: 0;
 }
 
-.question-mark1 {
-	width: 50px;
-	/* 물음표의 너비 */
-	height: 70px;
-	/* 물음표의 높이 */
-	position: relative;
-	margin: auto;
-	position: fixed;
-    bottom: 0;
-    left: 0;
-}
 
-.question-mark1:before {
-	content: "★";
-	/* 물음표 텍스트 */
-	font-size: 40px;
-	/* 물음표의 글꼴 크기 */
-	color: #ffffff;
-	/* 원하는 색상 */
-	position: absolute;
-	top: 0;
-	left: 50%;
-	transform: translateX(-50%);
-}
-
-.question-mark1:after {
-	content: "";
-	width: 10px;
-	/* 물음표의 반원 너비 */
-	height: 10px;
-	/* 물음표의 반원 높이 */
-	/*  border-top: 2px solid #1E282D;  물음표의 반원 테두리 스타일 */
-	/*  border-left: 2px solid #1E282D;  물음표의 반원 테두리 스타일 */
-	border-radius: 50%;
-	/* 물음표의 반원을 원형으로 만듭니다 */
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	transform: translateX(-50%);
-}
-
-.question-mark1:hover:before {
-	content: "내 포지션 선택 후 챔피언 이름 입력, 그리고 함께 하는 사람의 포지션 선택!";
-	/* hover 효과 시 변경되는 텍스트 */
-	font-size: 20px;
-	/* hover 효과 시 변경되는 텍스트의 글꼴 크기 */
-	white-space: nowrap;
-	/* 텍스트가 한 줄로만 나타나도록 설정 */
-	/*  overflow: hidden;  텍스트가 넘칠 경우 숨김 처리 */
-	position: absolute; /* 부모 요소에 대해 상대적인 위치 설정 */
-    left: 700%; /* 왼쪽으로 이동 */
-    top: 25%; /* 위쪽 정렬 */
-}
 
 .champName {
 	position: absolute;
@@ -532,6 +480,26 @@ p {
 		
 }
 
+.question-mark {
+	float: right;
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 0 300px 0 0;
+  }
+  .question-mark:before {
+    content: "?";
+    font-size: 160px;
+    font-weight: bold;
+    color: #000;
+    position: absolute;
+    top: -5%;
+    left: 32%;
+  }
 .now {
 	width: 500px;
 	height: 50px;

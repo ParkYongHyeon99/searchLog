@@ -24,7 +24,7 @@ function search(position) {
 		console.log(result)
 		const temp = document.createElement("tbody")
 
-		$.each(result, function(index, match, champions) {
+		$.each(result, function(index, match) {
 
 			const championName = match.championName === 'FiddleSticks' ? 'Fiddlesticks' : match.championName;
 			i++
@@ -40,6 +40,7 @@ function search(position) {
 		$('#result').next().remove();
 		$('#result').after(temp);
 		$('#loading').hide();
+		$('.question-mark').hide();
 	})
 
 
@@ -63,6 +64,7 @@ function displayInput(event) {
 	outputDiv.appendChild(imgElement);
 
 }
+
 
 function showImage(button) {
 	var selectedTextParagraph = document.getElementById('selectedText');
@@ -98,30 +100,14 @@ function showImage(button) {
 }
 
 
-//function displayChampionName(radio) {
-//	
-//    var championName = $(radio).val();
-//    // 여기에 선택된 챔피언 이름을 사용하는 코드를 추가할 수 있습니다.
-//    console.log("선택된 챔피언: " + championName);
-//    $('.champion-img').removeClass('selected');
-//    $(radio).siblings('label').find('.champion-img').addClass('selected');
-//    
-//    
-//}
+
 function selectRadioButton(index) {
 	document.getElementById('championName_' + index).checked = true;
 }
 
-//$(document).ready(function(){
-//        // 라디오 버튼 변경 이벤트를 감지하여 선택된 값을 변수에 저장
-//        $('input[name="teamPosition"]').change(function(){
-//            let teamPosition = $('input[name="teamPosition"]:checked').val();
-//            console.log("선택된 팀 포지션:", teamPosition);
-//            // 이후 여기에 필요한 로직을 추가하면 됩니다.
-//        });
-//    });
 
-//시너지 챔피언 포지션 검색 버튼
+
+
 function handleClick(event) {
 	const target = event.target.closest("button[id='myteamPosition']");
 	if (target) {
@@ -130,49 +116,6 @@ function handleClick(event) {
 
 }
 
-const positionBtns = document.querySelectorAll("#myteamPosition");
-positionBtns.forEach(positionBtn => {
-	positionBtn.addEventListener("click", function(event) {
-
-
-		positionBtns.forEach(btn => {
-			btn.classList.remove("show")
-		})
-		event.target.classList.add("show")
-	})
-})
-
-$('input[name=aa]').on('change', function() {
-	$.ajax({
-		type: 'GET',
-		url: '/test',  // 실제 서버 엔드포인트로 변경
-		data: { line: $('input[name=aa]:checked').val() },   // 서버에 전달할 데이터
-		success: function(champions) {
-			if (champions.length != 0) {
-				html = '<ul class="width100">'
-				for (let i = 0; i < champions.length; i++) {
-					html += '<li>'
-					html += '<input type="radio" name="championName" id="championName_' + i + '" value="' + champions[i].championName + '" onclick="displayChampionName(this)">'
-					html += '<label for="championName_' + i + '">'
-					html += '<img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/' + champions[i].championName + '.png">'
-					if (champions[i].championName_kr.length > 3) {
-						html += '<div class="set">' + champions[i].championName_kr.substring(0, 3) + '...</div>'
-					} else {
-						html += '<div class="set">' + champions[i].championName_kr + '</div>'
-					}
-					html += '</label></li>'
-				}
-				html += '</ul>'
-				$('#test').empty();
-				$('#test').append(html);
-			}
-		},
-		error: function(error) {
-			// 오류 발생 시 실행할 코드
-			console.error('Error:', error);
-		}
-	});
-});
 
 /* ====================== gameMate,gameMode,tier 변경 체크 ====================== */
 $('input[name=teamPosition]').on('change', function() {
