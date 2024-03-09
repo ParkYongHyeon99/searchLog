@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+
+
+/* ============컨테이너 설정=========== */
+.tooltipImgDiv{
+	justify-content:center;
+	flex-direction: row;
+	text-align: center;
+}
+.tooltipImgDiv2{
+	flex-direction: column;
+	margin-left: auto;
+	text-align: center;
+}
+/* 툴팁 기본 스타일 설정 시작 */
+.tooltip { position: relative;	display: #1E2328; }
+.tooltip .tooltiptext {
+	text-align: center;
+	visibility: hidden;
+	width: 120px;
+	background-color: #1E2328;
+	color: #C89B3C;
+	border-radius: 6px;
+	padding: 5px 0;
+	position: absolute;
+	z-index: 1;
+}
+.tooltip:hover .tooltiptext { visibility: visible; }
+/* 아래쪽 툴팁 시작 */
+.tooltip .tooltip-bottom {
+	width: 100px;
+	top: 130%;
+	left: 80%;
+	margin-left: -60px;
+}
+.tooltip .tooltip-bottom::after {
+	bottom: 100%;
+	left: 80%;
+	margin-left: -5px;
+	border-color: transparent transparent #1E2328 transparent;
+}
+.tooltip .tooltip-right {
+	width: 350px;
+	padding: 10px;
+	top: -5px;
+	left: 160%;
+	margin-left: -60px;
+}
+.tooltip .tooltip-right::after {
+	bottom: 100%;
+	left: 105%;
+	margin-left: -5px;
+	border-color: transparent transparent #1E2328 transparent;
+}
+
+
+

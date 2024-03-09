@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+
+.allSmallBox{
+	margin-top: 10px;
+}
+
+#nickDiv {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+#nickDiv > * {
+    flex: 0 0 auto; /* flex-grow, flex-shrink, flex-basis */
+    margin-right: 10px; /* 요소들 사이의 간격 조절 */
+    margin-bottom: 10px; /* 요소들 사이의 간격 조절 */
+}
+
+#nowLoginId {
+	width: 100%;
+    display: flex;
+    align-items: center; /* 세로 중앙 정렬 */
+    justify-content: flex-start; /* 가로 시작점 정렬 */
+}
+
+#nowLoginId > *:first-child { width: 15%; }
+#nowLoginId > *:nth-child(2) { width: 5%; }
+#nowLoginId > * { margin-right: 10px; /* 요소들 사이의 간격 조절 */ }
+
+
+#nicknameBTN{
+	margin-right: -4px;
+	border-radius: 0;
+	border-top-left-radius: 6px;
+	border-bottom-left-radius: 6px;
+}
+#anonymousBTN{
+	margin-left: -4px;
+	border-radius: 0;
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+}
+
+.selectBtn{
+	border: 1px solid #091428;
+	background-color: #C89B3C;
+	color: #1E282D;
+}
+.noSelectBtn{
+	border: 1px solid #C89B3C;
+	background-color: #091428;
+	color: #C89B3C;
+}
+
+
+table{
+	border: 1px solid black;
+	text-align: center;
+	width: 100%;
+}
+
+.boardListT{
+	margin: 10px;
+}
+
+
+
+.crudBtn{
+	float: rigth;
+}
+
+#write_frm{
+	margin-top: 10px;
+}
+
+
+/* 툴바와 툴바 버튼, 툴바 버튼을 클릭하면 뜨는 툴팁의의 배경색을 동일하게 설정 */
+.note-toolbar, .note-btn-group button,.note-dropdown-menu  {
+    background-color: #091428;
+}
+/* 툴바와 툴바 버튼 배경색을 동일하게 설정 변경 */
+.note-btn-group button:hover, .note-btn-group button:active {
+    background-color: #224b97;
+}
+.note-editable,.note-editable > *{
+    padding-left: 10px;
+    padding-right: 4px;
+	text-align: left;
+}
+
+
+input[type="text"],input[type="password"],.note-editor .note-editable{ border: 1px solid #C89B3C; }
+.note-placeholder{
+	margin-left: 10px;
+	margin-top: 5px;
+}

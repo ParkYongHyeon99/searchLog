@@ -1,7 +1,27 @@
 @charset "UTF-8";
 
+
+.left-align{
+	text-align: left;
+}
+
+#dmBtn{
+	float: right;
+	margin-right: 3%;
+}
+
+.sePoDiv{
+	display: inline-block;
+}
+
+.serchMateDiv,#dmBtn {
+    display: inline-block; /* 버튼을 블록 요소로 설정하여 한 줄에 하나의 요소만 표시 */
+    vertical-align: middle;
+}
+
+
 input[disabled] {
-    background-color: #fff;
+    background-color: #091428;
 }
 
 
@@ -10,12 +30,23 @@ input[disabled] {
 }
 
 
-.lmListT{
+.lmListT, #mLAppList{
 	border: 1px solid black;
 	text-align: center;
-	width: 90%;
+	width: 100%;
 	border-collapse: separate;
 	border-spacing: 0 5px;
+}
+/* #mLAppList{ */
+/* 	width:80%; */
+/*  	border: 1px solid black; */
+/*  	padding: 1% 0 1% 0; */
+/*  	margin: auto; */
+/*  	text-align: center; */
+/* } */
+
+.trF{
+	width: auto;
 }
 
 .trF>th{
@@ -47,58 +78,6 @@ label{
 	height: 0;
 }
 
-
-/* ============컨테이너 설정=========== */
-.tooltipImgDiv{
-	justify-content:center;
-	flex-direction: row;
-	text-align: center;
-}
-.tooltipImgDiv2{
-	flex-direction: column;
-	margin-left: auto;
-	text-align: center;
-}
-/* 툴팁 기본 스타일 설정 시작 */
-.tooltip { position: relative;	display: #1E2328; }
-.tooltip .tooltiptext {
-	text-align: center;
-	visibility: hidden;
-	width: 120px;
-	background-color: #1E2328;
-	color: #C89B3C;
-	border-radius: 6px;
-	padding: 5px 0;
-	position: absolute;
-	z-index: 1;
-}
-.tooltip:hover .tooltiptext { visibility: visible; }
-/* 아래쪽 툴팁 시작 */
-.tooltip .tooltip-bottom {
-	width: 100px;
-	top: 130%;
-	left: 80%;
-	margin-left: -60px;
-}
-.tooltip .tooltip-bottom::after {
-	bottom: 100%;
-	left: 80%;
-	margin-left: -5px;
-	border-color: transparent transparent #1E2328 transparent;
-}
-.tooltip .tooltip-right {
-	width: 350px;
-	padding: 10px;
-	top: -5px;
-	left: 160%;
-	margin-left: -60px;
-}
-.tooltip .tooltip-right::after {
-	bottom: 100%;
-	left: 105%;
-	margin-left: -5px;
-	border-color: transparent transparent #1E2328 transparent;
-}
 
 
 
@@ -141,7 +120,6 @@ label{
 	background-color: olive;
 }
 #lmInfoChoice{
-	/* display: none; */
 	background-color: teal;
 }
 
@@ -150,7 +128,7 @@ label{
 	height: 30%;
 	line-height: 30px;
 	padding: 20px;
-	background-color: aqua;
+	background-color: #091428;
 	text-align: center;
 }
 #lmNotionDiv h3,h2{
@@ -167,13 +145,6 @@ label{
 	padding: 0;
 }
 
-#mLAppList{
-	width:80%;
- 	border: 1px solid black;
- 	padding: 1% 0 1% 0;
- 	margin: auto;
- 	text-align: center;
-}
 
 #lmDMContent2{
 	margin: auto;
@@ -186,10 +157,8 @@ label{
 }
 
 
-
 #chat-div{
 	overflow: auto;
-/* 	text-align: center; */
 	padding: auto;
 	width: 100%;
 	height: 200px;
@@ -201,7 +170,6 @@ label{
  	background-color: #005A82;
  	color: #A09B8C;
  	display: inline-block;
-/*  	position: absolute; */
  	margin-left: 35%;
 }
 .appAppendChat>div{
@@ -252,7 +220,6 @@ label{
 	right: 5px;
 }
 #chat-backBtn{
-/* 	position: absolute; */
 	height: 30px;
 	width: 30px;
 	top: 10px;
@@ -266,7 +233,6 @@ label{
 
 #lmAppList{
 	overflow: auto;
-/* 	text-align: center; */
 	padding: auto;
 	width: 100%;
 	height: 250px;
@@ -298,8 +264,13 @@ label{
 	margin-right: 10px;
 }
 
+.noText{
+	margin: auto;
+}
 
-
+.chatTextDiv{
+	font-size: 1.2em;
+}
 
 
 

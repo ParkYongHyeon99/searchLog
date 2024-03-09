@@ -15,12 +15,19 @@
 <!-- sweetalert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
+<link rel="stylesheet" href="/css/allStyle.css">
 <link rel="stylesheet" href="/css/lolmate.css">
+<link rel="stylesheet" href="/css/tooltip.css">
 <link rel="stylesheet" href="/css/lolmateModal.css">
 </head>
 <body>
 	<!-- https://appsnuri.tistory.com/405 나중에 이거 적용할것 -->
-	<div class="allBigBox">
+	<div class="allBigBox l-container">
+
+		<header class="insert">
+			<div th:insert="~{header :: h1}" class="logo">로고</div>
+			<div th:insert="~{header :: ul}" class="header">헤더</div>
+		</header>
 
 		<th:block th:if="${session.member != null}">
 			<input type="hidden" id="m_id" name="m_id" th:value="${session.member.m_id}">
@@ -33,86 +40,86 @@
 
 		<div id="lmNotionDiv">
 			<h3>내용 들어갈 예정</h3>
-		</div>
-		<br>
+		</div> <br>
+		
 
 		<div class="lmTabChoice">
 			<div id="lmListChoice" class="tooltip">
 				lolmate 목록
 				<span class="tooltiptext tooltip-right">
-					<p>듀오를 구하거나<br>멘토를 구하는 글 목록입니다.</p>
+					<p> 듀오를 구하거나<br>멘토를 구하는 글 목록입니다. </p>
 				</span>
 			</div>
 			<div id="lmInfoChoice" class="tooltip">
 				신청 관리
 				<span class="tooltiptext tooltip-right" id="lmInfoTooltip">
-					<p>작성한 글의 신청자를 관리하거나,<br>신청한 글을 관리합니다.</p>
+					<p> 작성한 글의 신청자를 관리하거나,<br>신청한 글을 관리합니다. </p>
 				</span>
 			</div>
 		</div>
-		<br>
-		<!-- lmTabChoice 끝 -->
+		<br> <!-- lmTabChoice 끝 -->
+		
 
 		<div>
 			<div id="lmListTab">
-				<div class="serchMateDiv">
-					<label><input type="radio" name="lm_gameMate_find" value="0"
-						checked="checked">듀오</label>
-					<label><input type="radio"
-						name="lm_gameMate_find" value="1">멘토</label>
-					<select name="lm_gameMode_find">
-						<option value="soloRank" selected="selected">솔로랭크</option>
-						<option value="teamRank">자유랭크</option>
-						<option value="quickMatch">빠른대전</option>
-						<option value="aram">칼바람</option>
-					</select>
-					<select name="lm_tier_find">
-						<option value="All">전체 티어</option>
-						<option value="Iron">아이언</option>
-						<option value="Bronze">브론즈</option>
-						<option value="Silver">실버</option>
-						<option value="Gold">골드</option>
-						<option value="Platinum">플래티넘</option>
-						<option value="Emerald">에메랄드</option>
-						<option value="Diamond">다이아몬드</option>
-						<option value="Master">마스터</option>
-						<option value="Grandmaster">그랜드마스터</option>
-						<option value="Challenger">챌린저</option>
-					</select> <br> <br>
-					<div class="sePoDiv">
-						<label class="positionImg tooltip pAll" id="pAll">
-							<input type="radio" class="poRadio" name="lm_findPosition_find" value="All" id="rpAll"
-								checked="checked"></input>
-							<span class="tooltiptext tooltip-bottom">전체 라인</span>
-						</label>
-						<label class="positionImg tooltip Top" id="Top">
-							<input type="radio" class="poRadio" name="lm_findPosition_find" value="top" id="rTop"></input>
-							<span class="tooltiptext tooltip-bottom">탑</span>
-						</label>
-						<label class="positionImg tooltip Jungle" id="Jungle">
-							<input type="radio" class="poRadio" name="lm_findPosition_find" value="jug" id="rJungle"></input>
-							<span class="tooltiptext tooltip-bottom">정글</span>
-						</label>
-						<label class="positionImg tooltip Mid" id="Mid">
-							<input type="radio" class="poRadio" name="lm_findPosition_find" value="mid" id="rMid"></input>
-							<span class="tooltiptext tooltip-bottom">미드</span>
-						</label>
-						<label class="positionImg tooltip Bot" id="Bot">
-							<input type="radio" class="poRadio" name="lm_findPosition_find" value="adc" id="rBot"></input>
-							<span class="tooltiptext tooltip-bottom">봇(원딜)</span>
-						</label>
-						<label class="positionImg tooltip Support" id="Support">
-							<input type="radio" class="poRadio" name="lm_findPosition_find" value="sup" id="rSupport"></input>
-							<span class="tooltiptext tooltip-bottom">서포터</span>
-						</label>
+				<div class="left-align">
+					<div class="serchMateDiv">
+						<label><input type="radio" name="lm_gameMate_find" value="0" checked="checked">듀오</label>
+						<label><input type="radio" name="lm_gameMate_find" value="1">멘토</label>
+						<select name="lm_gameMode_find">
+							<option value="soloRank" selected="selected">솔로랭크</option>
+							<option value="teamRank">자유랭크</option>
+							<option value="quickMatch">빠른대전</option>
+							<option value="aram">칼바람</option>
+						</select>
+						<select name="lm_tier_find">
+							<option value="All">전체 티어</option>
+							<option value="Iron">아이언</option>
+							<option value="Bronze">브론즈</option>
+							<option value="Silver">실버</option>
+							<option value="Gold">골드</option>
+							<option value="Platinum">플래티넘</option>
+							<option value="Emerald">에메랄드</option>
+							<option value="Diamond">다이아몬드</option>
+							<option value="Master">마스터</option>
+							<option value="Grandmaster">그랜드마스터</option>
+							<option value="Challenger">챌린저</option>
+						</select>
+						<!-- <br> <br> -->
+						<div class="sePoDiv left-align">
+							<label class="positionImg tooltip pAll" id="pAll">
+								<input type="radio" class="poRadio" name="lm_findPosition_find" value="All" id="rpAll" checked="checked"></input>
+								<span class="tooltiptext tooltip-bottom">전체 라인</span>
+							</label>
+							<label class="positionImg tooltip Top" id="Top">
+								<input type="radio" class="poRadio" name="lm_findPosition_find" value="top" id="rTop"></input>
+								<span class="tooltiptext tooltip-bottom">탑</span>
+							</label>
+							<label class="positionImg tooltip Jungle" id="Jungle">
+								<input type="radio" class="poRadio" name="lm_findPosition_find" value="jug" id="rJungle"></input>
+								<span class="tooltiptext tooltip-bottom">정글</span>
+							</label>
+							<label class="positionImg tooltip Mid" id="Mid">
+								<input type="radio" class="poRadio" name="lm_findPosition_find" value="mid" id="rMid"></input>
+								<span class="tooltiptext tooltip-bottom">미드</span>
+							</label>
+							<label class="positionImg tooltip Bot" id="Bot">
+								<input type="radio" class="poRadio" name="lm_findPosition_find" value="adc" id="rBot"></input>
+								<span class="tooltiptext tooltip-bottom">봇(원딜)</span>
+							</label>
+								<label class="positionImg tooltip Support" id="Support">
+								<input type="radio" class="poRadio" name="lm_findPosition_find" value="sup" id="rSupport"></input>
+								<span class="tooltiptext tooltip-bottom">서포터</span>
+							</label>
+						</div>
+						<!-- sePoDiv 끝 -->
 					</div>
-					<!-- sePoDiv 끝 -->
+					<!-- serchMateDiv 끝 -->
+					<button id="dmBtn" disabled>&ensp;듀오/멘토 찾기&ensp;</button>
 				</div>
-				<!-- serchMateDiv 끝 -->
 
-				<button id="dmBtn" disabled>듀오/멘토 찾기</button>
-				<br> <br>
-				
+				<br>
+
 				<table class="lmListT" id="lmListT">
 					<thead>
 						<tr class="trF">
@@ -136,11 +143,13 @@
 				</table>
 			</div>
 			<!-- lmListTab 끝 -->
-			
+
 			<div id="lmInfoTab">
 				<div>
-					<label><input type="radio" name="lmInfoTabChoice" value="myList" checked="checked">작성한 글</label>
-					<label><input type="radio" name="lmInfoTabChoice" value="myAppList">신청한 글</label>
+					<label><input type="radio" name="lmInfoTabChoice"
+						value="myList" checked="checked">작성한 글</label> <label><input
+						type="radio" name="lmInfoTabChoice" value="myAppList">신청한
+						글</label>
 				</div>
 				<div id="infoNoction"></div>
 				<div id="lmInfoContents">
@@ -155,7 +164,7 @@
 
 	</div>
 
-	
+
 	<!-- 모달 위 모달 https://goodsgoods.tistory.com/434 -->
 	<div id="dmModal" class="modal-overlay">
 		<div class="modal-window">
@@ -168,7 +177,8 @@
 					<div class="lmWriteBox">
 						<div class="lm_serchSelectDiv">
 							<h5 class="lmWrite_h5">소환사 닉네임</h5>
-							<input class="lm_summonerName_write" type="text" placeholder="닉네임#태그">
+							<input class="lm_summonerName_write" type="text"
+								placeholder="닉네임#태그">
 						</div>
 						<div class="lm_serchSelectDiv">
 							<div class="btn-group discordDiv floatLeft">
@@ -191,98 +201,105 @@
 								</select>
 							</div>
 						</div>
-					</div>	<!-- lmWriteBox --><br>
-					
+					</div>
+					<!-- lmWriteBox -->
+					<br>
+
 					<div class="positionSelect">
 						<div class="myPoDivSelect">
 							<h5>내 포지션</h5>
 							<label class="positionImg tooltip pAll" id="writemypAll">
-								<input type="checkbox" class="poRadio" name="lm_myPosition_write" value="All"
-									checked="checked"></input>
+								<input type="checkbox" class="poRadio"
+								name="lm_myPosition_write" value="All" checked="checked"></input>
 								<span class="tooltiptext tooltip-bottom">전체 라인</span>
+							</label> <label class="positionImg tooltip Top" id="writemyTop">
+								<input type="checkbox" class="poRadio"
+								name="lm_myPosition_write" value="top"></input> <span
+								class="tooltiptext tooltip-bottom">탑</span>
+							</label> <label class="positionImg tooltip Jungle" id="writemyJungle">
+								<input type="checkbox" class="poRadio"
+								name="lm_myPosition_write" value="jug"></input> <span
+								class="tooltiptext tooltip-bottom">정글</span>
+							</label> <label class="positionImg tooltip Mid" id="writemyMid">
+								<input type="checkbox" class="poRadio"
+								name="lm_myPosition_write" value="mid"></input> <span
+								class="tooltiptext tooltip-bottom">미드</span>
+							</label> <label class="positionImg tooltip Bot" id="writemyBot">
+								<input type="checkbox" class="poRadio"
+								name="lm_myPosition_write" value="adc"></input> <span
+								class="tooltiptext tooltip-bottom">봇(원딜)</span>
+							</label> <label class="positionImg tooltip Support" id="writemySupport">
+								<input type="checkbox" class="poRadio"
+								name="lm_myPosition_write" value="sup"></input> <span
+								class="tooltiptext tooltip-bottom">서포터</span>
 							</label>
-							<label class="positionImg tooltip Top" id="writemyTop">
-								<input type="checkbox" class="poRadio" name="lm_myPosition_write" value="top"></input>
-								<span class="tooltiptext tooltip-bottom">탑</span>
-							</label>
-							<label class="positionImg tooltip Jungle" id="writemyJungle">
-								<input type="checkbox" class="poRadio" name="lm_myPosition_write" value="jug"></input>
-								<span class="tooltiptext tooltip-bottom">정글</span>
-							</label>
-							<label class="positionImg tooltip Mid" id="writemyMid">
-								<input type="checkbox" class="poRadio" name="lm_myPosition_write" value="mid"></input>
-								<span class="tooltiptext tooltip-bottom">미드</span>
-							</label>
-							<label class="positionImg tooltip Bot" id="writemyBot">
-								<input type="checkbox" class="poRadio" name="lm_myPosition_write" value="adc"></input>
-								<span class="tooltiptext tooltip-bottom">봇(원딜)</span>
-							</label>
-							<label class="positionImg tooltip Support" id="writemySupport">
-								<input type="checkbox" class="poRadio" name="lm_myPosition_write" value="sup"></input>
-								<span class="tooltiptext tooltip-bottom">서포터</span>
-							</label>
-						</div>	<!-- myPoDivSelect 끝 -->
-						
+						</div>
+						<!-- myPoDivSelect 끝 -->
+
 						<div class="findPoDivSelect">
 							<h5>찾는 포지션</h5>
 							<label class="positionImg tooltip pAll" id="writefindpAll">
-								<input type="checkbox" class="poRadio" name="lm_findPosition_write" value="All"
-									checked="checked"></input>
+								<input type="checkbox" class="poRadio"
+								name="lm_findPosition_write" value="All" checked="checked"></input>
 								<span class="tooltiptext tooltip-bottom">전체 라인</span>
+							</label> <label class="positionImg tooltip Top" id="writefindTop">
+								<input type="checkbox" class="poRadio"
+								name="lm_findPosition_write" value="top"></input> <span
+								class="tooltiptext tooltip-bottom">탑</span>
+							</label> <label class="positionImg tooltip Jungle" id="writefindJungle">
+								<input type="checkbox" class="poRadio"
+								name="lm_findPosition_write" value="jug"></input> <span
+								class="tooltiptext tooltip-bottom">정글</span>
+							</label> <label class="positionImg tooltip Mid" id="writefindMid">
+								<input type="checkbox" class="poRadio"
+								name="lm_findPosition_write" value="mid"></input> <span
+								class="tooltiptext tooltip-bottom">미드</span>
+							</label> <label class="positionImg tooltip Bot" id="writefindBot">
+								<input type="checkbox" class="poRadio"
+								name="lm_findPosition_write" value="adc"></input> <span
+								class="tooltiptext tooltip-bottom">봇(원딜)</span>
+							</label> <label class="positionImg tooltip Support" id="writefindSupport">
+								<input type="checkbox" class="poRadio"
+								name="lm_findPosition_write" value="sup"></input> <span
+								class="tooltiptext tooltip-bottom">서포터</span>
 							</label>
-							<label class="positionImg tooltip Top" id="writefindTop">
-								<input type="checkbox" class="poRadio" name="lm_findPosition_write" value="top"></input>
-								<span class="tooltiptext tooltip-bottom">탑</span>
-							</label>
-							<label class="positionImg tooltip Jungle" id="writefindJungle">
-								<input type="checkbox" class="poRadio" name="lm_findPosition_write" value="jug"></input>
-								<span class="tooltiptext tooltip-bottom">정글</span>
-							</label>
-							<label class="positionImg tooltip Mid" id="writefindMid">
-								<input type="checkbox" class="poRadio" name="lm_findPosition_write" value="mid"></input>
-								<span class="tooltiptext tooltip-bottom">미드</span>
-							</label>
-							<label class="positionImg tooltip Bot" id="writefindBot">
-								<input type="checkbox" class="poRadio" name="lm_findPosition_write" value="adc"></input>
-								<span class="tooltiptext tooltip-bottom">봇(원딜)</span>
-							</label>
-							<label class="positionImg tooltip Support" id="writefindSupport">
-								<input type="checkbox" class="poRadio" name="lm_findPosition_write" value="sup"></input>
-								<span class="tooltiptext tooltip-bottom">서포터</span>
-							</label>
-						</div>	<!-- findPoDivSelect 끝 -->
-					</div>	<!-- positionSelect 끝 -->
-					
+						</div>
+						<!-- findPoDivSelect 끝 -->
+					</div>
+					<!-- positionSelect 끝 -->
+
 					<div class="lmMemoDiv">
 						<textarea id="lmWriteMemo" rows="10%" cols="78%"></textarea>
 					</div>
-					
+
 					<button type="button" id="lmWriteBtn">작성</button>
 				</form>
-			</div>	<!-- content 끝 -->
+			</div>
+			<!-- content 끝 -->
 		</div>
-	</div>	<!-- dmModal 끝 -->
-	
-	
+	</div>
+	<!-- dmModal 끝 -->
+
+
 	<div id="lmDModal" class="modal-overlay">
 		<div class="modal-window2">
 			<div class="title">
 				<h2 id="lm_detailT">summonerName님의 lolmate 상세 페이지</h2>
 			</div>
 			<div class="close-area">X</div>
-			<div class="content lmWriteDiv" id="lmDMContent">
-					내용 들어갈 예정
-			</div>
-			<div class="content" id="lmDMContent2">
-					(이벤트 추가한)내용 들어갈 예정2
-			</div>	<!-- content 끝 -->
+			<div class="content lmWriteDiv" id="lmDMContent">내용 들어갈 예정</div>
+			<div class="content" id="lmDMContent2">(이벤트 추가한)내용 들어갈 예정2</div>
+			<!-- content 끝 -->
 		</div>
-	</div>	<!-- dmModal 끝 -->
+	</div>
+	<!-- dmModal 끝 -->
 
 
 
 	<!-- 기본 js -->
 	<script type="text/javascript" src="/js/lolmate.js"></script>
 	<script type="text/javascript" src="/js/lolmateModal.js"></script>
+	<script type="text/javascript" src="/js/lolmate_change.js"></script>
+	<script type="text/javascript" src="/js/lolmate_chat.js"></script>
 </body>
 </html>

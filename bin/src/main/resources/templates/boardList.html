@@ -19,6 +19,11 @@
 	
 	<div class="allBigBox">
 		
+		<header class="insert">
+			<div th:insert="~{header :: h1}" class="logo">로고</div>
+			<div th:insert="~{header :: ul}" class="header">헤더</div>
+		</header>
+		
 		<h3>Board List</h3>
 		
 		<div th:if="${session.member != null}">

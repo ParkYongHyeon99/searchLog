@@ -21,4 +21,15 @@ public class restController {
 		return eSer.test(eDto);
 	}
 
+	@GetMapping("/testt")
+	public List<Map<String, Object>> testt(ExDto eDto) {
+		log.info("챔피언 정렬 변경" + eDto);
+		return eSer.testt(eDto);
+	}
+
+	@GetMapping("/ex/mostLine")
+	public List<Map<String, Object>> mostLine(String championName) {
+		return eSer.mostLine(championName);
+	}
+
 }
