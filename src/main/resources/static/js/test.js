@@ -14,9 +14,9 @@ var botPick = 0;
 var supPick = 0;
 
 
+
 $(document).ready(function() {
 	// AJAX 요청 실행
-	LoadingWithMask()
 	$.ajax({
 		type: "GET",
 		url: "http://127.0.0.1:8000/summoner/search",
@@ -28,15 +28,7 @@ $(document).ready(function() {
 		success: function(result) {
 			name = params.get('name');
 			console.log(result);
-			$('#lanePick').css({
-				"display": "block"
-			})
-			$('#mostPlayName').css({
-				"display": "block"
-			})
-			$('.ddd').css({
-				"display": "block"
-			})
+
 
 
 			for (var l = 0; l < result.total_Data_list.length; l++) {
@@ -151,43 +143,43 @@ $(document).ready(function() {
 					if (item0[i] != 0) {
 						item0Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item0[i] + ".png");
 					} else {
-						item0Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item0Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item1[i] != 0) {
 						item1Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item1[i] + ".png");
 					} else {
-						item1Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item1Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item2[i] != 0) {
 						item2Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item2[i] + ".png");
 					} else {
-						item2Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item2Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item3[i] != 0) {
 						item3Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item3[i] + ".png");
 					} else {
-						item3Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item3Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item4[i] != 0) {
 						item4Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item4[i] + ".png");
 					} else {
-						item4Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item4Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item5[i] != 0) {
 						item5Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item5[i] + ".png");
 					} else {
-						item5Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item5Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item6[i] != 0) {
 						item6Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item6[i] + ".png");
 					} else {
-						item6Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item6Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 
@@ -286,7 +278,7 @@ $(document).ready(function() {
 						var I_tier = JSON.stringify(result.total_Data_list[l][i].solo_tier).slice(1, -1);
 						var I_rank = JSON.stringify(result.total_Data_list[l][i].solo_rank).slice(1, -1);
 						var I_point = JSON.stringify(result.total_Data_list[l][i].solo_rankpoint);
-
+						
 						console.log(I_tier)
 						console.log(I_rank)
 						console.log(I_point)
@@ -1212,6 +1204,7 @@ $(document).ready(function() {
         </div>
     </div>
 
+
                                                 </div>
 
                                             </div>
@@ -1403,7 +1396,7 @@ $(document).ready(function() {
 
 
 			$('.winChart-bar').css({
-				"background": "conic-gradient(#8ab4f8 " + win_rating + "%, #ff3c38 0%)"
+				"background": "conic-gradient(#8ab4f8 " + win_rating + "%, #e42121 0%)"
 			})
 
 			$('#pcentage').append(`
@@ -1443,27 +1436,28 @@ $(document).ready(function() {
 				<img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/${mostFrequent}.png" alt="">
 			`)
 
-
+			
 
 			if (I_tier == "unranked") {
 				$('#tierImg').append(`
 				<span> unranked </span>
 			`)
-
+				
 			} else {
 				$('#tierImg').append(`
 				<img src="https://opgg-static.akamaized.net/images/medals_new/${I_tier}.png?image=q_auto,f_png,w_144&v=1708681571653" alt="" width="100px" height="100px">
 				`)
-
+				
 				$('#tier').append(`
-				<span>${I_tier + " " + I_rank} </span>
+				<span>${I_tier + " " +I_rank} </span>
 				`)
-
+				
 				$('#point').append(`
 				<span>${I_point} LP</span>
 				`)
+				
 			}
-			closeLoadingWithMask()
+
 
 
 		}
@@ -1477,8 +1471,8 @@ function submitForm() {
 	var params = new URLSearchParams(window.location.search);
 	var name = params.get('name');
 	var tag = params.get('tag');
-	start += 2;
-	LoadingWithMask()
+	start += 3;
+
 
 	// AJAX 요청 실행
 	$.ajax({
@@ -1495,7 +1489,7 @@ function submitForm() {
 			$("#chart").empty();
 			$("#winrate_title").empty();
 			$('#pcentage').empty();
-			$('#mostPlay').empty();
+
 
 			for (var l = 0; l < result.total_Data_list.length; l++) {
 				var championNames = []
@@ -1610,43 +1604,43 @@ function submitForm() {
 					if (item0[i] != 0) {
 						item0Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item0[i] + ".png");
 					} else {
-						item0Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item0Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item1[i] != 0) {
 						item1Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item1[i] + ".png");
 					} else {
-						item1Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item1Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item2[i] != 0) {
 						item2Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item2[i] + ".png");
 					} else {
-						item2Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item2Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item3[i] != 0) {
 						item3Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item3[i] + ".png");
 					} else {
-						item3Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item3Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item4[i] != 0) {
 						item4Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item4[i] + ".png");
 					} else {
-						item4Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item4Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item5[i] != 0) {
 						item5Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item5[i] + ".png");
 					} else {
-						item5Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item5Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 					if (item6[i] != 0) {
 						item6Img.push("https://ddragon.leagueoflegends.com/cdn/14.4.1/img/item/" + item6[i] + ".png");
 					} else {
-						item6Img.push("https://www.htmlcsscolor.com/preview/gallery/4040B7.png");
+						item6Img.push("https://www.htmlcsscolor.com/preview/gallery/0000B0.png");
 					}
 
 
@@ -2820,7 +2814,7 @@ function submitForm() {
 
 
 			$('.winChart-bar').css({
-				"background": "conic-gradient(#8ab4f8 " + win_rating + "%, #ff3c38 0%)"
+				"background": "conic-gradient(#8ab4f8 " + win_rating + "%, #e42121 0%)"
 			})
 			$('#pcentage').append(`
 				<span">${win_rating}%</span>
@@ -2846,73 +2840,20 @@ function submitForm() {
 			$('.supPick').css({
 				"height": supPickkPcentage
 			})
-
 			let counts = champList.reduce((map, item) => {
 				map[item] = (map[item] || 0) + 1;
 				return map;
 			}, {});
 			let mostFrequent = Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
-			$('#mostPlay').append(`
-				<img src="https://ddragon.leagueoflegends.com/cdn/14.5.1/img/champion/${mostFrequent}.png" alt="">
-			`)
-			closeLoadingWithMask()
 
 		}
-
 	});
 
 };
 var total = l + start
 
 function sibla(total) {
+
 	var line1 = document.getElementById("hidden-table" + total);
 	line1.style.display = ((line1.style.display != 'none') ? 'none' : 'block');
-	
-	var button = document.getElementById(`hideButton${total}`);
-	var value = button.value;
-	if (value === "자세히") {
-		button.value = "간단히";
-	} else {
-		button.value = "자세히";
-	}
 }
-
-function LoadingWithMask() {
-	var maskHeight = $(document).height();
-	var maskWidth = window.document.body.clientWidth;
-	var mask = `
-		"<div id='mask' style='position:absolute; z-index:9000; background-color:#000000; display:none; left:0; top:0;'>
-		<div id='loadingImg'>
-		<img src='https://tistory2.daumcdn.net/tistory/1898109/skin/images/Spinner.gif' alt='' 
-		style=
-		'position: absolute; 
-		display: block; 
-		margin: 0px auto; 
-		width='900px' 
-		right='300px'>
-		</div>
-		</div>";
-	`
-
-	$('body').append(mask)
-	$('#mask').css({
-		'width': maskWidth,
-		'height': maskHeight,
-		'justify-content': 'center',
-		'opacity': '0.3'
-	}); //마스크 표시   
-	$('#loadingImg img').css({
-		'position': 'fixed',
-		'left': '900px',
-		'top': '300px'
-	}); //마스크 표시  
-	$('#mask').show(); //로딩중 이미지 표시    
-
-}
-
-function closeLoadingWithMask() {
-	$('#mask').hide();
-	$('#mask').remove();
-}
-
-
