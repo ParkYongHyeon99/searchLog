@@ -7,7 +7,9 @@
 	<title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 	<link rel="stylesheet" href="/css/synergy.css">
-	<link rel="stylesheet" href="/css/lolmate.css">
+	<link rel="stylesheet" href="/css/tooltip.css">
+	
+	
 	<script defer src="/js/match.js"></script>
 
 
@@ -40,23 +42,23 @@
 
 
 					<div>
-						<label class="positionImg tooltip Top" id="Top" style="width: 50px;">
+						<label class="positionImg tooltip Top" id="Top" style="height: 50px; width: 31px;">
 							<input type="radio" class="poRadio" name="teamPosition" value="top" id="rTop"></input>
 							<span class="tooltiptext tooltip-bottom1">탑</span>
 						</label>
-						<label class="positionImg tooltip Jungle" id="Jungle" style="width: 50px;">
+						<label class="positionImg tooltip Jungle" id="Jungle" style="height: 50px; width: 32px;">
 							<input type="radio" class="poRadio" name="teamPosition" value="jungle" id="rJungle"></input>
 							<span class="tooltiptext tooltip-bottom1">정글</span>
 						</label>
-						<label class="positionImg tooltip Mid" id="Mid" style="width: 50px;">
+						<label class="positionImg tooltip Mid" id="Mid" style="height: 50px; width: 33px;">
 							<input type="radio" class="poRadio" name="teamPosition" value="middle" id="rMid"></input>
 							<span class="tooltiptext tooltip-bottom1">미드</span>
 						</label>
-						<label class="positionImg tooltip Bot" id="Bot" style="width: 50px;">
+						<label class="positionImg tooltip Bot" id="Bot" style="height: 50px; width: 34.5px;">
 							<input type="radio" class="poRadio" name="teamPosition" value="bottom" id="rBot"></input>
 							<span class="tooltiptext tooltip-bottom1">바텀</span>
 						</label>
-						<label class="positionImg tooltip Support" id="Support" style="width: 50px;">
+						<label class="positionImg tooltip Support" id="Support" style="height: 50px; width: 32px;">
 							<input type="radio" class="poRadio" name="teamPosition" value="utility"
 								id="rSupport"></input>
 							<span class="tooltiptext tooltip-bottom1">서폿</span>
@@ -75,15 +77,15 @@
 							<colgroup>
 								<col width="15%">
 								<col width="16%">
-								<col width="54%">
-								<col width="15%">
+								<col width="53%">
+								<col width="16%">
 							</colgroup>
 							<thead id="result">
 								<tr class="result-head">
 									<th class="head-menu"><span>순위</span></th>
 									<th class="head-menu"><span>시너지 챔피언</span></th>
 									<th class="head-menu"><span>시너지 승률</span></th>
-									<th class="head-menu"><span>게임 판수</span></th>
+									<th class="head-menu"><span>함꼐한 게임 수</span></th>
 								</tr>
 							</thead>
 
@@ -98,29 +100,28 @@
 	</div>
 	<div class="con2">
 		<div onclick="handleClick(event)">
-			<!--					<div class="question-mark1"></div>-->
 			<p class="wantpo">알고 싶은 포지션</p>
 
 			<button class="myteamPosition tooltip" value="top" name="aa"
 				onclick="search('top'); displayInput(); showImage(this); showContent(this);">
 				<img src="/img/position/Diamond-Top.png" alt="top" class="lineImage">
-				<span class="tooltiptext tooltip-bottom">탑</span></button>
+				<span class="tooltiptext tooltip-bottom2">탑</span></button>
 			<button class="myteamPosition tooltip" value="jug" name="aa"
 				onclick="search('jungle'); displayInput(); showImage(this); showContent(this);">
 				<img src="/img/position/Diamond-Jungle.png" alt="jungle" class="lineImage">
-				<span class="tooltiptext tooltip-bottom">정글</span></button>
+				<span class="tooltiptext tooltip-bottom2">정글</span></button>
 			<button class="myteamPosition tooltip" value="mid" name="aa"
 				onclick="search('middle'); displayInput(); showImage(this); showContent(this);">
 				<img src="/img/position/Diamond-Mid.png" alt="middle" class="lineImage">
-				<span class="tooltiptext tooltip-bottom">미드</span></button>
+				<span class="tooltiptext tooltip-bottom2">미드</span></button>
 			<button class="myteamPosition tooltip" value="adc" name="aa"
 				onclick="search('bottom'); displayInput(); showImage(this); showContent(this);">
 				<img src="/img/position/Diamond-Bot.png" alt="bottom" class="lineImage">
-				<span class="tooltiptext tooltip-bottom">바텀</span></button>
+				<span class="tooltiptext tooltip-bottom2">바텀</span></button>
 			<button class="myteamPosition tooltip" value="sup" name="aa"
 				onclick="search('utility'); displayInput(this); showImage(this); showContent(this);">
 				<img src="/img/position/Diamond-Support.png" alt="supporter" class="lineImage">
-				<span class="tooltiptext tooltip-bottom">서폿</span></button>
+				<span class="tooltiptext tooltip-bottom2">서폿</span></button>
 
 		</div>
 
@@ -148,9 +149,10 @@
 
 
 	<div id="loading" style="margin-left: 0px;">
-		<img src="/img/Book.gif">
+		<img src="/img/820.gif">
 		<p class="matchload">로딩중입니다..</p>
 	</div>
+								<div class="question-mark1"></div>
 
 	<!--<%@include file="/WEB-INF/tiles/footer.jsp" %>-->
 </body>
