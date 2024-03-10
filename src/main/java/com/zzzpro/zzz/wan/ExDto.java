@@ -14,7 +14,6 @@ public class ExDto {
 	private String championName_kr;
 	private String highest_pick_rate_position;
 	private String searchText;
-	
 
 	private String line;
 	private String winrate;

@@ -7,7 +7,7 @@
 <script src="//code.jquery.com/jquery-3.7.1.min.js"></script>
 </head>
 <body>
-    <div th:if="${session.member != null}" style="float:right">
+    <div th:if="${session.member != null}" style="float: right">
         <p style="color:white" th:text="${session.member.m_nick}"></p>
         <button onclick="location.href='/member/logout'">로그아웃</button>
     </div>
@@ -19,12 +19,12 @@
         <div th:insert="~{header :: ul}" class="header">헤더</div>
     </header>
 
-    <div class="head-container">
+    <div class="head-container" style="border-top: 3px solid">
         <header style="display: flex; justify-content: center">
             <img th:alt="초상화" th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${championName}.png|"
                 alt="초상화" class="divide" style="width:100px; height:100px">
             <!-- 탭 메뉴 시작 -->
-            <table>
+            <table style="background-color: #0A1428;">
                 <tr th:each="mostLine : ${mostLine}">
                     <td onclick="showTab('tab1')" class="tab">
                         <img th:src="@{/img/position/Diamond-Top.png}">

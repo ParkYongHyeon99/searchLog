@@ -37,8 +37,8 @@ public interface ExDao {
 
 	List<ExDto> tabKr(ExDto eDto);
 
-	List<ExDto> searchBar(ExDto eDto);
+	List<ExDto> tabWin(ExDto eDto);
 
-	List<Map<String, Object>> tabWin(ExDto eDto);
+	List<ExDto> searchBar(ExDto eDto);
 
 }

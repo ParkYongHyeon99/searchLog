@@ -55,10 +55,10 @@ li * {
 	                <span>
 	                    <label><input type="radio" value="" name="aaa" class="po" checked="checked">전체</label>
                         <label><input type="radio" value="top" name="aaa" class="po">탑</label>
-                        <label><input type="radio" value="jug" name="aaa" class="po">정글</label>
-                        <label><input type="radio" value="mid" name="aaa" class="po">미드</label>
-                        <label><input type="radio" value="adc" name="aaa" class="po">원딜</label>
-                        <label><input type="radio" value="sup" name="aaa" class="po">서폿</label>
+                        <label><input type="radio" value="jungle" name="aaa" class="po">정글</label>
+                        <label><input type="radio" value="middle" name="aaa" class="po">미드</label>
+                        <label><input type="radio" value="bottom" name="aaa" class="po">원딜</label>
+                        <label><input type="radio" value="utility" name="aaa" class="po">서폿</label>
                     </span>
                 </span>
             </div>
@@ -87,7 +87,7 @@ li * {
                             <td style="width: 25%">카운터</td>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tabWin">
                         <tr th:each="champion, chIndex : ${championList}">
                             <td th:text="${chIndex.index + 1}">순위</td>
                             <td class="flex">
@@ -110,9 +110,9 @@ li * {
                             <td th:text="|${champion['pickrate']}%|">픽률</td>
                             <td th:text="|${champion['banrate']}%|">밴율</td>
                             <td>
-                    			<div th:each="counterChampion : ${counters}">
+<!--                     			<div th:each="counterChampion : ${counters}"> -->
                         			<span>카운터</span>
-                    			</div>
+<!--                     			</div> -->
 		            		</td>
                         </tr>
                     </tbody>

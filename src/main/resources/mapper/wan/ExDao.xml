@@ -14,7 +14,7 @@
 		AS bot_rate,
 		ROUND(SUM(CASE WHEN teamPosition = 'UTILITY' THEN 1 ELSE 0 END) / COUNT(*) * 100, 2)
 		AS sup_rate
-		FROM rune WHERE championName = #{championNamee} AND tier1='에메랄드';
+		FROM rune WHERE championName = #{championName} AND tier1='에메랄드';
 	</select>
 
 	<select id="rune">
@@ -94,6 +94,13 @@
 		order by championName_kr
 	</select>
 	
+	<select id="tabWin">
+		select * 
+		from champList_emerald
+		where highest_pick_rate_position like #{highest_pick_rate_position} 
+		ORDER BY CASE WHEN pickrate >=10 THEN 0 ELSE 1 END, winrate DESC
+	</select>
+	
 	<select id="searchBar">
 		select championName, championName_kr, highest_pick_rate_position 
 		from champList_emerald 
@@ -102,14 +109,6 @@
 		or championName like #{searchText} 
 		or championName_kr like #{searchText} 
 		order by championName_kr;
-	</select>
-
-	<select id="tabWin">
-		SELECT championName, championName_kr,
-		highest_pick_rate_position, winrate, pickrate, banrate
-		from
-		champList_emerald
-		where line like #{line} ORDER BY winrate DESC
 	</select>
 
 

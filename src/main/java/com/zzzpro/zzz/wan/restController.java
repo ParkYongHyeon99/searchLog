@@ -21,16 +21,15 @@ public class restController {
 		return eSer.tabKr(eDto);
 	}
 
+	@GetMapping("/tabWin")
+	public List<ExDto> tabWin(ExDto eDto) {
+		log.info("@@승률 -> 라인 변경" + eDto);
+		return eSer.tabWin(eDto);
+	}
+
 	@GetMapping("/searchBar")
 	public List<ExDto> search(ExDto eDto) {
 		log.info("@@챔피언 검색 -> " + eDto);
 		return eSer.searchBar(eDto);
 	}
-
-	@GetMapping("/testt")
-	public List<Map<String, Object>> tabWin(ExDto eDto) {
-		log.info("@@승률 -> 라인 변경" + eDto);
-		return eSer.tabWin(eDto);
-	}
-
 }
