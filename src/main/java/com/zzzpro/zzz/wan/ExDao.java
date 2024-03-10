@@ -35,7 +35,9 @@ public interface ExDao {
 
 	List<Map<String, Object>> counterDESC(String championName, String highest_pick_rate_position);
 
-	List<Map<String, Object>> tabKr(ExDto eDto);
+	List<ExDto> tabKr(ExDto eDto);
+
+	List<ExDto> searchBar(ExDto eDto);
 
 	List<Map<String, Object>> tabWin(ExDto eDto);
 

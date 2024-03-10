@@ -31,15 +31,16 @@ li * {
         	<div th:insert="~{header :: ul}" class="header">헤더</div>
         </header>
         <div>
-            <div id="topbar" class="flex">
-                <span class="width33">
+            <div class="flex">
+                <span class="width33" style="padding: 10px;">
+                    <input type="text" id="searchInput" placeholder="챔피언 검색(가렌, ㄱㄹ, ...)" class="search"><br>
                     <span>
                         <label><input type="radio" value="" name="aa" class="po" checked="checked">전체</label>
                         <label><input type="radio" value="top" name="aa" class="po">탑</label>
-                        <label><input type="radio" value="jug" name="aa" class="po">정글</label>
-                        <label><input type="radio" value="mid" name="aa" class="po">미드</label>
-                        <label><input type="radio" value="adc" name="aa" class="po">원딜</label>
-                        <label><input type="radio" value="sup" name="aa" class="po">서폿</label>
+                        <label><input type="radio" value="jungle" name="aa" class="po">정글</label>
+                        <label><input type="radio" value="middle" name="aa" class="po">미드</label>
+                        <label><input type="radio" value="bottom" name="aa" class="po">원딜</label>
+                        <label><input type="radio" value="utility" name="aa" class="po">서폿</label>
                     </span>
                 </span>
 			    <span class="width67">
@@ -62,8 +63,8 @@ li * {
                 </span>
             </div>
             <div class="flex">
-                <div id="test" class="width33">
-                    <ul class="width100">
+                <div id="tabKr" class="width33">
+                    <ul id="searchBar" class="width100">
                         <li th:each="champion : ${champions}">
     						<a th:href="@{/ex/{championName}/{highest_pick_rate_position}(championName=${champion.championName}, highest_pick_rate_position=${champion.highest_pick_rate_position})}">
         						<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.championName}.png|"

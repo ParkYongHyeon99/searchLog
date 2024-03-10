@@ -85,13 +85,14 @@ public class ExService {
 		model.addAttribute("counterDESC", counterDESC(championName, highest_pick_rate_position));
 	}
 
-	public List<Map<String, Object>> tabKr(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
-		eDto.setLine('%' + eDto.getLine() + '%');
-		if (eDto.getLine().equals("%all%")) {
-			return eDao.tabKr(eDto);
-		} else {
-			return eDao.tabKr(eDto);
-		}
+	public List<ExDto> tabKr(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
+		eDto.setHighest_pick_rate_position('%' + eDto.getHighest_pick_rate_position() + '%');
+		return eDao.tabKr(eDto);
+	}
+
+	public List<ExDto> searchBar(ExDto eDto) {
+		eDto.setSearchText('%' + eDto.getSearchText() + '%');
+		return eDao.searchBar(eDto);
 	}
 
 	public List<Map<String, Object>> tabWin(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리

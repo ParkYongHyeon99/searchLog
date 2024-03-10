@@ -16,14 +16,20 @@ public class restController {
 	ExService eSer;
 
 	@GetMapping("/tabKr")
-	public List<Map<String, Object>> tabKr(ExDto eDto) {
-		log.info("이름 -> 라인 변경" + eDto);
+	public List<ExDto> tabKr(ExDto eDto) {
+		log.info("@@이름 -> 라인 변경" + eDto);
 		return eSer.tabKr(eDto);
+	}
+
+	@GetMapping("/searchBar")
+	public List<ExDto> search(ExDto eDto) {
+		log.info("@@챔피언 검색 -> " + eDto);
+		return eSer.searchBar(eDto);
 	}
 
 	@GetMapping("/testt")
 	public List<Map<String, Object>> tabWin(ExDto eDto) {
-		log.info("승률 -> 라인 변경" + eDto);
+		log.info("@@승률 -> 라인 변경" + eDto);
 		return eSer.tabWin(eDto);
 	}
 

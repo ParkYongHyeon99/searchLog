@@ -1,7 +1,7 @@
 $('input[name=aa]').on('change', function() {
 	$.ajax({
 		type: 'GET',
-		url: '/test',  // 실제 서버 엔드포인트로 변경
+		url: '/tabKr',  // 실제 서버 엔드포인트로 변경
 		data: { line: $('input[name=aa]:checked').val() },   // 서버에 전달할 데이터
 		success: function(champions) {
 			if (champions.length != 0) {

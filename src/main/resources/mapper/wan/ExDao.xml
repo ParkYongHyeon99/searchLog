@@ -88,11 +88,20 @@
 	</select>
 
 	<select id="tabKr">
-		select championName, championName_kr,
-		highest_pick_rate_position
+		select championName, championName_kr, highest_pick_rate_position 
 		from champList_emerald
-		where line like
-		#{line} order by championName_kr
+		where highest_pick_rate_position like #{highest_pick_rate_position} 
+		order by championName_kr
+	</select>
+	
+	<select id="searchBar">
+		select championName, championName_kr, highest_pick_rate_position 
+		from champList_emerald 
+		where 
+		champion_name_cons like #{searchText} 
+		or championName like #{searchText} 
+		or championName_kr like #{searchText} 
+		order by championName_kr;
 	</select>
 
 	<select id="tabWin">
