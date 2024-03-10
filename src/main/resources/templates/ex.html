@@ -66,7 +66,8 @@ li * {
                 <div id="tabKr" class="width33">
                     <ul id="searchBar" class="width100">
                         <li th:each="champion : ${champions}">
-    						<a th:href="@{/ex/{championName}/{highest_pick_rate_position}(championName=${champion.championName}, highest_pick_rate_position=${champion.highest_pick_rate_position})}">
+    						<a th:href="@{/ex/{championName}/{highest_pick_rate_position}(championName=${champion.championName}, highest_pick_rate_position=${champion.highest_pick_rate_position})}"
+    						onclick="setSelectedPosition('${champion.highest_pick_rate_position}')">
         						<img th:src="|https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/${champion.championName}.png|"
             						alt="초상화">
         						<div th:utext="${#strings.length(champion.championName_KR) > 3 ? champion.championName_KR.substring(0, 3) + '...' : champion.championName_KR}" class="set"></div>
