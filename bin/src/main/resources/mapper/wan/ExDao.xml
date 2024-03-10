@@ -3,29 +3,56 @@
 <mapper namespace="com.zzzpro.zzz.wan.ExDao">
 
 	<select id="mostLine">
-		SELECT * FROM champList_emerald WHERE
-		championName=#{championName}
+		SELECT
+		ROUND(SUM(CASE WHEN teamPosition = 'TOP' THEN 1 ELSE 0 END) / COUNT(*) * 100, 2) 
+		AS top_rate,
+		ROUND(SUM(CASE WHEN teamPosition = 'JUNGLE' THEN 1 ELSE 0 END) / COUNT(*) * 100, 2)
+		AS jug_rate,
+		ROUND(SUM(CASE WHEN teamPosition = 'MIDDLE' THEN 1 ELSE 0 END) / COUNT(*) * 100, 2)
+		AS mid_rate,
+		ROUND(SUM(CASE WHEN teamPosition = 'BOTTOM' THEN 1 ELSE 0 END) / COUNT(*) * 100, 2)
+		AS bot_rate,
+		ROUND(SUM(CASE WHEN teamPosition = 'UTILITY' THEN 1 ELSE 0 END) / COUNT(*) * 100, 2)
+		AS sup_rate
+		FROM rune WHERE championName = #{championNamee} AND tier1='에메랄드';
 	</select>
 
 	<select id="rune">
 		SELECT * FROM rune
 		WHERE championName=#{championName}
-		AND teamPosition=#{highest_pick_rate_position} AND tier1='챌린저'
+		AND teamPosition=#{highest_pick_rate_position} AND tier1='에메랄드'
+		ORDER BY rune_percentage DESC
 	</select>
 
 	<select id="spell">
 		SELECT * FROM spell
 		WHERE championName=#{championName}
 		AND teamPosition=#{highest_pick_rate_position}
-		AND tier1='챌린저'
+		AND tier1='에메랄드'
+	</select>
+	
+	<select id="skill3lv">
+	SELECT * FROM skill3lv1 WHERE championName=#{championName} AND
+	teamPosition=#{highest_pick_rate_position} AND tier1='에메랄드' ORDER BY skill_percentage DESC
+	</select>
+	
+	<select id="skill6lv">
+	SELECT * FROM skill6lv1 WHERE championName=#{championName} AND
+	teamPosition=#{highest_pick_rate_position} AND tier1='에메랄드' ORDER BY skill_percentage DESC
 	</select>
 
 	<select id="core3">
 		SELECT * FROM core3
 		WHERE championName=#{championName}
-		AND teamPosition=#{highest_pick_rate_position} AND tier1='챌린저'
+		AND teamPosition=#{highest_pick_rate_position} AND tier1='그랜드마스터'
 		ORDER BY
 		core3_count DESC
+	</select>
+
+	<select id="sitem">
+		SELECT * FROM sitem
+		WHERE championName=#{championName}
+		AND teamPosition=#{highest_pick_rate_position} AND tier1='에메랄드'
 	</select>
 
 	<select id="shoes">
@@ -37,30 +64,38 @@
 	<select id="counterDESC">
 		SELECT *
 		FROM counter
-		WHERE championName=#{championName} AND
-		teamPosition=#{highest_pick_rate_position} AND tier1='그랜드마스터'
-		HAVING counter_win_rate != 100 AND counter_win_rate != 0 AND
-		counter_win_rate &gt;= 50
+		WHERE
+		championName=#{championName} AND
+		teamPosition=#{highest_pick_rate_position} AND tier1='마스터'
+		HAVING
+		counter_win_rate != 100 AND counter_win_rate != 0 AND
+		counter_win_rate
+		&gt; 50
 		ORDER BY counter_win_rate DESC
 	</select>
 
 	<select id="counter">
 		SELECT *
 		FROM counter
-		WHERE championName=#{championName} AND
-		teamPosition=#{highest_pick_rate_position} AND tier1='그랜드마스터'
-		HAVING counter_win_rate != 100 AND counter_win_rate != 0 AND
-		counter_win_rate &lt; 50
+		WHERE
+		championName=#{championName} AND
+		teamPosition=#{highest_pick_rate_position} AND tier1='마스터'
+		HAVING
+		counter_win_rate != 100 AND counter_win_rate != 0 AND
+		counter_win_rate
+		&lt; 50
 		ORDER BY counter_win_rate
 	</select>
 
-	<select id="test">
-		select championName,championName_kr
-		from champList
-		where line like #{line} order by championName_kr
+	<select id="tabKr">
+		select championName, championName_kr,
+		highest_pick_rate_position
+		from champList_emerald
+		where line like
+		#{line} order by championName_kr
 	</select>
 
-	<select id="testt">
+	<select id="tabWin">
 		SELECT championName, championName_kr,
 		highest_pick_rate_position, winrate, pickrate, banrate
 		from

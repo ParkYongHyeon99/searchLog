@@ -9,14 +9,16 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ExDto {
 
-	private String line;
 	// champions
 	private String championName;
 	private String championName_kr;
+	private String highest_pick_rate_position;
+	private String searchText;
+
+	private String line;
 	private String winrate;
 	private String pickrate;
 	private String banrate;
-	private String highest_pick_rate_position;
 
 	private String teamPosition;
 	private String all_rate;

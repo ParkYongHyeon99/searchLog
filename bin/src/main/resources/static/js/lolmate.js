@@ -81,8 +81,8 @@ function infoTabMyList(id){
 					appCtnCell.text('  '+lm.lm_app.length+'  명');
 				}
 				const endCell = $('<td>').text('');
-				if(lm.lm_end == 0){ endCell.text('신청 가능'); }
-					else if(lm.lm_end == 1){ endCell.text('닫힘'); }
+				if(lm.lm_end == 0){ endCell.text('  신청 가능  '); }
+					else if(lm.lm_end == 1){ endCell.text('  닫힘  '); }
 				num--;
 				
 				newRow.append(numCell,gameMateCell,gameModeCell,myPCell,findPCell,memoCell,appCtnCell,endCell)
@@ -445,8 +445,8 @@ function lmAjax(){
 		let cntHtml = '';
 		let id = document.getElementById('m_id').value;
 		if(lmList["all"].length!=0){
+			$('#lmListT tbody').empty();
 			if(lmList["serch"].length!=0){
-				$('#lmListT tbody').empty();
 				for(let lm of lmList["serch"]){
 					let newRow = $('<tr>');
 					const gameModeCell = $('<td>').text(lm.lm_gameMode) // 게임 모드

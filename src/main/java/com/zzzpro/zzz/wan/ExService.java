@@ -44,12 +44,20 @@ public class ExService {
 		return eDao.spell(championName, highest_pick_rate_position);
 	}
 
-	public List<Map<String, Object>> skill(String championName, String highest_pick_rate_position) {
-		return eDao.skill(championName, highest_pick_rate_position);
+	public List<Map<String, Object>> skill3lv(String championName, String highest_pick_rate_position) {
+		return eDao.skill3lv(championName, highest_pick_rate_position);
+	}
+
+	public List<Map<String, Object>> skill6lv(String championName, String highest_pick_rate_position) {
+		return eDao.skill6lv(championName, highest_pick_rate_position);
 	}
 
 	public List<Map<String, Object>> core3(String championName, String highest_pick_rate_position) {
 		return eDao.core3(championName, highest_pick_rate_position);
+	}
+
+	public List<Map<String, Object>> sitem(String championName, String highest_pick_rate_position) {
+		return eDao.sitem(championName, highest_pick_rate_position);
 	}
 
 	public List<Map<String, Object>> shoes(String championName, String highest_pick_rate_position) {
@@ -68,29 +76,27 @@ public class ExService {
 		model.addAttribute("mostLine", mostLine(championName));
 		model.addAttribute("rune", rune(championName, highest_pick_rate_position));
 		model.addAttribute("spell", spell(championName, highest_pick_rate_position));
-//		model.addAttribute("skill_3lv", skill_3lv(championName, highest_pick_rate_position));
+		model.addAttribute("skill3lv", skill3lv(championName, highest_pick_rate_position));
+		model.addAttribute("skill6lv", skill6lv(championName, highest_pick_rate_position));
 		model.addAttribute("core3", core3(championName, highest_pick_rate_position));
+		model.addAttribute("sitem", sitem(championName, highest_pick_rate_position));
 		model.addAttribute("shoes", shoes(championName, highest_pick_rate_position));
 		model.addAttribute("counter", counter(championName, highest_pick_rate_position));
 		model.addAttribute("counterDESC", counterDESC(championName, highest_pick_rate_position));
 	}
 
-	public List<Map<String, Object>> test(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
-		eDto.setLine('%' + eDto.getLine() + '%');
-		if (eDto.getLine().equals("%all%")) {
-			return eDao.test(eDto);
-		} else {
-			return eDao.test(eDto);
-		}
+	public List<ExDto> tabKr(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
+		eDto.setHighest_pick_rate_position('%' + eDto.getHighest_pick_rate_position() + '%');
+		return eDao.tabKr(eDto);
 	}
 
-	public List<Map<String, Object>> testt(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
-		eDto.setLine('%' + eDto.getLine() + '%');
-		if (eDto.getLine().equals("%all%")) {
-			return eDao.championList(eDto);
-		} else {
-			return eDao.testt(eDto);
-		}
+	public List<ExDto> searchBar(ExDto eDto) {
+		eDto.setSearchText('%' + eDto.getSearchText() + '%');
+		return eDao.searchBar(eDto);
 	}
 
+	public List<ExDto> tabWin(ExDto eDto) { // champions 메서드에서 받아온 챔피언값 필요함 html에서 라인탭누르면 이쪽으로 넘어온 js실행원리
+		eDto.setLine('%' + eDto.getLine() + '%');
+		return eDao.tabWin(eDto);
+	}
 }

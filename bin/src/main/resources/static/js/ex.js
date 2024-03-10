@@ -1,13 +1,13 @@
 $('input[name=aa]').on('change', function() {
 	$.ajax({
 		type: 'GET',
-		url: '/test',  // 실제 서버 엔드포인트로 변경
+		url: '/tabKr',  // 실제 서버 엔드포인트로 변경
 		data: { line: $('input[name=aa]:checked').val() },   // 서버에 전달할 데이터
 		success: function(champions) {
 			if (champions.length != 0) {
 				html = '<ul class="width100">'
 				for (let i = 0; i < champions.length; i++) {
-					html += '<li><a href="/ex/' + champions[i].championName + '">'
+					html += '<li><a href="/ex/' + champions[i].championName + '/' + champions[i].highest_pick_rate_position + '">'
 					html += '<img src="https://ddragon.leagueoflegends.com/cdn/14.2.1/img/champion/' + champions[i].championName + '.png">'
 					if (champions[i].championName_kr.length > 3) {
 						html += '<div class="set">' + champions[i].championName_kr.substring(0, 3) + '...'

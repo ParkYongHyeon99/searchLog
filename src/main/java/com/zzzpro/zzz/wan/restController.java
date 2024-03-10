@@ -1,7 +1,6 @@
 package com.zzzpro.zzz.wan;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,21 +14,21 @@ public class restController {
 	@Autowired
 	ExService eSer;
 
-	@GetMapping("/test")
-	public List<Map<String, Object>> test(ExDto eDto) {
-		log.info("라인별 탭변경" + eDto);
-		return eSer.test(eDto);
+	@GetMapping("/tabKr")
+	public List<ExDto> tabKr(ExDto eDto) {
+		log.info("@@이름 -> 라인 변경" + eDto);
+		return eSer.tabKr(eDto);
 	}
 
-	@GetMapping("/testt")
-	public List<Map<String, Object>> testt(ExDto eDto) {
-		log.info("챔피언 정렬 변경" + eDto);
-		return eSer.testt(eDto);
+	@GetMapping("/tabWin")
+	public List<ExDto> tabWin(ExDto eDto) {
+		log.info("@@승률 -> 라인 변경" + eDto);
+		return eSer.tabWin(eDto);
 	}
 
-	@GetMapping("/ex/mostLine")
-	public List<Map<String, Object>> mostLine(String championName) {
-		return eSer.mostLine(championName);
+	@GetMapping("/searchBar")
+	public List<ExDto> search(ExDto eDto) {
+		log.info("@@챔피언 검색 -> " + eDto);
+		return eSer.searchBar(eDto);
 	}
-
 }

@@ -1,9 +1,8 @@
 * {
-	margin: 1px;
 	text-align: center;
 	background-color: #0A1428;
+	margin: 0;
 	padding: 0;
-	border: 1px solid grey;
 	color: orange;
 }
 
@@ -13,13 +12,17 @@ body {
 	height: 100vh;
 }
 
+span label {
+	cursor: pointer;
+}
+
 button {
 	background-color: #1b5ac2;
 	color: #fff;
 	margin: 9px;
 	border-radius: 10px;
 	padding: 2px 4px;
-	font-size: 15px;
+	/* 	font-size: 15px; */
 	border: 0;
 	cursor: pointer;
 }
@@ -32,6 +35,15 @@ img {
 	display: inline-block;
 	width: 50px;
 	border: 0;
+}
+
+td {
+	border-top: 1px solid grey; /* 오른쪽 변에만 스타일 지정 */
+	border-left: 1px solid grey; /* 오른쪽 변에만 스타일 지정 */
+	border-bottom: 2px solid black; /* 오른쪽 변에만 스타일 지정 */
+	border-right: 2px solid black; /* 오른쪽 변에만 스타일 지정 */
+	vertical-align: top; /* 상단정렬 */
+	text-align: center;
 }
 
 a {
@@ -47,14 +59,27 @@ a {
 	color: orange;
 }
 
-table tr td {
-	font-size: 0.8em;
+table {
+	padding: 10px;
+}
+
+table * {
 	margin: 0;
 	padding: 0;
+	background-color: #1E282D;
+}
+
+section * {
+	background-color: #1E282D;
 }
 
 td a img {
 	width: 40px;
+}
+
+td img {
+	width: 40px;
+	height: 40px;
 }
 
 ul {
@@ -63,8 +88,8 @@ ul {
 	margin: 0;
 }
 
-seection span {
-	display: flex;
+header * {
+	background-color: #1E282D;
 }
 
 .l-container {
@@ -118,20 +143,10 @@ seection span {
 	vertical-align: middle;
 }
 
-.set {
-	text-align: center;
-	font-size: 0.8em;
-	cursor: pointer;
-}
-
 .po {
 	opacity: 0;
 	position: absolute;
 	cursor: pointer;
-}
-
-.flex {
-	display: flex;
 }
 
 .insert {
@@ -151,7 +166,7 @@ seection span {
 	text-align: center;
 	z-index: 1;
 	color: white;
-	font-size: 18px;
+	/* 	font-size: 18px; */
 	font-weight: bold;
 	background: none;
 }
@@ -189,7 +204,7 @@ seection span {
 	display: flex;
 	width: 1200px;
 	margin: 0 auto;
-	text-align: center;
+	font-size: 0.8em;
 }
 
 .head-container {
@@ -207,12 +222,8 @@ seection span {
 }
 
 .tab {
-	/* 	padding: 50px; */
 	cursor: pointer;
-	width: 100%;
-	height: 100%;
-	/* 탭의 너비를 100%로 설정하여 부모의 너비에 맞춤 */
-	box-sizing: border-box;
+	width: 200px;
 }
 
 .tab-content {
@@ -238,55 +249,22 @@ seection span {
 	width: 100%;
 }
 
-.double-divide {
-	width: 25%;
-}
-
-.left {
-	text-align: left;
-}
-
-.search-box {
-	height: 50px;
-	border-radius: 10px;
-	background-color: #F0F0F0;
-	color: black;
-	font-size: 100%;
-}
-
-.rune {
-	width: 100%;
-	flex-direction: column;
-}
-
-.rune img {
-	width: 30px;
-	height: 30px;
-}
-
 .arrow-right {
-	border-top: 10px solid transparent;
-	border-bottom: 10px solid transparent;
-	border-left: 15px solid orange;
+	position: relative;
 	display: inline-block;
-	margin-bottom: 15px;
+	margin: 0 0 10px 0;
+	/* 부등호와 텍스트 간의 간격 조절 */
 }
 
-.section-container {
-	display: flex;
-	height: 75%;
+.arrow-right::before {
+	content: '>';
+	/* 단일 부등호로 변경 */
+	color: #82D580;
+	/* 부등호의 색상 조절 */
+	font-size: 20px;
+	/* 부등호의 크기 조절 */
 }
 
-.rune {
-	flex: 1;
+.flex {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-.spell-container {
-	display: flex;
-	flex: 1;
-	justify-content: space-around;
-	align-items: center;
 }
