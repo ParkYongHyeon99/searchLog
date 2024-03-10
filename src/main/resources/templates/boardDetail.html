@@ -13,6 +13,7 @@
 <!-- 썸머노트 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <link rel="stylesheet" href="/css/allStyle.css">
+<link rel="stylesheet" href="/css/board.css">
 </head>
 <body>
 	
@@ -23,52 +24,54 @@
 			<div th:insert="~{header :: ul}" class="header">헤더</div>
 		</header>
 		
-		<h3>Board Detail</h3>
-		
-		<div class="bDtoDIV">
-			<th:block th:if="${bDto}!=null">
-				<p th:if="${bDto.unnamed == 1}"><b>익명 게시글</b></p>
-				<p th:text=" ' &ensp;글번호 ' + ${bDto.b_num} + ' &ensp; '"></p>
-				<p th:text=" ' &ensp;제목 ' + ${bDto.b_title} + ' &ensp; '"></p>
-				
-				<th:block th:if="${bDto.unnamed == 1}">
-					<p th:text=" ' &ensp;작성자 ' + ${bDto.b_writerNick} + ' &ensp; '"></p>
-				</th:block>
-				<th:block th:if="${bDto.unnamed == 0}">
-					<p th:text=" ' &ensp;작성자 ' + ${bDto.b_writer} + ' &ensp; '"></p>
-				</th:block>
-				
-				<p th:text=" ' &ensp;작성날짜 ' + ${bDto.b_date} + ' &ensp; '"></p>
-				<p th:text=" ' &ensp;조회수 ' + ${bDto.b_view} + ' &ensp; '"></p>
-				<p th:utext=" ' &ensp;내용 ' + ${bDto.b_contents} + ' &ensp; '"></p>
-				
-				<th:block th:if="${session.member}!=null">
-					<th:block th:if="${session.member.m_nick}==${bDto.b_writer}">
-						<button type="button" class="crudBtn" th:onclick="|location.href='/board/boardUpdate?b_num=${bDto.b_num}'|">수정</button>
-						<button type="button" class="crudBtn" th:onclick="|location.href='/board/boardDelete?b_num=${bDto.b_num}'|">삭제</button>
+		<div class="allSmallBox">
+			<div class="bDtoDIV">
+				<th:block th:if="${bDto}!=null">
+					<p th:if="${bDto.unnamed == 1}"><b>익명 게시글</b></p>
+					
+					<p th:text=" ' &ensp;글번호 ' + ${bDto.b_num} + ' &ensp; '"></p>
+					<p th:text=" ' &ensp;제목 ' + ${bDto.b_title} + ' &ensp; '"></p>
+					
+					<th:block th:if="${bDto.unnamed == 1}">
+						<p th:text=" ' &ensp;작성자 ' + ${bDto.b_writerNick} + ' &ensp; '"></p>
+					</th:block>
+					<th:block th:if="${bDto.unnamed == 0}">
+						<p th:text=" ' &ensp;작성자 ' + ${bDto.b_writer} + ' &ensp; '"></p>
+					</th:block>
+					
+					<p th:text=" ' &ensp;작성날짜 ' + ${bDto.b_date} + ' &ensp; '"></p>
+					<p th:text=" ' &ensp;조회수 ' + ${bDto.b_view} + ' &ensp; '"></p>
+<!-- 					<p> &ensp;내용</p> -->
+					<p th:utext=" ${bDto.b_contents} + ' &ensp; '"></p>
+					
+					<th:block th:if="${session.member}!=null">
+						<th:block th:if="${session.member.m_nick}==${bDto.b_writer}">
+							<button type="button" class="crudBtn" th:onclick="|location.href='/board/boardUpdate?b_num=${bDto.b_num}'|">수정</button>
+							<button type="button" class="crudBtn" th:onclick="|location.href='/board/boardDelete?b_num=${bDto.b_num}'|">삭제</button>
+						</th:block>
+					</th:block>
+					<th:block th:if="${session.member}==null and ${bDto.unnamed == 1}" id="anoUDBTN">
+						<input type="password" id="unBPw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20"> <br>
+						<button type="button" class="crudBtn" th:onclick="unUD([[${bDto.b_num}]],'U')">수정</button>
+						<button type="button" class="crudBtn" th:onclick="unUD([[${bDto.b_num}]],'D')">삭제</button>
 					</th:block>
 				</th:block>
-				<th:block th:if="${session.member}==null and ${bDto.unnamed == 1}" id="anoUDBTN">
-					<input type="password" id="unBPw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20"> <br>
-					<button type="button" class="crudBtn" th:onclick="unUD([[${bDto.b_num}]],'U')">수정</button>
-					<button type="button" class="crudBtn" th:onclick="unUD([[${bDto.b_num}]],'D')">삭제</button>
-				</th:block>
-			</th:block>
+			</div>
+			
+			<div class="cDtoDIV">
+				<table>
+					<th:block th:if="${cList}!=null" th:each="c:${cList}">
+						<tr>
+							<td></td>
+						</tr>
+					</th:block>
+				</table>
+			</div>
+			
+			
+			<button type="button" onclick="location.href = '/board/list?page=1'">리스트로 돌아가기</button>
+			
 		</div>
-		
-		<div class="cDtoDIV">
-			<table>
-				<th:block th:if="${cList}!=null" th:each="c:${cList}">
-					<tr>
-						<td></td>
-					</tr>
-				</th:block>
-			</table>
-		</div>
-		
-		
-		<button type="button" onclick="location.href = '/board/list?page=1'">리스트로 돌아가기</button>
-		
 	</div>
 	
 	<!-- 기본 js -->
