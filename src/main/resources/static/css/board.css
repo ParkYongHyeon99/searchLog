@@ -2,7 +2,9 @@
 
 
 .allSmallBox{
+	display: relative;
 	margin-top: 10px;
+	flex-direction: column;
 }
 
 #nickDiv {
@@ -54,24 +56,35 @@
 }
 
 
-table{
+.boardListT, .pagingTable{
 	border: 1px solid black;
 	text-align: center;
 	width: 100%;
-}
-
-.boardListT{
+	min-width: 100%;
 	margin: 10px;
 }
 
+.boardListT{
+	border-collapse: separate;
+	border-spacing: 15px; /* 원하는 간격으로 조절 */
+}
 
 
-.crudBtn{
-	float: rigth;
+.bDtoDIV>* {
+	text-align: left;
+	margin-bottom: 10px;
+}
+.bDtoDIV > :first-child {
+	margin-top: 50px;
+	margin-bottom: 20px;
 }
 
 #write_frm{
 	margin-top: 10px;
+}
+.write{
+	margin-top: 50px;
+	float: left;
 }
 
 

@@ -29,7 +29,7 @@
 		
 		<div class="allSmallBox">
 			
-			<button type="button" class="crudBtn" onclick="location.href='/board/boardWrite'">글 작성</button>
+			<button type="button" class="crudBtn write" onclick="location.href='/board/boardWrite'">글 작성</button>
 			<br><br>
 			
 			<table class="boardListT">
@@ -48,15 +48,17 @@
 				</th:block>
 				
 				<th:block th:if="${bList}!=null" th:each="b : ${bList}">
-					<tr>
-						<td th:text=" ' &ensp; ' + ${b.b_num} + ' &ensp; '"></td>
-						<td><a th:href="|/board/detail?b_num=${b.b_num}|" th:text=" ' &ensp; ' + ${b.b_title} + ' &ensp; '"></a></td>
-						<th:block>
-							<td th:if="${b.unnamed == 0}" th:text=" ' &ensp; ' + ${b.b_writer} + ' &ensp; '"></td>
-							<td th:if="${b.unnamed == 1}" th:text=" ' &ensp; 익명) ' + ${b.b_writerNick} + ' &ensp; '"></td>
-						</th:block>
-						<td th:text=" ' &ensp; ' + ${b.b_date} + ' &ensp; '"></td>
-						<td th:text=" ' &ensp; ' + ${b.b_view} + ' &ensp; '"></td>
+					<tr th:onclick="'boardDetail(' + ${b.b_num} + ')'">
+<!-- 						<th:block th:href="|/board/detail?b_num=${b.b_num}|"> -->
+							<td th:text=" ' &ensp; ' + ${b.b_num} + ' &ensp; '"></td>
+							<td th:text=" ' &ensp; ' + ${b.b_title} + ' &ensp; '"></td>
+							<th:block th:href="|/board/detail?b_num=${b.b_num}|">
+								<td th:if="${b.unnamed == 0}" th:text=" ' &ensp; ' + ${b.b_writer} + ' &ensp; '"></td>
+								<td th:if="${b.unnamed == 1}" th:text=" ' &ensp; 익명) ' + ${b.b_writerNick} + ' &ensp; '"></td>
+							</th:block>
+							<td th:text=" ' &ensp; ' + ${b.b_date} + ' &ensp; '"></td>
+							<td th:text=" ' &ensp; ' + ${b.b_view} + ' &ensp; '"></td>
+<!-- 						</th:block> -->
 					</tr>
 				</th:block>
 			</table>
@@ -64,6 +66,10 @@
 			
 			<table class="pagingTable">
 				<tr>
+					<th:block th:if="${paging.leftP == 1}">
+						<td>&ensp;</td>
+						<td>&ensp;</td>
+					</th:block>
 					<th:block th:if="${paging.leftP != 1}">
 						<td><a th:href="|/board/list?page=1|"><<</a></td>
 						<td><a th:href="|/board/list?page=${paging.beforeP}|"><</a></td>
@@ -82,5 +88,11 @@
 			
 		</div>
 	</div>
+	
+	<script type="text/javascript">
+		function boardDetail(b_num){
+			window.location.href='/board/detail?b_num=' + b_num
+		}
+	</script>
 </body>
 </html>

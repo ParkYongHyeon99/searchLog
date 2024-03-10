@@ -172,3 +172,10 @@
 	padding: 10px;
 	overflow-y: auto;
 }
+
+.swal2-x-mark,.swal2-success-ring{
+	background-color: transparent;
+}
+.swal2-popup{
+    background-color: #091428;
+}
