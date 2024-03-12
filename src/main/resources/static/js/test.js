@@ -14,9 +14,13 @@ var botPick = 0;
 var supPick = 0;
 
 
+
+
 $(document).ready(function() {
 	// AJAX 요청 실행
+
 	LoadingWithMask()
+
 	$.ajax({
 		type: "GET",
 		//url: "http://127.0.0.1:8000/summoner/search",
@@ -39,7 +43,6 @@ $(document).ready(function() {
 			$('.ddd').css({
 				"display": "block"
 			})
-
 
 			for (var l = 0; l < result.total_Data_list.length; l++) {
 				var championNames = []
@@ -1333,7 +1336,8 @@ $(document).ready(function() {
 
 
 				})
-			} //for문 전적검색 수		
+			} //for문 전적검색 수	
+
 			let resulttt = champList.map((item, index) => [item, winLoss[index]]);
 
 
@@ -1367,12 +1371,8 @@ $(document).ready(function() {
 			</div>
 			
 			`)
-
-
-
-
-
 			}
+
 			let winResult = winLoss.reduce((acc, cur) => {
 				if (acc.hasOwnProperty(cur)) {
 					acc[cur]++;
@@ -1462,7 +1462,14 @@ $(document).ready(function() {
 			closeLoadingWithMask()
 
 
+		},
+		error: function(result) {
+			console.log(result);
+			alert('없는 소환사입니다.');
+			window.location.href = "/main";
+
 		}
+
 	});
 
 });
@@ -2865,7 +2872,7 @@ var total = l + start
 function sibla(total) {
 	var line1 = document.getElementById("hidden-table" + total);
 	line1.style.display = ((line1.style.display != 'none') ? 'none' : 'block');
-	
+
 	var button = document.getElementById(`hideButton${total}`);
 	var value = button.value;
 	if (value === "자세히") {
