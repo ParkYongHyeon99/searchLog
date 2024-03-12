@@ -1381,8 +1381,8 @@ $(document).ready(function() {
 				}
 				return acc;
 			}, {});
-			let winTostring = parseInt(JSON.stringify(winResult.True));
-			let lossTostring = parseInt(JSON.stringify(winResult.False));
+			let winTostring = winResult.True ? parseInt(JSON.stringify(winResult.True)) : 0;
+			let lossTostring = winResult.False ? parseInt(JSON.stringify(winResult.False)) : 0;
 			let win_rating = Math.round((winTostring / (winTostring + lossTostring) * 100))
 
 
