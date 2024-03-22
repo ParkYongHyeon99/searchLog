@@ -1,26 +1,57 @@
+@charset "UTF-8";
+
 * {
 	margin: 1px;
 	text-align: center;
 	background-color: #0A1428;
 	padding: 0;
-/* 	border: 1px solid grey; */
+/*	border: 1px solid grey;*/
 	color: orange;
+
 }
 
 body {
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	/*	height: 100vh;*/
 }
-button{
-/*	background-color: #1b5ac2;*/
+
+.result-body {
+	border: 1px solid gold;
+}
+
+.body-text {
+	background-color:  rgba(255, 255, 255, 0.05);
+}
+
+.con2 {
+	width: 705px;
+	/*	float:left;*/
+}
+
+.con3 {
+	/*	background-color: antiquewhite;*/
+/*		display: flex;*/
+	text-align: center;
+	margin: 30px 0 0 0px;
+	color: orange;
+	height: 50x;
+	width: 250px;
+}
+.con4{
+	float: right;
+	margin: -81px 0 0 0;
+	width: 245px;
+}
+button {
+	/*	background-color: #1b5ac2;*/
 	color: #fff;
 	margin: 9px;
 	border-radius: 10px;
-	padding: 2px 4px; 
-  	font-size: 15px;
-  	border:0;
-  	cursor: pointer;
+	padding: 2px 4px;
+	font-size: 15px;
+	border: 0;
+	cursor: pointer;
 }
 
 nav * {
@@ -30,7 +61,7 @@ nav * {
 img {
 	display: inline-block;
 	width: 50px;
-	border:0;
+	border: 0;
 }
 
 a {
@@ -66,19 +97,53 @@ seection span {
 	display: flex;
 }
 
+.wrap {
+	width: 1200px;
+	height: 2000px;
+}
+
 .l-container {
 	width: 1100px;
 	margin: 0 auto;
 	text-align: center;
 }
 
+/* 입력 상자 스타일링 */
+.championInput {
+	padding: 10px;
+	font-size: 16px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	outline: none;
+	transition: border-color 0.3s;
+	width: 200px;
+	/* 상자의 너비를 조정할 수 있습니다. */
+	margin: 45px 0 10px 160px;
+
+}
+
+/* 입력 상자 포커스 시 스타일링 */
+.championInput:focus {
+	border-color: #007bff;
+	/* 포커스 시 테두리 색상 변경 */
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	/* 포커스 시 그림자 효과 추가 */
+}
+
 .width33 {
+
 	width: 33%;
 	background-color: #1E282D;
 }
 
 .width33 * {
 	background-color: inherit;
+}
+
+.lane {
+	background-color: white;
+	width: 50%;
+	margin: auto;
 }
 
 .width67 {
@@ -90,22 +155,38 @@ seection span {
 	background-color: inherit;
 }
 
+.teampo {
+	position: relative;
+	margin: 0 0 0 140px;
+	justify-content: center;
+	align-items: center;
+}
+
 .width100 {
 	width: 100%;
 	display: flex;
-	list-style: none; /* 기본 목록 스타일 제거 */
+	list-style: none;
+	/* 기본 목록 스타일 제거 */
 	padding: 0;
 	margin: 0;
 	flex-wrap: wrap;
 	justify-content: center;
 	margin: 0;
 	padding: 0;
-	list-style: none; /* 왼쪽으로 정렬 */
+	list-style: none;
+	/* 왼쪽으로 정렬 */
+}
+
+.hi {
+	width: 700px;
+	height: 200px;
 }
 
 .width100 li {
-	flex: 0 1 calc(16.6667% - 10px); /* 6개의 아이템이 가로로 꽉 차게 나열되도록 설정 */
-	box-sizing: border-box; /* 여백을 포함한 크기로 요소를 계산하도록 설정 */
+	flex: 0 1 calc(16.6667% - 10px);
+	/* 6개의 아이템이 가로로 꽉 차게 나열되도록 설정 */
+	box-sizing: border-box;
+	/* 여백을 포함한 크기로 요소를 계산하도록 설정 */
 	margin: 0 5px 0 0;
 	text-align: center;
 }
@@ -135,27 +216,29 @@ seection span {
 
 .insert {
 	display: flex;
-	
+
 }
 
 .insert * {
 	display: flex;
-	align-items: center; /*수직 중앙 정렬 */
-	
+	align-items: center;
+	/*수직 중앙 정렬 */
+
 	width: 100%;
 	height: 100%;
-	border:0;   
+	border: 0;
 	top: 0;
-    padding: 10px;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    z-index: 1;
-    color: white;
-    font-size: 18px;
+	padding: 10px;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+	z-index: 1;
+	color: white;
+	font-size: 18px;
 	font-weight: bold;
-	background:none;
+	background: none;
 }
+
 .insert button:hover {
 	text-decoration: underline;
 }
@@ -175,12 +258,12 @@ seection span {
 	cursor: pointer;
 	width: 100%;
 	height: 50px;
-	
+
 }
 
 .header * {
 	cursor: pointer;
-		list-style-type: none;
+	list-style-type: none;
 	padding: 0;
 	margin: 0;
 	height: 40px;
@@ -292,24 +375,214 @@ seection span {
 	justify-content: space-around;
 	align-items: center;
 }
+
 p {
 	background-color: rgba(255, 255, 255, 0.05);
+	/*	color: black;*/
+}
+
+/*.synergy-result {*/
+/*	height: 400px;*/
+/*	margin: 0 350px 0 350px;*/
+/*}*/
+
+#loading {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: lightslategray;
+	padding: 20px;
+	border-radius: 8px;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.wantpo {
+	background-color: #0A1428;
+	color: orange;
+}
+
+.position {
+	margin: 0 0 0 750px;
+	height: 100px;
+}
+
+.positionImg {
+	float: left;
+	height: 100%;
+	/*    width:50px;*/
+	padding: 0 30px 0 0;
+	margin: 0 0 0 7px;
+}
+
+/*.positionImgs{*/
+/*	float: left	;*/
+/*}*/
+
+.input[type="radio"] {
+	display: none;
+}
+
+.sePoDiv {
+	float: left;
+	margin: auto;
+
+}
+
+.positionImg {
+	height: 40px;
+	width: 100px;
+	margin: 0 0 0 20px;
+}
+
+
+.poRadio,
+.myPoRadio,
+.findPoRadio {
+	opacity: 0;
+	position: absolute;
+	width: 0;
+	height: 0;
+	
+}
+
+
+.lineImage.active {
+	background: #7ea338;
+	color: white;
+}
+
+.lineImage:visited {
+	background: #7ea338;
+	color: white;
+}
+
+.lineImage {
+	border: 0;
+}
+
+.question-mark {
+	float: right;
+    width: 200px;
+    height: 200px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    margin: 0 300px 0 0;
+  }
+  .question-mark:before {
+    content: "?";
+    font-size: 160px;
+    font-weight: bold;
+    color: #000;
+    position: absolute;
+    top: -5%;
+    left: 32%;
+  }
+.question-mark1 {
+	width: 50px;
+	/* 물음표의 너비 */
+	height: 70px;
+	/* 물음표의 높이 */
+	position: relative;
+	margin: auto;
+	position: fixed;
+    bottom: 0;
+    left: 0;
+}
+
+.question-mark1:before {
+	content: "★";
+	/* 물음표 텍스트 */
+	font-size: 40px;
+	/* 물음표의 글꼴 크기 */
+	color: #ffffff;
+	/* 원하는 색상 */
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.question-mark1:after {
+	content: "";
+	width: 10px;
+	/* 물음표의 반원 너비 */
+	height: 10px;
+	/* 물음표의 반원 높이 */
+	/*  border-top: 2px solid #1E282D;  물음표의 반원 테두리 스타일 */
+	/*  border-left: 2px solid #1E282D;  물음표의 반원 테두리 스타일 */
+	border-radius: 50%;
+	/* 물음표의 반원을 원형으로 만듭니다 */
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+.question-mark1:hover:before {
+	content: "내 포지션 선택 후 챔피언 이름 입력, 그리고 함께 하는 사람의 포지션 선택!";
+	/* hover 효과 시 변경되는 텍스트 */
+	font-size: 20px;
+	/* hover 효과 시 변경되는 텍스트의 글꼴 크기 */
+	white-space: nowrap;
+	/* 텍스트가 한 줄로만 나타나도록 설정 */
+	/*  overflow: hidden;  텍스트가 넘칠 경우 숨김 처리 */
+	position: absolute; /* 부모 요소에 대해 상대적인 위치 설정 */
+    left: 700%; /* 왼쪽으로 이동 */
+    top: 25%; /* 위쪽 정렬 */
+}
+
+.champName {
+	position: absolute;
+	margin: 55px 0 0 180px;
+	background-color: #0A1428;
+
+}
+
+
+#outputImage {
+	display: flex;
+ 	justify-content: center;
+	margin:auto	;
+/*	position: relative;*/
+		
+}
+
+.now {
+	width: 500px;
+	height: 50px;
+	margin: 35px 0 0px 102px
+}
+
+.tooltip .tooltip-bottom1 {
+	width: 40px;
+	top: 100%;
+	left: 30%;
+	margin-left: -60px;
+}
+.tooltip .tooltip-bottom2 {
+	width: 40px;
+	top: 100%;
+	left: 50%;
+	margin-left: -60px;
+}
+.champImage{
+	height: 100px;
+}
+
+.selectedImage {
+	position: relative;
+	display: flex;
+}
+.chart-child{
+	background-color: orange;
+	height: 10px;
+}
+.matchload{
+	background-color: lightslategray;
 	color: black;
 }
-
-.synergy-result{
-	margin: 0 0 0 330px;
-
-}
-#loading {
-    display: none;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  

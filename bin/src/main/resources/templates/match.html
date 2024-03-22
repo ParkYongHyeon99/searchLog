@@ -1,95 +1,235 @@
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<!--<%@include file="/WEB-INF/tiles/header.jsp" %>-->
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<link rel="stylesheet" href="/css/synergy.css">
-<script defer src="/js/match.js"></script>
+	<!--<%@include file="/WEB-INF/tiles/header.jsp" %>-->
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<link rel="stylesheet" href="/css/synergy.css">
+	<link rel="stylesheet" href="/css/tooltip.css">
 
-<!--<%--  <%@include file="/WEB-INF/tiles/header.jsp" %> --%>-->
+
+	<script defer src="/js/match.js"></script>
+
+
+	<!--<%--  <%@include file="/WEB-INF/tiles/header.jsp" %> --%>-->
 </head>
+
 <body>
-<div th:if="${session.member != null}" style="float:right">
-			<p style = "color:white"th:text="${session.member.m_nick}"></p>
-			<button style="background-color: #1b5ac2;" onclick="location.href='/member/logout'">로그아웃</button>
+
+	<div th:if="${session.member != null}" style="float:right">
+		<p style="color:white" th:text="${session.member.m_nick}"></p>
+		<button style="background-color: #1b5ac2;" onclick="location.href='/member/logout'">로그아웃</button>
+	</div>
+	<div th:if="${session.member == null}" style="float:right">
+		<button style="background-color: #1b5ac2;" onclick="location.href='/member/loginfrm'">로그인</button>
+
+	</div>
+	<header class="insert">
+		<div th:insert="~{header :: h1}" class="logo">로고</div>
+		<div th:insert="~{header :: ul}" class="header">헤더</div>
+	</header>
+<div class="question-mark1"></div>
+
+	<div id="synergy-head">
+		<div style="display: flex" id="con1">
+			<div class="hi">
+				<div class="myteampo">내 포지션</div>
+
+				<div class="teampo">
+
+
+					<div>
+						<label class="positionImg tooltip Top" id="Top" style="height: 50px; width: 31px;">
+							<input type="radio" class="poRadio" name="teamPosition" value="top" id="rTop"></input>
+							<span class="tooltiptext tooltip-bottom1">탑</span>
+						</label>
+						<label class="positionImg tooltip Jungle" id="Jungle" style="height: 50px; width: 32px;">
+							<input type="radio" class="poRadio" name="teamPosition" value="jungle" id="rJungle"></input>
+							<span class="tooltiptext tooltip-bottom1">정글</span>
+						</label>
+						<label class="positionImg tooltip Mid" id="Mid" style="height: 50px; width: 33px;">
+							<input type="radio" class="poRadio" name="teamPosition" value="middle" id="rMid"></input>
+							<span class="tooltiptext tooltip-bottom1">미드</span>
+						</label>
+						<label class="positionImg tooltip Bot" id="Bot" style="height: 50px; width: 34.5px;">
+							<input type="radio" class="poRadio" name="teamPosition" value="bottom" id="rBot"></input>
+							<span class="tooltiptext tooltip-bottom1">바텀</span>
+						</label>
+						<label class="positionImg tooltip Support" id="Support" style="height: 50px; width: 32px;">
+							<input type="radio" class="poRadio" name="teamPosition" value="utility"
+								id="rSupport"></input>
+							<span class="tooltiptext tooltip-bottom1">서폿</span>
+						</label>
+					</div>
+
+				</div>
+				<p class="champName">챔피언 이름</p>
+				<input type="text" id="championName" name="championName" class="championInput"
+					placeholder="&nbsp;&nbsp;챔피언 검색" />
 			</div>
-			<div th:if="${session.member == null}" style="float:right" >
-			<button style="background-color: #1b5ac2;" onclick="location.href='/member/loginfrm'">로그인</button>
-			
+			<div class="hi">
+				<div class="synergy-result">
+					<div class="tableinner">
+						<table id="synergy-table">
+							<colgroup>
+								<col width="15%">
+								<col width="16%">
+								<col width="53%">
+								<col width="16%">
+							</colgroup>
+							<thead id="result">
+								<tr class="result-head">
+									<th class="head-menu"><span>순위</span></th>
+									<th class="head-menu"><span>시너지 챔피언</span></th>
+									<th class="head-menu"><span>시너지 승률</span></th>
+									<th class="head-menu"><span>함꼐한 게임 수</span></th>
+								</tr>
+							</thead>
+
+						</table>
+					</div>
+
+
+				</div>
+			</div>
+
 		</div>
-<header class="insert">
-        	<div th:insert="~{header :: h1}" class="logo">로고</div>
-        	<div th:insert="~{header :: ul}" class="header">헤더</div>
-        </header>
-<div class="back"></div>
+	</div>
+	<div class="question-mark"></div>
+	<div class="con2">
+		<div onclick="handleClick(event)">
+			<p class="wantpo">알고 싶은 포지션</p>
 
-<div id="wrap">
+			<button class="myteamPosition tooltip" value="top" name="aa"
+				onclick="search('top'); displayInput(); showImage(this); ">
+				<img src="/img/position/Diamond-Top.png" alt="top" class="lineImage">
+				<span class="tooltiptext tooltip-bottom2">탑</span></button>
+			<button class="myteamPosition tooltip" value="jug" name="aa"
+				onclick="search('jungle'); displayInput(); showImage(this);">
+				<img src="/img/position/Diamond-Jungle.png" alt="jungle" class="lineImage">
+				<span class="tooltiptext tooltip-bottom2">정글</span></button>
+			<button class="myteamPosition tooltip" value="mid" name="aa"
+				onclick="search('middle'); displayInput(); showImage(this); ">
+				<img src="/img/position/Diamond-Mid.png" alt="middle" class="lineImage">
+				<span class="tooltiptext tooltip-bottom2">미드</span></button>
+			<button class="myteamPosition tooltip" value="adc" name="aa"
+				onclick="search('bottom'); displayInput(); showImage(this); ">
+				<img src="/img/position/Diamond-Bot.png" alt="bottom" class="lineImage">
+				<span class="tooltiptext tooltip-bottom2">바텀</span></button>
+			<button class="myteamPosition tooltip" value="sup" name="aa"
+				onclick="search('utility'); displayInput(this); showImage(this); ">
+				<img src="/img/position/Diamond-Support.png" alt="supporter" class="lineImage">
+				<span class="tooltiptext tooltip-bottom2">서폿</span></button>
 
-  <div class="synergy-head">
-    <div class="inner">
-      <div class="search">
-        <input type="text" id="championName" name="championName" class="championInput" placeholder="&nbsp;&nbsp;챔피언 검색"/>
-        <div class="material-symbols-outlined">내 포지션을 입력하세요</div>
-        <select id= "teamPosition" name="teamPosition" class="championSelect">
-		  <option value="">&nbsp;내 포지션</option>
-		  <option value="top">탑</option>
-		  <option value="jungle">정글</option>
-		  <option value="middle">미드</option>
-		  <option value="bottom">바텀</option>
-		  <option value="utility">서폿</option>
-	    </select>
-	    <div class="position" onclick="handleClick(event)">
-	      <button class="myteamPosition" onclick="search('top')"><img src="/img/position/Diamond-Top.png" alt="top" class="lineImage"><span class="lineText">탑</span></button>
-	      <button class="myteamPosition" onclick="search('middle')"><img src="/img/position/Diamond-Mid.png" alt="middle" class="lineImage"><span class="lineText">미드</span></button>
-	      <button class="myteamPosition" onclick="search('jungle')"><img src="/img/position/Diamond-Jungle.png" alt="jungle" class="lineImage"><span class="lineText">정글</span></button>
-	      <button class="myteamPosition" onclick="search('bottom')"><img src="/img/position/Diamond-Bot.png" alt="bottom" class="lineImage"><span class="lineText">바텀</span></button>
-	      <button class="myteamPosition" onclick="search('utility')"><img src="/img/position/Diamond-Support.png" alt="supporter" class="lineImage"><span class="lineText">서폿</span></button>
-	    </div>
-      </div>     
-    </div>
-  </div>
-  
-  <div class="synergy-result">
-    <div class="tableinner">
-       <table id="synergy-table">
-    	 <colgroup>
-      	  <col width="15%">
-      	  <col width="15%">
-      	  <col width="55%">
-      	  <col width="15%"> 
-    	 </colgroup>
-    	 <thead id="result">
-      	  <tr class="result-head">
-       	    <th class="head-menu"><span>순&nbsp;&nbsp;위</span></th>
-       	    <th class="head-menu"><span>시너지&nbsp;&nbsp;챔피언</span></th>
-       	    <th class="head-menu"><span>시너지&nbsp;&nbsp;승률</span></th>
-       	    <th class="head-menu"><span>게임&nbsp;&nbsp;판수</span></th>
-      	  </tr>    
-    	</thead>
-    	
-  	  </table>
-    </div>
-  </div>
-  
-  	
-</div>
- <div id="loading" style="margin-left: 0px;">
-        <img src="/img/Book.gif">
-       <p class ="matchload">로딩중입니다..</p>
-    </div>
+		</div>
 
-<!--<%@include file="/WEB-INF/tiles/footer.jsp" %>-->
+
+	</div>
+
+
+
+
+	<div class="now">현재 입력 정보
+
+		<div class="con3">
+			<p id="selectedTextValue"></p>
+			<div id="selectedImageValue"></div>
+		</div>
+		<div class="con4">
+			<p id="selectedText"></p>
+			<div id="selectedImage"></div>
+		</div>
+		<div id="outputImage"></div>
+	</div>
+
+<div class="question-mark1"></div>
+
+
+
+	<div id="loading" style="margin-left: 0px;">
+		<img src="/img/820.gif">
+		<p class="matchload">로딩중입니다..</p>
+	</div>
+	
+			<!--<%@include file="/WEB-INF/tiles/footer.jsp" %>-->
 </body>
+
 </html>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <script>
-    $(document).ready(function() {
+	$(document).ready(function () {
     $('#loading').hide();
-    $('.myteamPosition').click(function(){
-        $('#loading').show();
-        return true;
-        });
+    $('.myteamPosition').click(function () {
+
+        var isChecked = $('input[name="teamPosition"]:checked').length > 0;
+        var isInputted = $('#championName').val().trim() !== '';
+        
+        if (isChecked && isInputted) {
+            $('#loading').show();
+            $('#outputImage').show();
+            $('.con4').show();
+            return true;
+        } else {
+			$('#outputImage').hide();
+            $('.con4').hide();
+        	
+            return false;
+        }
     });
+});
+</script>
+<script>
+	document.addEventListener("DOMContentLoaded", function () {
+		var selectedTextValueParagraph = document.getElementById('selectedTextValue');
+		var selectedImageValueParagraph = document.getElementById('selectedImageValue');
+		var currentImage = null; // 변수를 추가하여 현재 이미지를 추적합니다.
+
+		var radioButtons = document.querySelectorAll('input[type="radio"].poRadio');
+
+		radioButtons.forEach(function (radioButton) {
+			radioButton.addEventListener('change', function () {
+				if (this.checked) {
+					var position = "";
+					var imageUrl = "";
+					switch (this.value) {
+						case "top":
+							position = "탑";
+							imageUrl = "/img/position/Diamond-Top.png";
+							break;
+						case "jungle":
+							position = "정글";
+							imageUrl = "/img/position/Diamond-Jungle.png";
+							break;
+						case "middle":
+							position = "미드";
+							imageUrl = "/img/position/Diamond-Mid.png";
+							break;
+						case "bottom":
+							position = "원딜";
+							imageUrl = "/img/position/Diamond-Bot.png";
+							break;
+						case "utility":
+							position = "서폿";
+							imageUrl = "/img/position/Diamond-Support.png";
+							break;
+						default:
+							position = "알 수 없음";
+					}
+					selectedTextValueParagraph.textContent = "내 라인: " + position;
+					// Append the image to the selectedValueParagraph
+					if (currentImage) {
+						selectedImageValueParagraph.removeChild(currentImage);
+					}
+					var image = document.createElement('img');
+					image.src = imageUrl;
+					selectedImageValueParagraph.appendChild(image);
+					currentImage = image;
+				}
+			});
+		});
+		
+	});
+
 </script>

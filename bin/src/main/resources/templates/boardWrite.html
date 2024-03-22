@@ -16,40 +16,47 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
 <!-- 버튼 -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" -->
+<!--         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous"> -->
 
-
+<link rel="stylesheet" href="/css/allStyle.css">
+<link rel="stylesheet" href="/css/board.css">
 </head>
 <body>
 	
-	<div class="allBigBox">
+	<div class="allBigBox l-container">
 		
-		<h3>Board Write</h3>
+		<header class="insert">
+			<div th:insert="~{header :: h1}" class="logo">로고</div>
+			<div th:insert="~{header :: ul}" class="header">헤더</div>
+		</header>
+		
+		<br>
 		
 		<form id="write_frm" method="get" onsubmit="return writeCheck()" action="/board/writeSub">
-		
-			<th:block th:if="${session.member}!=null">
-				<nav>
-					<p>현재 로그인 ID: </p><p id="writerId" th:text="${session.member.m_id}"></p>
-				</nav>
-				<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-					<div class="btn-group me-2" role="group" aria-label="First group">
-						<button type="button" class="btn btn-primary" id="nicknameBTN" onclick="anonymousChange()">공개</button>
-						<button type="button" class="btn btn-outline-primary" id="anonymousBTN" onclick="anonymousChange()">익명</button>
-					</div>
-				</div>
-				<input type="hidden" id="b_writer" name="b_writer" th:value="${session.member.m_nick}">
-			</th:block>
-			<th:block th:if="${session.member}==null">
-				<input type="hidden" name="b_writer" class="input" value="익명">
-			</th:block>
 			
-			<div>
-				<input type="text" id="b_writerNick" name="b_writerNick" class="input" placeholder="닉네임 입력" maxlength="20" autocapitalize="off">
-				<input type="password" id="b_pw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20">
-			</div>
-			<p id="unNickCheckTip"></p>
+			<div id="nickDiv">
+				<th:block th:if="${session.member}!=null">
+					<nav id="nowLoginId">
+						<p>현재 로그인 ID: </p><p id="writerId" th:text="${session.member.m_id}"></p>
+					</nav> <br>
+					<div class="btn-group me-2" role="group" aria-label="First group">
+						<button type="button" class="selectBtn" id="nicknameBTN">&ensp;공개&ensp;</button>
+						<button type="button" class="noSelectBtn" id="anonymousBTN">&ensp;익명&ensp;</button>
+					</div>
+					<input type="hidden" id="b_writer" name="b_writer" th:value="${session.member.m_nick}">
+				</th:block>
+				<th:block th:if="${session.member}==null">
+					<input type="hidden" id="writerId">
+					<input type="hidden" name="b_writer" class="input" value="익명">
+				</th:block>
+				
+				<div class="input_text">
+					<input type="text" id="b_writerNick" name="b_writerNick" class="input" placeholder="닉네임 입력" maxlength="20" autocapitalize="off">
+					<input type="password" id="b_pw" name="b_pw" class="input" placeholder="비밀번호 입력" maxlength="20">
+				</div>
+				<p id="unNickCheckTip"></p>
+			</div> <br>
 			
 			<input type="text" id="b_title" name="b_title" placeholder="제목은 최대 15글자까지 적을 수 있습니다." style="width: 90%; height: 40px;"> <br><br>
 			<textarea id="summernote" name="b_contents"></textarea> <br>

@@ -29,6 +29,18 @@ function appChat(lm_num,id,lm_master,category){
 		})
 	}
 	
+//	// setInterval을 변수에 할당합니다.
+//	var intervalId = setInterval(function() {
+//		var element = document.getElementById('lmDModal');
+//		var displayProperty = window.getComputedStyle(element).display;
+//	    if (displayProperty === 'flex') {
+//			console.log('flex')
+//	        chat(lm_num,lm_master,'0') // 특정 조건을 만족하지 않으면 계속 실행합니다.
+//	    } else {
+//			console.log('none')
+//	        clearInterval(intervalId); // 특정 조건을 만족하면 setInterval을 멈춥니다.
+//	    }
+//	}, 1000);
 	chat(lm_num,lm_master,'0')
 }
 /* ====================== 신청자의 채팅 끝 ====================== */
@@ -67,7 +79,7 @@ function chat(lm_num,lm_id,category){
         if(appChatList.length<1){
 			var chatText = document.createElement('div');
 			chatText.textContent = '아직 대화 내역이 없습니다.';
-			chatText.setAttribute('class','noText')				// << css 적용해야함
+			chatText.setAttribute('class','noText')
 			chatDiv.appendChild(chatText);
 		}else{
 			for(let i=0; i<appChatList.length; i++){

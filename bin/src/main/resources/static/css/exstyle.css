@@ -21,7 +21,7 @@ button {
 	color: #fff;
 	margin: 9px;
 	border-radius: 10px;
-	padding: 2px 4px;
+	/* 	padding: 2px 4px; */
 	/* 	font-size: 15px; */
 	border: 0;
 	cursor: pointer;
@@ -247,6 +247,7 @@ header * {
 
 .divide {
 	width: 100%;
+	background-color: #0A1428;
 }
 
 .arrow-right {
@@ -267,4 +268,14 @@ header * {
 
 .flex {
 	display: flex;
+}
+
+.search {
+	padding: 10px;
+	border-radius: 10px;
+	background-color: black;
+	color: orange;
+	width: 90%;
+	border: 2px solid black;
+	margin-bottom: 10px;
 }

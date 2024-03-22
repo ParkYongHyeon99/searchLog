@@ -2,10 +2,13 @@
 var params = new URLSearchParams(window.location.search);
 var name = params.get('name');
 var tag = params.get('tag');
+
+
 var start = 0;
 var champList = [];
 var totalList = [];
 var winLoss = [];
+
 
 var topPick = 0;
 var jgPick = 0;
@@ -23,7 +26,6 @@ $(document).ready(function() {
 
 	$.ajax({
 		type: "GET",
-		//url: "http://127.0.0.1:8000/summoner/search",
 		url: "http://192.168.1.27:8000/summoner/search",
 
 		data: {

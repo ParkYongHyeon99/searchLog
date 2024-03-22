@@ -12,13 +12,17 @@
 
 <!-- 썸머노트 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+<link rel="stylesheet" href="/css/allStyle.css">
+<link rel="stylesheet" href="/css/board.css">
 </head>
 <body>
 	
-	<div class="allBigBox">
+	<div class="allBigBox l-container">
 		
-		<h3>Board Update</h3>
+		<header class="insert">
+			<div th:insert="~{header :: h1}" class="logo">로고</div>
+			<div th:insert="~{header :: ul}" class="header">헤더</div>
+		</header>
 		
 		<div id="bDetailBox">
 
